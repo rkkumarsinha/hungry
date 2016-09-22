@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head lang="en">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<title>Spotter HTML Template Documentation</title>
+	<!-- Framework CSS -->
+	<link rel="stylesheet" href="assets/blueprint-css/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/blueprint-css/print.css" type="text/css" media="print">
+	<!--[if lt IE 8]><link rel="stylesheet" href="assets/blueprint-css/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/blueprint-css/plugins/fancy-type/screen.css" type="text/css" media="screen, projection">
+	<style type="text/css" media="screen">
+        .container { width: 960px; }
+		p, table, hr, .box { margin-bottom:25px; }
+		.box p { margin-bottom:10px; }
+        pre { background-color: #F7F8F6; padding: 30px; }
+        code { background: #eeeeee; font-size: 12px; padding: 3px; border: 1px solid #e1e1e1; }
+        h1,h2,h3,h4 {font-weight: bold; }
+	</style>
+</head>
+
+
+<body>
+	<div class="container">
+	
+		<h3 class="center alt">&ldquo;Spotter&rdquo; Documentation by &ldquo;ThemeStarz&rdquo; v1.0.0</h3>
+		
+		<hr>
+		
+		<h1 class="center">&ldquo;Spotter HTML Template&rdquo;</h1>
+		
+		<div class="borderTop">
+			<div class="span-6 colborder info prepend-1">
+				<p class="prepend-top">
+					<strong>
+					Created: 11/02/2015<br>
+					By: ThemeStarz<br>
+					Email: <a href="mailto:support@themestarz.net">support@themestarz.net</a>
+					</strong>
+				</p>
+			</div><!-- end div .span-6 -->		
+	
+			<div class="span-12 last">
+				<p class="prepend-top append-0">Thank you for purchasing our theme. If you have any questions that are beyond the scope of this help file, please feel free to email via my user page contact form <a href="http://themeforest.net/user/themestarz">here</a>. Thanks so much!</p>
+			</div>
+		</div><!-- end div .borderTop -->
+		
+		<hr>
+		
+		<h2 id="toc" class="alt">Table of Contents</h2>
+		<ol class="alpha">
+            <li><a href="#structure">Folder Structure</a></li>
+            <li><a href="#external-files">External Files</a></li>
+            <li><a href="#installation">Installation</a></li>
+            <li><a href="#json">JSON</a></li>
+            <li><a href="#map">Map</a></li>
+            <li><a href="#modal">Modal Window</a></li>
+            <li><a href="#owl-carousel">Owl Carousel</a></li>
+            <li><a href="#rtl">RTL Support</a></li>
+            <li><a href="#colors">Colors</a></li>
+            <li><a href="#universal-classes">Universal Classes</a></li>
+            <li><a href="#expandable-content">Expandable Content Class</a></li>
+		</ol>
+		<hr>
+
+        <h2 id="structure"><strong>Folder Structure</strong></h2>
+        <ul>
+            <li>Spotter
+                <ul>
+                    <li>HTML Files</li>
+                    <li><strong>assets</strong>
+                        <ul>
+                            <li><strong>bootstrap</strong> - Bootstrap source files</li>
+                            <li><strong>css</strong> - CSS style sheets</li>
+                            <li><strong>external</strong> - external HTML and JS file loaded by the template</li>
+                            <li><strong>fonts</strong> - Font Awesome font</li>
+                            <li><strong>icons</strong> - Map icons</li>
+                            <li><strong>img</strong> - Images</li>
+                            <li><strong>js</strong> - JS script files</li>
+                            <li><strong>json</strong> - JSON files which store data for map</li>
+                            <li><strong>scss</strong> - Source SCSS files</li>
+                        </ul>
+                    </li>
+                    <li><strong>documentation</strong> - This documentation</li>
+                    <li><strong>upload</strong> - Folder where images from file submit are stored</li>
+                </ul>
+            </li>
+        </ul>
+        <hr>
+
+        <h2 id="external-files"><strong>External Files</strong></h2>
+        <p>Spotter loads some external files from <code>assets/external</code> folder, so you need to edit them only
+        on one place. External folder contains these files:</p>
+        <ul>
+            <li><strong>_infobox.js</strong> - Infobox that appears after click on map marker</li>
+            <li><strong>_modal.html</strong> - Modal window. Only static HTML file, but ready to converting to dynamic PHP. More about  <a href="#modal-script">modal window script</a></li>
+            <li><strong>_modal-multichoice.html</strong> - Placeholder for multiple items</li>
+            <li><strong>_navigation.html</strong> - Main navigation</li>
+            <li><strong>_search-bar.html</strong> - "Redefine Search" form in subpage header</li>
+        </ul>
+        <hr>
+
+        <h2 id="installation">Installation</h2>
+        <div style="padding: 30px; background: red;"><h3 style="color: #fff">Important!</h3></div>
+        <br>
+        <p>In order to get JSON loading data you need to install <strong>localhost server</strong>. You can use <a href="https://www.apachefriends.org/index.html">XAMPP</a>.
+        Then you need to:</p>
+        <ul>
+            <li>Copy your files into <code>*your-xampp-installation-\htdocs</code></li>
+            <li>Run <strong>XAMPP</strong> and click <strong>Start</strong> next to <strong>Apache</strong>. This will start your localhost server.</li>
+            <li>Open <strong>browser</strong> and in URL type <code>localhost/spotter</code> (or other path)</li>
+        </ul>
+
+        <h2 id="json"><strong>JSON</strong></h2>
+        <p>All data necessary form map are stored in JSON format. For default <code>.json</code> files are renamed to <code>.json.txt</code>
+        for compatibility with all hosting providers. If you know, that your hosting provider supports JSON files, than you can rename it back to <code>.json</code>.
+        </p>
+        <strong>Example of JSON structure of <code>items.json.txt</code>:</strong>
+<pre>
+{
+    "data": [
+        {
+            "id": 1,
+            "category": "real_estate",
+            "title": "Steak House Restaurant",
+            "location": "63 Birch Street",
+            "latitude": 51.541599,
+            "longitude": -0.112588,
+            "url": "item-detail.html",
+            "type": "Apartment",
+            "type_icon": "assets/icons/store/apparel/umbrella-2.png",
+            "rating": 4,
+            "gallery":
+                [
+                    "assets/img/items/1.jpg",
+                    "assets/img/items/5.jpg",
+                    "assets/img/items/4.jpg"
+                ],
+            "features":
+                [
+                    "Free Parking",
+                    "Cards Accepted",
+                    "Wi-Fi",
+                    "Air Condition",
+                    "Reservations",
+                    "Teambuildings",
+                    "Places to seat"
+                ],
+            "date_created": "2014-11-03",
+            "price": "$2500",
+            "featured": 0,
+            "color": "",
+            "person_id": 1,
+            "year": 1980,
+            "special_offer": 0,
+            "item_specific":
+                {
+                    "bedrooms": 2,
+                    "bathrooms": 2,
+                    "rooms": 4,
+                    "garages": 1,
+                    "area": 240
+                },
+            "description": "Curabitur odio nibh, luctus non ...",
+            "last_review": "Curabitur odio nibh, luctus non ...",
+            "last_review_rating": 5
+        }
+    ]
+}
+</pre>
+        <p>These data are loaded by the map and displayed in <strong>infobox</strong> (if you click on marker) and in the <strong>left sidebar</strong>
+        (if you are using it)</p>
+        <h3>Necessary fields in JSON file</h3>
+        <p>You don't need to use all of these fields that are shown above. Only these are necessary in order to map works properly:</p>
+<pre>
+{
+    "data": [
+        {
+            "id": 1,
+            "category": "real_estate",
+            "title": "Steak House Restaurant",
+            "location": "63 Birch Street",
+            "latitude": 51.541599,
+            "longitude": -0.112588,
+            "url": "item-detail.html",
+            "type": "Apartment",
+            "type_icon": "assets/icons/store/apparel/umbrella-2.png"
+        }
+    ]
+}
+</pre>
+        <hr>
+
+        <h2 id="map"><strong>Map</strong></h2>
+        <p>Spotter allows you to use not only <strong>Google maps</strong>, but also <strong>OpenStreetMap</strong> and <strong>HERE</strong> maps,
+            thanks to <a href="http://leafletjs.com/">Leaflet plugin</a>. There are two scripts to load map on page:</p>
+        <h3><strong>Google Maps</strong></h3>
+        <p>To load Google Maps you need to put this code before <code>&lt;body&gt;</code> tag ends:</p>
+<pre>
+&lt;script&gt;
+    var _latitude = 51.541216;
+    var _longitude = -0.095678;
+    var jsonPath = 'assets/json/real-estate.json.txt';
+
+    $.getJSON(jsonPath)
+        .done(function(json) {
+            createHomepageGoogleMap(_latitude,_longitude,json);
+        })
+        .fail(function( jqxhr, textStatus, error ) {
+            console.log(error);
+        })
+    ;
+
+&lt;/script&gt;
+</pre>
+        <strong>Description</strong>
+        <ul>
+            <li><strong>_latitude</strong> - latitude of the center of map</li>
+            <li><strong>_longitude</strong> - longitude of the center of map</li>
+            <li><strong>jsonPath</strong> - path to JSON file</li>
+            <li><strong>json</strong> - data from JSON</li>
+        </ul>
+        <br>
+        <br>
+        <h3><strong>OpenStreetMap and HERE maps</strong></h3>
+        <p>Loading OSM or HERE map is similar. Put this code before <code>&lt;body&gt;</code> tag ends:</p>
+<pre id="osm-script">
+&lt;script&gt;
+    var _latitude = 51.541216;
+    var _longitude = -0.095678;
+    var jsonPath = 'assets/json/real-estate.json.txt';
+    var mapProvider = 'Acetate.all';
+
+    $.getJSON(jsonPath)
+        .done(function(json) {
+            createHomepageOSM(_latitude,_longitude,json,mapProvider);
+        })
+        .fail(function( jqxhr, textStatus, error ) {
+            console.log(error);
+        })
+    ;
+&lt;/script&gt;
+</pre>
+        <strong>Description</strong>
+        <ul>
+            <li><strong>_latitude</strong> - latitude of the center of map</li>
+            <li><strong>_longitude</strong> - longitude of the center of map</li>
+            <li><strong>jsonPath</strong> - path to JSON file</li>
+            <li><strong>json</strong> - data from JSON</li>
+            <li><strong>mapProvider</strong> - Which OSM map provider has to load the map</li>
+        </ul>
+        <h4>Map Providers for Leaflet plugin (OSM and HERE maps)</h4>
+        <p>Leaflet plugin can load variety of maps depending on your needs. To choose your favorite follow these steps:
+        </p>
+        <ul>
+            <li>Open your desired HTML page and place the <a href="#osm-script">script above</a></li>
+            <li>Go to<a href="http://leaflet-extras.github.io/leaflet-providers/preview/">Leaflet Providers Plugin Page</a></li>
+            <li>Choose a your favorite map from right sidebar</li>
+            <li>Copy <strong>Provider Name</strong> as it states in <a href="assets/images/leaflet-providers.jpg">this picture</a></li>
+            <li>Go back to your HTML page and as <code>mapProvider</code> place copied Provider name</li>
+        </ul>
+        <hr>
+
+        <h2 id="modal">Modal Window</h2>
+        <p>Modal window is pop-up window that is displayed after click on "Quick view" button when you hover over item,
+        or if you click the item in results sidebar in the map. It displays useful information about item without opening
+        new page.</p>
+        <strong>Modal window function:</strong>
+<pre>
+function quickView(id){
+    $.ajax({
+        type: 'POST',
+        url: 'assets/external/_modal.html',
+        data: id,
+        success: function (data) {
+            $('body').append(data);
+        }
+    });
+}
+</pre>
+        <p>An <code>id</code> variable is ready for case you want to use live AJAX call of PHP script. It should be works this way:</p>
+        <p>Click on item > Get an ID of item > Ajax call of PHP script > PHP will get data from database for item with number of ID >
+        Ajax is success > Create Modal window</p>
+        <hr>
+
+        <h2 id="owl-carousel">Owl Carousel</h2>
+        <p>Owl Carousel needs to be manually loaded everywhere you want to use it. It is because you can create multi linguale site
+        with RTL language. So if the script will be loaded from one place and set to RTL, it will not work properly on standard
+        left-to-right pages.</p>
+        <strong>This script needs to be loaded before &lt;/body&gt; tag ends:</strong>
+<pre>
+&lt;script&gt;
+    $(window).load(function(){
+        var rtl = false;
+        initializeOwl(rtl);
+    });
+&lt;/script&gt;
+</pre>
+        <hr>
+
+        <h2 id="rtl">RTL Support</h2>
+        <p>Spotter supports RTL languages. It is very easy to set it to RTL. Just add these to lines in &lt;head&gt; tag AFTER the <code>style.css</code>:</p>
+        <code>&lt;link rel="stylesheet" href="assets/css/bootstrap-rtl.min.css" type="text/css"&gt;</code>
+        <br>
+        <code>&lt;link rel="stylesheet" href="assets/css/rtl.css" type="text/css"&gt;</code>
+        <p>Don't forget to add/modify the <a href="#owl-carousel">Owl Carouse script</a> in the end of page</p>
+        <hr>
+
+        <h2 id="colors">Colors</h2>
+        <p>There are seven pre-defined color schemes:</p>
+        <ul>
+            <li><strong>Red</strong> (default)</li>
+            <li><strong>Blue</strong> - blue.css</li>
+            <li><strong>Brown</strong> - brown.css</li>
+            <li><strong>Green</strong> - green.css</li>
+            <li><strong>Orange</strong> - orange.css</li>
+            <li><strong>Purple</strong> - purple.css</li>
+            <li><strong>Grey</strong> - grey.css</li>
+        </ul>
+        <p>To set your favorite color scheme just replace <code>style.css</code> with the color CSS listed above. Example for <strong>green</strong> color:</p>
+        <p><code>&lt;link rel="stylesheet" href="assets/css/<strong>style.css</strong>" type="text/css"&gt;</code></p>
+        <p>Replace with</p>
+        <p><code>&lt;link rel="stylesheet" href="assets/css/<strong>green.css</strong>" type="text/css"&gt;</code></p>
+        <hr>
+
+        <h2 id="universal-classes">Universal Classes</h2>
+        <p>These classes are useful if you want to build new elements or modify current ones without editing the CSS files.</p>
+        <ul>
+            <li><strong>dark-inputs</strong> - set inputs background to dark grey</li>
+            <li><strong>block</strong> - adds 40px padding to top and bottom</li>
+            <li><strong>center</strong> - center text in element</li>
+            <li><strong>color-default</strong> - set color of text do default <a href="#colors">color of template</a></li>
+            <li><strong>color-grey-dark</strong> - set color of text to dark grey</li>
+            <br>
+            <li><strong>height-100</strong> - set height of the element in px</li>
+            <li><strong>height-200</strong></li>
+            <li><strong>height-300</strong></li>
+            <li><strong>height-400</strong></li>
+            <li><strong>height-500</strong></li>
+            <li><strong>height-600</strong></li>
+            <li><strong>height-700</strong></li>
+            <li><strong>height-800</strong></li>
+            <li><strong>height-900</strong></li>
+            <li><strong>height-1000</strong></li>
+            <br>
+            <li><strong>margin-top-10</strong> - set margin from top of element in px</li>
+            <li><strong>margin-top-15</strong></li>
+            <li><strong>margin-top-20</strong></li>
+            <li><strong>margin-top-25</strong></li>
+            <li><strong>margin-top-30</strong></li>
+            <li><strong>margin-top-35</strong></li>
+            <li><strong>margin-top-40</strong></li>
+            <li><strong>margin-top-50</strong></li>
+            <li><strong>margin-top-60</strong></li>
+            <li><strong>margin-top-70</strong></li>
+            <br>
+            <li><strong>min-height-10</strong> - set min height of element in px</li>
+            <li><strong>min-height-20</strong></li>
+            <li><strong>min-height-40</strong></li>
+            <li><strong>min-height-50</strong></li>
+            <li><strong>min-height-60</strong></li>
+            <li><strong>min-height-70</strong></li>
+            <li><strong>min-height-80</strong></li>
+            <li><strong>min-height-90</strong></li>
+            <li><strong>min-height-100</strong></li>
+            <li><strong>min-height-110</strong></li>
+            <li><strong>min-height-120</strong></li>
+            <li><strong>min-height-130</strong></li>
+            <li><strong>min-height-140</strong></li>
+            <li><strong>min-height-150</strong></li>
+            <li><strong>min-height-160</strong></li>
+            <li><strong>min-height-170</strong></li>
+            <li><strong>min-height-180</strong></li>
+            <li><strong>min-height-190</strong></li>
+            <li><strong>min-height-200</strong></li>
+            <br>
+            <li><strong>opacity-0</strong> - set opacity of element in % (0% invisible)</li>
+            <li><strong>opacity-1</strong></li>
+            <li><strong>opacity-2</strong></li>
+            <li><strong>opacity-3</strong></li>
+            <li><strong>opacity-4</strong></li>
+            <li><strong>opacity-5</strong></li>
+            <li><strong>opacity-6</strong></li>
+            <li><strong>opacity-7</strong></li>
+            <li><strong>opacity-8</strong></li>
+            <li><strong>opacity-9</strong></li>
+            <li><strong>opacity-10</strong></li>
+            <li><strong>opacity-20</strong></li>
+            <li><strong>opacity-30</strong></li>
+            <li><strong>opacity-40</strong></li>
+            <li><strong>opacity-50</strong></li>
+            <li><strong>opacity-60</strong></li>
+            <li><strong>opacity-70</strong></li>
+            <li><strong>opacity-80</strong></li>
+            <li><strong>opacity-90</strong></li>
+            <li><strong>opacity-100</strong></li>
+            <br>
+            <li><strong>space-under</strong> - add 30px margin at the bottom</li>
+        </ul>
+        <h4>Example of use</h4>
+        <br>
+        <code>&lt;div class="<strong>block space-under opacity-50 dark-inputs</strong>"&gt;&lt;/div&gt;</code>
+        <br>
+        <br>
+        <p>This code will create element with 40px padding from top and bottom, with 30px space under, with 50% opacity
+        and with dark inputs fields inside.</p>
+        <hr>
+
+        <h2 id="expandable-content">Expandable Content Class</h2>
+        <p>The <code>expandable-content</code> class is similar to Bootstrap's <code>collapse</code>, but it allows to show part
+        of the content. For example you have a long description of an item so you can't display it at all, but you still want to show couple of lines.
+        You can use <code>expandable-content</code> to set how many pixels from content you want to display. Example:</p>
+<pre>
+&lt;div class="<strong>expandable-content collapsed show-60</strong>" <strong>id=</strong>"detail-sidebar-event"&gt;
+    &lt;div class="<strong>content</strong>"&gt;
+        &lt;p>Maecenas purus sapien, pellentesque non consectetur eu, rhoncus in mauris.
+            Duis et nisl metus. Sed ut pulvinar mauris, bibendum ullamcorper ex.
+            Aliquam vitae ante diam. Nam eu blandit odio. Cras erat lorem, iaculis eu nulla eu, sodales aliquam eros.
+        &lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;a href="#" class="show-more <strong>expand-content</strong>" <strong>data-expand=</strong>"#detail-sidebar-event"&gt;Show More&lt;/a&gt;
+</pre>
+        <p><code><strong>expandable-content</strong></code> - tells that inside this element is content which will be expanded</p>
+        <p><code><strong>collapsed</strong></code> - tells that content is collapsed on page load</p>
+        <p><code><strong>id="detail-sidebar-event"</strong></code> - unique identifier</p>
+        <p><code><strong>content</strong></code> - content wrapper class (this class is required for calculating the height of a content)</p>
+        <p><code><strong>expand-content</strong></code> - a trigger that will expand the content after click</p>
+        <p><code><strong>data-expand</strong></code> - tells which element with unique identifier has to expand</p>
+		<hr>
+
+        <h2 id="loading-markers-from-database">Loading Markers from Database</h2>
+
+        <p>You can also load markers from database using couple of customized files. In this case there are only <strong>"id"</strong>,
+            <strong>"latitude"</strong> and <strong>"longitude"</strong> placed inside a <code>"item.json.txt"</code>. Other data should be in database (mySql for example).
+            So the map loads markers with only necessary data and other data are called after click via Ajax. Right now only Google map is supported.
+            You can find these modified files in <code>database-loading-files.zip</code> which includes:
+        </p>
+        <ul>
+            <li>external/_results.html</li>
+            <li>external/_infobox.html</li>
+            <li>js/maps.js</li>
+        </ul>
+
+        <p>
+            You need to create PHP scripts that will call database and generate HTML code for the map. There are two ajax scripts that call external files:
+        </p>
+
+<strong>1) If you click the marker, than data for infobox are loaded:</strong>
+<pre>
+$.ajax({
+    type: 'POST',
+    url: 'assets/external/_infobox.html',
+    data: json.data[i].id,
+    success: function (data) {
+        infoboxContent.innerHTML = data;
+        newMarkers[i].infobox.open(map, marker);
+        newMarkers[i].infobox.setOptions({ boxClass:'fade-in-marker'});
+    }
+});
+</pre>
+
+<p>ID of the marker is send to <code>"assets/external/_infobox.html"</code> - this has to be PHP file that will output HTML with the structure that you can see in "_infobox.html"</p>
+
+<strong>2) Items thumbnails in sidebar:</strong>
+
+<p>If you move map, than depending of which markers are in currently visible map area are displayed in left "results" sidebar</p>
+
+<pre>
+function pushItemsToArray(json, id, visibleItemsArray, method){
+    $.ajax({
+        type: 'POST',
+        url: 'assets/external/_result.html',
+        data: id,
+        success: function (data) {
+            visibleItemsArray.push(data);
+            if( method == 'resultsSidebar' ){
+                $('.items-list .results').html( visibleItemsArray );
+                rating('.results .item');
+            }
+        }
+    });
+}
+</pre>
+
+        <p>
+            Again, the ID is posted to <code>"assets/external/_result.html"</code> -> this needs to be PHP, which will send back the code with &lt;li&gt; structure.
+            There was a problem, that if you have displayed too many markers the browser freeze for couple of times, because the script is creating the &lt;li&gt; structure for "result sidebar". So there is a limit that maximum of 20 items can be displayed in she sidebar. But you can change this limit by changing value in this code:
+        </p>
+<pre>
+if ( tempVar < 20 ) { ...
+</pre>
+        <hr>
+
+        <p><strong>Icons used</strong></p>
+        <ul>
+            <li><a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a></li>
+            <li><a href="http://mapicons.nicolasmollet.com/">Map POI Icons</a></li>
+        </ul>
+
+		<p>Once again, thank you so much for purchasing this theme. As I said at the beginning, I'd be glad to help you if you have any questions relating to this theme. No guarantees, but I'll do my best to assist. If you have a more general question relating to the themes on ThemeForest, you might consider visiting the forums and asking your question in the "Item Discussion" section.</p> 
+		
+		<p class="append-bottom alt large"><strong>Theme Starz</strong></p>
+		<p><a href="#toc">Go To Table of Contents</a></p>
+		
+		<hr class="space">
+	</div><!-- end div .container -->
+</body>
+</html>
