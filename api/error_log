@@ -1,0 +1,71 @@
+[23-May-2016 06:53:14 UTC] PHP Parse error:  syntax error, unexpected ',' in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/post/bookdestination.php on line 71
+[23-May-2016 06:53:23 UTC] PHP Parse error:  syntax error, unexpected ',' in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/post/bookdestination.php on line 71
+[23-May-2016 06:54:08 UTC] PHP Parse error:  syntax error, unexpected ',' in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/post/bookdestination.php on line 71
+[23-May-2016 06:55:08 UTC] PHP Parse error:  syntax error, unexpected ',' in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/post/bookdestination.php on line 71
+[23-May-2016 07:05:39 UTC] PHP Parse error:  syntax error, unexpected ',' in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/post/bookdestination.php on line 71
+[24-May-2016 06:41:37 UTC] PHP Fatal error:  Call to a member function encryptPassword() on a non-object in /home/rmantra/public_html/hungrydunia.in/shared/lib/Model/User.php on line 41
+[24-May-2016 06:44:30 UTC] PHP Fatal error:  Call to a member function encryptPassword() on a non-object in /home/rmantra/public_html/hungrydunia.in/shared/lib/Model/User.php on line 41
+[25-May-2016 06:43:48 UTC] PHP Fatal error:  Call to a member function encryptPassword() on a non-object in /home/rmantra/public_html/hungrydunia.in/shared/lib/Model/User.php on line 41
+[25-May-2016 06:44:17 UTC] PHP Fatal error:  Call to a member function encryptPassword() on a non-object in /home/rmantra/public_html/hungrydunia.in/shared/lib/Model/User.php on line 41
+[25-May-2016 07:16:03 UTC] PHP Fatal error:  Call to a member function encryptPassword() on a non-object in /home/rmantra/public_html/hungrydunia.in/shared/lib/Model/User.php on line 41
+[25-May-2016 07:53:10 UTC] PHP Fatal error:  Call to a member function encryptPassword() on a non-object in /home/rmantra/public_html/hungrydunia.in/shared/lib/Model/User.php on line 41
+[25-May-2016 07:54:24 UTC] PHP Fatal error:  Call to a member function encryptPassword() on a non-object in /home/rmantra/public_html/hungrydunia.in/shared/lib/Model/User.php on line 41
+[26-May-2016 06:30:10 UTC] PHP Fatal error:  Call to a member function encryptPassword() on a non-object in /home/rmantra/public_html/hungrydunia.in/shared/lib/Model/User.php on line 41
+[26-May-2016 06:36:28 UTC] PHP Fatal error:  Call to a member function encryptPassword() on a non-object in /home/rmantra/public_html/hungrydunia.in/shared/lib/Model/User.php on line 41
+[26-May-2016 06:44:17 UTC] PHP Fatal error:  Call to a member function encryptPassword() on a non-object in /home/rmantra/public_html/hungrydunia.in/shared/lib/Model/User.php on line 41
+[26-May-2016 06:59:29 UTC] PHP Fatal error:  Call to a member function encryptPassword() on a non-object in /home/rmantra/public_html/hungrydunia.in/shared/lib/Model/User.php on line 41
+[28-May-2016 10:55:19 UTC] PHP Fatal error:  Call to a member function encryptPassword() on a non-object in /home/rmantra/public_html/hungrydunia.in/shared/lib/Model/User.php on line 41
+[11-Jul-2016 08:10:39 UTC] PHP Fatal error:  Call to a member function usePasswordEncryption() on a non-object in /home/rmantra/public_html/hungrydunia.in/shared/lib/Model/User.php on line 59
+[11-Jul-2016 08:13:49 UTC] PHP Fatal error:  Call to a member function usePasswordEncryption() on a non-object in /home/rmantra/public_html/hungrydunia.in/shared/lib/Model/User.php on line 59
+[11-Jul-2016 08:13:55 UTC] PHP Fatal error:  Call to a member function usePasswordEncryption() on a non-object in /home/rmantra/public_html/hungrydunia.in/shared/lib/Model/User.php on line 59
+[11-Jul-2016 08:14:05 UTC] PHP Fatal error:  Call to a member function usePasswordEncryption() on a non-object in /home/rmantra/public_html/hungrydunia.in/shared/lib/Model/User.php on line 59
+[11-Jul-2016 08:15:34 UTC] PHP Fatal error:  Call to a member function usePasswordEncryption() on a non-object in /home/rmantra/public_html/hungrydunia.in/shared/lib/Model/User.php on line 59
+[12-Jul-2016 04:36:43 UTC] PHP Fatal error:  Call to a member function usePasswordEncryption() on a non-object in /home/rmantra/public_html/hungrydunia.in/shared/lib/Model/User.php on line 59
+[12-Jul-2016 14:46:41 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:45 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:46 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:46 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:47 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:47 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:47 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:48 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:49 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:49 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:49 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:50 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:50 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:50 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:51 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:52 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:53 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:53 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:53 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:53 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:53 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:54 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:54 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:46:54 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:47:02 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:47:05 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:47:10 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[12-Jul-2016 14:47:43 UTC] PHP Fatal error:  Call to a member function dsql() on a non-object in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/discount.php on line 86
+[19-Jul-2016 19:31:10 UTC] PHP Parse error:  syntax error, unexpected 'is_active' (T_STRING), expecting ']' in /home/rmantra/public_html/hungrydunia.in/api/lib/HungryREST.php on line 39
+[19-Jul-2016 19:32:02 UTC] PHP Parse error:  syntax error, unexpected 'Userid' (T_STRING), expecting ']' in /home/rmantra/public_html/hungrydunia.in/api/lib/HungryREST.php on line 34
+[19-Jul-2016 19:47:19 UTC] PHP Parse error:  syntax error, unexpected 'Model_EmailTemplate' (T_STRING), expecting ']' in /home/rmantra/public_html/hungrydunia.in/shared/lib/Model/ReservedTable.php on line 81
+[21-Jul-2016 01:09:28 UTC] PHP Parse error:  syntax error, unexpected 'foreach' (T_FOREACH) in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/post/registration.php on line 182
+[21-Jul-2016 02:57:32 UTC] PHP Parse error:  syntax error, unexpected 'foreach' (T_FOREACH) in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/post/registration.php on line 182
+[21-Jul-2016 02:57:51 UTC] PHP Parse error:  syntax error, unexpected 'foreach' (T_FOREACH) in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/post/registration.php on line 182
+[21-Jul-2016 03:14:40 UTC] PHP Parse error:  syntax error, unexpected 'foreach' (T_FOREACH) in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/post/registration.php on line 182
+[21-Jul-2016 03:14:57 UTC] PHP Parse error:  syntax error, unexpected 'foreach' (T_FOREACH) in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/post/registration.php on line 182
+[21-Jul-2016 03:17:43 UTC] PHP Parse error:  syntax error, unexpected 'foreach' (T_FOREACH) in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/post/registration.php on line 182
+[22-Jul-2016 19:21:30 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting function (T_FUNCTION) in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/post/booktable.php on line 194
+[11-Aug-2016 19:37:43 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/post/discountcoupon.php on line 185
+[11-Aug-2016 19:37:58 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/rmantra/public_html/hungrydunia.in/api/endpoint/v1/post/discountcoupon.php on line 185
+[12-Aug-2016 18:23:00 UTC] PHP Fatal error:  Call to undefined function vardump() in /home/rmantra/public_html/hungrydunia.in/shared/lib/Controller/Google.php on line 78
+[12-Aug-2016 18:23:10 UTC] PHP Fatal error:  Call to undefined function vardump() in /home/rmantra/public_html/hungrydunia.in/shared/lib/Controller/Google.php on line 78
+[12-Sep-2016 06:17:10 UTC] PHP Fatal error:  Out of memory (allocated 8388608) (tried to allocate 262144 bytes) in /home/rmantra/public_html/hungrydunia.com/vendor/atk4/atk4/lib/AbstractObject.php on line 308
+[12-Sep-2016 12:44:48 UTC] PHP Parse error:  syntax error, unexpected '"referral_code"' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in /home/rmantra/public_html/hungrydunia.com/api/endpoint/v1/post/registration.php on line 177
+[19-Sep-2016 20:45:32 UTC] PHP Parse error:  syntax error, unexpected 'email' (T_STRING), expecting ']' in /home/rmantra/public_html/hungrydunia.com/shared/lib/Model/DiscountCoupon.php on line 155
+[19-Sep-2016 20:45:43 UTC] PHP Parse error:  syntax error, unexpected 'email' (T_STRING), expecting ']' in /home/rmantra/public_html/hungrydunia.com/shared/lib/Model/DiscountCoupon.php on line 155
+[19-Sep-2016 20:46:49 UTC] PHP Parse error:  syntax error, unexpected 'email' (T_STRING), expecting ']' in /home/rmantra/public_html/hungrydunia.com/shared/lib/Model/DiscountCoupon.php on line 157
+[19-Sep-2016 20:47:44 UTC] PHP Parse error:  syntax error, unexpected 'email' (T_STRING), expecting ']' in /home/rmantra/public_html/hungrydunia.com/shared/lib/Model/DiscountCoupon.php on line 157
