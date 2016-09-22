@@ -1,0 +1,36 @@
+
+<div id="{$_name}" style="{$style}" class="{$class}">
+  <div style="height:30px;" class="atk-push">{$quick_search}</div>
+  <div>{$header}</div>{$col}
+  <div class="row">{rows}{row}
+    <div data-recordid="{$id}" class="col-md-6 atk-push">{discount_wrapper}
+      <div style="background-color:#ededea;" class="btn btn-block">{$discount_name}: {$discount}{$offer}</div>{/}
+      <div class="promo-box">
+        <div title="{$user}" class="image item"><a href="#">
+            <div style="font-size:16px;font-size:bold;font-size:16px;background-color:rgba(128, 100, 128,0.8);color:white;" class="item-specific"><strong>{$user}</strong></div><img alt="" src="{profile_image_url}assets/img/hotel-flight.jpg{/}"/></a></div>
+        <div class="wrapper">
+          <h3 style="padding-top:5px;padding-bottom:5px;">Booking Id: {$booking_id}
+          </h3>
+          <div class="icon"><i class="fa fa-mobile">&nbsp;{$mobile}</i><i class="fa fa-envelope">&nbsp;{$email}</i><i class="fa fa-calendar">&nbsp;{$created_at}</i><i class="fa fa-clock-o">&nbsp;{$created_time}</i>
+            <div class="row">
+              <div title="Number of Adult" class="col-md-6"><i class="fa fa-user">&nbsp;{$no_of_adult}</i></div>
+              <div title="Number of Child" class="col-md-6"><i class="fa fa-child">&nbsp;{$no_of_child}</i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div style="padding-right:0px;" class="col-md-6">
+          <div data-actiontype="Canclled" data-tablereservationid="{$id}" class="btn btn-primary btn-block hungry-action btn-warning">Canclled</div>
+        </div>
+        <div style="padding-left:0px;" class="col-md-6">
+          <div data-actiontype="Approve" data-tablereservationid="{$id}" class="btn btn-primary btn-block hungry-action atk-swatch-orange">Approved</div>
+        </div>
+      </div>
+    </div>{/}
+    {/}
+  </div>{$Paginator}
+  {no_record_found}
+  <div></div>{/}
+  {$Content}
+</div>

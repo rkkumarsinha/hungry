@@ -11,9 +11,6 @@ class View_HostAccount_Restaurant extends View{
 		}
 
 		$this->api->stickyGET('selectedmenu');
-		// $col = $this->add('Cols');
-		// $left = $col->addColumn(4);
-		// $right = $col->addColumn(8);
 
 		if(!isset($this->app->listmodel->id)){
 			$this->owner->add('View_Info',null,'list_data')->set($this->app->listmodel['name']);

@@ -61,12 +61,13 @@ class page_addlisting extends Page{
         if($this->app->stickyGET('country_id')){
             $state_model->addCondition('country_id',$_GET['country_id'])->setOrder('name','asc');
             $state->setEmptyText('Please Select State');
-        }else{
-            $state->setEmptyText('Please Select Country First');
-            $state->setAttr('disabled',true);
-            // $state_model->addCondition('country_id',-1);
-            $state->addClass('hungrydisabled');
         }
+        $state->setEmptyText('Please Select State');
+        // else{
+        //     $state->setAttr('disabled',true);
+        //     // $state_model->addCondition('country_id',-1);
+        //     $state->addClass('hungrydisabled');
+        // }
 
         // $state->validateNotNull(true);
         $state->setModel($state_model);
@@ -76,12 +77,13 @@ class page_addlisting extends Page{
         if($this->app->stickyGET('state_id')){
             $city_model->addCondition('state_id',$_GET['state_id'])->setOrder('name','asc');
             $city->setEmptyText('Please Select City');
-        }else{
-            $city->setEmptyText('Please Select State First');
-            $city->setAttr('disabled',true);
-            // $city_model->addCondition('state_id',-1);
-            $city->addClass('hungrydisabled');
         }
+        $city->setEmptyText('Please Select City');
+        // else{
+        //     $city->setAttr('disabled',true);
+        //     // $city_model->addCondition('state_id',-1);
+        //     $city->addClass('hungrydisabled');
+        // }
 
         // $city->validateNotNull(true);
         $city->setModel($city_model);
@@ -91,12 +93,13 @@ class page_addlisting extends Page{
         if($this->app->stickyGET('city_id')){
             $area_model->addCondition('city_id',$_GET['city_id'])->setOrder('name','asc');
             $area->setEmptyText('Please Select Area');
-        }else{
-            $area->setEmptyText('Please Select City First');
-            $area->setAttr('disabled',true);
-            // $area_model->addCondition('city_id',-1);
-            $area->addClass('hungrydisabled');
         }
+        $area->setEmptyText('Please Select Area');
+        // else{
+        //     $area->setAttr('disabled',true);
+        //     // $area_model->addCondition('city_id',-1);
+        //     $area->addClass('hungrydisabled');
+        // }
         // $area->validateNotNull(true);
         $area->setModel($area_model);
 

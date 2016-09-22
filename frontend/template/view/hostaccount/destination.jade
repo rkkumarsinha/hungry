@@ -3,39 +3,38 @@ div(class='{$class}', id='{$_name}', style='{$style}')
     .col-md-3.col-sm-3
       aside#sidebar
         ul.navigation-sidebar.list-unstyled
-          li.hostaccount-verticaltabs.active(data-type="booking")
+          li.hostaccount-destination-verticaltabs(data-type="Booking")
             a(href='#')
               i.fa.fa-folder
               span Booking's
-          li.hostaccount-verticaltabs(data-type="sales")
+          li.hostaccount-destination-verticaltabs(data-type="Sales")
             a(href='#')
               i.fa.fa-eye-slash
               span Sales
-          li.hostaccount-verticaltabs(data-type="profile")
+          li.hostaccount-destination-verticaltabs(data-type="Profile")
             a(href='#')
               i.fa.fa-eye-slash
               span Profile
-          li.hostaccount-verticaltabs(data-type="manage_tickets")
+          li.hostaccount-destination-verticaltabs(data-type="ManagePackage")
             a(href='#')
               i.fa.fa-eye-slash
               span Manage Package's
-          li.hostaccount-verticaltabs(data-type="history")
+          li.hostaccount-destination-verticaltabs(data-type="History")
             a(href='#')
               i.fa.fa-eye-slash
               span History
-          li.hostaccount-verticaltabs(data-type="notification")
+          li.hostaccount-destination-verticaltabs(data-type="Notification")
             a(href='#')
               i.fa.fa-eye-slash
               span Notification
-          li.hostaccount-verticaltabs(data-type="message")
+          li.hostaccount-destination-verticaltabs(data-type="Contact")
             a(href='#')
               i.fa.fa-clock-o
               span Contact HungryDunia
-          li.hostaccount-verticaltabs(data-type="tnc")
+          li.hostaccount-destination-verticaltabs(data-type="TNC")
             a(href='#')
               i.fa.fa-clock-o
               span terms & condition
     .col-md-9.col-sm-9
       section#dashboard-section
-        | {$Content}
-  |         {/}
+        {$Content}

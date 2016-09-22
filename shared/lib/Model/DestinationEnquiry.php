@@ -8,7 +8,7 @@ class Model_DestinationEnquiry extends SQL_Model{
 
 		$this->hasOne('Destination','destination_id');
 		$this->hasOne('User','user_id');
-		$this->hasOne('Destination_Package','pakage_id');
+		$this->hasOne('Destination_Package','package_id');
 		$this->hasOne('Destination_Highlight','occassion_id');
 
 		$this->addField('name')->caption('username');
