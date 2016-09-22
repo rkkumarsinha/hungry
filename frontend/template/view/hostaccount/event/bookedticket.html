@@ -1,0 +1,47 @@
+<div id="{$_name}" class="{$class}" style="{$sytyle};">
+    <section id="items">
+        <div class="row">
+        {bookedticket}
+        {$quicksearch}
+        {rows}{row}
+        <div data-recordid="{$id}" class="col-md-6 atk-push">
+            <div style="background-color:#ededea;" class="btn btn-block">
+                Event Ticket: {$event_ticket}
+            </div>
+          <div class="promo-box">
+            <div title="{$event_name}" class="image item">
+                <a href="#">
+                    <div style="font-size:16px;font-size:bold;font-size:16px;background-color:rgba(128, 100, 128,0.8);color:white;" class="item-specific">
+                        <strong>{$event_name}</strong>
+                    </div>
+                    <img alt="" src="{event_image}assets/img/hotel-flight.jpg{/}"/>
+                </a>
+            </div>
+            <div class="wrapper">
+                <h3 style="padding-top:5px;padding-bottom:5px;">
+                    Booking No: {$ticket_booking_no}
+                </h3>
+                <div class="icon">
+                    <i class="fa fa-user" title="Booking Name">&nbsp;{$booking_name}</i>
+                    <i class="fa fa-user" title="Secondary Booking Name">&nbsp;{$secondary_booking_name}</i>
+                    <i class="fa fa-calendar" title="Booking Date">&nbsp;{$booking_date}</i>
+                    <i class="fa fa-clock-o" title="Booking Time">&nbsp;{$booking_time}</i>
+                    <div class="row">
+                        <div title="Ticket Qty" class="col-md-4">Qty: &nbsp;{$qty}</div>
+                        <div title="Ticket Price" class="col-md-8">Price: &nbsp;{$price} <i class="fa fa-rupee">&nbsp;</i></div>
+                    </div>
+                    <div class="fa fa-mobile" title="mobile number">&nbsp;{$mobile}</div><br/>
+                    <div class="fa fa-envelope" title="email">&nbsp;{$email}</div>
+                </div>
+                {$cancled_reason}
+            </div>
+          </div>
+            <div data-verifyticket="{$id}" class="btn btn-primary btn-block hungry-action atk-swatch-orange eventactiontype">Verify</div>
+        </div>
+        {/}{/}
+        {/}
+        {no_record_found}
+        {/}
+        </div>
+    </section>
+</div>

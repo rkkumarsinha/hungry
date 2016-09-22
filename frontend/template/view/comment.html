@@ -1,0 +1,59 @@
+
+<section id="reviews" style="clear:both;" class="block {$class}">
+  <header class="clearfix">
+    <h2 class="pull-left">Reviews</h2><a href="#write-review" class="btn framed icon pull-right roll">Write a review <i class="fa fa-pencil"></i></a>
+  </header>
+  <!-- /.overall-rating-->
+  <section class="reviews">{rows}{row}
+    <article style="margin-bottom:20px;" class="review">
+      <figure class="author"><img alt="{$user}" src="{$profile_image}" onerror="this.src='assets/img/default-avatar.png';"/>
+        <div class="date">{$created_at} {$created_time}</div>
+      </figure>
+      <!-- /.author-->
+      <div style="min-height:130px;" class="wrapper">
+        <h5>{$user}</h5>
+        <figure data-rating="4" class="hungryratingshowwrapper">
+          <input value="{$rating}" class="hungryratingshow"/>
+        </figure>
+        <p>{$comment}</p>
+        <div style="display:none;" class="individual-rating"><span>Value</span>
+          <figure data-rating="4" class="rating"><span class="stars"><i data-score="1" class="fa fa-star s1 active"></i><i data-score="2" class="fa fa-star s2 active"></i><i data-score="3" class="fa fa-star s3 active"></i><i data-score="4" class="fa fa-star s4 active"></i><i data-score="5" class="fa fa-star s5"></i></span></figure>
+        </div>
+        <!-- /.user-rating-->
+        <div style="display:none;" class="individual-rating"><span>Service</span>
+          <figure data-rating="4" class="rating"><span class="stars"><i data-score="1" class="fa fa-star s1 active"></i><i data-score="2" class="fa fa-star s2 active"></i><i data-score="3" class="fa fa-star s3 active"></i><i data-score="4" class="fa fa-star s4 active"></i><i data-score="5" class="fa fa-star s5"></i></span></figure>
+        </div>
+      </div>
+    </article>{/}{/}
+  </section>{$Paginator}
+</section>
+<section id="write-review">
+  <header>
+    <h2>Write a Review</h2>
+  </header>{comment_form}
+  <form id="form-review" action="?" method="post" role="form" class="background-color-white">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="form-group">
+          <label for="form-review-name">Name</label>
+          <input id="form-review-name" type="text" required="" name="form-review-name" class="form-control"/>
+        </div>
+        <!-- /.form-group-->
+        <div class="form-group">
+          <label for="form-review-email">Email</label>
+          <input id="form-review-email" type="email" required="" name="form-review-email" class="form-control"/>
+        </div>
+        <!-- /.form-group-->
+        <div class="form-group">
+          <label for="form-review-message">Message</label>
+          <textarea id="form-review-message" required="" rows="3" name="form-review-message" class="form-control"></textarea>
+        </div>
+        <!-- /.form-group-->
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">Submit Review</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <!-- /.main-search-->{/}
+</section>

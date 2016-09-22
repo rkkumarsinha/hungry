@@ -1,0 +1,41 @@
+div(id="{$_name}" class="{$class}" style="{$style}")
+	div.atk-push(style="height:30px;")
+		{$quick_search}
+	.row
+		{rows}{row}
+		.col-md-6.atk-push(data-recordid="{$id}")
+			{discount_wrapper}
+			div.btn.btn-block(style="background-color:#ededea;") {$discount_name}: {$discount}{$offer}
+			{/}
+			div.promo-box
+				div.image.item(title="{$user}")
+					a(href='#')
+						div.item-specific(style="font-size:16px;font-size:bold;font-size:16px;background-color:rgba(128, 100, 128,0.8);color:white;")
+							strong {$user}
+						img(alt="" src="{profile_image_url}assets/img/hotel-flight.jpg{/}")
+				div.wrapper
+					//- h3 Discount /Coupon: {$discount}{$offer} 
+					h3(style="padding-top:5px;padding-bottom:5px;") Booking Id: {$booking_id}
+						//- figure Lorem ipsum dolor sit amet
+					div.icon
+						i.fa.fa-mobile &nbsp;{$mobile}
+						i.fa.fa-envelope &nbsp;{$email}
+						i.fa.fa-calendar &nbsp;{$created_at}
+						i.fa.fa-clock-o &nbsp;{$created_time}
+						div.row
+							div.col-md-6(title="Number of Adult")
+								i.fa.fa-user &nbsp;{$no_of_adult}
+							div.col-md-6(title="Number of Child")
+								i.fa.fa-child &nbsp;{$no_of_child}
+			div.row
+				div.col-md-6(style="padding-right:0px;")
+					div.btn.btn-primary.btn-block.hungry-action.btn-warning(data-actiontype="Canclled" data-tablereservationid="{$id}") Canclled
+				div.col-md-6(style="padding-left:0px;")
+					div.btn.btn-primary.btn-block.hungry-action.atk-swatch-orange(data-actiontype="Approve" data-tablereservationid="{$id}") Approved
+		{/}
+		{/}
+	{$Paginator}
+	{no_record_found}
+	div
+	{/}
+	{$Content}

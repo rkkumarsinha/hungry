@@ -1,0 +1,20 @@
+// Off Canvas Navigation
+nav.off-canvas-navigation
+  header Navigation
+  .main-navigation.navigation-off-canvas
+// end Off Canvas Navigation
+// Page Content
+#page-content
+  // Hero Image
+  section.hero-image.search-filter-middle.height-450
+    .inner
+      .container.search-bar.horizontal(style="width:100%;")
+        h1 Event
+        .container.hungry-search-form(style="z-index: 2;position:relative;" id="hungrysearch")
+          .container(style="width:80%;")
+            {search_form}{/}
+    .background.event-home-slide-bg
+      {$homeslider}
+  // end Hero Image
+  section#featured.block.background-color-grey-dark.equal-height
+    {$eventlist}

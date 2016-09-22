@@ -1,0 +1,42 @@
+{$Content}
+{$loginsuccess}
+{login_wrapper}
+.hungrylogin
+    .login_modal_header
+      h2#myModalLabel.modal-title Login to Your Account
+    .modal-body.login-modal(style="border:0px;")
+      .clearfix
+      #social-icons-conatainer
+        .modal-body-left
+          {generalloginform}
+          .form-group
+            input#username.form-control.login-field(type='text', value='', placeholder='Enter your name')
+            i.fa.fa-user.login-field-icon
+          .form-group
+            input#login-pass.form-control.login-field(type='password', value='', placeholder='Password')
+            i.fa.fa-lock.login-field-icon
+          a.btn.btn-success.modal-login-btn(href='#') Login
+          {/}
+          br
+          {$forgotpassword}
+        .modal-body-right
+          .modal-social-icons
+            a.btn.btn-default.facebook.btn-block(href='{$facebook_login_url}')
+              i.fa.fa-facebook.modal-icons(style="font-size:20px;")
+              |  Sign In with Facebook
+            a.btn.btn-default.google.btn-block(href='{$google_login_url}')
+              i.fa.fa-google-plus.modal-icons(style="font-size:20px;")
+              |  Sign In with Google
+            a.btn.btn-default.twitter.btn-block(href='#' style="display:none;")
+              i.fa.fa-twitter.modal-icons(style="font-size:20px;")
+              |  Sign In with Twitter
+            a.btn.btn-default.linkedin.btn-block(href='#' style="display:none;")
+              i.fa.fa-linkedin.modal-icons(style="font-size:20px;")
+              |  Sign In with Linkedin
+        #center-line  OR 
+      .clearfix
+      .form-group.modal-register-btn
+        a.btn.btn-default.atk-swatch-orange(href="?page=register")  New User Please Register
+    //- .clearfix
+    //- .modal-footer.login_modal_footer
+{/}

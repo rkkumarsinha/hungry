@@ -1,0 +1,37 @@
+
+<div id="page-canvas">
+  <nav class="off-canvas-navigation">
+    <header>Navigation</header>
+    <div class="main-navigation navigation-off-canvas"></div>
+  </nav>
+  <div id="page-content">
+    <section class="hero-image search-filter-middle height-450">
+      <div class="inner">
+        <div style="width:100%;" class="container search-bar horizontal">
+          <h1>Venue</h1>
+          <div style="z-index: 2;position:relative;" class="container hungry-search-form">
+            <div style="width:80%;" class="container">{search_form}{/}</div>
+          </div>
+        </div>
+      </div>
+      <div class="background event-home-slide-bg">{$homeslider}</div>
+    </section>
+    <section style="margin-top:20px;" class="container">
+      <header>
+        <h2>Categories</h2>
+      </header>{venue}
+      {lister_wrapper}
+      <div class="row">
+        {rows}
+        {row}
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 hungry-venue"><a href="?page=destination&amp;venue={$id}" class="info">
+            <div class="hovereffect"><img src="{$venue_image_url}" onerror="this.src='assets/img/hungry-not-found.png';" class="img-responsive"/>
+              <div class="overlay">
+                <h2>{$name}</h2>
+              </div>
+            </div></a></div>{/}{/}
+      </div>{/}
+      {/}
+    </section>
+  </div>
+</div>

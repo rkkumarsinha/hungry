@@ -1,0 +1,8 @@
+div(id="{$_name}" class="{$class} hungry-search" style="{$style}")
+	div.row(style="background: white;width:300px;margin:0px;")
+		a.col-md-4(class="{$tab_restaurant}" style="padding:10px;" href="?page=index") Restaurant
+		a.col-md-4(class="{$tab_event}" style="padding:10px;" href="?page=event") Event
+		a.col-md-4(class="{$tab_venue}" style="padding:10px;" href="?page=venue") Venue
+	.search-bar.horizontal.main-search.background-color-grey-light
+		{$form_search}	
+		{$Content}

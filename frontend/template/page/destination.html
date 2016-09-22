@@ -1,0 +1,41 @@
+
+<div id="{$_name}" style="{$style}" class="{$class}">
+  <!-- Off Canvas Navigation-->
+  <nav class="off-canvas-navigation">
+    <header>Navigation</header>
+    <div class="main-navigation navigation-off-canvas"></div>
+  </nav>
+  <!-- end Off Canvas Navigation-->
+  <!-- Page Content-->
+  <div id="page-content" class="hungrydestination">
+    <!-- Hero Image-->
+    <section class="hero-image search-filter-middle height-450">
+      <div class="inner">
+        <div style="width:100%;" class="container search-bar horizontal">
+          <h1>Destinations</h1>
+          <div style="z-index: 2;position:relative;" class="container hungry-search-form">
+            <div style="width:80%;" class="container">{search_form}{/}</div>
+          </div>
+        </div>
+      </div>
+      <div class="background event-home-slide-bg"><img src="assets/img/slide1-1.jpg" onerror="this.src='assets/img/hungry-not-found.jpg'"/>{$homeslider}</div>
+    </section>
+    <!-- end Hero Image-->
+    <section id="featured" class="block equal-height">{$destinationlist}</section>
+  </div>
+  <div id="destination_enquiry_modalpopup" tabindex="-1" role="dialog" aria-labelledby="destination_enquiry_modalpopup" class="modal fade">
+    <div role="document" class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true" style="margin-right:20px;">×</span></button>
+          <h4 id="{$_name}_model_label" style="font-size:16px;" class="modal-title text-hungry">Request to book</h4>
+        </div>
+        <div class="modal-body destination_enquiry_modalpopup">{$enquiryform}{$Content}</div>
+        <div class="modal-footer">
+          <button type="button" style="width:200px;border-radius:10px;" class="btn btn-default hungry-green-btn requesttobook-hungry-submit">Submit</button>
+          <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

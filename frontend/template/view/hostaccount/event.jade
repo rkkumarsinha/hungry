@@ -1,0 +1,45 @@
+div(class='{$class}', id='{$_name}', style='{$style}')
+  .row(style='margin-top:60px;')
+    .col-md-3.col-sm-3
+      aside#sidebar
+        ul.navigation-sidebar.list-unstyled
+          li.hostaccount-event-verticaltabs(data-type="BookedTicket")
+            a(href='#')
+              i.fa.fa-folder
+              span Booked Tickets
+          li.hostaccount-event-verticaltabs(data-type="Verified")
+            a(href='#')
+              i.fa.fa-folder
+              span Verified
+          li.hostaccount-event-verticaltabs(data-type="Sales")
+            a(href='#')
+              i.fa.fa-eye-slash
+              span Sales
+          li.hostaccount-event-verticaltabs(data-type="Profile")
+            a(href='#')
+              i.fa.fa-eye-slash
+              span Event Profile
+          li.hostaccount-event-verticaltabs(data-type="ManageTicket")
+            a(href='#')
+              i.fa.fa-eye-slash
+              span Manage Ticket's
+          li.hostaccount-event-verticaltabs(data-type="History")
+            a(href='#')
+              i.fa.fa-eye-slash
+              span History
+          li.hostaccount-event-verticaltabs(data-type="Notification")
+            a(href='#')
+              i.fa.fa-eye-slash
+              span Notification
+          li.hostaccount-event-verticaltabs(data-type="Contact")
+            a(href='#')
+              i.fa.fa-clock-o
+              span Contact HungryDunia
+          li.hostaccount-event-verticaltabs(data-type="TNC")
+            a(href='#')
+              i.fa.fa-clock-o
+              span terms & condition
+    .col-md-9.col-sm-9
+      section#dashboard-section
+        | {$Content}
+  |         {/}

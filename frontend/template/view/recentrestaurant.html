@@ -1,0 +1,34 @@
+
+<div class="row">
+  {recentlyadded}
+  {rows}
+  {row}
+  <div class="col-md-4 col-sm-4">
+    <div class="item">
+      <div class="image"><a href="{$path}">
+          <div class="overlay">
+            <div class="inner">
+              <div style="display:none;" class="content">
+                <h4>Description</h4>
+                <p>{about_restaurat}Curabitur odio nibh, luctus non pulvinar a, ultricies ac diam. Donec neque massa{/}</p>
+              </div>
+            </div>
+          </div>
+          <div class="item-specific"><span title="Distance" data-lat="{$latitude}" data-lng="{$longitude}"><i class="fa fa-map-marker"><span data-lat="{$latitude}" data-lng="{$longitude}" style="color:orange;" data-id="{$id}" class="current-distance"></span></i>{$distance}</span><span title="Bathrooms"><i class="fa fa-inr"></i>{avgcost}un defined{/}</span><span title="Area"><i class="fa fa-tags"></i> {offers}240m{/}</span></div><img src="{display_image}assets/img/small.jpg{/}" alt="" onerror="this.src='assets/img/hungry-not-found.png';"/></a>
+        <div class="restaurant-category"><i class="fa fa-hungry">{$category}</i></div>
+      </div>{getdiscount_wrapper}
+      <div data-restaurantid="{$id}" class="btn-block atk-swatch-orange btn hungry-getdiscount container">Get Discount</div>{/}
+      <div class="wrapper"><a href="{$path}">
+          <h3><img src="assets/img/{$food_type}.png" alt="{$food_type}"/> {name}Steak House Restaurant{/}</h3></a>
+        <figure>{address}63 Birch Street{/}</figure>
+      </div>
+      <div class="info text-center">
+        <div class="type"><i><img src="assets/icons/restaurants-bars/restaurants/restaurant.png" alt=""/></i><span>{type}Restaurant{/}</span></div>
+        <div data-rating="{rating}{/}" class="hungry-star-wrapper">
+          <input id="{$id}" value="{$rating}" class="rating-loading"/>
+        </div>{$menu}
+      </div>
+    </div>
+  </div>{/}{/}
+  {/}
+</div>

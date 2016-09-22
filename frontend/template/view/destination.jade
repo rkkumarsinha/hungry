@@ -1,0 +1,75 @@
+div(id="{$_name}" class="{$class}" style="{$style}")
+  .container
+    header
+      h2 {header}Destination{/}
+    .row
+      | {rows}{row}
+      .col-md-3.col-sm-3
+        .item
+          .image
+            a(href='{$path}')
+              .overlay
+                .inner
+                  .content(style='display:none;')
+                    h4 Description
+                    p
+                      | {about_restaurat}Curabitur odio nibh, luctus non pulvinar a, ultricies ac diam. Donec neque massa{/}
+              .item-specific
+                span(title='Distance', data-lat='{$latitude}', data-lng='{$longitude}')
+                  i.fa.fa-map-marker
+                    span.current-distance(data-lat='{$latitude}', data-lng='{$longitude}', style='color:orange;', data-id='{$id}')
+                  | {$distance}
+                span(title='Avg Cost')
+                  i.fa.fa-inr
+                  | {avg_cost}un defined{/}
+                span(title='Area')
+                  i.fa.fa-tags
+                  |  {package_count}{/}
+              img(src='{display_image}assets/img/small.jpg{/}' alt='' onerror="this.src='assets/img/hungry-not-found.jpg'")
+            .restaurant-category
+              i.fa.fa-hungry {$first_category}
+          {requesttobook_wrapper}
+          div.btn-block.atk-swatch-orange.btn.hungrydestination_enquiry.container( data-destinationid='{$id}') Request To Book
+          {/}
+          .wrapper
+            a(href='{$path}')
+              h3
+                img(src='assets/img/{$food_type}.png', alt='{$food_type}')
+                |  {name}Steak House Restaurant{/}
+            figure {address}63 Birch Street{/}
+          .info.text-center
+            .type
+              i
+                img(src='{category_icon_url}assets/icons/restaurants-bars/restaurants/restaurant_indian.png{/}', alt='{$category}' onerror="this.src='assets/img/hungry-not-found.jpg'")
+              span {type}{/}
+            .hungry-star-wrapper(data-rating='{rating}{/}')
+              input(id="{$id}" value="{$rating}" class="rating-loading")
+            | {$menu}
+      | {/}{/}
+      // /.col-sm-4
+    script(type='text/javascript').
+      if ( navigator.geolocation ) {
+      function success(pos) {
+      $.each($(".current-distance"),function(index,element){
+      $.post('?page=getdistance',
+      {
+      'currentlat':pos.coords.latitude,
+      'currentlan':pos.coords.longitude,
+      'restlan':$(element).attr('data-lng'),
+      'restlat':$(element).attr('data-lat')
+      },
+      function(data) {
+      //- console.log(data);
+      $(element).html(data);
+      });
+      });
+      }
+      function fail(error) {
+      //- alert('failed');
+      }
+      function error(error){
+      }
+      navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 5, enableHighAccuracy:true, timeout: 6000});
+
+      //- navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true,timeout: 100000,maximumAge: 0});
+      }

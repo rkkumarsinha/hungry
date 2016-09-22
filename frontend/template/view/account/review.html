@@ -1,0 +1,46 @@
+<div id="{$_name}" class="{$class}" style="{$sytyle};margin-top:50px;">
+    <div class="row">
+        <div class="col-md-3 col-sm-3">
+            <aside id="sidebar">
+                <ul class="navigation-sidebar list-unstyled">
+                    <li class="useraccount-review-verticaltabs" data-type="approved">
+                        <a href="#">
+                            <i class="fa fa-folder"></i>
+                            <span>Approved</span>
+                        </a>
+                    </li>
+                    <li class="useraccount-review-verticaltabs" data-type="pending">
+                        <a href="#">
+                            <i class="fa fa-clock-o"></i>
+                            <span>Pending</span>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+        <div class="col-md-9 col-sm-9">
+            {review_lister}
+            {rows}{row}
+            <section class="reviews">
+                <article class="review">
+                    <figure class="author" style="width:100px;">
+                        <img alt="" src="{profile_image_url}assets/img/default-avatar.png{/}" style="height:100px;">
+                        <div class="date">{$created_at}</div>
+                    </figure>
+                    <!-- /.author-->
+                    <div class="wrapper">
+                        <h5>{$title}</h5>
+                        <div class="rating-container rating-animate rating-disabled"><div class="rating"><span class="empty-stars"><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span><span class="star"><i class="glyphicon glyphicon-star-empty"></i></span></span><span class="filled-stars" style="width: {rating_per}0{/}%;"><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span><span class="star"><i class="glyphicon glyphicon-star"></i></span></span></div></div>
+                        <p>
+                            {$comment}
+                        </p>
+                    </div>
+                    <!-- /.wrapper-->
+                </article>
+            </section>
+            {/}{/}
+            {/}
+            {no_record_found}{/}
+        </div>
+    </div>
+</div>

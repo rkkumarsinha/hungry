@@ -1,0 +1,43 @@
+div(class='{$class}', id='{$_name}', style='{$style}')
+  .row
+    .col-md-6
+      {review_lister}
+      div(id="{$_name}")
+        ul.comments
+            {rows}{row}
+            li.comment(data-reviewid="{$id}")
+              figure(title="{$user}")
+                .image
+                  img(alt='', src='{profile_image_url}assets/img/default-avatar.png{/}')
+                p {$user}
+              .comment-wrapper
+                .name.pull-left(title="{$title}") {$title}
+                span.date.pull-right(style="background-color:rgb(244,244,242);")
+                  span.fa.fa-calendar
+                  | {$created_at} {$created_time}
+                p {$comment}
+                .row(style="margin:0px;")
+                  .col-md-6(style="background-color:rgb(244,244,242);")
+                    i.fa.fa-star-o.atk-swatch-yellow(title="User Rating" style="padding:5px;border-radius:5px;") &nbsp;Rating:
+                      strong &nbsp;{$rating}
+                  .col-md-6(style="background-color:rgb(244,244,242);")
+                    a.host-comment.comment1.reply(href='#' data-reviewid="{$id}")
+                      span.fa.fa-comments-o &nbsp;Comment
+                hr
+            {/}{/}
+      {/}
+    .col-md-6
+      {comment_lister}
+      {lister}
+      {rows}{row}
+      article.faq-single
+        .wrapper
+          .answer
+            figure Answer
+            p
+              | Vivamus ut turpis risus. Vestibulum gravida dictum sem a rutrum. Fusce tincidunt
+      {/}{/}
+      {/}
+      {/}
+      {$comment_form}
+  {$Content}

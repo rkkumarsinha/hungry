@@ -1,0 +1,16 @@
+div(id="{$_name}" style="{$style}" class="{$class} container account")
+  header.text-center(style="background-color:white;padding:20px;")
+    h2.page-title {$list_data}
+  #page-useraccount(style="margin-top:10px;")
+    // Off Canvas Navigation
+    nav.off-canvas-navigation
+      header Navigation
+      .main-navigation.navigation-off-canvas
+    // end Off Canvas Navigation
+    #page-content
+      {$Content}
+      section.container
+        {signin}
+        {/signin}
+      // /.block
+    // end Page Content

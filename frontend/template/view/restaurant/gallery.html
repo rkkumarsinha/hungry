@@ -1,0 +1,83 @@
+
+{not_found}
+<link rel="stylesheet" href="css/lightgallery.css"/>
+<style>
+#hungrylightgallery
+{
+  float: left;
+  width: 100%;
+  padding: 0;
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  background-color: white;
+}
+
+.hungry-image-wrapper
+{
+  float: left;
+  width: 33.3%;
+  padding: 0;
+  margin: 0;
+  background-color: #000;
+  border: 10px solid #fff;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.hungry-image-wrapper img
+{
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  -webkit-transition: all 2s ease-out;
+  transition: all 2s ease-out;
+}
+
+div.hungry-image-wrapper:hover img, div.hungry-image-wrapper:focus img
+{
+  -webkit-transform: scale(1.3);
+  transform: scale(1.3);
+}
+
+#hungrylightgallery div
+{
+  position: relative;
+  height: 0;
+  padding-top: 26.25%;
+}
+
+#hungrylightgallery img
+{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+</style>
+<div class="restaurant-gallery">
+  <div id="hungrylightgallery" class="list-unstyled row">
+    {rows}{row}
+          <div href="{$image}" class="col-md-6 col-lg-4 col-sm-12 hungry-image-wrapper">
+              <img class="img-responsive" src="{$image}">
+          </div>
+    {/}{/}
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#hungrylightgallery').lightGallery();
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/picturefill/2.3.1/picturefill.min.js"></script>
+<script src="js/lightgallery.js"></script>
+<script src="js/lg-fullscreen.js"></script>
+<script src="js/lg-thumbnail.js"></script>
+<script src="js/lg-autoplay.js"></script>
+<script src="js/lg-zoom.js"></script>
+<script src="js/lg-hash.js"></script>
+<script src="js/lg-pager.js"></script>
+{/}

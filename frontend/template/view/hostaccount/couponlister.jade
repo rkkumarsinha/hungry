@@ -1,0 +1,32 @@
+div(id="{$_name}" class="{$class}" style="{$style}")
+	div.atk-push(style="height:30px;")
+		{$quick_search}
+	.row
+		{rows}{row}
+		.col-md-6.atk-push(data-recordid="{$id}")
+			{discount_wrapper}
+			div.btn.btn-block(style="background-color:#ededea;") {$discount_name}: {$discount}{$offer}
+			{/}
+			div.promo-box
+				div.image.item(title="{$user}")
+					a(href='#')
+						div.item-specific(style="font-size:16px;font-size:bold;font-size:16px;background-color:rgba(128, 100, 128,0.8);color:white;")
+							strong {$user}
+						img(alt="" src="{profile_image_url}assets/img/hotel-flight.jpg{/}")
+				div.wrapper
+					//- h3 Discount /Coupon: {$discount}{$offer} 
+					h3(style="padding-top:5px;padding-bottom:5px;") Coupon: {$discount_coupon}
+						//- figure Lorem ipsum dolor sit amet
+					div.icon
+						i.fa.fa-mobile &nbsp;{$mobile}
+						i.fa.fa-envelope &nbsp;{$email}
+						i.fa.fa-calendar &nbsp;{$created_at}
+						i.fa.fa-clock-o &nbsp;{$created_time}
+			div.btn.btn-primary.btn-block.atk-swatch-orange.verify-button(data-couponid="{$id}") Verify
+		{/}
+		{/}
+	{$Paginator}
+	{no_record_found}
+	div
+	{/}
+	{$Content}

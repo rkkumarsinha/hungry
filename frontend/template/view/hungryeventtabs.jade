@@ -1,0 +1,8 @@
+div(id="{$_name}" class="{$class} hungryeventtabs")
+	ul.horizontal-slide
+		{tabs}
+		li(data-tabid="{$tab_id}" class="{$tab_class} span2")
+			a(href="{$url}")
+				h4{$tab_name}
+		{/}
+	{$Content}

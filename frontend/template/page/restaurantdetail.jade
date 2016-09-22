@@ -1,0 +1,296 @@
+#page-content.page-item-detail.hungry-restaurant-detail
+  // Hero Image
+  section.hero-image.height-400.restaurant-detail-banner
+    .inner(style='vertical-align: middle;')
+      .container
+        .row
+          .col-md-9.col-sm-12.text-left.restaurant-info
+            .restaurant-logo-image
+              img(src='{rest_logo_image}{/}')
+            h1 {name}Find Place For Fun and Eat{/}
+            div {address}630-f sec.11 Near Alok School Udaipur, Rajasthan.{/}
+            |             {hungryuserrating}
+            |             {/}
+          .col-md-3.col-sm-12
+            div.btn.atk-swatch-orange.btn-block(title="get discount" type='button' data-toggle='modal' data-target='\#{$_name}{$id}_discount_model' style="font-size:16px;margin-top:8px;color:white;cursor:pointer; cursor: hand;border-radius:5px;") Get Discount
+          .col-md-3.col-sm-12
+            div.btn.atk-swatch-green.btn-block(title="Reserve Table" type='button' data-toggle='modal' data-target='\#{$_name}{$id}_reservetable_model' style="font-size:16px;margin-top:8px;color:white;cursor:pointer; cursor: hand;background-color:#5cb85c;border-radius:5px;") Reserve Table
+    .background(style='background:rgba(0, 0, 0, 0.45) none repeat scroll 0 0;')
+      img(src='{rest_banner_image}assets/img/restaurant-detail-banner.jpg{/}', alt='')
+  | {$Content}
+  section.container
+    .row
+      // Item Detail Content
+      .col-md-9
+        section#main-content.block
+          .row
+            // Detail Sidebar
+            aside#detail-sidebar.col-md-4.col-sm-4
+              // Contact
+              section
+                header
+                  h3 Contact
+                address
+                  div(style='display:none;') {$address}
+                  figure
+                    | {mobile_wrapper}
+                    .info
+                      i.fa.fa-mobile
+                      span {$mobile_no}
+                    | {/}
+                    |                     {phone_wrapper}
+                    .info
+                      i.fa.fa-phone
+                      span {$phone_no}
+                    | {/}
+                    |                     {email_wrapper}
+                    .info
+                      i.fa.fa-envelope
+                      span {$email}
+                    | {/}
+                    |                     {website_wrapper}
+                    .info
+                      i.fa.fa-globe
+                      a(href='#') {$website}
+                    | {/}
+                    .social 
+                      {instagram_wrapper}
+                      a.social-button(target="_blank" href="{$instagram_page_url}")
+                        i.fa.fa-instagram.instagram(style="padding:0px !important;float:left;")
+                      {/}
+                      {facebook_wrapper}
+                      a.social-button(target="_blank" href="{$facebook_page_url}")
+                        i.fa.fa-facebook.facebook(style="padding:0px !important;")
+                      {/}
+              // end Contact
+              // Rating
+              section.clearfix
+                header
+                  a.roll(href='#reviews1')
+                    h3 Rating
+                .hungry-star-wrapper(data-rating='{rating}{/}')
+                  input.rating-loading(id='{$id}', value='{$rating}')
+                // <figure data-rating="{$rating}" class="rating big pull-right"></figure>
+              // end Rating
+              section
+                header
+                  h3 Avg Cost/Person
+                figure
+                  #detail-sidebar-event
+                    .content
+                      b A La Carte 
+                      | {veg_wrapper}
+                      p Veg. ₹ {$avg_cost_per_person_veg}
+                      | {/}
+                      |                       {non_veg_wrapper}
+                      p Non Veg. ₹ {$avg_cost_per_person_nonveg}
+                      | {/}
+                      |                       {thali_wrapper}
+                      b Thali 
+                      p ₹ {$avg_cost_per_person_thali}
+                      | {/}
+              // Events
+              section(style='display:none;')
+                header
+                  h3 Events
+                figure
+                  #detail-sidebar-event.expandable-content.collapsed.show-60
+                    .content
+                      p
+                        | Maecenas purus sapien, pellentesque non consectetur eu, rhoncus in mauris.
+                        | Duis et nisl metus. Sed ut pulvinar mauris, bibendum ullamcorper ex.
+                        | Aliquam vitae ante diam. Nam eu blandit odio. Cras erat lorem, iaculis eu nulla eu, sodales aliquam eros.
+                  a.show-more.expand-content(data-expand='#detail-sidebar-event', href='#') Show More
+              // end Events
+              // Features
+              section
+                header
+                  h3 Features
+                figure
+                  #detail-sidebar-features
+                    .content
+                      | {feature}
+                      .info
+                        .row
+                          .col-md-3
+                            img(src='{$icon_url}', style='width:30px;')
+                          .col-md-9
+                            p(style='padding:5px;')  {$Highlight}
+                      |                       {/}
+              // end features
+              // cuisine
+              section
+                header
+                  h3 Cuisines
+                figure
+                  #detail-sidebar-cuisine
+                    .content
+                      | {cuisine}
+                      .info
+                        .row
+                          .col-md-3
+                            img(src='{$icon_url}', style='width:30px;float:left')
+                          .col-md-9
+                            p(style='padding:5px;')  {$keyword}
+                      |                       {/}
+              // end cuisines
+              // Contact Form
+              section(style='display:none;')
+                header
+                  h3 Contact Form
+                figure
+                  form#item-detail-form(action='?', method='post', role='form')
+                    .form-group
+                      label(for='item-detail-name') Name
+                      input#item-detail-name.form-control.framed(type='text', required='', name='item-detail-name')
+                    // /.form-group
+                    .form-group
+                      label(for='item-detail-email') Email
+                      input#item-detail-email.form-control.framed(type='email', required='', name='item-detail-email')
+                    // /.form-group
+                    .form-group
+                      label(for='item-detail-message') Message
+                      textarea#item-detail-message.form-control.framed(required='', rows='3', name='item-detail-message')
+                    // /.form-group
+                    .form-group
+                      button.btn.framed.icon(type='submit')
+                        | Send
+                        i.fa.fa-angle-right
+                    // /.form-group
+              // end Contact Form
+            // end Detail Sidebar
+            // Content
+            .col-md-8.col-sm-8
+              section
+                div
+                  // Nav tabs
+                  ul.nav.nav-tabs(role='tablist')
+                    li.active(role='presentation')
+                      a(href='#gallery', aria-controls='gallery', role='tab', data-toggle='tab') Gallery
+                    li(role='presentation')
+                      a(href='#menu', aria-controls='menu', role='tab', data-toggle='tab') Menu
+                    li(role='presentation')
+                      a(href='#description', aria-controls='description', role='tab', data-toggle='tab') Description
+                    li(role='presentation')
+                      a(href='#operationlhours', aria-controls='operationlhours', role='tab', data-toggle='tab') Operational Hours
+                    li(role='presentation')
+                      a(href='#offers', aria-controls='offers', role='tab', data-toggle='tab') Offers
+                  // Tab panes
+                  .tab-content
+                    #gallery.tab-pane.active(role='tabpanel')
+                      | {$gallery}
+                      // /.item-gallery
+                    #menu.tab-pane(role='tabpanel') {$menu}
+                    #description.tab-pane(role='tabpanel')
+                      article
+                        header
+                          h2 Description
+                        p
+                          | {$about_restaurant}
+                      // /.block
+                      article.block
+                        header
+                          h2 Features
+                        ul.bullets
+                          | {highlight}
+                          | {siglehighlight}
+                          li {$Highlight}
+                          | {/}
+                          |                           {/}
+                      // /.block
+                    #operationlhours.tab-pane(role='tabpanel')
+                      article
+                        header
+                          h2 Operational Hours
+                        dl.lines
+                          div
+                            dt Monday
+                            dd &nbsp;{monday}Holiday{/}
+                          div
+                            dt Tuesday
+                            dd &nbsp;{tuesday}Holiday{/}
+                          div
+                            dt Wednesday
+                            dd &nbsp;{wednesday}Holiday{/}
+                          div
+                            dt Thursday
+                            dd &nbsp;{thursday}Holiday{/}
+                          div
+                            dt Friday
+                            dd &nbsp;{friday}Holiday{/}
+                          div
+                            dt Saturday
+                            dd &nbsp;{saturday}Holiday{/}
+                          div
+                            dt Sunday
+                            dd &nbsp;{sunday}Holiday{/}
+                      // /.block
+                    #offers.tab-pane(role='tabpanel')
+                      | {restaurantoffer}
+                      .wrapper
+                        h5 {$name}
+                        p {$detail}
+                      | {/}
+              // Reviews
+              | {$review}
+              // end Review Form
+            // /.col-md-8
+          // /.row
+        // /#main-content
+      // /.col-md-8
+      // Sidebar
+      .col-md-3.restaurant-detail-right-sidebar
+        section#restaurant-detail.block.restaurant-map-container
+          header
+            h2 Map Route
+          div(style='height:200px;') {$routemap}
+        section#nearbyrestaurant.block.near-by-restaurant-container
+          header
+            h2 Near By Restaurant
+          | {$nearbyrestaurant}
+        section#recommendrestaurant.block.recommend-restaurant-container
+          header
+            h2 Recommend Restaurant
+          | {$recommendedrestaurant}
+      // /.form-group
+      // /#sidebar
+      // /.col-md-3
+      // end Sidebar
+      // /.row
+  .modal.fade(id='{$_name}{$id}_discount_model' tabindex='-1' role='dialog' aria-labelledby='{$_name}{$id}_discount_model')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true' style="margin-right:20px;") ×
+          h4.modal-title.text-hungry(id='{$_name}_model_label' style="font-size:16px;") Get Discount
+        .modal-body.hungry-getdiscount-modal-popup
+          {$getdiscount}
+        .modal-footer
+          button.btn.btn-default.hungry-green-btn.getdiscount-hungry-submit(type='button' style="width:200px;border-radius:10px;") Get code
+          button.btn.btn-default(type='button', data-dismiss='modal') Close
+            | {$getdiscount_save_button}
+  .modal.fade(id='{$_name}{$id}_reservetable_model' tabindex='-1' role='dialog' aria-labelledby='{$_name}{$id}_reservetable_model')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true' style="margin-right:20px;") ×
+          h4.modal-title.text-hungry(id='{$_name}_model_label' style="font-size:16px;") Reserve Table
+        .modal-body.hungry-reserve-table-modal-popup
+          {$reservetable}
+        .modal-footer
+          button.btn.btn-default.hungry-green-btn.reservetable-hungry-submit(type='button' style="width:200px;border-radius:10px;") Book Table
+          button.btn.btn-default(type='button', data-dismiss='modal') Close
+            | {$reserv_save_btn}
+  .modal.fade(id='comment_modalpopup' tabindex='-1' role='dialog' aria-labelledby='comment_modalpopup')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true' style="margin-right:20px;") ×
+          h4.modal-title.text-hungry(id='{$_name}_model_label' style="font-size:16px;") Login
+        .modal-body.hungry-comment_modalpopup
+          {$login}{$Content}
+        .modal-footer
+          button.btn.btn-default(type='button', data-dismiss='modal') Close

@@ -1,0 +1,47 @@
+
+<div class="container">
+  <header>
+    <h2>{header}Popular this week{/}</h2>
+  </header>
+  <div class="owl-carousel wide carousel">{rows}{row}
+    <div class="slide">
+      <div class="inner">
+        <div class="image">
+          <div class="item-specific">
+            <div style="display:none;" class="inner">
+              <div class="content">
+                <dl>
+                  <dt>Bedrooms</dt>
+                  <dd>2</dd>
+                  <dt>Bathrooms</dt>
+                  <dd>2</dd>
+                  <dt>Area</dt>
+                  <dd>240m<sup>2</sup></dd>
+                  <dt>Garages</dt>
+                  <dd>1</dd>
+                  <dt>Build Year</dt>
+                  <dd>1990</dd>
+                </dl>
+              </div>
+            </div>
+          </div><img src="{display_image}assets/img/items/restaurant/8.jpg{/}"/>
+        </div>
+        <div class="wrapper"><a href="{$path}">
+            <h3>{name}Magma Bar and Grill{/}</h3></a>
+          <figure><i class="fa fa-map-marker"></i><span>{address}970 Chapel Street, Rosenberg, TX 77471{/}</span></figure>
+          <div class="info">
+            <div data-rating="4" class="rating">
+              <aside class="reviews">{rating}6 reviews{/}</aside>
+            </div>
+            <div class="type"><i><img src="assets/icons/restaurants-bars/restaurants/restaurant.png"/></i><span>{type}Restaurant{/}</span></div>
+          </div>
+          <!-- /.info-->
+          <p>{about_restaurant}            </p>{/}<a href="{$path}" class="read-more icon">Read More</a>
+        </div>
+        <!-- /.wrapper-->
+      </div>
+      <!-- /.inner-->
+    </div>
+    <!-- /.slide-->{/}{/}
+  </div>
+</div>

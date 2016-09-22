@@ -1,0 +1,17 @@
+div(id='{$_name}' style="{$style}" class="{$class}")
+	{comment_wrapper}
+	div.commentlister(style="overflow:scroll !important;max-height:300px;")
+		{rows}
+		{row}
+		article.faq-single
+			.wrapper
+				.answer
+					figure {$created_at}
+						p {$comment}
+		{/}
+		{/}
+	{/}
+	{not_found}
+	{/}
+	{$comment_form}
+	{$Content}

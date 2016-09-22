@@ -1,0 +1,45 @@
+.container
+  header
+    h2 {header}Popular this week{/}
+  .owl-carousel.wide.carousel{rows}{row}
+    .slide
+      .inner
+        .image
+          .item-specific
+            .inner(style="display:none;")
+              .content
+                dl
+                  dt Bedrooms
+                  dd 2
+                  dt Bathrooms
+                  dd 2
+                  dt Area
+                  dd
+                    | 240m
+                    sup 2
+                  dt Garages
+                  dd 1
+                  dt Build Year
+                  dd 1990
+          img(src='{display_image}assets/img/items/restaurant/8.jpg{/}')
+        .wrapper
+          a(href="{$path}")
+            h3 {name}Magma Bar and Grill{/}
+          figure
+            i.fa.fa-map-marker
+            span {address}970 Chapel Street, Rosenberg, TX 77471{/}
+          .info
+            .rating(data-rating='4')
+              aside.reviews {rating}6 reviews{/}
+            .type
+              i
+                img(src='assets/icons/restaurants-bars/restaurants/restaurant.png')
+              span {type}Restaurant{/}
+          // /.info
+          p{about_restaurant}            
+          {/}
+          a.read-more.icon(href="{$path}") Read More
+        // /.wrapper
+      // /.inner
+    // /.slide
+    {/}{/}

@@ -1,0 +1,22 @@
+div(id='{$_name}', style='{$style}', class='{$class}')
+	i.glyphicon.glyphicon-map-marker(title="select your location" type='button' data-toggle='modal' data-target='\#{$_name}_location_model' style="font-size:30px;margin-top:8px;color:white;cursor:pointer; cursor: hand;")
+	small(title="currently selected {$current_location}") {$current_location}
+	.modal.fade(id='{$_name}_location_model' tabindex='-1' role='dialog' aria-labelledby='{$_name}_model_label')
+		.modal-dialog(role='document')
+			.modal-content
+				.modal-header
+					button.close(type='button', data-dismiss='modal', aria-label='Close')
+						span(aria-hidden='true' style="margin-right:20px;") ×
+					h4.modal-title(id='{$_name}_model_label') Select your location
+				.modal-body
+					{location_lister}
+					{rows}	
+					{row}
+					div.hungrycity.btn.dropdown-toggle(data-cityid="{$id}"){$name}
+					{/}
+					{/}
+					{/}
+					| {$Content}
+				.modal-footer
+					button.btn.btn-default(type='button', data-dismiss='modal') Close
+						| {$save_button}

@@ -1,0 +1,63 @@
+section#reviews.block(style="clear:both;" class="{$class}")
+  header.clearfix
+    h2.pull-left Reviews
+    a.btn.framed.icon.pull-right.roll(href='#write-review')
+      | Write a review 
+      i.fa.fa-pencil
+  // /.overall-rating
+  section.reviews
+    {rows}{row}
+    article.review(style="margin-bottom:20px;")
+      figure.author
+        img(alt='{$user}', src='{$profile_image}' onerror="this.src='assets/img/default-avatar.png';")
+        .date {$created_at} {$created_time}
+      // /.author
+      .wrapper(style="min-height:130px;")
+        h5 {$user}
+        figure.hungryratingshowwrapper(data-rating='4')
+          input.hungryratingshow(value='{$rating}')
+        p {$comment}
+        .individual-rating(style="display:none;")
+          span Value
+          figure.rating(data-rating='4')
+            span.stars
+              i.fa.fa-star.s1.active(data-score='1')
+              i.fa.fa-star.s2.active(data-score='2')
+              i.fa.fa-star.s3.active(data-score='3')
+              i.fa.fa-star.s4.active(data-score='4')
+              i.fa.fa-star.s5(data-score='5')
+        // /.user-rating
+        .individual-rating(style="display:none;")
+          span Service
+          figure.rating(data-rating='4')
+            span.stars
+              i.fa.fa-star.s1.active(data-score='1')
+              i.fa.fa-star.s2.active(data-score='2')
+              i.fa.fa-star.s3.active(data-score='3')
+              i.fa.fa-star.s4.active(data-score='4')
+              i.fa.fa-star.s5(data-score='5')
+    {/}{/}
+  {$Paginator}
+section#write-review
+  header
+    h2 Write a Review
+  {comment_form}
+  form#form-review.background-color-white(action='?', method='post', role='form')
+    .row
+      .col-md-8
+        .form-group
+          label(for='form-review-name') Name
+          input#form-review-name.form-control(type='text', required='', name='form-review-name')
+        // /.form-group
+        .form-group
+          label(for='form-review-email') Email
+          input#form-review-email.form-control(type='email', required='', name='form-review-email')
+        // /.form-group
+        .form-group
+          label(for='form-review-message') Message
+          textarea#form-review-message.form-control(required='', rows='3', name='form-review-message')
+        // /.form-group
+        .form-group
+          button.btn.btn-default(type='submit') Submit Review
+  // /.main-search
+  {/}

@@ -1,0 +1,34 @@
+div(id="{$_name}" class="{$class}" style="{$style}")
+  // Off Canvas Navigation
+  nav.off-canvas-navigation
+    header Navigation
+    .main-navigation.navigation-off-canvas
+  // end Off Canvas Navigation
+  // Page Content
+  #page-content.hungrydestination
+    // Hero Image
+    section.hero-image.search-filter-middle.height-450
+      .inner
+        .container.search-bar.horizontal(style="width:100%;")
+          h1 Destinations
+          .container.hungry-search-form(style="z-index: 2;position:relative;")
+            .container(style="width:80%;")
+              {search_form}{/}
+      .background.event-home-slide-bg
+        img(src="assets/img/slide1-1.jpg" onerror="this.src='assets/img/hungry-not-found.jpg'")
+        {$homeslider}
+    // end Hero Image
+    section#featured.block.equal-height
+      {$destinationlist}
+  .modal.fade(id='destination_enquiry_modalpopup' tabindex='-1' role='dialog' aria-labelledby='destination_enquiry_modalpopup')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true' style="margin-right:20px;") ×
+          h4.modal-title.text-hungry(id='{$_name}_model_label' style="font-size:16px;") Request to book
+        .modal-body.destination_enquiry_modalpopup
+          {$enquiryform}{$Content}
+        .modal-footer
+          button.btn.btn-default.hungry-green-btn.requesttobook-hungry-submit(type='button' style="width:200px;border-radius:10px;") Submit
+          button.btn.btn-default(type='button', data-dismiss='modal') Close

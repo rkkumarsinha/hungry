@@ -1,0 +1,283 @@
+#page-content.page-item-detail.event-detail.hungry-restaurant-detail
+  // Hero Image
+  section.hero-image.height-400.event-detail-banner.restaurant-detail-banner
+    .inner(style="vertical-align: middle;")
+      .container
+        .row
+          .col-md-9.col-sm-12.text-left.restaurant-info
+            .restaurant-logo-image
+              img(src='{destination_logo_image}assets/img/hungry-not-found.png{/}' onerror="this.src='assets/img/hungry-not-found.jpg';")
+            h1 {name}Find Place For Fun and Eat{/}
+            div {address}{/}
+          .col-md-3.col-sm-12
+            div.btn-block.atk-swatch-orange.btn.hungrydestination_enquiry.container( data-destinationid='{$id}' style="font-size:16px;margin-top:8px;color:white;cursor:pointer; cursor: hand;border-radius:5px;") Request to book
+    .background(style="background:rgba(0, 0, 0, 0.45) none repeat scroll 0 0;z-index:-1;")
+      img(src='{destination_banner_image}assets/img/restaurant-detail-banner.jpg{/}', alt='' style="width:100%;" onerror="this.src='assets/img/hungry-not-found.jpg'")
+  {$Content}
+  section.container
+    .row
+      // Item Detail Content
+      .col-md-9
+        section#main-content.block
+          .row
+            // Detail Sidebar
+            aside#detail-sidebar.col-md-4.col-sm-4
+              // Contact
+              section
+                header
+                  h3 Contact
+                address()
+                  div(style="display:none;") {$address}
+                  figure
+                    {mobile_wrapper}
+                    .info
+                      i.fa.fa-mobile
+                      span {$mobile_no}
+                    {/}
+                    {phone_wrapper}
+                    .info
+                      i.fa.fa-phone
+                      span {$phone_no}
+                    {/}
+                    {email_wrapper}
+                    .info
+                      i.fa.fa-envelope
+                      span {$email}
+                    {/}
+                    {website_wrapper}
+                    .info
+                      i.fa.fa-globe
+                      a(href='#') {$website}
+                    {/}
+                    .social 
+                      {instagram_wrapper}
+                      a.social-button(target="_blank" href="{$instagram_page_url}" title="instagram")
+                        i.fa.fa-instagram.instagram(style="padding:0px !important;float:left;")
+                      {/}
+                      {facebook_wrapper}
+                      a.social-button(target="_blank" href="{$facebook_page_url}" title="facebook")
+                        i.fa.fa-facebook.facebook(style="padding:0px !important;")
+                      {/}
+              // end Contact
+              //Destination Hightlight
+              section
+                header
+                  h3 Facilities
+                figure
+                  #detail-sidebar-facilites
+                    .content
+                      {facilites}
+                      .info
+                        .row
+                          .col-md-3
+                           img(src="{$icon_url}" style="width:30px;float:left" onerror="this.src='assets/img/hungry-not-found.jpg'")
+                          .col-md-9
+                            p(style="padding:5px;") {$destination_highlight}
+                      {/}
+              //Occassion
+              section
+                header
+                  h3 Occassions
+                figure
+                  #detail-sidebar-occassion
+                    .content
+                    {occassion}
+                    .info
+                      .row
+                        .col-md-3
+                          img(src="{$icon_url}" style="width:30px;float:left" onerror="this.src='assets/img/hungry-not-found.jpg'")
+                        .col-md-9
+                          p(style="padding:5px;") {$destination_highlight}
+                    {/}
+              //Service Available
+              section
+                header
+                  h3 Services
+                figure
+                  #detail-sidebar-service-available
+                    .content
+                    {service}
+                    .info
+                      .row
+                        .col-md-3
+                          img(src="{$icon_url}" style="width:30px;float:left" onerror="this.src='assets/img/hungry-not-found.jpg'")
+                        .col-md-9
+                          p(style="padding:5px;") {$destination_highlight}
+                    {/}
+              // Features
+              section
+                header
+                  h3 Attractions
+                figure
+                  #detail-sidebar-features
+                    .content
+                      {event_attraction}{/}
+              // end features
+              // Contact Form
+              section(style="display:none;")
+                header
+                  h3 Contact Form
+                figure
+                  form#item-detail-form(action='?', method='post', role='form')
+                    .form-group
+                      label(for='item-detail-name') Name
+                      input#item-detail-name.form-control.framed(type='text', required='', name='item-detail-name')
+                    // /.form-group
+                    .form-group
+                      label(for='item-detail-email') Email
+                      input#item-detail-email.form-control.framed(type='email', required='', name='item-detail-email')
+                    // /.form-group
+                    .form-group
+                      label(for='item-detail-message') Message
+                      textarea#item-detail-message.form-control.framed(required='', rows='3', name='item-detail-message')
+                    // /.form-group
+                    .form-group
+                      button.btn.framed.icon(type='submit')
+                        | Send
+                        i.fa.fa-angle-right
+                    // /.form-group
+              // end Contact Form
+            // end Detail Sidebar
+            // Content
+            .col-md-8.col-sm-8
+              section
+                div
+                  // Nav tabs
+                  ul.nav.nav-tabs(role='tablist')
+                    li.active(role='presentation')
+                      a(href='#gallery', aria-controls='gallery', role='tab', data-toggle='tab') Gallery
+                    li(role='presentation')
+                      a(href='#description', aria-controls='description', role='tab', data-toggle='tab') Description
+                    li(role='presentation')
+                      a(href='#operationlhours', aria-controls='operationlhours', role='tab', data-toggle='tab') Timing
+                    li(role="presentation")
+                      a(href="#packages" aria-controls="Packages" role="tab" data-toggle="tab") Packages
+                    li(role="guidline")
+                      a(href="#guidline" aria-controls="Guidline" role="tab" data-toggle="tab") Guidelines
+                    li(role="space")
+                      a(href="#space" aria-controls="Space" role="tab" data-toggle="tab") Spaces
+                  // Tab panes
+                  .tab-content
+                    #gallery.tab-pane.active(role='tabpanel')
+                      {$gallery}
+                    #description.tab-pane(role='tabpanel')
+                      h2 About Destination
+                      p 
+                        {$about_destination}
+                      h2 Booking Policy
+                      p
+                        {$booking_policy}
+                      h2 Cancellation Policy
+                      p
+                        {$cancellation_policy}
+                    #operationlhours.tab-pane(role='tabpanel')
+                      {event_day_time}
+                      dl.lines
+                        dt Monday
+                        dd {monday}{/}
+                        dt Tuesday
+                        dd {tuesday}{/}
+                        dt Wednesday
+                        dd {wednesday}{/}
+                        dt Thursday
+                        dd {thursday}{/}
+                        dt Friday
+                        dd {friday}{/}
+                        dt Saturday
+                        dd {sunday}{/}
+                      {/}
+                    #packages.tab-pane(role="tabpanel")
+                      {packages}
+                      div.wrapper(style="margin-bottom:10px;")
+                        h3(style="margin-bottom:10px;") {$name}
+                        div(style="padding:0px 0px 0px 10px;") Price:  {$price}&nbsp;
+                          i.fa.fa-rupee
+                        div(style="padding:0px 0px 0px 10px;") {$detail}
+                        <hr/>
+                      {/}
+                    #guidline.tab-pane(role="tabpanel")
+                      h2 Guidlines
+                      p {$guidelines}
+                      h2 How To Reach
+                      p {$how_to_reach}
+                    #space.tab-pane(role="tabpanel")
+                      {dest_space}
+                      .row
+                        .col-md-3
+                          img(src="{$icon_url}" style="width:30px;float:left" onerror="this.src='assets/img/hungry-not-found.jpg'")
+                        .col-md-9
+                          h4(style="text-transform:uppercase;") {$name}
+                          .row
+                            .col-md-12
+                              p Capacity: {$cps}
+                              p Size: {$size}
+                              p Type: {$type}
+                      <hr/>
+                      {/}
+              // Reviews
+              {$review}
+              // end Review Form
+            // /.col-md-8
+          // /.row
+        // /#main-content
+      // /.col-md-8
+      // Sidebar
+      .col-md-3
+        section#main-content.block.near-by-restaurant-container
+          header
+            h2 Map Route
+          div(style="height:200px;")
+            {$routemap}
+        section#main-content.destinationdetail-similardestination-list
+           aside#detail-sidebar
+            section
+              header
+                h3 Similar Destinations
+              figure
+                #detail-sidebar-venue
+                  .content
+                  {$similar_destination}
+        section#main-content
+          aside#detail-sidebar
+            section
+              header
+                h3 Space
+              figure
+                #detail-sidebar-venue
+                  .content
+                    {space}
+                    .info
+                      .row
+                        .col-md-3
+                          img(src="{$icon_url}" style="width:30px;float:left" onerror="this.src='assets/img/hungry-not-found.jpg'")
+                        .col-md-9
+                          p(style="padding:5px;") {$name}
+                    {/}
+        section#main-content
+          aside#detail-sidebar
+            section
+              header
+                h3 Venue
+              figure
+                #detail-sidebar-venue
+                  .content
+                  {venue}
+                  .info
+                    .row
+                      .col-md-3
+                        img(src="{$icon_url}" style="width:30px;float:left" onerror="this.src='assets/img/hungry-not-found.jpg'")
+                      .col-md-9
+                        p(style="padding:5px;") {$name}
+                  {/}
+  .modal.fade(id='destination_enquiry_modalpopup' tabindex='-1' role='dialog' aria-labelledby='destination_enquiry_modalpopup')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true' style="margin-right:20px;") ×
+          h4.modal-title.text-hungry(id='{$_name}_model_label' style="font-size:16px;") Request to book
+        .modal-body.destination_enquiry_modalpopup
+          {$enquiryform}{$Content}
+        .modal-footer
+          button.btn.btn-default.hungry-green-btn.requesttobook-hungry-submit(type='button' style="width:200px;border-radius:10px;") Submit
+          button.btn.btn-default(type='button', data-dismiss='modal' style="border-radius:10px;") Close

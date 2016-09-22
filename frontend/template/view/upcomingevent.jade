@@ -1,0 +1,30 @@
+.div(id="{$_name}" class="{$class}" style="{$style}")
+  header
+    h2 {header}{/}
+  .row
+    {rows}{row}
+    .item.col-md-12.col-sm-12.col-xs-12(style="margin:0px;margin-bottom:20px;")
+        .image
+          a(href='{$path}')
+            div(style="position:absolute;color:white;margin-top:45%;width:100%;text-align:center;")
+              div.inner
+                div.content
+                  h4(style="font-weight:normal !important;padding:5px;") {$name}
+            .item-specific
+              span(title='Distance', data-lat='{$latitude}', data-lng='{$longitude}')
+                i.fa.fa-map-marker
+                  span.current-distance(data-lat='{$latitude}', data-lng='{$longitude}', style='color:orange;', data-id='{$id}')
+                | {$distance}
+              span(title='')
+                i.fa.fa-inr
+                | {lowest_price}{/}
+              span(title='Area')
+                i.fa.fa-tags
+                |  {offers}240m{/}
+            div.icon.event-date
+              div {$starting_date}
+              div {$starting_month}
+            img(src='{display_image}assets/img/small.jpg{/}', alt='' onerror="this.src='assets/img/hungry-not-found.jpg';")
+          .restaurant-category
+            i.fa.fa-hungry {$event_category}
+    {/}{/}

@@ -1,0 +1,42 @@
+
+<div id="{$_name}" style="{$style}" class="{$class}">
+  <div class="row">
+    <div class="col-md-6">{review_lister}
+      <div id="{$_name}">
+        <ul class="comments">{rows}{row}
+          <li data-reviewid="{$id}" class="comment">
+            <figure title="{$user}">
+              <div class="image"><img alt="" src="{profile_image_url}assets/img/default-avatar.png{/}"/></div>
+              <p>{$user}</p>
+            </figure>
+            <div class="comment-wrapper">
+              <div title="{$title}" class="name pull-left">{$title}</div><span style="background-color:rgb(244,244,242);" class="date pull-right"><span class="fa fa-calendar"></span>{$created_at} {$created_time}</span>
+              <p>{$comment}</p>
+              <div style="margin:0px;" class="row">
+                <div style="background-color:rgb(244,244,242);" class="col-md-6"><i title="User Rating" style="padding:5px;border-radius:5px;" class="fa fa-star-o atk-swatch-yellow">&nbsp;Rating:<strong>&nbsp;{$rating}</strong></i></div>
+                <div style="background-color:rgb(244,244,242);" class="col-md-6"><a href="#" data-reviewid="{$id}" class="host-comment comment1 reply"><span class="fa fa-comments-o">&nbsp;Comment</span></a></div>
+              </div>
+              <hr/>
+            </div>
+          </li>{/}{/}
+        </ul>
+      </div>{/}
+    </div>
+    <div class="col-md-6">
+      {comment_lister}
+      {lister}
+      {rows}{row}
+      <article class="faq-single">
+        <div class="wrapper">
+          <div class="answer">
+            <figure>Answer</figure>
+            <p>Vivamus ut turpis risus. Vestibulum gravida dictum sem a rutrum. Fusce tincidunt</p>
+          </div>
+        </div>
+      </article>{/}{/}
+      {/}
+      {/}
+      {$comment_form}
+    </div>
+  </div>{$Content}
+</div>

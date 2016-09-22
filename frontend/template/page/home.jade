@@ -1,0 +1,252 @@
+// Off Canvas Navigation
+nav.off-canvas-navigation
+  header Navigation
+  .main-navigation.navigation-off-canvas
+// end Off Canvas Navigation
+// Page Content
+#page-content
+  // Hero Image
+  section.hero-image.search-filter-middle.height-450
+    .inner
+      .container.search-bar.horizontal(style="width:100%;")
+        h1 Find Place For Fun and Eat
+        .container.hungry-search-form(style="z-index: 2;position:relative;")
+          .container(style="width:60%;")
+            {search_form}{/}
+    .background
+      {$homeslider}
+  // end Hero Image
+  // Featured
+  section#featured.block.equal-height
+    {restaurantlist}
+    .container
+      header
+        h2 Featured
+      .row
+        .col-md-3.col-sm-3
+          .item
+            .image
+              .quick-view
+                i.fa.fa-eye
+                span Quick View
+              a(href='item-detail.html')
+                .overlay
+                  .inner
+                    .content
+                      h4 Description
+                      p Curabitur odio nibh, luctus non pulvinar a, ultricies ac diam. Donec neque massa
+                .item-specific
+                  span(title='Bedrooms')
+                    img(src='assets/img/bedrooms.png', alt='')
+                    | 2
+                  span(title='Bathrooms')
+                    img(src='assets/img/bathrooms.png', alt='')
+                    | 2
+                  span(title='Area')
+                    img(src='assets/img/area.png', alt='')
+                    | 240m
+                    sup 2
+                  span(title='Garages')
+                    img(src='assets/img/garages.png', alt='')
+                    | 1
+                .icon
+                  i.fa.fa-thumbs-up
+                img(src='assets/img/items/1.jpg', alt='')
+            .wrapper
+              a(href='item-detail.html')
+                h3 Steak House Restaurant
+              figure 63 Birch Street
+              .info
+                .type
+                  i
+                    img(src='assets/icons/restaurants-bars/restaurants/restaurant.png', alt='')
+                  span Restaurant
+                .rating(data-rating='4')
+          // /.item
+        // /.col-sm-4
+        .col-md-3.col-sm-3
+          .item
+            .image
+              .quick-view
+                i.fa.fa-eye
+                span Quick View
+              a(href='item-detail.html')
+                .overlay
+                  .inner
+                    .content
+                      h4 Description
+                      p Curabitur odio nibh, luctus non pulvinar a, ultricies ac diam. Donec neque massa
+                img(src='assets/img/items/2.jpg', alt='')
+            .wrapper
+              a(href='item-detail.html')
+                h3 Benny’s Cafeteria
+              figure 63 Birch Street
+              .info
+                .type
+                  i
+                    img(src='assets/icons/restaurants-bars/restaurants/cafetaria.png', alt='')
+                  span Cafeteria
+                .rating(data-rating='4')
+          // /.item
+        // /.col-sm-4
+        .col-md-3.col-sm-3
+          .item
+            .image
+              .quick-view
+                i.fa.fa-eye
+                span Quick View
+              a(href='item-detail.html')
+                .overlay
+                  .inner
+                    .content
+                      h4 Description
+                      p Curabitur odio nibh, luctus non pulvinar a, ultricies ac diam. Donec neque massa
+                .item-specific
+                  span Daily menu from: $6
+                img(src='assets/img/items/restaurant/9.jpg', alt='')
+            .wrapper
+              a(href='item-detail.html')
+                h3 Big Bamboo
+              figure 4662 Bruce Street
+              .info
+                .type
+                  i
+                    img(src='assets/icons/restaurants-bars/restaurants/japanese-food.png', alt='')
+                  span Sushi
+                .rating(data-rating='3')
+          // /.item
+        // /.col-sm-4
+        .col-md-3.col-sm-3
+          .item
+            .image
+              .quick-view
+                i.fa.fa-eye
+                span Quick View
+              a(href='item-detail.html')
+                .overlay
+                  .inner
+                    .content
+                      h4 Description
+                      p Curabitur odio nibh, luctus non pulvinar a, ultricies ac diam. Donec neque massa
+                .item-specific
+                  span Daily menu from: $6
+                img(src='assets/img/items/restaurant/10.jpg', alt='')
+            .wrapper
+              a(href='item-detail.html')
+                h3 Sushi Wooshi Bar
+              figure 357 Trainer Avenue
+              .info
+                .type
+                  i
+                    img(src='assets/icons/restaurants-bars/restaurants/fishchips.png', alt='')
+                  span Sushi Bar
+                .rating(data-rating='3')
+          // /.item
+        // /.col-sm-4
+      // /.row
+    // /.container
+    .background.opacity-5
+      img(src='assets/img/restaurants-bg2.jpg', alt='')
+    {/restaurantlist}
+  // end Featured
+  // Popular
+  section#popular.block.background-color-white
+    {popularrestaurant}
+    {/}
+  section#listing.block
+    .container
+      .row
+        .col-md-9.col-sm-9
+          section.equal-height
+            header
+              h2 Recently Added
+            {recentlyadded}
+            {/}
+          // Categories
+        .col-md-3.col-sm-3
+          aside#sidebar
+            section
+              header
+                h2 Text Widget
+              .social-box-wrapper
+                .social-box.col-md-12.col-sm-4.facebook
+                  i.fa.fa-facebook
+                  .clearfix
+                    span.social-count 184k
+                    span.social-action likes
+                  span.social-name facebook
+                .social-box.col-md-12.col-sm-4.twitter
+                  i.fa.fa-twitter
+                  .clearfix
+                    span.social-count 49k
+                    span.social-action tweets
+                  span.social-name twitter
+                .social-box.col-md-12.col-sm-4.google
+                  i.fa.fa-google-plus
+                  .clearfix
+                    span.social-count 1 204
+                    span.social-action circles
+                  span.social-name google+
+            section(style="display:none;")
+              header
+                h2 Events
+              .form-group
+                select.framed(name='events')
+                  option(value='') Select Your City
+                  option(value='1') London
+                  option(value='2') New York
+                  option(value='3') Barcelona
+                  option(value='4') Moscow
+                  option(value='5') Tokyo
+            section(style="display:none;")
+              header
+                h2 Recent Post
+              a.item-horizontal.small(href='item-detail.html')
+                h3 Cash Cow Restaurante
+                figure 63 Birch Street
+                .wrapper
+                  .image
+                    img(src='assets/img/items/1.jpg', alt='')
+                  .info
+                    .type
+                      i
+                        img(src='assets/icons/restaurants-bars/restaurants/restaurant.png', alt='')
+                      span Restaurant
+                    .rating(data-rating='4')
+              // /.item-horizontal small
+              a.item-horizontal.small(href='item-detail.html')
+                h3 Blue Chilli
+                figure 2476 Whispering Pines Circle
+                .wrapper
+                  .image
+                    img(src='assets/img/items/2.jpg', alt='')
+                  .info
+                    .type
+                      i
+                        img(src='assets/icons/restaurants-bars/restaurants/restaurant.png', alt='')
+                      span Restaurant
+                    .rating(data-rating='3')
+              // /.item-horizontal small
+              a.item-horizontal.small(href='item-detail.html')
+                h3 Eddie’s Fast Food
+                figure 4365 Bruce Street
+                .wrapper
+                  .image
+                    img(src='assets/img/items/3.jpg', alt='')
+                  .info
+                    .type
+                      i
+                        img(src='assets/icons/restaurants-bars/restaurants/restaurant.png', alt='')
+                      span Restaurant
+                    .rating(data-rating='5')
+              // /.item-horizontal small
+          // /#sidebar
+        // /.col-md-3
+      // /.row
+    // /.block
+  // end Listing
+  //- hr
+  //- section#getcode.block.text-center
+  //-   .container
+  //-       h2.btn.btn-primary.btn-block.atk-swatch-orange Get Code
+    // /.container

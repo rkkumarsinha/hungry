@@ -1,0 +1,12 @@
+.thumbnails
+  span.expand-content.btn.framed.icon(data-expand='#gallery-thumbnails')
+    | More
+    i.fa.fa-plus
+  #gallery-thumbnails.expandable-content.height.collapsed.show-70
+    .content
+      {rows}
+      {row}
+      a(href='\#{$id}' id="thumbnail-{$id}")
+        img(alt='', src='{$thumbnail_img}')
+      {/}
+      {/}

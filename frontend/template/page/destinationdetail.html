@@ -1,0 +1,325 @@
+
+<div id="page-content" class="page-item-detail event-detail hungry-restaurant-detail">
+  <!-- Hero Image-->
+  <section class="hero-image height-400 event-detail-banner restaurant-detail-banner">
+    <div style="vertical-align: middle;" class="inner">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 col-sm-12 text-left restaurant-info">
+            <div class="restaurant-logo-image"><img src="{destination_logo_image}assets/img/hungry-not-found.png{/}" onerror="this.src='assets/img/hungry-not-found.jpg';"/></div>
+            <h1>{name}Find Place For Fun and Eat{/}</h1>
+            <div>{address}{/}</div>
+          </div>
+          <div class="col-md-3 col-sm-12">
+            <div data-destinationid="{$id}" style="font-size:16px;margin-top:8px;color:white;cursor:pointer; cursor: hand;border-radius:5px;" class="btn-block atk-swatch-orange btn hungrydestination_enquiry container">Request to book</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="background:rgba(0, 0, 0, 0.45) none repeat scroll 0 0;z-index:-1;" class="background"><img src="{destination_banner_image}assets/img/restaurant-detail-banner.jpg{/}" alt="" style="width:100%;" onerror="this.src='assets/img/hungry-not-found.jpg'"/></div>
+  </section>{$Content}
+  <section class="container">
+    <div class="row">
+      <!-- Item Detail Content-->
+      <div class="col-md-9">
+        <section id="main-content" class="block">
+          <div class="row">
+            <!-- Detail Sidebar-->
+            <aside id="detail-sidebar" class="col-md-4 col-sm-4">
+              <!-- Contact-->
+              <section>
+                <header>
+                  <h3>Contact</h3>
+                </header>
+                <address>
+                  <div style="display:none;">{$address}</div>
+                  <figure>{mobile_wrapper}
+                    <div class="info"><i class="fa fa-mobile"></i><span>{$mobile_no}</span></div>{/}
+                    {phone_wrapper}
+                    <div class="info"><i class="fa fa-phone"></i><span>{$phone_no}</span></div>{/}
+                    {email_wrapper}
+                    <div class="info"><i class="fa fa-envelope"></i><span>{$email}</span></div>{/}
+                    {website_wrapper}
+                    <div class="info"><i class="fa fa-globe"></i><a href="#">{$website}</a></div>{/}
+                    <div class="social">
+                       
+                      {instagram_wrapper}<a target="_blank" href="{$instagram_page_url}" title="instagram" class="social-button"><i style="padding:0px !important;float:left;" class="fa fa-instagram instagram"></i></a>{/}
+                      {facebook_wrapper}<a target="_blank" href="{$facebook_page_url}" title="facebook" class="social-button"><i style="padding:0px !important;" class="fa fa-facebook facebook"></i></a>{/}
+                    </div>
+                  </figure>
+                </address>
+              </section>
+              <!-- end Contact-->
+              <!--Destination Hightlight-->
+              <section>
+                <header>
+                  <h3>Facilities</h3>
+                </header>
+                <figure>
+                  <div id="detail-sidebar-facilites">
+                    <div class="content">{facilites}
+                      <div class="info">
+                        <div class="row">
+                          <div class="col-md-3"><img src="{$icon_url}" style="width:30px;float:left" onerror="this.src='assets/img/hungry-not-found.jpg'"/></div>
+                          <div class="col-md-9">
+                            <p style="padding:5px;">{$destination_highlight}</p>
+                          </div>
+                        </div>
+                      </div>{/}
+                    </div>
+                  </div>
+                </figure>
+              </section>
+              <!--Occassion-->
+              <section>
+                <header>
+                  <h3>Occassions</h3>
+                </header>
+                <figure>
+                  <div id="detail-sidebar-occassion">
+                    <div class="content"></div>{occassion}
+                    <div class="info">
+                      <div class="row">
+                        <div class="col-md-3"><img src="{$icon_url}" style="width:30px;float:left" onerror="this.src='assets/img/hungry-not-found.jpg'"/></div>
+                        <div class="col-md-9">
+                          <p style="padding:5px;">{$destination_highlight}</p>
+                        </div>
+                      </div>
+                    </div>{/}
+                  </div>
+                </figure>
+              </section>
+              <!--Service Available-->
+              <section>
+                <header>
+                  <h3>Services</h3>
+                </header>
+                <figure>
+                  <div id="detail-sidebar-service-available">
+                    <div class="content"></div>{service}
+                    <div class="info">
+                      <div class="row">
+                        <div class="col-md-3"><img src="{$icon_url}" style="width:30px;float:left" onerror="this.src='assets/img/hungry-not-found.jpg'"/></div>
+                        <div class="col-md-9">
+                          <p style="padding:5px;">{$destination_highlight}</p>
+                        </div>
+                      </div>
+                    </div>{/}
+                  </div>
+                </figure>
+              </section>
+              <!-- Features-->
+              <section>
+                <header>
+                  <h3>Attractions</h3>
+                </header>
+                <figure>
+                  <div id="detail-sidebar-features">
+                    <div class="content">{event_attraction}{/}</div>
+                  </div>
+                </figure>
+              </section>
+              <!-- end features-->
+              <!-- Contact Form-->
+              <section style="display:none;">
+                <header>
+                  <h3>Contact Form</h3>
+                </header>
+                <figure>
+                  <form id="item-detail-form" action="?" method="post" role="form">
+                    <div class="form-group">
+                      <label for="item-detail-name">Name</label>
+                      <input id="item-detail-name" type="text" required="" name="item-detail-name" class="form-control framed"/>
+                    </div>
+                    <!-- /.form-group-->
+                    <div class="form-group">
+                      <label for="item-detail-email">Email</label>
+                      <input id="item-detail-email" type="email" required="" name="item-detail-email" class="form-control framed"/>
+                    </div>
+                    <!-- /.form-group-->
+                    <div class="form-group">
+                      <label for="item-detail-message">Message</label>
+                      <textarea id="item-detail-message" required="" rows="3" name="item-detail-message" class="form-control framed"></textarea>
+                    </div>
+                    <!-- /.form-group-->
+                    <div class="form-group">
+                      <button type="submit" class="btn framed icon">Send<i class="fa fa-angle-right"></i></button>
+                    </div>
+                    <!-- /.form-group-->
+                  </form>
+                </figure>
+              </section>
+              <!-- end Contact Form-->
+            </aside>
+            <!-- end Detail Sidebar-->
+            <!-- Content-->
+            <div class="col-md-8 col-sm-8">
+              <section>
+                <div>
+                  <!-- Nav tabs-->
+                  <ul role="tablist" class="nav nav-tabs">
+                    <li role="presentation" class="active"><a href="#gallery" aria-controls="gallery" role="tab" data-toggle="tab">Gallery</a></li>
+                    <li role="presentation"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
+                    <li role="presentation"><a href="#operationlhours" aria-controls="operationlhours" role="tab" data-toggle="tab">Timing</a></li>
+                    <li role="presentation"><a href="#packages" aria-controls="Packages" role="tab" data-toggle="tab">Packages</a></li>
+                    <li role="guidline"><a href="#guidline" aria-controls="Guidline" role="tab" data-toggle="tab">Guidelines</a></li>
+                    <li role="space"><a href="#space" aria-controls="Space" role="tab" data-toggle="tab">Spaces</a></li>
+                  </ul>
+                  <!-- Tab panes-->
+                  <div class="tab-content">
+                    <div id="gallery" role="tabpanel" class="tab-pane active">{$gallery}</div>
+                    <div id="description" role="tabpanel" class="tab-pane">
+                      <h2>About Destination</h2>
+                      <p>
+                         
+                        {$about_destination}
+                      </p>
+                      <h2>Booking Policy</h2>
+                      <p>{$booking_policy}</p>
+                      <h2>Cancellation Policy</h2>
+                      <p>{$cancellation_policy}</p>
+                    </div>
+                    <div id="operationlhours" role="tabpanel" class="tab-pane">{event_day_time}
+                      <dl class="lines">
+                        <dt>Monday</dt>
+                        <dd>{monday}{/}</dd>
+                        <dt>Tuesday</dt>
+                        <dd>{tuesday}{/}</dd>
+                        <dt>Wednesday</dt>
+                        <dd>{wednesday}{/}</dd>
+                        <dt>Thursday</dt>
+                        <dd>{thursday}{/}</dd>
+                        <dt>Friday</dt>
+                        <dd>{friday}{/}</dd>
+                        <dt>Saturday</dt>
+                        <dd>{sunday}{/}</dd>
+                      </dl>{/}
+                    </div>
+                    <div id="packages" role="tabpanel" class="tab-pane">{packages}
+                      <div style="margin-bottom:10px;" class="wrapper">
+                        <h3 style="margin-bottom:10px;">{$name}</h3>
+                        <div style="padding:0px 0px 0px 10px;">Price:  {$price}&nbsp;<i class="fa fa-rupee"></i></div>
+                        <div style="padding:0px 0px 0px 10px;">{$detail}</div><hr/>
+                      </div>{/}
+                    </div>
+                    <div id="guidline" role="tabpanel" class="tab-pane">
+                      <h2>Guidlines</h2>
+                      <p>{$guidelines}</p>
+                      <h2>How To Reach</h2>
+                      <p>{$how_to_reach}</p>
+                    </div>
+                    <div id="space" role="tabpanel" class="tab-pane">{dest_space}
+                      <div class="row">
+                        <div class="col-md-3"><img src="{$icon_url}" style="width:30px;float:left" onerror="this.src='assets/img/hungry-not-found.jpg'"/></div>
+                        <div class="col-md-9">
+                          <h4 style="text-transform:uppercase;">{$name}</h4>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <p>Capacity: {$cps}</p>
+                              <p>Size: {$size}</p>
+                              <p>Type: {$type}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div><hr/>
+                      {/}
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!-- Reviews-->{$review}
+              <!-- end Review Form-->
+            </div>
+            <!-- /.col-md-8-->
+          </div>
+          <!-- /.row-->
+        </section>
+        <!-- /#main-content-->
+      </div>
+      <!-- /.col-md-8-->
+      <!-- Sidebar-->
+      <div class="col-md-3">
+        <section id="main-content" class="block near-by-restaurant-container">
+          <header>
+            <h2>Map Route</h2>
+          </header>
+          <div style="height:200px;">{$routemap}</div>
+        </section>
+        <section id="main-content" class="destinationdetail-similardestination-list">
+          <aside id="detail-sidebar">
+            <section>
+              <header>
+                <h3>Similar Destinations</h3>
+              </header>
+              <figure>
+                <div id="detail-sidebar-venue">
+                  <div class="content"></div>{$similar_destination}
+                </div>
+              </figure>
+            </section>
+          </aside>
+        </section>
+        <section id="main-content">
+          <aside id="detail-sidebar">
+            <section>
+              <header>
+                <h3>Space</h3>
+              </header>
+              <figure>
+                <div id="detail-sidebar-venue">
+                  <div class="content">{space}
+                    <div class="info">
+                      <div class="row">
+                        <div class="col-md-3"><img src="{$icon_url}" style="width:30px;float:left" onerror="this.src='assets/img/hungry-not-found.jpg'"/></div>
+                        <div class="col-md-9">
+                          <p style="padding:5px;">{$name}</p>
+                        </div>
+                      </div>
+                    </div>{/}
+                  </div>
+                </div>
+              </figure>
+            </section>
+          </aside>
+        </section>
+        <section id="main-content">
+          <aside id="detail-sidebar">
+            <section>
+              <header>
+                <h3>Venue</h3>
+              </header>
+              <figure>
+                <div id="detail-sidebar-venue">
+                  <div class="content"></div>{venue}
+                  <div class="info">
+                    <div class="row">
+                      <div class="col-md-3"><img src="{$icon_url}" style="width:30px;float:left" onerror="this.src='assets/img/hungry-not-found.jpg'"/></div>
+                      <div class="col-md-9">
+                        <p style="padding:5px;">{$name}</p>
+                      </div>
+                    </div>
+                  </div>{/}
+                </div>
+              </figure>
+            </section>
+          </aside>
+        </section>
+      </div>
+    </div>
+  </section>
+  <div id="destination_enquiry_modalpopup" tabindex="-1" role="dialog" aria-labelledby="destination_enquiry_modalpopup" class="modal fade">
+    <div role="document" class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true" style="margin-right:20px;">×</span></button>
+          <h4 id="{$_name}_model_label" style="font-size:16px;" class="modal-title text-hungry">Request to book</h4>
+        </div>
+        <div class="modal-body destination_enquiry_modalpopup">{$enquiryform}{$Content}</div>
+        <div class="modal-footer">
+          <button type="button" style="width:200px;border-radius:10px;" class="btn btn-default hungry-green-btn requesttobook-hungry-submit">Submit</button>
+          <button type="button" data-dismiss="modal" style="border-radius:10px;" class="btn btn-default">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

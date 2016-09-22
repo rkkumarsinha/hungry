@@ -1,0 +1,25 @@
+
+<div id="{$_name}" style="{$style}" class="div {$class}">
+  <header>
+    <h2>{header}{/}</h2>
+  </header>
+  <div class="row">{rows}{row}
+    <div style="margin:0px;margin-bottom:20px;" class="item col-md-12 col-sm-12 col-xs-12">
+      <div class="image"><a href="{$path}">
+          <div style="position:absolute;color:white;margin-top:45%;width:100%;text-align:center;">
+            <div class="inner">
+              <div class="content">
+                <h4 style="font-weight:normal !important;padding:5px;">{$name}</h4>
+              </div>
+            </div>
+          </div>
+          <div class="item-specific"><span title="Distance" data-lat="{$latitude}" data-lng="{$longitude}"><i class="fa fa-map-marker"><span data-lat="{$latitude}" data-lng="{$longitude}" style="color:orange;" data-id="{$id}" class="current-distance"></span></i>{$distance}</span><span title=""><i class="fa fa-inr"></i>{lowest_price}{/}</span><span title="Area"><i class="fa fa-tags"></i> {offers}240m{/}</span></div>
+          <div class="icon event-date">
+            <div>{$starting_date}</div>
+            <div>{$starting_month}</div>
+          </div><img src="{display_image}assets/img/small.jpg{/}" alt="" onerror="this.src='assets/img/hungry-not-found.jpg';"/></a>
+        <div class="restaurant-category"><i class="fa fa-hungry">{$event_category}</i></div>
+      </div>
+    </div>{/}{/}
+  </div>
+</div>

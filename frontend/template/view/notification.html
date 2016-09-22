@@ -1,0 +1,19 @@
+
+<div id="{$_name}" style="{$style}" class="{$class}">
+  {rows}
+  {row}
+  <article class="review">
+    <figure class="author"><img alt="" src="assets/img/default-avatar.png"/>
+      <div class="date">{$created_at}</div>
+    </figure>
+    <div class="wrapper">
+      <h5>{$name}</h5>
+      <p>{$message}</p>
+      <div class="individual-rating"><span>From : {$from}</span></div>
+    </div>
+  </article>{/}
+  {/}
+  {$not_found}
+  {$Paginator}
+  {$Content}
+</div>

@@ -1,0 +1,97 @@
+    <section>
+        <h3><i class="fa fa-user"></i>Personal Info</h3>
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="form-group atk-form-row">
+                    <label for="name">Name</label>
+                    {$name}
+                </div>
+                <!--/.form-group-->
+            </div>
+            <!--/.col-md-3-->
+            <div class="col-md-6 col-sm-6">
+                <div class="form-group form-group atk-form-row">
+                    <label for="email">Email</label>
+                    {$email}
+                </div>
+                <!--/.form-group-->
+            </div>
+            <!--/.col-md-3-->
+            <div class="col-md-6 col-sm-6">
+                <div class="form-group form-group atk-form-row">
+                    <label for="mobile">Mobile</label>
+                    {$mobile}
+                </div>
+                <!--/.form-group-->
+            </div>
+            <!--/.col-md-3-->
+            <div class="col-md-6 col-sm-6">
+                <div class="form-group form-group atk-form-row">
+                    <label for="phone">DOB</label>
+                    {$dob}
+                </div>
+                <!--/.form-group-->
+            </div>
+            <!--/.col-md-3-->
+        </div>
+    </section>
+    <section>
+        <h3><i class="fa fa-map-marker"></i>Address</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group form-group atk-form-row">
+                    <label for="state">Country</label>
+                        {$country_id}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group form-group atk-form-row">
+                    <label for="state">State</label>
+                        {$state_id}
+                </div>
+            </div>
+        </div>
+        <!--/.form-group-->
+        <div class="form-group form-group atk-form-row">
+            <label for="city">City</label>
+            {$city_id}
+        </div>
+        <!--/.form-group-->
+        <div class="row">
+            <div class="col-md-8 col-sm-8">
+                <div class="form-group form-group atk-form-row">
+                    <label for="street">Street</label>
+                    {$street}                                            
+                </div>
+                <!--/.form-group-->
+            </div>
+            <!--/.col-md-8-->
+            <div class="col-md-4 col-sm-4">
+                <div class="form-group form-group atk-form-row">
+                    <label for="zip">ZIP</label>
+                    {$zip}
+                </div>
+                <!--/.form-group-->
+            </div>
+        </div>
+        <!--/.col-md-3-->
+        <div class="form-group form-group atk-form-row">
+            <label for="additional-address">Additional Address Line</label>
+            {$address}
+        </div>
+        <!--/.form-group-->
+    </section>
+    <section>
+        <h3><i class="fa fa-info-circle"></i>About Me</h3>
+        <div class="form-group form-group atk-form-row">
+            <label for="about-me">Some Words About Me</label>
+            <div class="form-group">
+                {$extra_info}
+            </div>
+            <!--/.form-group-->
+        </div>
+        <!--/.form-group-->
+    </section>
+    <div class="form-group">
+    {$submit}
+    </div>

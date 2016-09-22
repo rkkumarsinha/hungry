@@ -1,0 +1,81 @@
+<div id="{$_name}" class="{$class}" style="{$sytyle}; margin-top:50px;">
+    <div class="row">
+        <div class="col-md-2 col-sm-2">
+            <aside id="sidebar">
+                <ul class="navigation-sidebar list-unstyled">
+                    <li class="useraccount-verticaltabs" data-type="confirmed">
+                        <a href="#">
+                            <i class="fa fa-folder"></i>
+                            <span>Approved</span>
+                        </a>
+                    </li>
+                    <li class="useraccount-verticaltabs" data-type="pending">
+                        <a href="#">
+                            <i class="fa fa-clock-o"></i>
+                            <span>In Queue</span>
+                        </a>
+                    </li>
+                    <li class="useraccount-verticaltabs" data-type="canceled">
+                        <a href="#">
+                            <i class="fa fa-eye-slash"></i>
+                            <span>Canclled</span>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+        <div class="col-md-10 col-sm-10">
+            <section id="items">
+                <div class="row">
+                {mybooking}
+                {rows}{row}
+                    <div data-recordid="{$id}" class="col-md-6 atk-push">
+                        {discount_wrapper}
+                            <div style="background-color:#ededea;" class="btn btn-block">
+                                {$discount_name}: {$discount}{$offer}
+                            </div>
+                        {/}
+                      <div class="promo-box">
+                        <div title="{$restaurant}" class="image item">
+                            <a href="#">
+                                <div style="font-size:16px;font-size:bold;font-size:16px;background-color:rgba(128, 100, 128,0.8);color:white;" class="item-specific">
+                                    <strong>{$restaurant}</strong>
+                                </div>
+                                <img alt="" src="{restaurant_image}assets/img/hotel-flight.jpg{/}"/>
+                            </a>
+                        </div>
+                        <div class="wrapper">
+                            <h3 style="padding-top:5px;padding-bottom:5px;">
+                                Booking Id: {$booking_id}
+                            </h3>
+                            <div class="icon">
+                                <i class="fa fa-mobile">&nbsp;{$mobile}</i>
+                                <i class="fa fa-envelope">&nbsp;{$email}</i>
+                                <i class="fa fa-calendar">&nbsp;{$created_at}</i>
+                                <i class="fa fa-clock-o">&nbsp;{$created_time}</i>
+                                <div class="row">
+                                    <div title="Number of Adult" class="col-md-6"><i class="fa fa-user">&nbsp;{$no_of_adult}</i></div>
+                                    <div title="Number of Child" class="col-md-6"><i class="fa fa-child">&nbsp;{$no_of_child}</i></div>
+                                </div>
+                            </div>
+                            <div class="icon">
+                                <div>Total Amount: {$total_amount} &nbsp;<i class="fa fa-rupee">&nbsp;</i></div>
+                                <div>Amount Paid: {$amount_paid} &nbsp;<i class="fa fa-rupee">&nbsp;</i></div>
+                                <div>Payment Mode: {$payment_mode}</div>
+                            </div>
+                            {$cancled_reason}
+                        </div>
+                      </div>
+                    </div>
+                    {/}{/}
+                    <!-- <div style="clear:both;">
+                        {$Paginator}
+                    </div> -->
+                  {/}
+                  {no_record_found}
+                  {/}
+                  </div>
+            </section>
+        </div>
+    </div>
+</div>

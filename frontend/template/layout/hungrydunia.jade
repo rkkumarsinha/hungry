@@ -1,0 +1,127 @@
+//- title 
+// Outer Wrapper
+#outer-wrapper
+  // Inner Wrapper
+  #inner-wrapper
+    // Navigation
+    .header#page-top
+      .wrapper
+        .brand
+          a(href='?page=index')
+            img(src='assets/img/hungrydunia/logo.png', alt='logo')
+        .brand.hungry-current-location
+          {$location}          
+        nav.navigation-items
+          .wrapper
+            ul.main-navigation.navigation-top-header
+            ul.user-area
+              {event_cart_wrapper}
+              li.hungryeventcart(style="display:none;")
+                a( href="?page=cartdetail") Event 
+                  span.badge {$event_count}
+              {/}
+              {login_menu}
+              li
+                div(role="group" class="btn-group")
+                  div(aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" class="dropdown-toggle" type="button" id="btnGroupVerticalDrop1") {$username}
+                    {host_wrapper}
+                    span.caret(style="margin:10px;")
+                  ul(aria-labelledby="btnGroupVerticalDrop1" class="dropdown-menu")
+                    {hostdropdown}
+                    li
+                      a(href="#") Dropdown link
+                    {/}
+                  {/}
+              {/login_menu}
+              li
+                {signlogout}a(href='?page=sign-in') Sign In{/}
+              {register_wrapper}
+              li
+                a(href='?page=register')
+                  strong Register
+              {/}
+              li
+                a(href='?page=addlisting')
+                  i.glyphicon.glyphicon-plus(style="color:white;")
+                  strong &nbsp;Add Your Listing
+    // end Navigation
+    // Page Canvas
+    #page-canvas
+      {$Content}
+    // end Page Canvas
+    // Page Footer
+    footer#page-footer
+      .inner
+        .footer-top
+          .container
+            .row
+              .col-md-3.col-sm-3
+                section
+                  h2 About Us
+                  address
+                    div hungrydunia.com
+                    div 19, priyadarshni Nagar,
+                    div Bedla Road, Udaipur(Raj.)
+                    figure
+                      .info
+                        i.fa.fa-mobile
+                        span +91 9521389201
+                      .info
+                        i.fa.fa-envelope
+                        span info@hungrydunia.com
+                      .info
+                        i.fa.fa-globe
+                        a(href='www.hungrydunia.com' target='_blank') www.hungrydunia.com
+                  .social
+                    a.social-button(href='http://www.twitter.com/HungryDunia' target="_blank")
+                      i.fa.fa-twitter
+                    a.social-button(href='http://www.facebook.com/HungryDunia' target="_blank")
+                      i.fa.fa-facebook
+                  a.btn.framed.icon(href='contact.html')
+                    | Contact Us
+                    i.fa.fa-angle-right
+              // /.col-md-4
+              .col-md-3.col-sm-3
+                // New Items
+                section
+                  h2 Subscribe
+                  {$subscription}
+              .col-md-3.col-sm-3
+                // Recent Reviews
+                section
+                  h2 site links
+                  .info
+                    a(href="http://hungrydunia.com/") &nbsp; Home
+                  .info
+                    a(href="http://hungrydunia.com/cms/aboutus")&nbsp; About Us
+                  .info
+                    a(href="http://hungrydunia.com/contact") &nbsp; Contact
+                  .info
+                    a(href="http://hungrydunia.com/cms/privacypolicy") &nbsp; Privacy Policy
+                  .info
+                    a(href="http://hungrydunia.com/cms/terms") &nbsp; Terms &amp; Conditions
+                  .info
+                    a(href="http://hungrydunia.com/selfie") &nbsp; Selfie Contest
+              .col-md-3.col-sm-3
+                section
+                  h2 Like us on Facebook
+                  .fb-page.fb_iframe_widget(data-show-posts='true', data-show-facepile='true', data-hide-cover='false', data-adapt-container-width='true', data-small-header='false', data-height='350px', data-href='https://www.facebook.com/profile.php?id=1626740274230341&fref=ts', fb-xfbml-state='rendered', fb-iframe-plugin-query='adapt_container_width=true&app_id=684843678310300&container_width=263&height=350&hide_cover=false&href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D1626740274230341%26fref%3Dts&locale=en_US&sdk=joey&show_facepile=true&show_posts=true&small_header=false')
+                    span(style='vertical-align: bottom; width: 263px; height: 350px;')
+                      iframe(width='1000px', height='350px', frameborder='0', name='fe37da973d8f5', allowtransparency='true', allowfullscreen='true', scrolling='no', title='fb:page Facebook Social Plugin', style='border: medium none; visibility: visible; width: 263px; height: 350px;', src='http://www.facebook.com/v2.3/plugins/page.php?adapt_container_width=true&app_id=684843678310300&channel=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D42%23cb%3Df372b813986e826%26domain%3Dhungrydunia.com%26origin%3Dhttp%253A%252F%252Fhungrydunia.com%252Ff3b606491fa0f58%26relation%3Dparent.parent&container_width=263&height=350&hide_cover=false&href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D1626740274230341%26fref%3Dts&locale=en_US&sdk=joey&show_facepile=true&show_posts=true&small_header=false')
+
+                  // /.review
+                // end Recent Reviews
+            // /.row
+          // /.container
+        // /.footer-top
+        .footer-bottom
+          .container
+            span.left Copyright 2015 hungrydunia.com, All rights reserved
+            span.right
+              a.to-top.roll(href='#page-top')
+                i.fa.fa-angle-up
+        // /.footer-bottom
+    // end Page Footer
+  // end Inner Wrapper
+// end Outer Wrapper
+//script(type='text/javascript', src='assets/js/jquery-2.1.0.min.js')

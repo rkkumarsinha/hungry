@@ -1,0 +1,21 @@
+
+<div id="{$_name}" style="{$style}" class="{$class}">{comment_wrapper}
+  <div style="overflow:scroll !important;max-height:300px;" class="commentlister">
+    {rows}
+    {row}
+    <article class="faq-single">
+      <div class="wrapper">
+        <div class="answer">
+          <figure>{$created_at}
+            <p>{$comment}</p>
+          </figure>
+        </div>
+      </div>
+    </article>{/}
+    {/}
+  </div>{/}
+  {not_found}
+  {/}
+  {$comment_form}
+  {$Content}
+</div>

@@ -1,0 +1,23 @@
+
+<div id="{$_name}" style="{$style}" class="{$class}">
+  <div style="height:30px;" class="atk-push">{$quick_search}</div>
+  <div class="row">{rows}{row}
+    <div data-recordid="{$id}" class="col-md-6 atk-push">{discount_wrapper}
+      <div style="background-color:#ededea;" class="btn btn-block">{$discount_name}: {$discount}{$offer}</div>{/}
+      <div class="promo-box">
+        <div title="{$user}" class="image item"><a href="#">
+            <div style="font-size:16px;font-size:bold;font-size:16px;background-color:rgba(128, 100, 128,0.8);color:white;" class="item-specific"><strong>{$user}</strong></div><img alt="" src="{profile_image_url}assets/img/hotel-flight.jpg{/}"/></a></div>
+        <div class="wrapper">
+          <h3 style="padding-top:5px;padding-bottom:5px;">Coupon: {$discount_coupon}
+          </h3>
+          <div class="icon"><i class="fa fa-mobile">&nbsp;{$mobile}</i><i class="fa fa-envelope">&nbsp;{$email}</i><i class="fa fa-calendar">&nbsp;{$created_at}</i><i class="fa fa-clock-o">&nbsp;{$created_time}</i></div>
+        </div>
+      </div>
+      <div data-couponid="{$id}" class="btn btn-primary btn-block atk-swatch-orange verify-button">Verify</div>
+    </div>{/}
+    {/}
+  </div>{$Paginator}
+  {no_record_found}
+  <div></div>{/}
+  {$Content}
+</div>

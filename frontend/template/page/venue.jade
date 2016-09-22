@@ -1,0 +1,31 @@
+#page-canvas
+	nav.off-canvas-navigation
+		header Navigation
+		.main-navigation.navigation-off-canvas
+	#page-content
+		section.hero-image.search-filter-middle.height-450
+			.inner
+				.container.search-bar.horizontal(style="width:100%;")
+					h1 Venue
+					.container.hungry-search-form(style="z-index: 2;position:relative;")
+						.container(style="width:80%;")
+							{search_form}{/}
+			.background.event-home-slide-bg
+				{$homeslider}
+		section.container(style="margin-top:20px;")
+			header
+				h2 Categories
+			{venue}
+			{lister_wrapper}
+			.row
+				{rows}
+				{row}
+				div.col-lg-3.col-md-4.col-sm-6.col-xs-12.hungry-venue
+					a.info(href="?page=destination&venue={$id}")
+						div.hovereffect
+							img.img-responsive(src="{$venue_image_url}" onerror="this.src='assets/img/hungry-not-found.png';")
+							div.overlay
+								h2 {$name}
+				{/}{/}
+			{/}
+			{/}

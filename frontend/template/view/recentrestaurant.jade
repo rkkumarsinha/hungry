@@ -1,0 +1,49 @@
+.row
+  {recentlyadded}
+  {rows}
+  {row}
+  .col-md-4.col-sm-4
+    .item
+      .image
+        //- .quick-view
+        //-   i.fa.fa-hungry {$category}
+        a(href='{$path}')
+          .overlay
+            .inner
+              .content(style='display:none;')
+                h4 Description
+                p
+                  | {about_restaurat}Curabitur odio nibh, luctus non pulvinar a, ultricies ac diam. Donec neque massa{/}
+          .item-specific
+            span(title='Distance', data-lat='{$latitude}', data-lng='{$longitude}')
+              i.fa.fa-map-marker
+                span.current-distance(data-lat='{$latitude}', data-lng='{$longitude}', style='color:orange;', data-id='{$id}')
+              | {$distance}
+            span(title='Bathrooms')
+              i.fa.fa-inr
+              | {avgcost}un defined{/}
+            span(title='Area')
+              i.fa.fa-tags
+              |  {offers}240m{/}
+          img(src='{display_image}assets/img/small.jpg{/}', alt='' onerror="this.src='assets/img/hungry-not-found.png';")
+        .restaurant-category
+          i.fa.fa-hungry {$category}
+      {getdiscount_wrapper}
+      div.btn-block.atk-swatch-orange.btn.hungry-getdiscount.container( data-restaurantid='{$id}') Get Discount
+      {/}
+      .wrapper
+        a(href='{$path}')
+          h3
+            img(src='assets/img/{$food_type}.png', alt='{$food_type}')
+            |  {name}Steak House Restaurant{/}
+        figure {address}63 Birch Street{/}
+      .info.text-center
+        .type
+          i
+            img(src='assets/icons/restaurants-bars/restaurants/restaurant.png', alt='')
+          span {type}Restaurant{/}
+        .hungry-star-wrapper(data-rating='{rating}{/}')
+          input(id="{$id}" value="{$rating}" class="rating-loading")
+        | {$menu}
+  {/}{/}
+  {/}

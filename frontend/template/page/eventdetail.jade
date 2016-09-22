@@ -1,0 +1,175 @@
+#page-content.page-item-detail.event-detail.hungry-restaurant-detail
+  // Hero Image
+  section.hero-image.height-400.event-detail-banner.restaurant-detail-banner
+    .inner(style="vertical-align: middle;")
+      .container
+        .row
+          .col-md-9.col-sm-12.text-left.restaurant-info
+            .restaurant-logo-image
+              img(src='{event_logo_image}assets/img/hungry-not-found.png{/}' onerror="this.src='assets/img/hungry-not-found.jpg';")
+            h1 {name}Find Place For Fun and Eat{/}
+            div {address}{/}
+          .col-md-3.col-sm-12
+            {$bookticket}
+    .background(style="background:rgba(0, 0, 0, 0.45) none repeat scroll 0 0;")
+      img(src='{event_banner_image}assets/img/restaurant-detail-banner.jpg{/}', alt='' style="width:100%;")
+  {$Content}
+  section.container
+    .row
+      // Item Detail Content
+      .col-md-9
+        section#main-content.block
+          .row
+            // Detail Sidebar
+            aside#detail-sidebar.col-md-4.col-sm-4
+              // Contact
+              section
+                header
+                  h3 Organizer Contact
+                address()
+                  div(style="display:none;") {$address}
+                  figure
+                    {mobile_wrapper}
+                    .info
+                      i.fa.fa-mobile
+                      span {$mobile_no}
+                    {/}
+                    {phone_wrapper}
+                    .info
+                      i.fa.fa-phone
+                      span {$phone_no}
+                    {/}
+                    {email_wrapper}
+                    .info
+                      i.fa.fa-envelope
+                      span {$email}
+                    {/}
+                    {website_wrapper}
+                    .info
+                      i.fa.fa-globe
+                      a(href='#') {$website}
+                    {/}
+                    {facebook_wrapper}
+                    .info
+                      i.fa.fa-facebook
+                      a(href='{$facebook_page_url}' target="_blank") Visit Facebook
+                    {/}
+                    {instagram_wrapper}
+                    .info
+                      i.fa.fa-instagram
+                      a(href='{$instagram_page_url}') Instagram URL
+                    {/}
+              // end Contact
+              section
+                header
+                  h3 Event Date
+                figure
+                  #detail-sidebar-event
+                    .content.ticket-price
+                      div(style="margin-top:10px;margin-bottom:10px;font-weight:bold;")
+                        i.fa.fa-calendar.text-success &nbsp;Starting Date&nbsp; 
+                        span.pull-right
+                          {$starting_date}
+                      div(style="margin-top:10px;margin-bottom:10px;font-weight:bold;")
+                        i.fa.fa-calendar.text-danger &nbsp;Ending Date&nbsp;
+                        span.pull-right
+                          {$closing_date}
+              section
+                header
+                  h3 Ticket Price
+                figure
+                  #detail-sidebar-event
+                    .content.ticket-price
+                      div(style="display:none")
+                        i.fa.fa-calendar.text-success &nbsp;Starting Date&nbsp; 
+                        span.pull-right
+                          {$starting_date}
+                      div(style="display:none")
+                        i.fa.fa-calendar.text-danger &nbsp;Ending Date&nbsp;
+                        span.pull-right
+                          {$closing_date}
+                      div.hungry-ticket-price
+                        {ticket_price}
+                        {/}
+              // Features
+              section
+                header
+                  h3 Attraction
+                figure
+                  #detail-sidebar-features
+                    .content
+                      {event_attraction}{/}
+              // end features
+              // Contact Form
+              section(style="display:none;")
+                header
+                  h3 Contact Form
+                figure
+                  form#item-detail-form(action='?', method='post', role='form')
+                    .form-group
+                      label(for='item-detail-name') Name
+                      input#item-detail-name.form-control.framed(type='text', required='', name='item-detail-name')
+                    // /.form-group
+                    .form-group
+                      label(for='item-detail-email') Email
+                      input#item-detail-email.form-control.framed(type='email', required='', name='item-detail-email')
+                    // /.form-group
+                    .form-group
+                      label(for='item-detail-message') Message
+                      textarea#item-detail-message.form-control.framed(required='', rows='3', name='item-detail-message')
+                    // /.form-group
+                    .form-group
+                      button.btn.framed.icon(type='submit')
+                        | Send
+                        i.fa.fa-angle-right
+                    // /.form-group
+              // end Contact Form
+            // end Detail Sidebar
+            // Content
+            .col-md-8.col-sm-8
+              section.event-detail-middle-section
+                div
+                  // Nav tabs
+                  ul.nav.nav-tabs(role='tablist')
+                    li.active(role='presentation')
+                      a(href='#gallery', aria-controls='gallery', role='tab', data-toggle='tab') Gallery
+                    li(role='presentation')
+                      a(href='#description', aria-controls='description', role='tab', data-toggle='tab') Description
+                    li(role='presentation')
+                      a(href='#guidelines', aria-controls='operationlhours', role='tab', data-toggle='tab') Guide Lines
+                    li(role='presentation')
+                      a(href='#ticket', aria-controls='offers', role='tab', data-toggle='tab') Ticket & Their Detail
+                  // Tab panes
+                  .tab-content
+                    #gallery.tab-pane.active(role='tabpanel')
+                      {$gallery}
+                    #description.tab-pane(role='tabpanel')
+                      p 
+                        {$detail}
+                    #guidelines.tab-pane(role='tabpanel')
+                      {$guide_lines}
+                    #ticket.tab-pane(role='tabpanel')
+                      {$ticket_and_their_detail}  
+                      // /.block  
+              // Reviews
+              {$review}
+              // end Review Form
+            // /.col-md-8
+          // /.row
+        // /#main-content
+      // /.col-md-8
+      // Sidebar
+      .col-md-3
+        section#main-content.block.near-by-restaurant-container
+          header
+            h2 Map Route
+          div(style="height:200px;")
+            {$routemap}
+        section#event-near-by-restaurant.block.near-by-restaurant-container
+          {$upcoming_event}
+      // /.form-group
+      // /#sidebar
+      // /.col-md-3
+      // end Sidebar
+      // /.row
+

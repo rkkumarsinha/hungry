@@ -1,0 +1,121 @@
+// Page Content
+#page-content
+  section.container
+    .block
+      .row
+        .col-lg-4.col-md-4.col-sm-12.col-md-offset-4.col-sm-offset-3
+          {successsection}
+          div(id="{$_name}" class="{$class}" style="{$style}")
+            header.text-center
+              h1.page-title Thanks for signing up
+            hr
+            p Please check your email and click activate account in the message we just send to {$email_id}.
+            p once your account is activated we will verify, and we will send you email with some information to help you get started with hungrydunia.com
+            small * if you do'nt see the email in your inbox look for it in your junk folder or check your email again.
+          {/}
+          {form_section}
+          {register}
+          header.form-section-header
+            h1.page-title Add Your Restaurant
+            hr
+          .row
+            .col-md-12.col-ms-12.col-lg-12
+              {full_name_wrapper}
+              div.atk-form-row.atk-form-row-line
+                div.atk-push-xsmall.atk-form-label.atk-text-nowrap
+                  label.mandatory
+                    span Full Name:
+                div.atk-form-field.atk-push-small
+                  {$full_name}
+              {/}
+              {email_wrapper}
+              div.atk-form-row.atk-form-row-line
+                div.atk-push-xsmall.atk-form-label.atk-text-nowrap
+                  label.mandatory
+                    span Email:
+                div.atk-form-field.atk-push-small
+                  {$email}
+              {/}
+              {password_wrapper}
+              div.atk-form-row.atk-form-row-line
+                div.atk-push-xsmall.atk-form-label.atk-text-nowrap
+                  label.mandatory
+                    span Password:
+                div.atk-form-field.atk-push-small
+                  {$password}
+              {/}
+              {confirm_wrapper}
+              div.atk-form-row.atk-form-row-line
+                div.atk-push-xsmall.atk-form-label.atk-text-nowrap
+                  label.mandatory
+                    span Confirm Password:
+                div.atk-form-field.atk-push-small
+                  {$confirm_password}
+              {/}
+              div.atk-form-row.atk-form-row-line
+                div.atk-push-xsmall.atk-form-label.atk-text-nowrap
+                  label.mandatory
+                    span Business Name:
+                div.atk-form-field.atk-push-small
+                  {$business_name}
+              div.atk-form-row.atk-form-row-line
+                div.atk-push-xsmall.atk-form-label.atk-text-nowrap
+                  label.mandatory
+                    span Business Type:
+                div.atk-form-field.atk-push-small
+                  {$business_type}
+              div.atk-form-row.atk-form-row-line
+                div.atk-push-xsmall.atk-form-label.atk-text-nowrap
+                  label.mandatory
+                    span Mobile:
+                div.atk-form-field.atk-push-small
+                  {$mobile}
+              div.atk-form-row.atk-form-row-line
+                div.atk-push-xsmall.atk-form-label.atk-text-nowrap
+                  label.mandatory
+                    span Country:
+                div.atk-form-field.atk-push-small
+                  {$country}
+              div.atk-form-row.atk-form-row-line
+                div.atk-push-xsmall.atk-form-label.atk-text-nowrap
+                  label.mandatory
+                    span State:
+                div.atk-form-field.atk-push-small
+                  {$state}
+              div.atk-form-row.atk-form-row-line
+                div.atk-push-xsmall.atk-form-label.atk-text-nowrap
+                  label.mandatory
+                    span City:
+                div.atk-form-field.atk-push-small
+                  {$city}
+              div.atk-form-row.atk-form-row-line
+                div.atk-push-xsmall.atk-form-label.atk-text-nowrap
+                  label.mandatory
+                    span Area:
+                div.atk-form-field.atk-push-small
+                  {$area}
+              div.atk-form-row.atk-form-row-line
+                div.atk-push-xsmall.atk-form-label.atk-text-nowrap
+                  label.mandatory
+                    span Address:
+                div.atk-form-field.atk-push-small
+                  {$address}
+              div.atk-form-row.atk-form-row-line
+                div.atk-push-xsmall.atk-form-label.atk-text-nowrap
+                  label.mandatory
+                    //- span Received Newsletter:
+                .row
+                  .col-md-7.col-sm-12
+                    div.atk-form-field.atk-push-small
+                      {$received_newsletter}
+                  .col-md-5.col-sm-12
+                    {$submit_button}
+          hr
+          .center.form-section-footer
+            figure.note
+              | By clicking the “Create an Account” button you agree with our 
+              a.link(href='terms-conditions') Terms and conditions
+          {/}
+    {/}
+  // /.block
+// end Page Content

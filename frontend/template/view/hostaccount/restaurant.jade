@@ -1,0 +1,53 @@
+div(class='{$class}', id='{$_name}', style='{$style}')
+  .row(style='margin-top:10px;')
+    .col-md-3.col-sm-3
+      aside#sidebar
+        ul.navigation-sidebar.list-unstyled.hungrydunia-host-account-vtabs
+          li.hostaccount-verticaltabs(data-type="DiscountCoupon")
+            a(href='#')
+              i.fa.fa-folder
+              span Coupons
+          li.hostaccount-verticaltabs(data-type="TableReservation")
+            a(href='#')
+              i.fa.fa-check
+              span Table Reservation
+          li.hostaccount-verticaltabs(data-type="Sales")
+            a(href='#')
+              i.fa.fa-eye-slash
+              span Sales
+          li.hostaccount-verticaltabs(data-type="ReviewAndComment")
+            a(href='#')
+              i.fa.fa-eye-slash
+              span Review's & comment's
+          li.hostaccount-verticaltabs(data-type="Event")
+            a(href='#')
+              i.fa.fa-eye-slash
+              span Manage Event
+          li.hostaccount-verticaltabs(data-type="History")
+            a(href='#')
+              i.fa.fa-eye-slash
+              span History
+          li.hostaccount-verticaltabs(data-type="Notification")
+            a(href='#')
+              i.fa.fa-eye-slash
+              span Notification
+          li.hostaccount-verticaltabs(data-type="DiscountManagement")
+            a(href='#')
+              i.fa.fa-clock-o
+              span Offer/ Discount
+          li.hostaccount-verticaltabs(data-type="Profile")
+            a(href='#')
+              i.fa.fa-clock-o
+              span Profile
+          li.hostaccount-verticaltabs(data-type="Contact")
+            a(href='#')
+              i.fa.fa-clock-o
+              span Contact HungryDunia
+          li.hostaccount-verticaltabs(data-type="TNC")
+            a(href='#')
+              i.fa.fa-clock-o
+              span terms & condition
+    .col-md-9.col-sm-9
+      section#dashboard-section
+        | {$Content}
+  |         {/}

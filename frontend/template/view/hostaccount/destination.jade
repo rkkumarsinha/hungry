@@ -1,0 +1,41 @@
+div(class='{$class}', id='{$_name}', style='{$style}')
+  .row(style='margin-top:60px;')
+    .col-md-3.col-sm-3
+      aside#sidebar
+        ul.navigation-sidebar.list-unstyled
+          li.hostaccount-verticaltabs.active(data-type="booking")
+            a(href='#')
+              i.fa.fa-folder
+              span Booking's
+          li.hostaccount-verticaltabs(data-type="sales")
+            a(href='#')
+              i.fa.fa-eye-slash
+              span Sales
+          li.hostaccount-verticaltabs(data-type="profile")
+            a(href='#')
+              i.fa.fa-eye-slash
+              span Profile
+          li.hostaccount-verticaltabs(data-type="manage_tickets")
+            a(href='#')
+              i.fa.fa-eye-slash
+              span Manage Package's
+          li.hostaccount-verticaltabs(data-type="history")
+            a(href='#')
+              i.fa.fa-eye-slash
+              span History
+          li.hostaccount-verticaltabs(data-type="notification")
+            a(href='#')
+              i.fa.fa-eye-slash
+              span Notification
+          li.hostaccount-verticaltabs(data-type="message")
+            a(href='#')
+              i.fa.fa-clock-o
+              span Contact HungryDunia
+          li.hostaccount-verticaltabs(data-type="tnc")
+            a(href='#')
+              i.fa.fa-clock-o
+              span terms & condition
+    .col-md-9.col-sm-9
+      section#dashboard-section
+        | {$Content}
+  |         {/}

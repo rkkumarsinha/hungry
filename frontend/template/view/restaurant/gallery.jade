@@ -1,0 +1,77 @@
+//- {not_found}
+//- link(rel="stylesheet" type="text/css" media="all" href="css/jgallery.css")
+//- script(type="text/javascript" src="js/jgallery.min.js")
+//- script(type="text/javascript" src="js/touchswipe.js")
+//- script(type='text/javascript').
+//-   $( function() {
+//-   $( '#restaurant_menu' ).jGallery();
+//-   } );
+//- #restaurant_menu
+//-   .album(data-jgallery-album-title='Album 1')
+//-     {rows}{row}
+//-     a(href='{$image}')
+//-       img(src='{image}{/}', alt='Photo 1')
+//-     {/}
+//-     {/}
+//- {/}
+
+{not_found}
+link(rel="stylesheet" href="css/magnific-popup.css")
+script(src="js/jquery.magnific-popup.js")
+.restaurant-gallery.row(style="padding:0;margin:0px;")
+  {rows}{row}
+  div(href="{$image}" data-source="{$image}" title="{$name}").thumbnail.col-md-2.col-lg.3.col.sm-3
+    img(src='{image}{/}', alt='Photo 1')
+  {/}
+  {/}
+style(type='text/css').
+  .image-source-link {
+  color: #98C3D1;
+  }
+  .mfp-with-zoom .mfp-container,
+  .mfp-with-zoom.mfp-bg {
+  opacity: 0;
+  -webkit-backface-visibility: hidden;
+  /* ideally, transition speed should match zoom duration */
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  }
+  .mfp-with-zoom.mfp-ready .mfp-container {
+  opacity: 1;
+  }
+  .mfp-with-zoom.mfp-ready.mfp-bg {
+  opacity: 0.8;
+  }
+  .mfp-with-zoom.mfp-removing .mfp-container,
+  .mfp-with-zoom.mfp-removing.mfp-bg {
+  opacity: 0;
+  }
+script(type='text/javascript').
+  $(document).ready(function() {
+  $('.restaurant-gallery').magnificPopup({
+  delegate: 'div',
+  type: 'image',
+  closeOnContentClick: false,
+  closeBtnInside: false,
+  mainClass: 'mfp-with-zoom mfp-img-mobile',
+  image: {
+  verticalFit: true,
+  titleSrc: function(item) {
+  return item.el.attr('title');
+  }
+  },
+  gallery: {
+  enabled: true
+  },
+  zoom: {
+  enabled: true,
+  duration: 300, // don't foget to change the duration also in CSS
+  opener: function(element) {
+  return element.find('img');
+  }
+  }
+  });
+  });
+{/}

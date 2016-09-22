@@ -1,0 +1,18 @@
+div(id="{$_name}" class="{$class}" style="{$style}")
+	{rows}
+	{row}
+	article.review
+		figure.author
+			img(alt='', src='assets/img/default-avatar.png')
+			.date {$created_at}
+		.wrapper
+			h5 {$name}
+			p {$message}
+			.individual-rating
+				span From : {$from}
+	{/}
+	{/}
+	{$not_found}
+	{$Paginator}
+	{$Content}
+	

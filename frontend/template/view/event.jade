@@ -1,0 +1,67 @@
+div(id="{$_name}" class="{$class}" style="{$style}")
+  header
+    h2 {header}Featured{/}
+  .row
+    | {rows}{row}
+    .col-md-4.col-sm-4
+      .item
+        .image
+          a(href='{$path}')
+            .overlay
+              .inner
+                .content(style='display:none;')
+                  h4 Description
+                  p {address}{/}
+            .item-specific
+              span(title='Distance', data-lat='{$latitude}', data-lng='{$longitude}')
+                i.fa.fa-map-marker
+                  span.current-distance(data-lat='{$latitude}', data-lng='{$longitude}', style='color:orange;', data-id='{$id}')
+                | {$distance}
+              span(title='')
+                i.fa.fa-inr
+                | {lowest_price}{/} *
+              span(title='Area')
+                i.fa.fa-tags
+                |  {offers}240m{/}
+            div.icon.event-date
+              div {$starting_date}
+              div {$starting_month}
+            img(src='{display_image}assets/img/small.jpg{/}', alt='')
+          .restaurant-category
+            i.fa.fa-hungry {$event_category}
+        {bookticket_wrapper}
+        div.btn-block.atk-swatch-orange.btn.hungry-getdiscount.container( data-restaurantid='{$id}' style="width:60%;margin-top:10px;border-radius:10px;") Book Ticket
+        {/}
+        .wrapper
+          a(href='{$path}')
+            h3
+              |  {name}Hungry Event{/}
+          figure {address}{/}
+    | {/}{/}
+    // /.col-sm-4
+  script(type='text/javascript').
+    if ( navigator.geolocation ) {
+    function success(pos) {
+    $.each($(".current-distance"),function(index,element){
+    $.post('?page=getdistance',
+    {
+    'currentlat':pos.coords.latitude,
+    'currentlan':pos.coords.longitude,
+    'restlan':$(element).attr('data-lng'),
+    'restlat':$(element).attr('data-lat')
+    },
+    function(data) {
+    //- console.log(data);
+    $(element).html(data);
+    });
+    });
+    }
+    function fail(error) {
+    console.log("https://www.google.co.in/maps/@26.8852108,75.7905578,11z?hl=en");
+    }
+    function error(error){
+    }
+    navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 5, enableHighAccuracy:true, timeout: 6000});
+
+    //- navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true,timeout: 100000,maximumAge: 0});
+    }

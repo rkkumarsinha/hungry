@@ -1,0 +1,178 @@
+
+<div id="page-content" class="page-item-detail event-detail hungry-restaurant-detail">
+  <!-- Hero Image-->
+  <section class="hero-image height-400 event-detail-banner restaurant-detail-banner">
+    <div style="vertical-align: middle;" class="inner">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 col-sm-12 text-left restaurant-info">
+            <div class="restaurant-logo-image"><img src="{event_logo_image}assets/img/hungry-not-found.png{/}" onerror="this.src='assets/img/hungry-not-found.jpg';"/></div>
+            <h1>{name}Find Place For Fun and Eat{/}</h1>
+            <div>{address}{/}</div>
+          </div>
+          <div class="col-md-3 col-sm-12">{$bookticket}</div>
+        </div>
+      </div>
+    </div>
+    <div style="background:rgba(0, 0, 0, 0.45) none repeat scroll 0 0;" class="background"><img src="{event_banner_image}assets/img/restaurant-detail-banner.jpg{/}" alt="" style="width:100%;"/></div>
+  </section>{$Content}
+  <section class="container">
+    <div class="row">
+      <!-- Item Detail Content-->
+      <div class="col-md-9">
+        <section id="main-content" class="block">
+          <div class="row">
+            <!-- Detail Sidebar-->
+            <aside id="detail-sidebar" class="col-md-4 col-sm-4">
+              <!-- Contact-->
+              <section>
+                <header>
+                  <h3>Organizer Contact</h3>
+                </header>
+                <address>
+                  <div style="display:none;">{$address}</div>
+                  <figure>{mobile_wrapper}
+                    <div class="info"><i class="fa fa-mobile"></i><span>{$mobile_no}</span></div>{/}
+                    {phone_wrapper}
+                    <div class="info"><i class="fa fa-phone"></i><span>{$phone_no}</span></div>{/}
+                    {email_wrapper}
+                    <div class="info"><i class="fa fa-envelope"></i><span>{$email}</span></div>{/}
+                    {website_wrapper}
+                    <div class="info"><i class="fa fa-globe"></i><a href="#">{$website}</a></div>{/}
+                    {facebook_wrapper}
+                    <div class="info"><i class="fa fa-facebook"></i><a href="{$facebook_page_url}" target="_blank">Visit Facebook</a></div>{/}
+                    {instagram_wrapper}
+                    <div class="info"><i class="fa fa-instagram"></i><a href="{$instagram_page_url}">Instagram URL</a></div>{/}
+                  </figure>
+                </address>
+              </section>
+              <!-- end Contact-->
+              <section>
+                <header>
+                  <h3>Event Date</h3>
+                </header>
+                <figure>
+                  <div id="detail-sidebar-event">
+                    <div class="content ticket-price">
+                      <div style="margin-top:10px;margin-bottom:10px;font-weight:bold;"><i class="fa fa-calendar text-success">&nbsp;Starting Date&nbsp; </i><span class="pull-right">{$starting_date}</span></div>
+                      <div style="margin-top:10px;margin-bottom:10px;font-weight:bold;"><i class="fa fa-calendar text-danger">&nbsp;Ending Date&nbsp;</i><span class="pull-right">{$closing_date}</span></div>
+                    </div>
+                  </div>
+                </figure>
+              </section>
+              <section>
+                <header>
+                  <h3>Ticket Price</h3>
+                </header>
+                <figure>
+                  <div id="detail-sidebar-event">
+                    <div class="content ticket-price">
+                      <div style="display:none"><i class="fa fa-calendar text-success">&nbsp;Starting Date&nbsp; </i><span class="pull-right">{$starting_date}</span></div>
+                      <div style="display:none"><i class="fa fa-calendar text-danger">&nbsp;Ending Date&nbsp;</i><span class="pull-right">{$closing_date}</span></div>
+                      <div class="hungry-ticket-price">
+                        {ticket_price}
+                        {/}
+                      </div>
+                    </div>
+                  </div>
+                </figure>
+              </section>
+              <!-- Features-->
+              <section>
+                <header>
+                  <h3>Attraction</h3>
+                </header>
+                <figure>
+                  <div id="detail-sidebar-features">
+                    <div class="content">{event_attraction}{/}</div>
+                  </div>
+                </figure>
+              </section>
+              <!-- end features-->
+              <!-- Contact Form-->
+              <section style="display:none;">
+                <header>
+                  <h3>Contact Form</h3>
+                </header>
+                <figure>
+                  <form id="item-detail-form" action="?" method="post" role="form">
+                    <div class="form-group">
+                      <label for="item-detail-name">Name</label>
+                      <input id="item-detail-name" type="text" required="" name="item-detail-name" class="form-control framed"/>
+                    </div>
+                    <!-- /.form-group-->
+                    <div class="form-group">
+                      <label for="item-detail-email">Email</label>
+                      <input id="item-detail-email" type="email" required="" name="item-detail-email" class="form-control framed"/>
+                    </div>
+                    <!-- /.form-group-->
+                    <div class="form-group">
+                      <label for="item-detail-message">Message</label>
+                      <textarea id="item-detail-message" required="" rows="3" name="item-detail-message" class="form-control framed"></textarea>
+                    </div>
+                    <!-- /.form-group-->
+                    <div class="form-group">
+                      <button type="submit" class="btn framed icon">Send<i class="fa fa-angle-right"></i></button>
+                    </div>
+                    <!-- /.form-group-->
+                  </form>
+                </figure>
+              </section>
+              <!-- end Contact Form-->
+            </aside>
+            <!-- end Detail Sidebar-->
+            <!-- Content-->
+            <div class="col-md-8 col-sm-8">
+              <section class="event-detail-middle-section">
+                <div>
+                  <!-- Nav tabs-->
+                  <ul role="tablist" class="nav nav-tabs">
+                    <li role="presentation" class="active"><a href="#gallery" aria-controls="gallery" role="tab" data-toggle="tab">Gallery</a></li>
+                    <li role="presentation"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
+                    <li role="presentation"><a href="#guidelines" aria-controls="operationlhours" role="tab" data-toggle="tab">Guide Lines</a></li>
+                    <li role="presentation"><a href="#ticket" aria-controls="offers" role="tab" data-toggle="tab">Ticket & Their Detail</a></li>
+                  </ul>
+                  <!-- Tab panes-->
+                  <div class="tab-content">
+                    <div id="gallery" role="tabpanel" class="tab-pane active">{$gallery}</div>
+                    <div id="description" role="tabpanel" class="tab-pane">
+                      <p>
+                         
+                        {$detail}
+                      </p>
+                    </div>
+                    <div id="guidelines" role="tabpanel" class="tab-pane">{$guide_lines}</div>
+                    <div id="ticket" role="tabpanel" class="tab-pane">{$ticket_and_their_detail}  
+                      <!-- /.block  -->
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!-- Reviews-->{$review}
+              <!-- end Review Form-->
+            </div>
+            <!-- /.col-md-8-->
+          </div>
+          <!-- /.row-->
+        </section>
+        <!-- /#main-content-->
+      </div>
+      <!-- /.col-md-8-->
+      <!-- Sidebar-->
+      <div class="col-md-3">
+        <section id="main-content" class="block near-by-restaurant-container">
+          <header>
+            <h2>Map Route</h2>
+          </header>
+          <div style="height:200px;">{$routemap}</div>
+        </section>
+        <section id="event-near-by-restaurant" class="block near-by-restaurant-container">{$upcoming_event}</section>
+      </div>
+      <!-- /.form-group-->
+      <!-- /#sidebar-->
+      <!-- /.col-md-3-->
+      <!-- end Sidebar-->
+      <!-- /.row-->
+    </div>
+  </section>
+</div>

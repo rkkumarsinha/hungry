@@ -1,0 +1,34 @@
+div(id="{$_name}" class="{$class}" style="{$style}")
+	section
+		.item.list.admin-view.hungry-event-ticket
+			.image
+				a(href='item-detail.html')
+					.overlay(style="display:none;")
+						.inner
+							.content
+								h4 Description
+								p Curabitur odio nibh, luctus non pulvinar a, ultricies ac diam. Donec neque massa
+					.item-specific
+						span  {$remaining_ticket} Left
+					img(src='{first_image}{/}', alt='')
+			.wrapper(style="padding:20px 20px 10px;")
+				a(href='#')
+					h3(style="text-transform:uppercase;height:auto;") {$name}
+				figure {$detail}
+				.info
+					{$addtocartform}
+				small(style="font-size:12px;")
+					span(style="color:red;") Disclaimer: 
+					span{$disclaimer}
+			.description
+				{remaining_count}
+				ul.list-unstyled.actions
+					{rows}
+					{row}
+					li
+						a(href='#')
+							{$name}
+					{/}{/}
+					p(style="font-weight:bold;") Ticket's Left
+				{/}
+			{$ribben}
