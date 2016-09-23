@@ -1,0 +1,113 @@
+{
+	restaurants:[
+
+		{
+				"name":"Kabab Mistri-Jaisingh Garh",
+				"url_slug":"kabab-mistry",
+				"owner_name":"",
+				"about_restaurant":"The glorious roof top restaurant udaipur by the name Kabab Mistri, developed by Chef Dhar, is a fine dine exposure for food lovers. It's a partially covered dining area with spectacular view of the Aravali hills and town, specializes in Indian and World Kababs with a hint of Asian cuisine, specially crafted to suite a wide range of taste buds. Also offers some of the very authentic and popular Rajasthani delicacies that are must for anyone visiting Udaipur.",
+				"address":"3, Haridas Ji Ki Magri, The Trident Road, Shavri Colony, Udaipur-313001, Rajasthan India",
+				"mobile_no":"8875028885",
+				"phone_no":"0294-2461552",
+				"email":"email@xyz.com",
+				"website":"http://www.jaisinghgarh.com/",
+				"facebook_page_url":"https://www.facebook.com/KababMistriUdaipur",
+				"instagram_page_url":"https://www.facebook.com/KababMistriUdaipur",
+				"rating":"4",
+				"avg_cost_per_person_veg":"400",
+				"avg_cost_per_person_nonveg":"400",
+				"avg_cost_per_person_thali":"400",
+				"credit_card_accepted":"0",
+				"reservation_needed":"1",
+				"type":"Restaurent",
+				"created_at":"",
+				"longitude":"73.67000299999995",
+				"latitude":"24.579714",
+				"is_featured":"0",
+				"is_popular":"0",
+				"is_recommend":"0",
+				"country":"India",
+				"state":"Rajasthan",
+				"city":"Udaipur",
+				"area":"New Fatehpura",
+				"logo_image": "http://hungrydunia.com/restaurant/view_restaurant/Hungrydunia-Volcano",
+				"banner_image": "http://hungrydunia.com/banner/119-banner.JPG",
+				"display_image": "http://hungrydunia.com/banner/119-banner.JPG",
+				"time_slot":{
+							"monday": "11:00am- 11:00pm",
+							"tuesday":"11:00am- 11:00pm",
+							"wednesday":"11:00am- 11:00pm",
+							"thursday":"11:00am- 11:00pm",
+							"friday":"11:00am- 11:00pm",
+							"saturday":"11:00am- 11:00pm",
+							"sunday":"11:00am- 11:00pm"
+						},
+				"category":{
+							"category1":"",
+							"category2":"",
+							"category4":""
+						},
+				"restaurant_images":{
+							"1":"http://hungrydunia.com//uploads/image0150630_102616.jpg",
+							"2":"http://hungrydunia.com//uploads/image1150630_102616.JPG",
+							"3":"http://hungrydunia.com//uploads/image2150630_102616.JPG",
+							"4":"http://hungrydunia.com//uploads/image3150630_102616.JPG",
+							"5":"http://hungrydunia.com//uploads/image4150630_102616.JPG",
+							"6":"http://hungrydunia.com//uploads/image5150630_102617.JPG",
+							"7":"http://hungrydunia.com//uploads/image6150630_102617.JPG",
+							"8":"http://hungrydunia.com//uploads/image7150630_102617.JPG"
+						},
+				"restaurant_menu":{
+							"1":"http://hungrydunia.com//menu/menu0150819_011234.jpg",
+							"2":"http://hungrydunia.com//menu/menu0150819_011350.jpg",
+							"3":"http://hungrydunia.com//menu/menu1150819_011350.jpg",
+							"4":"http://hungrydunia.com//menu/menu2150819_011350.jpg",
+							"5":"http://hungrydunia.com//menu/menu3150819_011350.jpg",
+							"6":"http://hungrydunia.com//menu/menu4150819_011350.jpg",
+							"7":"http://hungrydunia.com//menu/menu5150819_011350.jpg"
+						},
+				"highlight":{
+							"1":"Pure Veg",
+							"2":"Alcohol Served",
+							"3":"Credit Card Accepted",
+							"4":"Wifi",
+							"5":"Breakfast",
+							"6":"Lunch",
+							"7":"Dinner",
+							"8":"Bakery Products",
+							"9":"AC Hall",
+							"10":"Candle Light",
+							"11":"Home Delivery Facility",
+							"12":"Mocktail",
+							"13":"Party Hall/ Banquet Hall",
+							"14":"Disc",
+							"15":"Pub",
+							"16":"Birthday Party"
+						},
+				"keyword":{
+							"1":"Chinese Food",
+							"2":"Continental Food",
+							"3":"Italian Food",
+							"4":"North Indian Food",
+							"5":"Mexicon",
+							"6":"Desserts",
+							"7":"Jain Food",
+							"8":"Dine Out",
+							"9":"Home Delivery",
+							"10":"Nightlife"
+							
+						},
+				"reviews":{
+							"1":{
+								"user_id":"2",
+								"user_name":"Mohit arora",
+								"rating":"4",
+								"comment":"We were looking for a place with good disc to have a private dance party. The search was over at Volcano. I must say that I have seen many disc but this was one of the best managed disc with all the look and feel. The cheery on the top was the amazing food..so the end result was- a day well spent..i would recommend this place to all party lovers and people who like to spend quality time with their friends. Moreover, we got 20% discount from hungrydunia which made our evening even memorable",
+								"created_at":"2015-02-08"
+								}
+						}
+		
+
+	}
+	]
+}
