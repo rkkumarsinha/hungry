@@ -23,7 +23,7 @@ class Model_Review extends SQL_Model{
 
 		$this->hasMany('Comment','review_id');
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 
 	}
 }

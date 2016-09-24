@@ -23,7 +23,7 @@ class Model_DestinationEnquiry extends SQL_Model{
 		$this->addField('status')->enum(['pending','approved','cancled'])->defaultValue('pending');
 
 		$this->addField('is_send_to_owner')->type('boolean')->defaultValue(false);
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 

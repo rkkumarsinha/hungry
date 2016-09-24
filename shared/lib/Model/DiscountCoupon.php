@@ -29,7 +29,7 @@ class Model_DiscountCoupon extends SQL_Model{
 		$this->addExpression('restaurant_name')->set($this->refSQL('restaurant_id')->fieldQuery('name'));
 		$this->addField('created_date')->type('date');
 		$this->addHook('beforeSave',$this);
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 	function beforeSave(){

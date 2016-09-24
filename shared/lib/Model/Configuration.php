@@ -30,6 +30,6 @@ class Model_Configuration extends SQL_Model{
 		//general configuration
 		$this->addField('registration_otp_expire_minute')->hint('time in minute');
 		
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 }

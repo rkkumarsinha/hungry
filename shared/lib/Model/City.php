@@ -19,7 +19,7 @@ class Model_City extends SQL_Model{
 
 		$this->hasMany('Area','city_id');
 		$this->hasMany('Image','city_id');
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 
 		$this->addHook('afterSave',$this);
 	}

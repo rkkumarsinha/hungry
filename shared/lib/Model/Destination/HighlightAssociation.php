@@ -20,6 +20,6 @@ class Model_Destination_HighlightAssociation extends SQL_Model{
 			return $q->expr("replace([0],'/public','')",[$m->refSQL('destination_highlight_id')->fieldQuery('image')]);
 		});
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 }

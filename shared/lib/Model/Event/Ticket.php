@@ -45,6 +45,6 @@ class Model_Event_Ticket extends SQL_Model{
 			return $q->expr("( IFNULL([0],0) - IFNULL([1],0) )",[$m->getElement('max_no_to_sale'),$m->refSQL('UserEventTicket')->addCondition('status','paid')->sum('qty')]);
 		});
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 }

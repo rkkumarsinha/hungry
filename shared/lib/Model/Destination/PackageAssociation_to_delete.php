@@ -12,6 +12,6 @@ class Model_Destination_PackageAssociation extends SQL_Model{
 			return $m->refSQL('destination_package_id')->fieldQuery('name');
 		});
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 }

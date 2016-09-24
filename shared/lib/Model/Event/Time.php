@@ -12,7 +12,7 @@ class Model_Event_Time extends SQL_Model{
 		$this->hasMany('Event_Ticket','event_ticket_id');
 
 		$this->addExpression('on_date')->set($this->refSQL('event_day_id')->fieldQuery('on_date'));
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 }

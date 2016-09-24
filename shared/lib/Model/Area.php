@@ -22,7 +22,7 @@ class Model_Area extends SQL_Model{
 		$this->addField('latitude');
 		$this->addField('longitude');
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 
 		$this->addHook('afterSave',$this);
 	}

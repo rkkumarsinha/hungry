@@ -9,7 +9,7 @@ class Model_Discount extends SQL_Model{
 		$this->addField('name')->mandatory(true);
 
 		$this->hasMany('Restaurant','discount_id');
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 }
 

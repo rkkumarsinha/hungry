@@ -16,7 +16,7 @@ class Model_Outbox extends SQL_Model{
 		$this->addField('related_document_id');
 		$this->addField('user_id');
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 	function createNew($name,$to,$subject,$body,$type,$related_document,$related_document_id,$user){

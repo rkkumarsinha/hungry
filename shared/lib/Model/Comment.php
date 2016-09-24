@@ -15,7 +15,7 @@ class Model_Comment extends SQL_Model{
 		$this->addField('is_approved')->type('boolean');
 		$this->addField('comment')->type('text');
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 
 		$this->addHook('beforeSave',$this);
 	}

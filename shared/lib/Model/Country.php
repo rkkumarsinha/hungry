@@ -11,6 +11,6 @@ class Model_Country extends SQL_Model{
 		$this->addField('longitude');
 		$this->addField('is_active')->type('boolean')->defaultValue(true);
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 }

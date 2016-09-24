@@ -27,7 +27,7 @@ class Model_Image extends SQL_Model{
 		$this->addField('created_at')->type('datetime')->defaultValue(date('Y-m-d H:i:s'));
 		$this->addField('approved_date')->type('datetime');//->defaultValue(date('Y-m-d H:i:s'));
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 }

@@ -36,7 +36,7 @@ class Model_UserEventTicket extends SQL_Model{
 		$this->addExpression('eventtimeid')->set($this->refSQL('event_ticket_id')->fieldQuery('event_time_id'));
 		$this->addExpression('eventdayid')->set($this->refSQL('event_ticket_id')->fieldQuery('event_day_id'));
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 	//book only the ticket

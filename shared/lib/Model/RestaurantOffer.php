@@ -13,7 +13,7 @@ class Model_RestaurantOffer extends SQL_Model{
 		$this->addExpression('detail')->set($this->refSQL('offer_id')->fieldQuery('detail'));
 		$this->addField('is_active')->type('boolean')->defaultValue(true);
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 
 	}
 }

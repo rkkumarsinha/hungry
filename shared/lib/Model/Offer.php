@@ -10,7 +10,7 @@ class Model_Offer extends SQL_Model{
 		$this->addField('detail')->type('text');
 
 		$this->hasMany('RestaurantOffer','offer_id');
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 }
 

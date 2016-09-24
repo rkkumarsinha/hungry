@@ -13,6 +13,6 @@ class Model_Destination_Package extends SQL_Model{
 		$this->addField('is_active')->type('boolean')->defaultValue(true);
 		
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}	
 }

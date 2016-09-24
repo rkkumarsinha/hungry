@@ -16,7 +16,7 @@ class Model_Event_Day extends SQL_Model{
 		$this->addExpression('event_closing_date')->set($this->refSQL('event_id')->fieldQuery('closing_date'));
 
 		$this->addHook('beforeSave',$this);
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 
 	}
 

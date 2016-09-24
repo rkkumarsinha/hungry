@@ -14,6 +14,6 @@ class Model_Destination_Highlight extends SQL_Model{
 
 		$this->hasMany('Destination_HighlightAssociation','destination_highlight_id');
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 }

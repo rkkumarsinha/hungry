@@ -8,7 +8,7 @@ class Model_CancledReason extends SQL_Model{
 		
 		$this->addField('name')->mandatory(true);
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 
 	}
 }

@@ -11,6 +11,6 @@ class Model_EventDestinationRest extends SQL_Model{
 		$this->hasOne('Restaurant','restaurant_id');
 		$this->addField('type')->setValueList(['event'=>'event','destination'=>'destination','restaurant'=>'restaurant']);
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 }

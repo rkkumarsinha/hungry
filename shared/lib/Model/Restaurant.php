@@ -96,7 +96,7 @@ class Model_Restaurant extends SQL_Model{
 		});
 
 		$this->addExpression('discount_percentage')->set($this->refSQL('discount_id')->fieldQuery('name'));
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 
 		$this->addHook('afterSave',$this);
 		$this->addHook('beforeSave',[$this,'updateSearchString']);

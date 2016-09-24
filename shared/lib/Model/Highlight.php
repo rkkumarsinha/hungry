@@ -10,6 +10,6 @@ class Model_Highlight extends SQL_Model{
 		$this->addField('is_active')->type('boolean')->defaultValue(true);
 		$this->add('filestore/Field_Image','image_id')->mandatory(true);
 		
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}	
 }

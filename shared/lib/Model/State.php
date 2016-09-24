@@ -13,6 +13,6 @@ class Model_State extends SQL_Model{
 		$this->addField('latitude');
 		$this->addField('longitude');
 		$this->addField('is_active')->type('boolean');
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 }

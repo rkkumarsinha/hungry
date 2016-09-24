@@ -10,6 +10,6 @@ class Model_EmailTemplate extends SQL_Model{
 		$this->addField('subject');
 		$this->addField('body')->type('text');
 		
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 }

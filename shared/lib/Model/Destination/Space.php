@@ -18,6 +18,6 @@ class Model_Destination_Space extends SQL_Model{
 			return $q->expr("replace([0],'/public','')",[$m->getElement('image')]);
 		});
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}	
 }

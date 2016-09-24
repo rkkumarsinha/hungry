@@ -9,7 +9,7 @@ class Model_Keyword extends SQL_Model{
 		$this->add('filestore/Field_Image','image_id')->mandatory(true);
 
 		$this->addHook('afterSave',$this);
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}	
 
 	function afterSave(){

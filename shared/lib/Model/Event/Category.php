@@ -11,7 +11,7 @@ class Model_Event_Category extends SQL_Model{
 		
 		$this->hasMany('Event','event_category_id');
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 
 	}
 }

@@ -18,7 +18,7 @@ class Model_Restaurant_Highlight extends SQL_Model{
 		});
 
 		$this->addHook('afterSave',$this);
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 	function afterSave(){		

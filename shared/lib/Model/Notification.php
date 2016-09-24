@@ -19,7 +19,7 @@ class Model_Notification extends SQL_Model{
 		$this->addField('status')->setValueList(['approved'=>'Approved','pending'=>"Pending",'cancled'=>"Cancled"]);
 		$this->addField('value'); 
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 }

@@ -12,6 +12,6 @@ class Model_Category extends SQL_Model{
 		
 		$this->hasMany('CategoryAssociation','cat_asso_id');
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 }

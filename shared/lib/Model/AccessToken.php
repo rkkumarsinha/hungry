@@ -14,7 +14,7 @@ class Model_AccessToken extends SQL_Model{
 		$this->addField('social_content')->type('text');
 		$this->addField('profile_picture_url')->type('text');
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 
 	}
 }
