@@ -6,7 +6,7 @@ class View_Login extends View{
 
 	function init(){
 		parent::init();
-		
+	
 		if($this->api->auth->model->id){
 			$container = $this->add("View")->addClass('container')->setStyle(['width'=>'40%','margin-top'=>'20px']);
             $container->add('View_Info',null)->set('already logged in');
@@ -16,6 +16,9 @@ class View_Login extends View{
 
 	    }else{
 	        //Redirect Page
+	        if(!session_id()) {
+			    session_start();
+			}
 	        if($status = $this->api->recall('from')){
 	        	$info = $this->add('View_Info');
 	        	if($status=="forgotpassword"){
@@ -28,9 +31,43 @@ class View_Login extends View{
 
 	        if($this->api->recall('next_url')){
 	            $redirect_url = array('next_url'=>$this->api->recall('next_url'));
-	        }
+	        }	        
 
-	        $f = $this->add('Form',null,'generalloginform',['form/stacked']);
+			$facebook_controller = $this->add('Controller_Facebook',['hfrom'=>$_GET['hfrom'],'isWebsiteCheck'=>true]);
+			$url = $facebook_controller->getLoginUrl();
+			$this->template->trySet('facebook_login_url',$url);
+
+			if($facebook_controller->user instanceof Model_User){
+				session_write_close();
+				$user_model = $this->add('Model_User')->load($facebook_controller->user->id);
+				$this->api->auth->login($user_model);
+				if(!$user_model['email']){
+					// $this->app->memorize('facebook_email_not_found',$facebook_controller->user->id);
+					$this->app->redirect($this->app->url('validate',['email_not_found'=>$facebook_controller->user->id."_"]));
+				}
+				else{
+					$this->api->auth->login($user_model);
+          			$this->api->redirect($this->api->url('account'));
+          			
+				}
+			}
+			$_SESSION["FBRLH_persist"] = $_SESSION["FBRLH_state"];
+			
+			$google_controller = $this->add('Controller_Google',['hfrom'=>$_GET['hfrom']]);
+			$url = $google_controller->getLoginUrl();
+			$this->template->trySet('google_login_url',$url);
+
+			if($google_controller->user instanceof Model_User){
+				$this->app->auth->model->load($google_controller->user->id);
+			}
+
+			if($this->app->auth->model->loaded()){
+				$this->template->trySetHtml('loginsuccess','<div class="container" style="padding:10px;background-color:green;color:white;font-size:16px;width:500px;">Login successfully redirecting please wait ...</div>');
+				$next_url = $this->app->recall('next_url')?:"index";
+				$this->app->redirect($this->app->url($next_url,['city'=>'udaipur']));
+			}
+
+			$f = $this->add('Form',null,'generalloginform',['form/stacked']);
 	        $f->addField('email')->validateNotNull()->validateField('filter_var($this->get(), FILTER_VALIDATE_EMAIL)')->setAttr('PlaceHolder','enter your email');
 	        $f->addField('password','password')->validateNotNull()->setAttr('PlaceHolder',"enter your password");
 	        $f->addSubmit('Login')->addClass('btn-block');
@@ -69,31 +106,7 @@ class View_Login extends View{
 	            	$this->api->redirect($this->api->url($this->app->recall('next_url')?:'index'))->execute();
 	            }
 	        }
-			$facebook_controller = $this->add('Controller_Facebook',['hfrom'=>$_GET['hfrom']]);
-			$url = $facebook_controller->getLoginUrl();
-			$this->template->trySet('facebook_login_url',$url);
-
-			if($facebook_controller->user instanceof Model_User){
-				$this->app->auth->model->load($facebook_controller->user->id);
-			}
-			
-			$google_controller = $this->add('Controller_Google',['hfrom'=>$_GET['hfrom']]);
-			$url = $google_controller->getLoginUrl();
-			$this->template->trySet('google_login_url',$url);
-
-			if($google_controller->user instanceof Model_User){
-				$this->app->auth->model->load($google_controller->user->id);
-			}
-
-			if($this->app->auth->model->loaded()){
-				$this->template->trySetHtml('loginsuccess','<div class="container" style="padding:10px;background-color:green;color:white;font-size:16px;width:500px;">Login successfully redirecting please wait ...</div>');
-				
-				$next_url = $this->app->recall('next_url')?:"index";
-				$this->app->redirect($this->app->url($next_url,['city'=>'udaipur']));
-
-			}
 		}
-
 
 	}
 
