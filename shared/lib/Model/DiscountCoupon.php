@@ -124,14 +124,14 @@ class Model_DiscountCoupon extends SQL_Model{
 		
 		if($this['offer_id']){
 			$offer = $this->add('Model_RestaurantOffer')->load($this['offer_id']);
-			$discount_name = "Offer name :" . $offer['name'] ."<br/>";
+			$discount_name = "Offer name: " . $offer['name'] ."<br/>";
 			$discount_detail = $offer['detail']."<br/>";
 			$discount_coupon = "Offer code: ".$this['discount_coupon'];
 		}
 
 		if($this['discount_id']){
 			$discount = $this->add('Model_Discount')->load($this['discount_id']);
-			$discount_name = "Discount name :".$discount['name']."<br/>";
+			$discount_name = "Discount name: ".$discount['name']."<br/>";
 			$discount_detail = "";
 			$discount_coupon = "Discount code: ".$this['discount_coupon'];
 		}
@@ -142,13 +142,12 @@ class Model_DiscountCoupon extends SQL_Model{
 		$body = str_replace("{restaurant_name}", $this['restaurant_name'], $body);
 		
 		$body = str_replace("{discount_name}", $discount_name, $body);
-		$body = str_replace("{discount_detail}", $discount_name.$discount_detail, $body);
+		$body = str_replace("{discount_detail}",$discount_detail, $body);
 		$body = str_replace("{discount_coupon}", $discount_coupon, $body);
 		$body = str_replace("{date_time}", $expire_date, $body);
 		
 		//end of string manupulation
 		$outbox = $this->add('Model_Outbox');
-		
 		$email_response = $outbox->sendEmail($this['email'],$subject,$body,$user_model);		
 		if($email_response != true){
 			throw new \Exception($email_response);
