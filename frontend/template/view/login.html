@@ -1,28 +1,30 @@
 
-{$Content}
-{$loginsuccess}
-{login_wrapper}
-<div class="hungrylogin">
-  <div class="login_modal_header">
-    <h2 id="myModalLabel" class="modal-title">Login to Your Account</h2>
-  </div>
-  <div style="border:0px;" class="modal-body login-modal">
-    <div class="clearfix"></div>
-    <div id="social-icons-conatainer">
-      <div class="modal-body-left">{generalloginform}
-        <div class="form-group">
-          <input id="username" type="text" value="" placeholder="Enter your name" class="form-control login-field"/><i class="fa fa-user login-field-icon"></i>
-        </div>
-        <div class="form-group">
-          <input id="login-pass" type="password" value="" placeholder="Password" class="form-control login-field"/><i class="fa fa-lock login-field-icon"></i>
-        </div><a href="#" class="btn btn-success modal-login-btn">Login</a>{/}<br/>{$forgotpassword}
-      </div>
-      <div class="modal-body-right">
-        <div class="modal-social-icons"><a href="{$facebook_login_url}" class="btn btn-default facebook btn-block"><i style="font-size:20px;" class="fa fa-facebook modal-icons"></i> Sign In with Facebook</a><a href="{$google_login_url}" class="btn btn-default google btn-block"><i style="font-size:20px;" class="fa fa-google-plus modal-icons"></i> Sign In with Google</a><a href="#" style="display:none;" class="btn btn-default twitter btn-block"><i style="font-size:20px;" class="fa fa-twitter modal-icons"></i> Sign In with Twitter</a><a href="#" style="display:none;" class="btn btn-default linkedin btn-block"><i style="font-size:20px;" class="fa fa-linkedin modal-icons"></i> Sign In with Linkedin</a></div>
-      </div>
-      <div id="center-line"> OR </div>
+<div id="{$_name}" style="{$style}" class="{$class}">
+  {$Content}
+  {$loginsuccess}
+  {login_wrapper}
+  <div class="hungrylogin">
+    <div class="login_modal_header">
+      <h2 id="myModalLabel" class="modal-title">Login to Your Account</h2>
     </div>
-    <div class="clearfix"></div>
-    <div class="form-group modal-register-btn"><a href="?page=register" class="btn btn-default atk-swatch-orange"> New User Please Register</a></div>
-  </div>
-</div>{/}
+    <div style="border:0px;" class="modal-body login-modal">
+      <div class="clearfix"></div>
+      <div id="social-icons-conatainer">
+        <div class="modal-body-left">{generalloginform}
+          <div class="form-group">
+            <input id="username" type="text" value="" placeholder="Enter your name" class="form-control login-field"/><i class="fa fa-user login-field-icon"></i>
+          </div>
+          <div class="form-group">
+            <input id="login-pass" type="password" value="" placeholder="Password" class="form-control login-field"/><i class="fa fa-lock login-field-icon"></i>
+          </div><a href="#" class="btn btn-success modal-login-btn">Login</a>{/}<br/>{$forgotpassword}
+        </div>
+        <div class="modal-body-right">
+          <div class="modal-social-icons"><a href="{$facebook_login_url}" class="btn btn-default facebook btn-block"><i style="font-size:20px;" class="fa fa-facebook modal-icons"></i> Sign In with Facebook</a><a href="{$google_login_url}" class="btn btn-default google btn-block"><i style="font-size:20px;" class="fa fa-google-plus modal-icons"></i> Sign In with Google</a><a href="#" style="display:none;" class="btn btn-default twitter btn-block"><i style="font-size:20px;" class="fa fa-twitter modal-icons"></i> Sign In with Twitter</a><a href="#" style="display:none;" class="btn btn-default linkedin btn-block"><i style="font-size:20px;" class="fa fa-linkedin modal-icons"></i> Sign In with Linkedin</a></div>
+        </div>
+        <div id="center-line"> OR </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="form-group modal-register-btn"><a href="?page=register" class="btn btn-default atk-swatch-orange"> New User Please Register</a></div>
+    </div>
+  </div>{/}
+</div>
