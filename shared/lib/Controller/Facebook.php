@@ -6,6 +6,7 @@ class Controller_Facebook extends AbstractController {
   public $user = null;
   public $hfrom = null;
   public $call_loginfunction = true;
+  public $isWebsiteCheck = false;
   function init(){
     parent::init();
 
@@ -29,6 +30,10 @@ class Controller_Facebook extends AbstractController {
     if($this->hfrom != "Facebook"){
       return false;
     }
+    
+    // cross broser state mismatch error solved
+    if($this->isWebsiteCheck)
+      $_SESSION["FBRLH_state"] = $_SESSION["FBRLH_persist"];
 
     if($accessToken_app){
         $accessToken = $accessToken_app;
