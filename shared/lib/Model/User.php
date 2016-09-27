@@ -86,8 +86,11 @@ class Model_User extends SQL_Model{
 	}
 
 	function afterSave(){
-		$this['referral_code'] = strtoupper('HNG'.$this->id.rand(111,999));
-		$this->save();
+
+		if(!$this['referral_code']){
+			$this['referral_code'] = strtoupper('HNG'.$this->id.rand(111,999));
+			$this->save();
+		}
 	}
 
 	function checkOPTExpire($otp,$user_email=null){
