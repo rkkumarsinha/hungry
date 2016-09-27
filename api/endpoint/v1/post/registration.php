@@ -148,7 +148,7 @@ class endpoint_v1_post_registration extends Endpoint_REST{
             $m->set($data);
             $m['is_active'] = 1;
             $m['type'] = 'user';
-            $m['referral_code'] = uniqid();
+            // $m['referral_code'] = uniqid();
             
             $md5_access_token = md5(uniqid($m['email']."-".$m['created_at'], true));
             // saved encrypted code
