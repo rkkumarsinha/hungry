@@ -65,7 +65,7 @@ class endpoint_v1_post_booktable extends HungryREST {
             $m['booking_date'] = $data['date'];
             $m['booking_time'] = $data['time'];
             $m->save();
-//            $m->sendReservedTable();
+           $m->sendReservedTable();
             // $this->api->db->commit();
         }catch(\Exception_StopInit $e){
 

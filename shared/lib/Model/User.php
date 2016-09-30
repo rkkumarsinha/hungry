@@ -40,7 +40,7 @@ class Model_User extends SQL_Model{
 		});
 		$this->addField('gender')->enum(['Male','Female']);
 		$this->addField('is_blocked')->type('boolean')->defaultValue(0);
-		$this->addField('referral_code')->defaultValue(uniqid());
+		$this->addField('referral_code');
 
 		$this->addField('street')->mandatory(true);
 		$this->addField('zip')->type('int')->mandatory(true);

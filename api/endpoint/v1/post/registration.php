@@ -72,7 +72,7 @@ class endpoint_v1_post_registration extends Endpoint_REST{
                 }
             }
 
-            $controller = $this->add('Controller_'.$data['social'],array('hfrom'=>$data['social'],'access_token'=>$data['access_token'],'call_loginfunction'=>false,'social_content'=>$data['social_content']));
+            $controller = $this->add('Controller_'.$data['social'],array('hfrom'=>$data['social'],'access_token'=>$data['access_token'],'call_loginfunction'=>false,'social_content'=>$data['social_content'],'all_data'=>$data));
             $new_user_model = $controller->loginStatus($data['access_token']);
 
             if(!$new_user_model){
@@ -148,7 +148,6 @@ class endpoint_v1_post_registration extends Endpoint_REST{
             $m->set($data);
             $m['is_active'] = 1;
             $m['type'] = 'user';
-            // $m['referral_code'] = uniqid();
             
             $md5_access_token = md5(uniqid($m['email']."-".$m['created_at'], true));
             // saved encrypted code

@@ -8,6 +8,7 @@ class Controller_Google extends AbstractController {
   public $hfrom = null;
   public $call_loginfunction = true;
   public $social_content = 0;
+  public $all_data=[];
 
   function init(){
     parent::init();
@@ -78,6 +79,7 @@ class Controller_Google extends AbstractController {
     $access_token = $this->add('Model_AccessToken');
     $access_token->addCondition('social_app','Google');
     $access_token->addCondition('return_userid',$user->id);
+    $access_token->addCondition('return_userid','<>',null);
     
     $access_token->tryLoadAny();
     if($access_token->loaded()){
@@ -92,7 +94,17 @@ class Controller_Google extends AbstractController {
     }
 
     $new_user = $this->add('Model_User');
-    $new_user->addCondition('email',$user->email);
+    if($this->all_data['email'] and $this->all_data['mobile']){
+      // $new_user->addCondition(
+      //               $new_user->dsql()->orExpr()
+      //                   ->where('mobile',$this->all_data['mobile'])
+      //                   ->where('email',$this->all_data['email'])
+      //             );
+      $new_user->addCondition('email',$this->all_data['email']);
+      $new_user->addCondition('mobile',$this->all_data['mobile']);
+    }else{
+      $new_user->addCondition('email',$user->email);
+    }
     $new_user->tryLoadAny();
 
     $new_user['name'] = $user->name;

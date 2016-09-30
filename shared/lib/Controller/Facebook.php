@@ -7,6 +7,8 @@ class Controller_Facebook extends AbstractController {
   public $hfrom = null;
   public $call_loginfunction = true;
   public $isWebsiteCheck = false;
+  public $all_data=[];
+
   function init(){
     parent::init();
 
@@ -32,8 +34,9 @@ class Controller_Facebook extends AbstractController {
     }
     
     // cross broser state mismatch error solved
-    if($this->isWebsiteCheck)
+    if($this->isWebsiteCheck){
       $_SESSION["FBRLH_state"] = $_SESSION["FBRLH_persist"];
+    }
 
     if($accessToken_app){
         $accessToken = $accessToken_app;
@@ -102,6 +105,7 @@ class Controller_Facebook extends AbstractController {
       $access_token = $this->add('Model_AccessToken');
       $access_token->addCondition('social_app','Facebook');
       $access_token->addCondition('return_userid',$userNode->getId());
+      $access_token->addCondition('return_userid','<>',null);
       $access_token->tryLoadAny();
       if($access_token->loaded()){
         $access_token['social_access_token'] = (string)$longLivedAccessToken;
@@ -111,6 +115,16 @@ class Controller_Facebook extends AbstractController {
       }
 
       $new_user = $this->add('Model_User');
+      if($this->all_data['mobile']){
+        // $new_user->addCondition(
+        //           $new_user->dsql()->orExpr()
+        //               ->where('mobile',$this->all_data['mobile'])
+        //               ->where('email',$this->all_data['email'])
+        //         );
+        $new_user->addCondition('mobile',$this->all_data['mobile']);
+        $new_user->tryLoadAny();
+      }
+
       $new_user['email'] = $userNode->getEmail();
       $new_user['gender'] = $userNode->getGender();
       $new_user['dob'] = $userNode->getBirthday();
@@ -122,7 +136,6 @@ class Controller_Facebook extends AbstractController {
       $new_user['updated_at'] = date('Y-m-d H:i:s');
       $new_user['received_newsletter'] = 1;
       
-
       if($profile_picture){
         $file = $this->add('filestore\Model_File',array('policy_add_new_type'=>true,'import_mode'=>'copy','import_source'=>$profile_picture));
         $file['filestore_volume_id'] = $file->getAvailableVolumeID();
