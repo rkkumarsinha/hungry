@@ -22,7 +22,7 @@ class Model_User extends SQL_Model{
 		$this->addField('updated_at')->type('DateTime')->defaultValue(date('Y-m-d H:i:s'));
 		$this->addField('is_active')->type('boolean')->defaultValue(false)->mandatory(true);
 		$this->addField('verification_code');
-		$this->addField('type')->setValueList(['superadmin'=>'Super Admin','admin'=>'Admin','user'=>'User','host'=>'Host'])->defaultValue('admin')->mandatory(true);
+		$this->addField('type')->setValueList(['superadmin'=>'Super Admin','admin'=>'Admin','user'=>'User','host'=>'Host'])->mandatory(true);
 		$this->addField('dob')->type('date');
 		$this->addField('mobile');
 		$this->addField('received_newsletter')->type('boolean')->defaultValue(true);
