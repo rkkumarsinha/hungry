@@ -9,7 +9,7 @@ class endpoint_v1_post_login extends HungryREST{
     public $allow_delete=false;
 
     function init(){
-    	parent::init();
+        parent::init();
 
     }
 
@@ -29,6 +29,16 @@ class endpoint_v1_post_login extends HungryREST{
 
         $user_name  = $_SERVER['PHP_AUTH_USER'];
         $password = $_SERVER['PHP_AUTH_PW'];
+
+        if(!filter_var($user_name, FILTER_VALIDATE_EMAIL)){
+            echo json_encode(array('status'=>"failed",'message'=>"email id is not valid"));
+            exit;
+        }
+
+        if(strlen($password) <= 0){
+            echo json_encode(array('status'=>"failed",'message'=>"password must be validate"));
+            exit;
+        }
         $headers = getallheaders();
         $user_model = $this->add('Model_User')
                         ->addCondition('is_active',true)
@@ -42,17 +52,22 @@ class endpoint_v1_post_login extends HungryREST{
 
         $login_id = $auth->verifyCredentials($user_name,$password);
         if(!$login_id){
-            echo "wrong credential";
-            exit;
+            return json_encode(array(
+                            'status'=>"failed",
+                            'message'=>'wrong credential .'
+                        ));
+            // exit;
         }
         
         if($login_id){
             $verify_user_model = $this->add('Model_User')->load($login_id);
-            if(!$verify_user_model['is_active'] or $verify_user_model['is_blocked'])
+            if(!$verify_user_model['is_active'] or $verify_user_model['is_blocked']){
                 return json_encode(array(
                             'status'=>"failed",
                             'message'=>'please activate your account first'
                         ));
+                exit;
+            }
             $this->api->auth->model = $verify_user_model;
 
             $access_token = $verify_user_model->getAccessModel("HungryDunia");
@@ -65,40 +80,54 @@ class endpoint_v1_post_login extends HungryREST{
                     "access_token"=>$access_token['social_access_token']
                 ));
         }
-
-        return json_encode(array(
-                            'status'=>"failed",
-                            'message'=>'wrong credential'
-                        ));
     }
 
-    function put_post(){
+    function put_post($data){
+
+        if(!$this->api->auth->model->id){
+            return json_encode(array(
+                    'status'=>"failed",
+                    "message"=>"wrong credential ..",
+                    ));
+        }
+
         $access_token = $this->api->auth->model->getAccessModel("HungryDunia");
-        return json_encode(array(
-                    'status'=>"success",
-                    "message"=>"your account has been login successfully",
-                    "user_id"=>$this->api->auth->model['id'],
-                    "social"=>$access_token['social_app'],
-                    "access_token"=>$access_token['social_access_token'],
-                    "user_name"=>$this->api->auth->model['name'],
-                    "mobile"=>$this->api->auth->model['mobile']
-                ));
+        if($access_token and $access_token->loaded()){
+            return json_encode(array(
+                        'status'=>"success",
+                        "message"=>"your account has been login successfully",
+                        "user_id"=>$this->api->auth->model['id'],
+                        "social"=>$access_token['social_app'],
+                        "access_token"=>$access_token['social_access_token'],
+                        "user_name"=>$this->api->auth->model['name'],
+                        "mobile"=>$this->api->auth->model['mobile'],
+                        "referral_code"=>$this->api->auth->model['referral_code']
+                    ));
+        }else{
+            return json_encode(array(
+                    'status'=>"failed",
+                    "message"=>"wrong credential .."
+                    ));   
+        }
     }
 
-	function delete($data){
+    function delete($data){
         return "you are not allow to access";
 	}
 
     function validateParam($data){
         
-        $required_param = ['name','email','created_at','dob','mobile','received_newsletter','social','social_content','password','referral_code'];
+        $required_param = ['email','password'];
         foreach ($required_param as $param) {
             if(!array_key_exists($param, $data)){
                 echo "Param = $param Error 1001";
                 exit;
             }
         }
-
+        if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+            echo json_encode(array('status'=>"failed",'message'=>"email id is not valid"));
+            exit;
+        }
                 
     }
 
