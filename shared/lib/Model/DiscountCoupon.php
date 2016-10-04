@@ -44,21 +44,27 @@ class Model_DiscountCoupon extends SQL_Model{
 		if(!$user->loaded())
 			return "user not found";
 
-		$discount_count = $this->add('Model_DiscountCoupon')->addCondition('user_id',$user->id)->addCondition('created_date',$this->api->today)->count()->getOne();	
+		$discount_count = $this->add('Model_DiscountCoupon')
+				->addCondition('user_id',$user->id)
+				->addCondition('user_id','<>',null)
+				->addCondition('created_date',$this->api->today)
+    			// ->addCondition('restaurant_id',$restaurant_id)
+				->count()->getOne();	
         if($discount_count > 3){
-        	return false;
+        	return 0;
         	return 'you exceed your today limit, try tomorrow';
         }
         
         //check for restaurant today discount //only one user can take one discount on each restaurant in one day
     	$dc = $this->add('Model_DiscountCoupon')
     			->addCondition('user_id',$user->id)
+    			->addCondition('user_id','<>',null)
     			->addCondition('restaurant_id',$restaurant_id)
     			->addCondition('created_date',$this->api->today)
     			;
     	$dc->tryLoadAny();
     	if($dc->loaded()){
-    		return false;
+    		return 0;
     		return 'you already taken discount today on this restaurant';
     	}
 

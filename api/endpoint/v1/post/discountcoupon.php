@@ -57,14 +57,14 @@ class endpoint_v1_post_discountcoupon extends HungryREST {
         $this->validateParam($data);
         
         if(!$m->checkDiscountQuota($data['restaurant_id'],$this->api->auth->model,$data['discount_id'],$data['offer_id']))
-            return json_encode(array('status'=>"failed",'message'=>'today limit exceeded, or you already have discount coupon of the same restaurant, please try after 24 Hours '));
+            return json_encode(array('status'=>"Failed",'message'=>'today limit exceeded, or you already have discount coupon of the same restaurant, please try after 24 Hours '));
         
         try{
             $m->set($data);
             $m['user_id'] = $this->api->auth->model->id;
             $m['is_send'] = 1;
             $m->save();
-            $m->sendDiscount();
+            // $m->sendDiscount();
         }catch(\Exception_StopInit $e){
 
         }catch(Exception $e){

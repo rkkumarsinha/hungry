@@ -18,6 +18,7 @@ class Admin extends App_Admin {
         $auth->setModel('User','email','password');
         $auth->check();       
 
+        $this->api->today = date('Y-m-d');
         $this->api->menu->addItem(['Event','icon'=>'ajust'],'/event');
         $this->api->menu->addItem(['Event Category','icon'=>'ajust'],'/eventcategory');
         $this->api->menu->addItem(['Category','icon'=>'ajust'],'/category');
