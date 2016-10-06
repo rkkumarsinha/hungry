@@ -80,12 +80,20 @@ class page_event extends Page{
             ->addColumn('Ticket')
             ->set(function($page){
             	$event_id = $_GET[$page->short_name.'_id'];
-            	$ticket = $page->add('Model_Event_Ticket')->addCondition('event_id',$event_id);
+            	$ticket = $page->add('Model_Event_Ticket',["time_title_field"=>'event_time_day'])->addCondition('event_id',$event_id);
             	$ticket_crud = $page->add('CRUD');
-            	$ticket_crud->setModel($ticket,array('event_time_id','name','price','detail','applicable_offer_qty','offer','offer_percentage','max_no_to_sale','disclaimer'),array('event_time','name','price','detail','applicable_offer_qty','offers','offer_percentage','max_no_to_sale','disclaimer'));
+                
+                // if($ticket_crud->isEditing()){
+                //     $event_day_field = $ticket_crud->form->addField('DropDown','event_day');
+                //     $event_day_field->setModel($page->add('Model_Event_Day')->addCondition('event_id',$event_id)->setOrder('id','asc'));
+                // }
 
-	            if($ticket_crud->isEditing()){
-            		$ticket_crud->form->getElement('event_time_id')->getModel()->addCondition('event_id',$event_id);
+                $ticket_crud->setModel($ticket,array('event_time_id','name','price','detail','applicable_offer_qty','offer','offer_percentage','max_no_to_sale','disclaimer'),array('event_time','name','price','detail','applicable_offer_qty','offers','offer_percentage','max_no_to_sale','disclaimer'));
+
+                if($ticket_crud->isEditing()){
+                    $event_time_model = $ticket_crud->form->getElement('event_time_id')
+                                        ->getModel();
+                    $event_time_model->addCondition('event_id',$event_id);
             	}
             });
 
