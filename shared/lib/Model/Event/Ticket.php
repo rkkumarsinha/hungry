@@ -2,7 +2,7 @@
 
 class Model_Event_Ticket extends SQL_Model{
 	public $table = "event_ticket";
-	public $time_title_field = "event_time_id";
+	public $time_title_field = "name";
 	function init(){
 		parent::init();
 
