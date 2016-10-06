@@ -11,7 +11,10 @@ class View_EventTicket extends View{
 		$cart_view->js('reload')->reload();
 		$cart_view->template->set('event_count',$count);
 
-		$event_day_model = $this->add('Model_Event_Day')->addCondition('event_id',$m->id)->getRows();
+		$event_day_model = $this->add('Model_Event_Day')
+							->addCondition('event_id',$m->id)
+							->setOrder('id','asc')
+							->getRows();
 		
 		$day_tabs = $this->add('Tabs',null,null,['view/hungryeventtabs']);
 		foreach ($event_day_model as $day_model) {
