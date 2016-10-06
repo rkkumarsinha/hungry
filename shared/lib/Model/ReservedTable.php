@@ -24,7 +24,7 @@ class Model_ReservedTable extends SQL_Model{
 		$this->addField('total_amount')->type('money')->defaultValue(0);
 		$this->addField('amount_paid')->type('money');
 		$this->addField('payment_mode')->setValueList(['cash'=>'Cash','card'=>"Card",'imps'=>"IMPS",'e_wallet'=>"E Wallet"]);
-
+		$this->addField('created_at')->type('datetime')->defaultValue(date('Y-m-d H:i:s'));
 
 		$this->addField('canceled_by')->enum(['host','user']);
 		$this->hasOne('CancledReason','cancled_reason_id');

@@ -187,8 +187,21 @@ class endpoint_v1_post_booktable extends HungryREST {
             }
         }
 
+        $table_count = $this->add('Model_ReservedTable')
+                    ->addCondition('user_id',$this->api->auth->model->id)
+                    ->addCondition('created_at',$this->api->today)
+                    ->count()->getOne();
+        if($table_count >= 3){
+            return json_encode(array('status'=>"Failed",'message'=>'today limit exceeded, please try after 24 Hours'));
+            exit;
+        }
+
         // check for today booking already
-        $old = $this->add('Model_ReservedTable')->addCondition('user_id',$this->api->auth->model->id)->addCondition('booking_date',$data['date'])->tryLoadany();
+        $old = $this->add('Model_ReservedTable')
+                ->addCondition('user_id',$this->api->auth->model->id)
+                ->addCondition('booking_date',$data['date'])
+                ->tryLoadany();
+
         if($old->loaded()){
             echo json_encode(array(
                             'status'=>"failed",
@@ -196,6 +209,11 @@ class endpoint_v1_post_booktable extends HungryREST {
                         ));
             exit;
         }
+
+        
+
+
+
     }
 
 }

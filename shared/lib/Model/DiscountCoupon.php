@@ -50,7 +50,7 @@ class Model_DiscountCoupon extends SQL_Model{
 				->addCondition('created_date',$this->api->today)
     			// ->addCondition('restaurant_id',$restaurant_id)
 				->count()->getOne();	
-        if($discount_count > 3){
+        if($discount_count >= 3){
         	return 0;
         	return 'you exceed your today limit, try tomorrow';
         }

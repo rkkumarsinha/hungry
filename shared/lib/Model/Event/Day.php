@@ -21,11 +21,11 @@ class Model_Event_Day extends SQL_Model{
 	}
 
 	function beforeSave(){
-		if($this['on_date'] < $this['event_starting_date']){
+		if($this['on_date'] <= $this['event_starting_date']){
 			throw $this->exception('must be greater then event starting date('.$this['event_starting_date'].')', 'ValidityCheck')->setField('on_date');
 		}
 
-		if($this['on_date'] > $this['event_closing_date']){
+		if($this['on_date'] >= $this['event_closing_date']){
 			throw $this->exception('must be less then event starting date('.$this['event_closing_date'].')', 'ValidityCheck')->setField('on_date');
 		}
 	}
