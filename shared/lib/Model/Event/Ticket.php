@@ -2,12 +2,12 @@
 
 class Model_Event_Ticket extends SQL_Model{
 	public $table = "event_ticket";
-
+	public $time_title_field = "event_time_id";
 	function init(){
 		parent::init();
 
 		$this->hasOne('Event','event_id');
-		$this->hasOne('Event_Time','event_time_id');
+		$this->hasOne('Event_Time','event_time_id',$this->time_title_field);
 
 		$this->addField('name')->mandatory(true); // Days
 		$this->addField('price')->type('money')->mandatory(true);
