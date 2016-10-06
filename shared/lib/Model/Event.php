@@ -75,9 +75,10 @@ class Model_Event extends SQL_Model{
 	}
 
 	function beforeSave(){
-		if($this['starting_date'] < $this->app->today){
-			throw $this->exception('Event cannot be add on previous day', 'ValidityCheck')->setField('starting_date');
-		}
+		
+		// if($this['starting_date'] < $this->app->today){
+		// 	throw $this->exception('Event cannot be add on previous day', 'ValidityCheck')->setField('starting_date');
+		// }
 
 		if($this['starting_date'] > $this['closing_date']){
 			throw $this->exception('closing day must be greater then starting day', 'ValidityCheck')->setField('closing_date');
