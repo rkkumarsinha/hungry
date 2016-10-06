@@ -95,8 +95,21 @@ class page_event extends Page{
             	$event_id = $_GET[$page->short_name.'_id'];
             	$images = $page->add('Model_EventImage')->addCondition('event_id',$event_id);
             	$images_crud = $page->add('CRUD');
-            	$images_crud->setModel($images,array('event_id','name','is_active','image_id'),array('event','name','image_id','is_active'));
-	            	// $day_crud->addColumn
+            	$images_crud->setModel($images,array('event_id','name','is_active','image_id'),array('event','name','is_active','image'));
+
+                $images_crud->grid->addHook('formatRow',function($g){
+                    if($g->model['image_id']){
+                        $f = $this->add('filestore/Model_File')->addCondition('id',$g->model['image_id']);
+                        $f->tryLoadAny();
+                        if($f->loaded()){
+                            $path = $this->app->getConfig('imagepath').str_replace("..", "", $f->getPath());
+                            $g->current_row_html['image'] = "<img width='100px;' src=".$path.">";
+                        }else
+                            $g->current_row_html['image'] = "No Icon Found";
+                    }else
+                        $g->current_row_html['image'] = "No Icon Found";
+                });
+
             });
 
        	$crud->grid->add('VirtualPage')
