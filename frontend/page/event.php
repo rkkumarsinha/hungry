@@ -10,7 +10,8 @@ class page_event extends Page{
         $this->add('View_Search',null,'search_form');
 		//Featured Restaurant
         $event_model = $this->add('Model_Event');
-        $event_model->addCondition('starting_date','<=',$this->app->today);
+        $event_model->addCondition('closing_date','>=',$this->app->today);
+        $event_model->setOrder('starting_date','asc');
 
         if($this->app->recall('event_data')){
             $data = $this->app->recall('event_data');
