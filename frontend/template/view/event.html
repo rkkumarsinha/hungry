@@ -1,5 +1,5 @@
 
-<div id="{$_name}" style="{$style}" class="{$class}">
+<div id="{$_name}" style="{$style} width:95%;margin:0 auto;" class="{$class}">
   <header>
     <h2>{header}Featured{/}</h2>
   </header>
@@ -19,13 +19,12 @@
             <div class="icon event-date">
               <div>{$starting_date}</div>
               <div>{$starting_month}</div>
-            </div><img src="{display_image}assets/img/small.jpg{/}" alt=""/></a>
+            </div><img src="{display_image}assets/img/small.jpg{/}" alt="" onerror="this.src='assets/img/hungry-not-found.png';"/></a>
           <div class="restaurant-category"><i class="fa fa-hungry">{$event_category}</i></div>
-        </div>{bookticket_wrapper}
-        <div data-restaurantid="{$id}" style="width:60%;margin-top:10px;border-radius:10px;" class="btn-block atk-swatch-orange btn hungry-getdiscount container">Book Ticket</div>{/}
+        </div>{bookticket_wrapper}<a href="?page=bookticket&amp;slug={$url_slug}" data-restaurantid="{$id}" style="width:60%;margin-top:10px;border-radius:10px;" class="btn-block atk-swatch-orange btn hungry-getdiscount container">Book Ticket</a>{/}
         <div class="wrapper"><a href="{$path}">
             <h3> {name}Hungry Event{/}</h3></a>
-          <figure>{address}{/}</figure>
+          <figure style="font-size:16px;">{address}{/}</figure>
         </div>
       </div>
     </div>{/}{/}

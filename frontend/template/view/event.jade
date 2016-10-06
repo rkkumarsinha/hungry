@@ -1,4 +1,4 @@
-div(id="{$_name}" class="{$class}" style="{$style}")
+div(id="{$_name}" class="{$class}" style="{$style} width:95%;margin:0 auto;")
   header
     h2 {header}Featured{/}
   .row
@@ -26,17 +26,17 @@ div(id="{$_name}" class="{$class}" style="{$style}")
             div.icon.event-date
               div {$starting_date}
               div {$starting_month}
-            img(src='{display_image}assets/img/small.jpg{/}', alt='')
+            img(src='{display_image}assets/img/small.jpg{/}', alt='' onerror="this.src='assets/img/hungry-not-found.png';")
           .restaurant-category
             i.fa.fa-hungry {$event_category}
         {bookticket_wrapper}
-        div.btn-block.atk-swatch-orange.btn.hungry-getdiscount.container( data-restaurantid='{$id}' style="width:60%;margin-top:10px;border-radius:10px;") Book Ticket
+        a(href="?page=bookticket&slug={$url_slug}").btn-block.atk-swatch-orange.btn.hungry-getdiscount.container( data-restaurantid='{$id}' style="width:60%;margin-top:10px;border-radius:10px;") Book Ticket
         {/}
         .wrapper
           a(href='{$path}')
             h3
               |  {name}Hungry Event{/}
-          figure {address}{/}
+          figure(style="font-size:16px;") {address}{/}
     | {/}{/}
     // /.col-sm-4
   script(type='text/javascript').
