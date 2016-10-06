@@ -16,9 +16,9 @@ class View_Login extends View{
 
 	    }else{
 	        //Redirect Page
-	        if(!session_id()) {
-			    session_start();
-			}
+	  //       if(!session_id()) {
+			//     session_start();
+			// }
 	        if($status = $this->api->recall('from')){
 	        	$info = $this->add('View_Info');
 	        	if($status=="forgotpassword"){
@@ -51,7 +51,7 @@ class View_Login extends View{
           			
 				}
 			}
-			$_SESSION["FBRLH_persist"] = $_SESSION["FBRLH_state"];
+			// $_SESSION["FBRLH_persist"] = $_SESSION["FBRLH_state"];
 			
 			$google_controller = $this->add('Controller_Google',['hfrom'=>$_GET['hfrom']]);
 			$url = $google_controller->getLoginUrl();
@@ -92,6 +92,7 @@ class View_Login extends View{
 	                $f->displayError('email','Please Activate Your Account First');
 
 	            $this->api->auth->login($f['email']);
+				// $this->api->auth->login($user_model);
 	            // user type is host then always redirect to host account or admin panel
 	            if($user_model['type'] === 'host'){
 	            	$this->app->redirect($this->app->url('account'));
