@@ -133,7 +133,7 @@ class View_Restaurant_ReserveTable extends View{
                     $this->js()->univ()->reload(['reservation_id'=>$rt_model['booking_id']])->execute();
                 }catch(\Exception $e){
                     $rt_model->delete();
-                    $v->js()->univ()->reload(['reservation_id'=>"delete"])->execute();
+                    $this->js()->univ()->reload(['reservation_id'=>"delete"])->execute();
                 }
                 $this->js(true)->_selector('.reservetable-hungry-submit')->hide();
             }

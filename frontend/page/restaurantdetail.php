@@ -29,9 +29,9 @@ class page_restaurantdetail extends Page{
     	$this->gallery_model = $this->add('Model_RestaurantImage')->addCondition('restaurant_id',$id);
         $this->setModel($restaurant_model);
 
-        $this->add('View_Restaurant_GetDiscount',['restaurant_id'=>$restaurant_model->id],'getdiscount');
+        $discount_view =  $this->add('View_Restaurant_GetDiscount',['restaurant_id'=>$restaurant_model->id],'getdiscount');
         if($restaurant_model['reservation_needed'])
-            $this->add('View_Restaurant_ReserveTable',['restaurant_id'=>$restaurant_model->id],'reservetable');
+            $reserve_table_view = $this->add('View_Restaurant_ReserveTable',['restaurant_id'=>$restaurant_model->id],'reservetable');
         
         // $getdiscount_btn = $this->add('Button','null','getdiscount')->set('Get Discount')->addClass('atk-swatch-orange btn-block')->setStyle('border','0px solid white');
         // if($getdiscount_btn->isClicked()){
@@ -152,10 +152,10 @@ class page_restaurantdetail extends Page{
         if(!$this->model['avg_cost_per_person_veg'] or $this->model['avg_cost_per_person_veg'] == 0)
             $this->template->tryDel('veg_wrapper');
         
-        if(!$this->model['avg_cost_per_person_nonveg'] or $this->model['avg_cost_per_person_veg'] == 0)
+        if(!$this->model['avg_cost_per_person_nonveg'] or $this->model['avg_cost_per_person_nonveg'] == 0)
             $this->template->tryDel('non_veg_wrapper');
 
-        if(!$this->model['avg_cost_per_person_thali'] or $this->model['avg_cost_per_person_veg'] == 0)
+        if(!$this->model['avg_cost_per_person_thali'] or $this->model['avg_cost_per_person_thali'] == 0)
             $this->template->tryDel('thali_wrapper');
 
     	parent::recursiveRender();
