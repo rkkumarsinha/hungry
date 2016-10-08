@@ -9,19 +9,18 @@ jQuery.widget("ui.routemap",{
 	_create: function(){
 		var self = this;	
 		this.getCurrentLatLong();
-		// alert(this.options.target_longitude);
 	},
 
 	getCurrentLatLong:function(){
-		// $.univ().successMessage("Detecting Your Location");
 		var self = this;
+		// $.univ().successMessage("Detecting Your Location");
 		if ( navigator.geolocation ) {
         	function success(pos) {
 				self.options.source_latitude =  pos.coords.latitude;
 				self.options.source_longitude =  pos.coords.longitude;
 				// self.options.source_latitude =  24.590001299999997;
 				// self.options.source_longitude =  73.7139802;
-				self.createMap();				
+				self.createMap();
         	}
         	function fail(error) {
         		console.log("failde from routemap");
@@ -30,7 +29,7 @@ jQuery.widget("ui.routemap",{
         	function error(error){
 
         	}
-        	navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 500000, enableHighAccuracy:true, timeout: 6000});
+        	navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 5000, enableHighAccuracy:true, timeout: 6000});
         }
 	},
 
