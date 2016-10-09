@@ -144,42 +144,57 @@ class page_addlisting extends Page{
                 $user['is_verified'] = false;
                 $user['type'] = "host";
                 $user['received_newsletter'] = $f['received_newsletter'];
+                $user['is_active'] = true;
+                $user->save();
             }else{
                 $user = $this->api->auth->model;
             }
 
-            if($user->send($to=$f['email']) or true){
-                $user['is_active'] = true;
-                $user->save();
-
-                $business_model = $this->add('Model_Restaurant');
-                switch ($f['business_type']) {
-                    case 'event':
-                            $business_model = $this->add('Model_Event');
-                        break;
-                    case 'venue':
-                            $business_model = $this->add('Model_Destination');
-                        break;
-                }
-
-                $business_model['name'] = $f['business_name'];
-                $business_model['country_id'] = $f['country'];
-                $business_model['state_id'] = $f['state'];
-                $business_model['city_id'] = $f['city'];
-                $business_model['area_id'] = $f['area'];
-                $business_model['address'] = $f['address'];
-                $business_model['user_id'] = $user->id;
-                $business_model->save();
-
-                $js_event = [
-                                $v->js()->show(),
-                                $v->js()->_selector('.to-top')->trigger('click'),
-                                $f->js()->hide()
-                            ];
-                $f->js(null,$js_event)->univ()->execute();
-            }else{
-                $f->js(null,$f->js()->reload())->univ()->errorMessage('something happen wrong')->execute();
+            $business_model = $this->add('Model_Restaurant');
+            $business_type = "restaurant";
+            switch ($f['business_type']) {
+                case 'event':
+                        $business_model = $this->add('Model_Event');
+                        $business_type = "event";
+                    break;
+                case 'venue':
+                        $business_model = $this->add('Model_Destination');
+                        $business_type = "destination";
+                    break;
             }
+
+            $business_model['name'] = $f['business_name'];
+            $business_model['country_id'] = $f['country'];
+            $business_model['state_id'] = $f['state'];
+            $business_model['city_id'] = $f['city'];
+            $business_model['area_id'] = $f['area'];
+            $business_model['address'] = $f['address'];
+            $business_model['user_id'] = $user->id;
+            $business_model->save();
+
+            $js_event = [
+                            $v->js()->show(),
+                            $v->js()->_selector('.to-top')->trigger('click'),
+                            $f->js()->hide()
+                        ];
+            $email_template = $this->add('Model_EmailTemplate')
+                                ->addCondition('name',"EMAILVERIFICATIONHOST")->tryLoadAny();
+            $subject = $email_template['subject'];
+            $body = $email_template['body'];
+
+            $body = str_replace("{user_name}", $user['name'], $body);
+            $body = str_replace("{business_name}", $business_model['name'], $body);
+            $body = str_replace("{verification_email_link}", $user->getVerificationURL()."&business=".$business_model->id."&business_type=".$business_type, $body);
+
+            $outbox = $this->add('Model_Outbox');
+            try{
+                $email_response = $outbox->sendEmail($user['email'],$subject,$body,$user);
+                $outbox->createNew("New User Registered",$user['email'],$subject,$body,"Email","New Host User Registration with ".$business_name['name'],$user->id,$user_model);
+                $f->js(null,$js_event)->univ()->execute();
+            }catch(Exception $e){                
+                $f->js(null,$js_event)->univ()->execute();
+            }
+
 
 
         }

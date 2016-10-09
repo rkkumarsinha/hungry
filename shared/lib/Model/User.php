@@ -22,7 +22,7 @@ class Model_User extends SQL_Model{
 		$this->addField('updated_at')->type('DateTime')->defaultValue(date('Y-m-d H:i:s'));
 		$this->addField('is_active')->type('boolean')->defaultValue(false)->mandatory(true);
 		$this->addField('verification_code');
-		$this->addField('type')->setValueList(['superadmin'=>'Super Admin','admin'=>'Admin','user'=>'User','host'=>'Host'])->mandatory(true);
+		$this->addField('type')->setValueList(['superadmin'=>'Super Admin','admin'=>'Admin','user'=>'User','host'=>'Host'])->mandatory(true)->defaultValue('user');
 		$this->addField('dob')->type('date');
 		$this->addField('mobile');
 		$this->addField('received_newsletter')->type('boolean')->defaultValue(true);
@@ -191,6 +191,54 @@ class Model_User extends SQL_Model{
 
 	}
 
+	function sendWelcomeMail($host_business_id=null,$host_business_type=null){
+		if(!$this->loaded())
+			throw new \Exception("user not found", 1);
+
+		throw new \Exception($host_business_type);
+		
+		if($this['type'] == "host" && $host_business_id && $host_business_type){
+
+			if($host_business_type =="restaurant"){
+				$business_model = $this->add('Model_Restaurant');
+			}elseif($host_business_type =="event"){
+				$business_model = $this->add('Model_Event');
+			}elseif($host_business_type =="destination"){
+				$business_model = $this->add('Model_Destination');
+			}
+
+			$business_model->tryLoad($host_business_id);
+			if(!$business_model->loaded())
+				throw new \Exception("Business not found", 1);
+			if($business_model['user_id'] != $this->id)
+				throw new \Exception("Business not belong to you", 1);
+
+			$email_template = $this->add('Model_EmailTemplate')
+                                ->addCondition('name',"WELCOMEEMAILHOST")->tryLoadAny();
+			$subject = $email_template['subject'];
+            $body = $email_template['body'];
+
+			// throw new \Exception($host_business_id." = ".$host_business_type." = ".$this['type']);
+
+            $body = str_replace("{owner_name}", $this['name'], $body);
+            $body = str_replace("{restaurant_name}", $business_model['name'], $body);
+            $body = str_replace("{email_id}", $this['email'], $body);
+            $body = str_replace("{address}", $business_model['address'], $body);
+            
+		}elseif($this['type'] == "user"){
+			
+			$email_template = $this->add('Model_EmailTemplate')
+                                ->addCondition('name',"WELCOMEEMAILUSER")->tryLoadAny();
+         	$subject = $email_template['subject'];
+            $body = $email_template['body'];
+            $body = str_replace("{user_name}", $this['name'], $body);
+            $body = str_replace("{email_id}", $this['email'], $body);
+		}
+
+		$outbox = $this->add('Model_Outbox');
+        $outbox->sendEmail($this['email'],$subject,$body,$this);
+	}
+
 	function send($to="techrakesh91@gmail.com",$subject="Here is the subject",$body="This is the HTML message body <b>in bold!{activation_link}</b>"){
 		$config = $this->add('Model_Configuration')->tryLoad(1);
 
@@ -273,6 +321,15 @@ class Model_User extends SQL_Model{
 					->addCondition('booking_date',$this->api->today)
 					->count()
 					->getOne();
+	}
+
+	function getVerificationURL(){
+
+		$this['verification_code'] = strtoupper(substr(md5(rand(111111,999999)),5,6));
+        $this->save();
+
+        $url = $this->api->url('verification',['hungryverification'=>true,'verification_code'=>$this['verification_code'],'email'=>$this['email']]);
+        return $url;
 	}
 
 	function sendVerificationLink(){

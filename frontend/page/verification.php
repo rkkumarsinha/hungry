@@ -5,6 +5,8 @@ class page_verification extends Page
         parent::init();
 
         $email = $this->api->stickyGET('email');
+        $this->api->stickyGET('business');
+        $this->api->stickyGET('business_type');
         $verification_code = $this->api->stickyGET('verification_code');
 
         $user = $this->add('Model_User')
@@ -38,9 +40,17 @@ class page_verification extends Page
       		$this->api->stickyForget('email');
       		$this->api->stickyForget('verification_code');
           
-          $this->api->memorize('from','verification');
-      		$form->js()->univ()->redirect($this->api->url('signin'))->execute();
-          // ->univ()->successMessage('Verification successfully')->execute();
+          $this->api->memorize('from','verification');          
+          try{
+            $user->sendWelcomeMail($_GET['business'],$_GET['business_type']);
+
+            $this->app->stickyForget('business_type');
+            $this->app->stickyForget('business');
+            $form->js()->univ()->redirect($this->api->url('signin'))->execute();
+          }catch(Exception $e){
+      		  $form->js()->univ()->redirect($this->api->url('signin'))->execute();
+          }
+
       	}
     }
 
