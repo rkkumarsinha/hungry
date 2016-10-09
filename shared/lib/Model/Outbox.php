@@ -36,6 +36,7 @@ class Model_Outbox extends SQL_Model{
 		
 		$config = $this->add('Model_Configuration')->tryLoad(1);
 		$mail = new PHPMailer;
+		// $mail->SMTPDebug = 2;
         $mail->isSMTP();
         $mail->Host = $config['host'];  // Specify main and backup SMTP servers
         $mail->SMTPAuth = true;                               // Enable SMTP authentication

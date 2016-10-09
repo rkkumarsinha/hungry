@@ -8,8 +8,6 @@ class View_Lister_Restaurant extends CompleteLister{
 	function init(){
 		parent::init();
 
-		// $this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=false&language=en');
-  		// $this->app->jui->addStaticInclude('gmap3.min');
 	}
 
 	function setModel($model){
