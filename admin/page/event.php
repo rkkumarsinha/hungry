@@ -55,9 +55,10 @@ class page_event extends Page{
             ->addColumn('Days')
             ->set(function($page){
             	$event_id = $_GET[$page->short_name.'_id'];
+
             	$day = $page->add('Model_Event_Day')->addCondition('event_id',$event_id);
             	$day_crud = $page->add('CRUD');
-            	$day_crud->setModel($day,array('name','on_date'));
+            	$day_crud->setModel($day);
 	            	// $day_crud->addColumn
             });
 		

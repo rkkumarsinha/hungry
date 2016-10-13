@@ -12,6 +12,8 @@ class Admin extends App_Admin {
             ->setBasePath($this->pathfinder->base_location->getPath() . '/..')
         ;    
         
+        date_default_timezone_set("Asia/Calcutta");
+
         $this->dbConnect();
         $auth=$this->add('Auth');
         $auth->usePasswordEncryption();
