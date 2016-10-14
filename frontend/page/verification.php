@@ -42,7 +42,10 @@ class page_verification extends Page
           
           $this->api->memorize('from','verification');          
           try{
-            $user->sendWelcomeMail($_GET['business'],$_GET['business_type']);
+
+            if($user['type'] == "user"){
+              $user->sendWelcomeMail();
+            }
 
             $this->app->stickyForget('business_type');
             $this->app->stickyForget('business');

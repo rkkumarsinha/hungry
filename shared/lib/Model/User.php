@@ -194,8 +194,6 @@ class Model_User extends SQL_Model{
 	function sendWelcomeMail($host_business_id=null,$host_business_type=null){
 		if(!$this->loaded())
 			throw new \Exception("user not found", 1);
-
-		throw new \Exception($host_business_type);
 		
 		if($this['type'] == "host" && $host_business_id && $host_business_type){
 
@@ -328,7 +326,7 @@ class Model_User extends SQL_Model{
 		$this['verification_code'] = strtoupper(substr(md5(rand(111111,999999)),5,6));
         $this->save();
 
-        $url = $this->api->url('verification',['hungryverification'=>true,'verification_code'=>$this['verification_code'],'email'=>$this['email']]);
+        $url = "http://hungrydunia.com/".$this->api->url('verification',['hungryverification'=>true,'verification_code'=>$this['verification_code'],'email'=>$this['email']]);
         return $url;
 	}
 
