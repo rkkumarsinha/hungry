@@ -3,7 +3,7 @@
 class View_Login extends View{
 	public $reload;
 	public $reload_class;
-
+	public $reload_page = false;
 	function init(){
 		parent::init();
 	
@@ -97,6 +97,11 @@ class View_Login extends View{
 	            if($user_model['type'] === 'host'){
 	            	$this->app->redirect($this->app->url('account'));
 	            }
+
+	            if($this->reload_page){
+	            	$this->app->redirect($this->app->url());
+	            }
+
 	            // if reload page
 	            if($this->reload == "parent"){
 	            	$this->owner->js()->reload()->execute();

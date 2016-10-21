@@ -47,7 +47,10 @@ class Model_Event extends SQL_Model{
 		$this->addField('url_slug');
 	
 		$this->addField('is_active')->type('boolean')->defaultValue(false);
+		$this->addField('is_verified')->type('boolean')->defaultValue(false);
 
+		$this->addField('created_at')->type('datetime')->defaultValue(date('Y-m-d H:i:s'));
+		
 		$this->hasMany('Event_Day','event_id');
 		$this->hasMany('Event_Ticket','event_id');
 		$this->hasMany('EventImage','event_id');
@@ -70,7 +73,7 @@ class Model_Event extends SQL_Model{
 
 		$this->addHook('beforeSave',[$this,'beforeSave']);
 		$this->addHook('beforeSave',[$this,'updateSearchString']);
-		// $this->add('dynamic_model/Controller_AutoCreator');
+		$this->add('dynamic_model/Controller_AutoCreator');
 
 	}
 

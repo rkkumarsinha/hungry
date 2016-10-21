@@ -1,5 +1,8 @@
 
-<div id="{$_name}" style="{$style}" class="{$class}"><i title="select your location" type="button" data-toggle="modal" data-target="#{$_name}_location_model" style="font-size:30px;margin-top:8px;color:white;cursor:pointer; cursor: hand;" class="glyphicon glyphicon-map-marker"></i><small title="currently selected {$current_location}">{$current_location}</small>
+<div id="{$_name}" style="{$style}" class="{$class}">
+<i title="select your location" type="button" data-toggle="modal" data-target="#{$_name}_location_model" style="font-size:30px;margin-top:8px;color:white;cursor:pointer; cursor: hand;" class="glyphicon glyphicon-map-marker"></i>
+<small title="currently selected {$current_location}"></small>
+
   <div id="{$_name}_location_model" tabindex="-1" role="dialog" aria-labelledby="{$_name}_model_label" class="modal fade">
     <div role="document" class="modal-dialog">
       <div class="modal-content">
@@ -11,7 +14,7 @@
           {location_lister}
           {rows}	
           {row}
-          <div data-cityid="{$id}" class="hungrycity btn dropdown-toggle">{$name}</div>{/}
+          <div data-cityid="{$id}" class="hungrycity btn dropdown-toggle" title="{$name}">{$name}</div>{/}
           {/}
           {/}
           {$Content}

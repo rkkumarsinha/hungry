@@ -4,8 +4,6 @@ class page_addlisting extends Page{
     {
         parent::init();
 
-
-
         // Thanks for signing up
         // Please check your email and click activate account in the message we just send to email_id.
         // once your account is activated we will verify, and we will send you email with some information to help you get started with hungrydunia.com
@@ -152,14 +150,18 @@ class page_addlisting extends Page{
 
             $business_model = $this->add('Model_Restaurant');
             $business_type = "restaurant";
+            $business_model['status'] = "deactive";
+            
             switch ($f['business_type']) {
                 case 'event':
                         $business_model = $this->add('Model_Event');
                         $business_type = "event";
+                        $business_model['is_active'] = false;
                     break;
                 case 'venue':
                         $business_model = $this->add('Model_Destination');
                         $business_type = "destination";
+                        $business_model['status'] = "deactive";
                     break;
             }
 
@@ -170,6 +172,7 @@ class page_addlisting extends Page{
             $business_model['area_id'] = $f['area'];
             $business_model['address'] = $f['address'];
             $business_model['user_id'] = $user->id;
+            $business_model['is_verified'] = false;
             $business_model->save();
 
             $js_event = [
@@ -189,13 +192,12 @@ class page_addlisting extends Page{
             $outbox = $this->add('Model_Outbox');
             try{
                 $email_response = $outbox->sendEmail($user['email'],$subject,$body,$user);
+                
                 $outbox->createNew("New User Registered",$user['email'],$subject,$body,"Email","New Host User Registration with ".$business_name['name'],$user->id,$user_model);
                 $f->js(null,$js_event)->univ()->execute();
             }catch(Exception $e){                
                 $f->js(null,$js_event)->univ()->execute();
             }
-
-
 
         }
     }

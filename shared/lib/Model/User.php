@@ -326,7 +326,7 @@ class Model_User extends SQL_Model{
 		$this['verification_code'] = strtoupper(substr(md5(rand(111111,999999)),5,6));
         $this->save();
 
-        $url = "http://hungrydunia.com/".$this->api->url('verification',['hungryverification'=>true,'verification_code'=>$this['verification_code'],'email'=>$this['email']]);
+        $url = "http://hungrydunia.com/frontend/public/?page=verification&hungryverification=>true&verification_code=".$this['verification_code']."&email=".$this['email'];
         return $url;
 	}
 

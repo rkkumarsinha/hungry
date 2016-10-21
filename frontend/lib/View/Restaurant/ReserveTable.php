@@ -9,7 +9,7 @@ class View_Restaurant_ReserveTable extends View{
         //if not logged in
             //show the login and registration page
         if(!$this->api->auth->model->id){
-            $this->add('View_Login',['reload'=>"parent"]);   
+            $this->add('View_Login',['reload_page'=>true]);
             $this->js(true)->_selector('.reservetable-hungry-submit')->hide();
             return;
         }
@@ -57,15 +57,17 @@ class View_Restaurant_ReserveTable extends View{
             $this->js(true)->_selector('.reservetable-hungry-submit')->show();
             $form = $this->add('Form',null,null,['form/stacked']);
             $c = $form->add('Columns');
-            $c1 = $c->addColumn(6);
-            $c2 = $c->addColumn(6);
+            $c1 = $c->addColumn(7);
+            $c2 = $c->addColumn(5);
 
             // $c1->addField('Radio',"offers",'Flat Discount and Offers')->setValueList($restaurant->getOfferAndDiscount())->validateNotNull();
 
             $c1->addField('line','name','Book Table For')->set($this->api->auth->model['name']);
             
-            $c1->addField('line','email')->set($this->api->auth->model['email']);
-            $c1->addField('line','mobile')->set($this->api->auth->model['mobile']);
+            $user_model = $this->add('Model_User')->load($this->app->auth->model->id);
+
+            $c1->addField('line','email')->set($user_model['email']);
+            $c1->addField('line','mobile')->set($user_model['mobile']);
 
             $row = $c1->add('Columns');
             $row_col1 = $row->addColumn(6);
@@ -75,9 +77,9 @@ class View_Restaurant_ReserveTable extends View{
             $row_col2->addField('Number','child')->validateNotNull();
 
             $row2 = $c1->add('Columns')->addClass('input-padding-remove');
-            $row2_col1 = $row2->addColumn(6);
+            $row2_col1 = $row2->addColumn(5);
             $row2_col2 = $row2->addColumn(4);
-            $row2_col3 = $row2->addColumn(2);
+            $row2_col3 = $row2->addColumn(3);
 
             $date_picker = $row2_col1->addField('DatePicker','booking_date')->validateNotNull();
             $time = $row2_col2->addField('dropdown','time')->validateNotNull();

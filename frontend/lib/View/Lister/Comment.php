@@ -33,8 +33,31 @@ class View_Lister_Comment extends CompleteLister{
 			if($form['rating'] == 0)
 				$form->error('rating','rating is a mandatory field');
 
-			if($form['rating'] > 5 or $form['rating'] < 0)
+			if($form['rating'] > 5 or $form['rating'] < 0.5)
 				$form->error('rating','rating cannot be greater then 5');
+
+			// check user have chnage to comment
+			$dc_model = $this->add('Model_DiscountCoupon')
+				->addCondition('status','redeemed')
+				->addCondition('restaurant_id',$this->restaurant_id)
+				->addCondition('user_id',$this->api->auth->model->id)
+				;
+			$total_dc = $dc_model->count()->getOne();
+			$review_model = $this->add('Model_Review')
+								->addCondition('user_id',$this->app->auth->model->id)
+								->addCondition('restaurant_id',$this->restaurant_id)
+								;
+			$total_review = $review_model->count()->getOne();
+
+			$reserved_table_model = $this->add('Model_ReservedTable')
+										->addCondition('user_id',$this->app->auth->model->id)
+										->addCondition('restaurant_id',$this->restaurant_id)
+										->addCondition('status','confirmed')
+										;
+			$total_reserved_table = $reserved_table_model->count()->getOne();
+
+			if(($total_dc + $total_reserved_table  - $total_review) <= 0)
+				$form->error('title','can\'t submit review and rating untill you have reserved table or discount voucher redemmed at this restaurant');
 
 			$title = $form['title'];
 			$comment = $form['comment'];
@@ -45,6 +68,8 @@ class View_Lister_Comment extends CompleteLister{
 			if(!is_array($memorize_data)){
 				$this->app->memorize('reviewdata',$data);
 			}
+
+
 
 			if(!$this->app->auth->model->id){
 				$form->js(null,$form->js()->reload())->_selector('#comment_modalpopup')->modal('show')->execute();

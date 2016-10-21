@@ -14,6 +14,9 @@ class page_restaurant extends Page {
 
         $c = $this->add('CRUD');
         $rst_model = $this->add('Model_Restaurant');
+        $rst_model->addExpression('user_status')->set(function($m,$q){
+            return $m->refSQL('user_id')->fieldQuery('is_verified');
+        });
 
         $f = $c->grid->add('Form',null,'grid_buttons',['form/rempty'])->addClass('atk-col-6 atk-align-right')->setStyle('margin-top','10px');
         $f->addField('DropDown','country')->setEmptyText('Select Country')->setModel('Country')->set($_GET['country']);
@@ -45,17 +48,75 @@ class page_restaurant extends Page {
             $rst_model->addCondition('area_id',$_GET['area']);
         }
 
-
         $c->setModel($rst_model,
-                        ['country_id','state_id','city_id','area_id','discount_id','logo_image_id','banner_image_id','display_image_id','name','owner_name','about_restaurant','address','mobile_no','phone_no','email','website','facebook_page_url','instagram_page_url','rating','avg_cost_per_person_veg','avg_cost_per_person_nonveg','avg_cost_per_person_thali','avg_cost_of_a_beer','credit_card_accepted','reservation_needed','monday','tuesday','wednesday','thursday','friday','saturday','sunday','url_slug','discount','discount_subtract','is_featured','is_popular','is_recommend','latitude','longitude','food_type'],
-                        ['name','address']
+                        ['user_id','country_id','state_id','city_id','area_id','discount_id','logo_image_id','banner_image_id','display_image_id','name','owner_name','about_restaurant','address','mobile_no','phone_no','email','website','facebook_page_url','instagram_page_url','rating','avg_cost_per_person_veg','avg_cost_per_person_nonveg','avg_cost_per_person_thali','avg_cost_of_a_beer','credit_card_accepted','reservation_needed','monday','tuesday','wednesday','thursday','friday','saturday','sunday','url_slug','discount','discount_subtract','is_featured','is_popular','is_recommend','latitude','longitude','food_type','is_verified','status'],
+                        ['user','name','address','user_status','status']
                     );
         $c->grid->addQuickSearch(['name']);
 
+        $c->grid->addHook('formatRow',function($g){
+            $g->current_row_html['name'] = '<a style="width:100px;" target="_blank" href="'.$this->api->url('verify_rest',['id'=>$g->model['id'],'type'=>'restaurant']).'">'.$g->model['name'].'</a>';
+            // $g->current_row_html['name'] = '<a style="width:100px;" target="_blank" href="'.$this->api->url('restaurantdetail',['rest_id'=>$g->model['id']]).'">'.$g->model['name'].'</a>';
+            $g->current_row_html['user_status'] = $g->model['user_status']?'<div class="atk-swatch-green" style="padding:2px;text-align:center;">verified</div>':'<div class="atk-swatch-red" style="padding:2px;text-align:center;">to be verified</div>';
+        });
         // if($c->isEditing()){
         //     $temp = $c->form->getElement('discount_id')->getModel();
         //     $temp->addCondition('is_discount',true);
         // }
+
+        $c->grid->add('VirtualPage')
+            ->addColumn('send_email_verification')
+            ->set(function($page){
+                $id = $_GET[$page->short_name.'_id'];
+
+                $business_model = $rest = $this->add('Model_Restaurant')->load($id);
+
+                if(!$rest['user_id']){
+                    $page->add('View_Error')->set('Host not found');
+                    return;
+                }
+
+                $user = $page->add('Model_User')->tryLoad($rest['user_id']);
+                if(!$user->loaded()){
+                    $page->add('View_Error')->set('Host not found');
+                    return;
+                }
+
+                if($user['type'] != "host"){
+                    $page->add('View_Error')->set('Host not found, user is not host type '.$user->id);
+                    return;   
+                }
+                
+                if($user['is_verified']){
+                    $page->add('View_Info')->set('Host is verified, do you want to send email again'.$user['is_verified']);
+                }
+                    // $page->add('View_Info')->set('Host is verified, do you want to send email again');
+
+                $email_template = $page->add('Model_EmailTemplate')
+                                ->addCondition('name',"EMAILVERIFICATIONHOST")
+                                ->tryLoadAny();
+                $subject = $email_template['subject'];
+                $body = $email_template['body'];
+
+                $body = str_replace("{user_name}", $user['name'], $body);
+                $body = str_replace("{business_name}", $business_model['name'], $body);
+                $body = str_replace("{verification_email_link}", $user->getVerificationURL()."&business=".$business_model->id."&business_type=restaurant", $body);
+
+                $form = $page->add('Form');
+                $form->add('View')->setHtml($body);
+                $form->addSubmit('Send Verification');
+
+                if($form->isSubmitted()){
+                    $outbox = $this->add('Model_Outbox');
+                    try{
+                        $email_response = $outbox->sendEmail($user['email'],$subject,$body,$user);
+                        $outbox->createNew("Verification Email From Admin",$user['email'],$subject,$body,"Email","New Host User Registration with ".$business_name['name'],$user->id,$user_model);
+                    }catch(Exception $e){
+                        // $form->js()->univ()->errorMessage('email not send')->execute();
+                    }
+                    $form->js()->univ()->successMessage('email send successfully')->execute();
+                }             
+        });
 
         $c->grid->add('VirtualPage')
             ->addColumn('Actions')
@@ -139,5 +200,4 @@ class page_restaurant extends Page {
         });
 
     }
-
 }

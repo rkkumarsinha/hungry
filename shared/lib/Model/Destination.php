@@ -64,6 +64,9 @@ class Model_Destination extends SQL_Model{
 		$this->addField('how_to_reach')->type('text');
 		$this->addField('search_string')->type('text');
 
+		$this->addField('status')->enum(["active","deactive"])->defaultValue('deactive');
+		$this->addField('is_verified')->type('boolean')->defaultValue(false);
+
 		$this->hasMany('Destination_HighlightAssociation','destination_id');
 		$this->hasMany('Destination_Space','destination_id');
 		$this->hasMany('Destination_Package','destination_id');
@@ -82,7 +85,7 @@ class Model_Destination extends SQL_Model{
 		});
 
 		$this->addHook('afterSave',[$this,'updateSearchString']);
-		// $this->add('dynamic_model/Controller_AutoCreator');
+		$this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 	function updateSearchString(){

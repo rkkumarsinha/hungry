@@ -1,5 +1,6 @@
 
 <div id="page-content" class="page-item-detail hungry-restaurant-detail">
+  {$redefine_search}
   <!-- Hero Image-->
   <section class="hero-image height-400 restaurant-detail-banner">
     <div style="vertical-align: middle;" class="inner">
@@ -276,16 +277,21 @@
           </header>
           <div style="height:200px;">{$routemap}</div>
         </section>
+        {near_by_wrapper}
         <section id="nearbyrestaurant" class="block near-by-restaurant-container">
           <header>
             <h2>Near By Restaurant</h2>
-          </header>{$nearbyrestaurant}
+          </header>
+          {$nearbyrestaurant}
         </section>
+        {/}
+        {recommended_wrapper}
         <section id="recommendrestaurant" class="block recommend-restaurant-container">
           <header>
             <h2>Recommend Restaurant</h2>
           </header>{$recommendedrestaurant}
         </section>
+        {/}
       </div>
       <!-- /.form-group-->
       <!-- /#sidebar-->

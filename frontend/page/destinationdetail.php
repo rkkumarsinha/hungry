@@ -11,11 +11,15 @@ class page_destinationdetail extends Page{
 
         //loading required model
         $slug = trim($this->api->stickyGET('slug'));
-        $destination_model = $this->add('Model_Destination')->addCondition('url_slug',$slug);
+        $destination_model = $this->add('Model_Destination')
+                ->addCondition('url_slug',$slug)
+                ->addCondition('status','active')
+                ->addCondition('is_verified',true)
+                ;
         $destination_model->tryLoadAny();
 
         if(!$destination_model->loaded()){
-            throw new \Exception("Page Not Found");
+            $this->app->redirect($this->app->url('404'));
             exit;
         }
 

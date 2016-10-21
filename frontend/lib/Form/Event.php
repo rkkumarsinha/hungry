@@ -3,6 +3,7 @@
 class Form_Event extends Form{
     public $city_id=false;
     public $btn_clicked = false;
+    public $redirect_page = 'event';
     function init(){
         parent::init();
         
@@ -48,7 +49,7 @@ class Form_Event extends Form{
 
             if($this->app->city_id != $this['city'])  {
                 $this->app->memorize('city_id',$this['city']);
-                $this->app->redirect($this->app->url());
+                $this->app->redirect($this->app->url($this->redirect_page));
             }
             
             $event_model = $this->add('Model_Event')->tryLoad($this['keyword']);

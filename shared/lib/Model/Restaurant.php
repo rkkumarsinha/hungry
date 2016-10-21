@@ -64,7 +64,9 @@ class Model_Restaurant extends SQL_Model{
 
 		$this->addField('search_string')->type('text')->system(true)->defaultValue(null);
 
-		$this->addField('status')->enum(["active","deactive"]);
+		$this->addField('status')->enum(["active","deactive"])->defaultValue('deactive');
+		$this->addField('is_verified')->type('boolean')->defaultValue(false);
+
 		$this->hasMany('CategoryAssociation','restaurant_id');
 		$this->hasMany('Review','restaurant_id');
 		$this->hasMany('RestaurantImage');
@@ -84,9 +86,13 @@ class Model_Restaurant extends SQL_Model{
 		$this->addExpression('offers')->set(function($m,$q){
 			return $m->refSQL('RestaurantOffer')->count();
 		});
-
+		
 		$this->addExpression('discounts')->set(function($m,$q){
-			return $m->refSQL('RestaurantOffer')->count();
+			return $q->expr('IF([0]>0,1,0)',[$m->getElement('discount_id')]);
+		});
+
+		$this->addExpression('offer_discount_count')->set(function($m,$q){
+			return $q->expr('[0]+[1]',[$m->getElement('offers'),$m->getElement('discounts')]);
 		});
 
 		$this->addExpression('category_icon_url')->set(function($m,$q){
@@ -95,19 +101,34 @@ class Model_Restaurant extends SQL_Model{
 			// return $m->refSQL('Highlight_id')->fieldQuery('image');
 		});
 
+		$this->addExpression('approved_review_count')->set("'0'");
+
 		$this->addExpression('discount_percentage')->set($this->refSQL('discount_id')->fieldQuery('name'));
-		// $this->add('dynamic_model/Controller_AutoCreator');
+		$this->add('dynamic_model/Controller_AutoCreator');
 
 		$this->addHook('afterSave',$this);
+		$this->addHook('afterLoad',$this);
 		$this->addHook('beforeSave',[$this,'updateSearchString']);
 	}
 
+	function afterLoad(){
+		if(!$this->loaded()) return;
+
+		$review = $this->add('Model_Review')
+					->addCondition('restaurant_id',$this->id)
+					->addCondition('is_approved',true)
+					;
+		$total_review = $review->count()->getOne();
+		$total_rating = $review->sum('rating')->getOne();
+		$this['rating'] = ($this['rating'] + $total_rating) / ($total_review + 1);
+		$this['approved_review_count'] = $total_review;
+	}
 
 	function afterSave(){
 		//check first if file exist or not
-		$filename = "../json/".strtoupper($this['city'])."/restaurant.json";
-		$rest = $this->add('Model_Restaurant')->addCondition('city_id',$this['city_id']);
-		file_put_contents($filename, json_encode($rest->getRows()));
+		// $filename = "../json/".strtoupper($this['city'])."/restaurant.json";
+		// $rest = $this->add('Model_Restaurant')->addCondition('city_id',$this['city_id']);
+		// file_put_contents($filename, json_encode($rest->getRows()));
 		//if exist then empty the file
 		//if exit not then create file 
 		//write all restaurant json data

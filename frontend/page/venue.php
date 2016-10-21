@@ -12,7 +12,6 @@ class page_venue extends Page{
 
 		$lister = $this->add('CompleteLister',null,'venue',['page/venue','lister_wrapper']);
 		$model = $this->add('Model_Venue')->setOrder('sequence_order','asc');
-		
 		$model->addExpression('venue_image_url')->set(function($m,$q){
 			return $q->expr("replace([0],'/public','')",[$m->getElement('image')]);
 			// return $m->refSQL('Highlight_id')->fieldQuery('image');

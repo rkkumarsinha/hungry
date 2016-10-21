@@ -109,7 +109,7 @@ class View_HostAccount_Restaurant_Profile extends View{
         $menu_crud = $menu_tab->add('CRUD');
         $menu_image = $this->add('Model_RestaurantMenu')
         				->addCondition('restaurant_id',$host_restaurant->id)
-        				->addCondition('type','restaurant')
+        				->addCondition('type','menu')
         				->addCondition('status','pending')
         				;
 

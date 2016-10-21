@@ -12,8 +12,9 @@ class Model_Review extends SQL_Model{
 
 		$this->addExpression('profile_image_url')->set($this->refSQL('user_id')->fieldQuery('profile_image_url'));
 		$this->addExpression('user_profile')->set($this->refSQL('user_id')->fieldQuery('profile_image_url'));
+		$this->addExpression('user_name')->set($this->refSQL('user_id')->fieldQuery('name'));
 
-		$this->addField('rating');
+		$this->addField('rating')->type('Number');
 		$this->addField('title')->mandatory(true);
 		$this->addField('comment')->type('text')->mandatory(true);
 		$this->addField('created_at')->type('date')->defaultValue(date('Y-m-d'));

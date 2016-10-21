@@ -16,6 +16,8 @@ class View_FilterMapSearch extends View{
 
 		
 		$rest_model = $this->add('Model_Restaurant');
+		$rest_model->addCondition('status','active');
+		$rest_model->addCondition('is_verified',true);
 		
 		if($search_data['keyword']){
 			$rest_model->addExpression('Relevance')->set('MATCH(search_string) AGAINST ("'.trim(implode(',', explode(" ",$search_data['keyword'])),",").'" IN NATURAL LANGUAGE MODE)');

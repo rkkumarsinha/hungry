@@ -11,7 +11,7 @@ class View_Restaurant_GetDiscount extends View{
         //if not logged in
         	//show the login and registration page
         if(!$this->api->auth->model->id){
-        	$this->add('View_Login',['reload'=>"parent"]);
+        	$this->add('View_Login',['reload_page'=>true]);
             $this->js(true)->_selector('.getdiscount-hungry-submit')->hide();
         	return;
         }
@@ -19,7 +19,7 @@ class View_Restaurant_GetDiscount extends View{
         	//check for the discount coupon max limit three in a day (before 12:0 clock)
         	//today discount return count of discount before 12:00PM
         $discount_count = $this->api->auth->model->todayDiscount();
-        if($discount_count === 3){
+        if($discount_count >= 3){
         	$this->add('View_Error')->set('you exceed your today limit, try tomorrow');
             $this->js(true)->_selector('.getdiscount-hungry-submit')->hide();
             return;

@@ -52,6 +52,8 @@ class Admin extends App_Admin {
         $top_menu->addItem(['User Event','icon'=>'ajust'],'/userevent');
         $top_menu->addItem(['Reserved Table','icon'=>'ajust'],'/reservedtable');
         $top_menu->addItem(['Email Template','icon'=>'ajust'],'/emailtemplate');
+        $top_menu->addItem(['Verification','icon'=>'ajust'],'/verify');
+        $top_menu->addItem(['Notification','icon'=>'ajust'],'/notification');
     }
 }
 

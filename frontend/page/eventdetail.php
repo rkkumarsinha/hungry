@@ -11,11 +11,15 @@ class page_eventdetail extends Page{
         
     	//loading required model
         $slug = trim($this->api->stickyGET('slug'));
-    	$this->event_model = $event_model = $this->add('Model_Event')->addCondition('url_slug',$slug);
+    	$this->event_model = $event_model = $this->add('Model_Event')
+                            ->addCondition('url_slug',$slug)
+                            ->addCondition('is_active',true)
+                            ->addCondition('is_verified',true)
+                            ;
         $event_model->tryLoadAny();
 
         if(!$event_model->loaded()){
-            throw new \Exception("Page Not Found");
+            $this->app->redirect($this->app->url('404'));
             exit;
         }
 

@@ -7,11 +7,12 @@
     <div id="page-top" class="header">
       <div class="wrapper">
         <div class="brand"><a href="?page=index"><img src="assets/img/hungrydunia/logo.png" alt="logo"/></a></div>
-        <div class="brand hungry-current-location">{$location}          </div>
+        <div class="brand hungry-current-location">{$location}</div>
         <nav class="navigation-items">
           <div class="wrapper">
             <ul class="main-navigation navigation-top-header"></ul>
             <ul class="user-area">{event_cart_wrapper}
+              <a href="https://play.google.com/store/apps/details?id=com.hungrydunia.app&hl=en" target="_blank"><i class="glyphicon glyphicon-phone " style="font-size:20px;background-color:white;"> </i>&nbsp;<b style="font-size:14px;color:white;">Download App</b></a>
               <li style="display:none;" class="hungryeventcart"><a href="?page=cartdetail">Event <span class="badge">{$event_count}</span></a></li>{/}
               {login_menu}
               <li>
@@ -29,13 +30,59 @@
               <li><a href="?page=register"><strong>Register</strong></a></li>{/}
               <li><a href="?page=addlisting"><i style="color:white;" class="glyphicon glyphicon-plus"></i><strong>&nbsp;Add Your Listing</strong></a></li>
             </ul>
+        <div class="toggle-navigation" style="display: inline-block;">
+          <div class="icon">
+              <div class="line"></div>
+              <div class="line"></div>
+              <div class="line"></div>
+          </div>
+        </div>
           </div>
         </nav>
       </div>
     </div>
     <!-- end Navigation-->
     <!-- Page Canvas-->
-    <div id="page-canvas">{$Content}</div>
+    <div id="page-canvas">
+    <!-- Off Canvas Navigation-->
+    <nav class="off-canvas-navigation">
+      <header>Navigation</header>
+      <div class="main-navigation navigation-off-canvas">
+        <ul>
+        {login_menu}
+        <li>
+        <a href="#home" class="has-child" data-toggle="collapse" aria-expanded="false" aria-controls="home">{$username}</a>
+          <div class="collapse in" id="home" style="height: auto;">
+            <ul>
+              {hostdropdown}
+                <li><a href="index-directory.html">Google Maps</a></li>
+              {/}
+            </ul>
+        </div>
+        </li>
+        {/}
+
+      <li>
+        <a href="?page=index" data-toggle="collapse" aria-expanded="false" aria-controls="home">Home</a>
+      </li>
+          <li>{signlogout}a(href='?page=sign-in') Sign In{/}</li>{register_wrapper}
+              <li>
+                <a href="?page=register"><strong>Register</strong></a>
+              </li>
+          {/}
+          <li>
+            <a href="?page=addlisting">
+              <i style="color:white;" class="glyphicon glyphicon-plus"></i><strong>&nbsp;Add Your Listing</strong>
+            </a>
+          </li>
+          <li>
+            <a href="https://play.google.com/store/apps/details?id=com.hungrydunia.app&hl=en" target="_blank"><i class="glyphicon glyphicon-phone " style="font-size:20px;background-color:white;"> </i>&nbsp;<b style="font-size:14px;color:white;">Download App</b></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    {$Content}
+    </div>
     <!-- end Page Canvas-->
     <!-- Page Footer-->
     <footer id="page-footer">
@@ -56,7 +103,20 @@
                       <div class="info"><i class="fa fa-globe"></i><a href="www.hungrydunia.com" target="_blank">www.hungrydunia.com</a></div>
                     </figure>
                   </address>
-                  <div class="social"><a href="http://www.twitter.com/HungryDunia" target="_blank" class="social-button"><i class="fa fa-twitter"></i></a><a href="http://www.facebook.com/HungryDunia" target="_blank" class="social-button"><i class="fa fa-facebook"></i></a></div><a href="contact.html" class="btn framed icon">Contact Us<i class="fa fa-angle-right"></i></a>
+                  <div class="social">
+                      <a href="http://www.twitter.com/HungryDunia" target="_blank" class="social-button">
+                        <i class="fa fa-twitter"></i>
+                      </a>
+                      <a href="http://www.facebook.com/HungryDunia" target="_blank" class="social-button">
+                        <i class="fa fa-facebook"></i>
+                      </a>
+                      <a href="https://www.instagram.com/hungrydunia/" target="_blank" class="social-button">
+                        <i class="fa fa-instagram"></i>
+                      </a>
+                  </div>
+                  <a href="contact.html" class="btn framed icon">Contact Us
+                    <i class="fa fa-angle-right">
+                      </i></a>
                 </section>
               </div>
               <!-- /.col-md-4-->
@@ -65,6 +125,9 @@
                 <section>
                   <h2>Subscribe</h2>{$subscription}
                 </section>
+                <!-- download the app -->
+                <a href='https://play.google.com/store/apps/details?id=com.hungrydunia.app&hl=en&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
+
               </div>
               <div class="col-md-3 col-sm-3">
                 <!-- Recent Reviews-->
@@ -102,6 +165,17 @@
     <!-- end Page Footer-->
   </div>
   <!-- end Inner Wrapper-->
+  <script type="text/javascript">
+    if( $('body').hasClass('navigation-off-canvas') ){
+      $('.header .toggle-navigation').click(function() {
+          $('#outer-wrapper').toggleClass('show-nav');  
+      }); 
+      $('#page-content').click(function() {
+        $('#outer-wrapper').removeClass('show-nav');  
+      });
+    }
+  </script>
+
 </div>
 <!-- end Outer Wrapper-->
 <!--script(type='text/javascript', src='assets/js/jquery-2.1.0.min.js')-->

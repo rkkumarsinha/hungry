@@ -1,0 +1,29 @@
+<section id="{$_name}" style="{$style}" class="sub-header hungryquicksearch {$class}">    
+    <div class="breadcrumb-wrapper">
+        <div class="container">
+            <div class="redefine-search">
+                <div class="inner" type="button" data-toggle="modal" data-target="#62675c94__efinesearch_redefinesearch_model">
+                    <span class="icon"></span>
+                </div>
+              <div id="{$_name}_redefinesearch_model" tabindex="-1" role="dialog" aria-labelledby="{$_name}_model_label" class="modal fade">
+                <div role="document" class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true" style="margin-right:20px;">×</span></button>
+                      <h4 id="{$_name}_model_label" class="modal-title">Redefine Your Search</h4>
+                    </div>
+                    <div class="modal-body">                
+                      {$Content}
+                    </div>
+                  <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">
+                      Close
+                    </button>
+                  </div>
+                  </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+  </section>

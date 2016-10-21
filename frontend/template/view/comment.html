@@ -6,14 +6,14 @@
   <!-- /.overall-rating-->
   <section class="reviews">{rows}{row}
     <article style="margin-bottom:20px;" class="review">
-      <figure class="author"><img alt="{$user}" src="{$profile_image}" onerror="this.src='assets/img/default-avatar.png';"/>
+      <figure class="author"><img alt="{$user_name}" src="{$profile_image}" onerror="this.src='assets/img/default-avatar.png';"/>
         <div class="date">{$created_at} {$created_time}</div>
       </figure>
       <!-- /.author-->
       <div style="min-height:130px;" class="wrapper">
-        <h5>{$user}</h5>
+        <h5>{$title}</h5>
         <figure data-rating="4" class="hungryratingshowwrapper">
-          <input value="{$rating}" class="hungryratingshow"/>
+          <input value="{$rating}" style="display:none;" class="hungryratingshow"/>
         </figure>
         <p>{$comment}</p>
         <div style="display:none;" class="individual-rating"><span>Value</span>

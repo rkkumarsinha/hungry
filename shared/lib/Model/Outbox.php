@@ -34,6 +34,9 @@ class Model_Outbox extends SQL_Model{
 
 	function sendEmail($to="techrakesh91@gmail.com",$subject="Here is the subject",$body="This is the HTML message body <b>in bold!{activation_link}</b>",$user_model){
 		
+		if(!$this->app->getConfig('email_send'))
+			return false;
+				
 		$config = $this->add('Model_Configuration')->tryLoad(1);
 		$mail = new PHPMailer;
 		// $mail->SMTPDebug = 2;

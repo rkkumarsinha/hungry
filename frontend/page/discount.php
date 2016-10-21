@@ -21,7 +21,11 @@ class page_discount extends Page{
         $view = $this->add('View',null,'restaurant');
         // $view->set('hello');
         $list = $view->add('View_Lister_Restaurant',['item_in_row'=>3,'show_discount'=>true]);
-        $model = $this->add('Model_Restaurant')->addCondition('banner_image_id','<>',null);
+        $model = $this->add('Model_Restaurant')
+                    ->addCondition('banner_image_id','<>',null)
+                    ->addCondition('status','active')
+                    ->addCondition('is_verified',1)
+                    ;
        	if($_GET['discount'])
        		$model->addCondition('discount',$_GET['discount']);
         $list->setModel($model);

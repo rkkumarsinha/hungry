@@ -23,11 +23,17 @@ class Model_Image extends SQL_Model{
 		$this->addField('type')->setValueList(['restaurant'=>'restaurant','menu'=>'menu','city'=>'city','event'=>'event','destination'=>'destination','RestaurantGallery'=>"RestaurantGallery",'EventGallery'=>"EventGallery",'VenueGallery'=>"VenueGallery"])->mandatory(true);
 		$this->add('filestore/Field_File','image_id')->mandatory(true);
 
-		$this->addField('status')->setValueList(['pending'=>"Pending",'approved'=>"Approved",'cancled'=>"Cancled"]);
+		$this->addField('status')->setValueList(['pending'=>"Pending",'approved'=>"Approved",'cancled'=>"Cancled"])->mandatory(true);
 		$this->addField('created_at')->type('datetime')->defaultValue(date('Y-m-d H:i:s'));
 		$this->addField('approved_date')->type('datetime');//->defaultValue(date('Y-m-d H:i:s'));
 
+		$this->addHook('beforeSave',$this);
 		// $this->add('dynamic_model/Controller_AutoCreator');
+	}
+
+	function beforeSave(){
+		if($this['status'] == "approved" and $this->isDirty('status'))
+			$this['approved_date'] = $this->api->today?$this->api->today:date('Y-m-d');
 	}
 
 }

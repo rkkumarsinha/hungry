@@ -9,18 +9,21 @@ class page_restaurantdetail extends Page{
 
     function init(){
         parent::init();
-
-        
+                
         // $path = "http://localhost/hungrydunia/".str_replace("..", "", $f->getPath());
         // $this->api->url()->absolute()->getBaseURL()
         
     	//loading required model
         $slug = trim($this->api->stickyGET('slug'));
-    	$restaurant_model = $this->add('Model_Restaurant')->addCondition('url_slug',$slug);
+    	$restaurant_model = $this->add('Model_Restaurant')
+                         ->addCondition('url_slug',$slug)
+                         ->addCondition('status','active')
+                         ->addCondition('is_verified',true)
+                         ->addCondition('city_id',$this->app->city_id)
+                        ;
         $restaurant_model->tryLoadAny();
-
         if(!$restaurant_model->loaded()){
-            throw new \Exception("Page Not Found");
+            $this->app->redirect($this->app->url('404'));
             exit;
         }
 
@@ -29,34 +32,14 @@ class page_restaurantdetail extends Page{
     	$this->gallery_model = $this->add('Model_RestaurantImage')->addCondition('restaurant_id',$id);
         $this->setModel($restaurant_model);
 
+        // Get Discount Review
         $discount_view =  $this->add('View_Restaurant_GetDiscount',['restaurant_id'=>$restaurant_model->id],'getdiscount');
+
+        // reservation table
         if($restaurant_model['reservation_needed'])
             $reserve_table_view = $this->add('View_Restaurant_ReserveTable',['restaurant_id'=>$restaurant_model->id],'reservetable');
         
-        // $getdiscount_btn = $this->add('Button','null','getdiscount')->set('Get Discount')->addClass('atk-swatch-orange btn-block')->setStyle('border','0px solid white');
-        // if($getdiscount_btn->isClicked()){
-        //     // 'autoOpen'=>false,'show'=>array('effect'=>'blind','duration'=> 1000)
-        //     $options = array('width'=>'800');
-        //     $this->js()->univ()->frameURL('Get Your Discount Coupon Here',$this->api->url('getdiscount',array('restaurant_id'=>$id,'cut_page'=>0)),$options)->addClass('hungry-frameurl')->execute();
-        // }
-
-        // $reserve_table_btn  = $this->add('Button','null','reservetable')->set('Reserve a Table')->addClass('atk-swatch-green btn-block')->setStyle('border','0px solid white');
-        // if($reserve_table_btn->isClicked()){
-        //     // 'autoOpen'=>false,'show'=>array('effect'=>'blind','duration'=> 1000)
-        //     $options = array('width'=>'800');
-        //     $this->js()->univ()->frameURL(
-        //                                 'Reserve A Table',
-        //                                 $this->api->url(
-        //                                             'reservetable',
-        //                                             array(
-        //                                                 'restaurant_id'=>$id,
-        //                                                 'cut_page'=>0
-        //                                                 )
-        //                                             ),
-        //                                             $options
-        //                                 )->addClass('hungry-frameurl')->execute();
-        // }
-        //Add Route Map        
+        //Add Route Map
         $view_route_map = $this->add('View_RouteMap',['restaurant_lat'=>$restaurant_model['latitude'],'restaurant_lng'=>$restaurant_model['longitude']],'routemap');
         
         $this->add('View_Review',['restaurant_id'=>$this->restaurant_id,'restaurant_rating'=>$restaurant_model['rating']],'hungryuserrating');
@@ -74,7 +57,8 @@ class page_restaurantdetail extends Page{
     }
 
     function recursiveRender(){
-        
+        $this->add('View_RedefineSearch',null,'redefine_search');
+
         $gallery = $this->add('View_Lister_RestaurantGallery',['restaurant_id'=>$this->restaurant_id],'gallery');
     	$gallery->setModel($this->gallery_model);
 
@@ -87,6 +71,8 @@ class page_restaurantdetail extends Page{
         //Calculating near by restaurant
         $near_by_restaurant = $this->add('Model_Restaurant');
         $near_by_restaurant->addCondition('city_id',$this->model['city_id']);
+        $near_by_restaurant->addCondition('status','active');
+        $near_by_restaurant->addCondition('is_verified',true);
         // $near_by_restaurant->addCondition('area_id',$this->model['area_id']);
         // SELECT * FROM `WAYPOINTS` W ORDER BY
         // ABS(ABS(W.`LATITUDE`-53.63) +
@@ -99,25 +85,37 @@ class page_restaurantdetail extends Page{
         });
         $near_by_restaurant->addCondition('id','<>',$this->model->id);
         $near_by_restaurant->setOrder('latlng','asc');
-        // $near_by_restaurant->addCondition('latlng','>',($this->model['latitude']));
-        $near_by_restaurant->addCondition('status','active');
         $near_by_restaurant->setLimit(3);
-        $list = $this->add('View_Lister_NearByRestaurant',null,'nearbyrestaurant');
-        $list->setModel($near_by_restaurant);
+        
+        if($near_by_restaurant->count()->getOne()){
+            $list = $this->add('View_Lister_NearByRestaurant',null,'nearbyrestaurant');
+            $list->setModel($near_by_restaurant);
+        }else{
+            $this->template->tryDel('near_by_wrapper');
+        }
         //end of near by restaurat
 
+        // Recommended
         $recom_restaurant = $this->add('Model_Restaurant')
             ->addCondition('is_recommend',true)
             ->addCondition('city_id',$this->model['city_id'])
+            ->addCondition('status','active')
+            ->addCondition('is_verified',true)
             ->setLimit(3);
 
-        $recom = $this->add('View_Lister_NearByRestaurant',null,'recommendedrestaurant');
-        $recom->setModel($recom_restaurant);
+        if($recom_restaurant->count()->getOne()){
+            $recom = $this->add('View_Lister_NearByRestaurant',null,'recommendedrestaurant');
+            $recom->setModel($recom_restaurant);
+        }else{
+            $this->template->tryDel('recommended_wrapper');
+        }
 
-        $offer_model = $this->add('Model_RestaurantOffer')->addCondition('restaurant_id',$this->restaurant_id);
+        // Restaurant offers
+        $offer_model = $this->add('Model_RestaurantOffer')->addCondition('restaurant_id',$this->restaurant_id)->addCondition('is_active',false);
         $offer = $this->add('Lister',null,'restaurantoffer',['page/restaurantdetail','restaurantoffer']);
         $offer->setModel($offer_model);
 
+        // Restaurant lister comment
         $comment_lister = $this->add('View_Lister_Comment',['restaurant_id'=>$this->restaurant_id],'review');
         $comment = $this->add('Model_Review')
                         ->addCondition('restaurant_id',$this->restaurant_id)

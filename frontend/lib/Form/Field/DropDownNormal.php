@@ -27,7 +27,7 @@ class Form_Field_DropDownNormal extends Form_Field_ValueList {
     function getInput($attr=array()){
         $this->selectnemu_options['change']=$this->js()->trigger('change')->_enclose();
         // $this->js(true)->selectize();
-        // $this->js(true)->selectmenu($this->selectnemu_options);
+        $this->js(true)->selectmenu($this->selectnemu_options);
         $multi = isset($this->attr['multiple']);
         $output=$this->getTag('select',array_merge(array(
                         'name'=>$this->name . ($multi?'[]':''),

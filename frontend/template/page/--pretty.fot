@@ -1,0 +1,1098 @@
+<?xml version="1.0"?>
+<fot>
+<a name="0"/>
+<text>  {$quick_search}
+</text>
+<text>  </text>
+<text>
+</text>
+<text>  </text>
+<a name="1"/>
+<text>    </text>
+<a name="2"/>
+<text>      </text>
+<a name="3"/>
+<text>        </text>
+<a name="4"/>
+<text>          </text>
+<a name="5"/>
+<text>            </text>
+<a name="6"/>
+<a name="7"/>
+<text>&gt;</text>
+<text>
+</text>
+<text>            </text>
+<a name="8"/>
+<text>{name}Find Place For Fun and Eat{/}</text>
+<text>
+</text>
+<text>            </text>
+<a name="9"/>
+<text>{address}630-f sec.11 Near Alok School Udaipur, Rajasthan.{/}</text>
+<text>            {hungryuserrating}
+</text>
+<text>                        {/}
+</text>
+<text>          </text>
+<text>
+</text>
+<text>          </text>
+<a name="10"/>
+<text>            </text>
+<a name="11"/>
+<text>Get Discount</text>
+<text>
+</text>
+<text>          </text>
+<text>
+</text>
+<text>          </text>
+<a name="12"/>
+<text>            </text>
+<a name="13"/>
+<text>Reserve Table</text>
+<text>
+</text>
+<text>          </text>
+<text>
+</text>
+<text>        </text>
+<text>
+</text>
+<text>      </text>
+<text>
+</text>
+<text>    </text>
+<text>
+</text>
+<text>    </text>
+<a name="14"/>
+<a name="15"/>
+<text>&gt;</text>
+<text>
+</text>
+<text>  </text>
+<text>{$Content}
+</text>
+<text>  </text>
+<a name="16"/>
+<text>    </text>
+<a name="17"/>
+<text>      </text>
+<text>
+</text>
+<text>      </text>
+<a name="18"/>
+<text>        </text>
+<a name="19"/>
+<text>          </text>
+<a name="20"/>
+<text>            </text>
+<text>
+</text>
+<text>            </text>
+<a name="21"/>
+<text>              </text>
+<text>
+</text>
+<text>              </text>
+<a name="22"/>
+<text>                </text>
+<a name="23"/>
+<text>                  </text>
+<a name="24"/>
+<text>Contact</text>
+<text>
+</text>
+<text>                </text>
+<text>
+</text>
+<text>                </text>
+<a name="25"/>
+<text>                  </text>
+<a name="26"/>
+<text>{$address}</text>
+<text>
+</text>
+<text>                  </text>
+<a name="27"/>
+<text>{mobile_wrapper}
+</text>
+<text>                    </text>
+<a name="28"/>
+<a name="30"/>
+<text>{$mobile_no}</text>
+<text>{/}
+</text>
+<text>                                        {phone_wrapper}
+</text>
+<text>                    </text>
+<a name="31"/>
+<a name="33"/>
+<text>{$phone_no}</text>
+<text>{/}
+</text>
+<text>                                        {email_wrapper}
+</text>
+<text>                    </text>
+<a name="34"/>
+<a name="36"/>
+<text>{$email}</text>
+<text>{/}
+</text>
+<text>                                        {website_wrapper}
+</text>
+<text>                    </text>
+<a name="37"/>
+<a name="39"/>
+<text>{$website}</text>
+<text>{/}
+</text>
+<text>                    </text>
+<a name="40"/>
+<text>                       
+</text>
+<text>                      {instagram_wrapper}</text>
+<text>{/}
+</text>
+<text>                      {facebook_wrapper}</text>
+<text>{/}
+</text>
+<text>                    </text>
+<text>
+</text>
+<text>                  </text>
+<text>
+</text>
+<text>                </text>
+<text>
+</text>
+<text>              </text>
+<text>
+</text>
+<text>              </text>
+<text>
+</text>
+<text>              </text>
+<text>
+</text>
+<text>              </text>
+<a name="45"/>
+<text>                </text>
+<a name="46"/>
+<a name="47"/>
+<text>                    </text>
+<a name="48"/>
+<text>Rating</text>
+<text>
+</text>
+<text>                </text>
+<a name="49"/>
+<text>                  </text>
+<a name="50"/>
+<text>&gt;
+</text>
+<text>                </text>
+<text>
+</text>
+<text>                </text>
+<text>
+</text>
+<text>              </text>
+<text>
+</text>
+<text>              </text>
+<text>
+</text>
+<text>              </text>
+<a name="51"/>
+<text>                </text>
+<a name="52"/>
+<text>                  </text>
+<a name="53"/>
+<text>Avg Cost/Person</text>
+<text>
+</text>
+<text>                </text>
+<text>
+</text>
+<text>                </text>
+<a name="54"/>
+<text>                  </text>
+<a name="55"/>
+<text>                    </text>
+<a name="56"/>
+<a name="57"/>
+<text>A La Carte </text>
+<text>{veg_wrapper}
+</text>
+<text>                      </text>
+<a name="58"/>
+<text>Veg. &#226;&#130;&#185; {$avg_cost_per_person_veg}</text>
+<text>{/}
+</text>
+<text>                                            {non_veg_wrapper}
+</text>
+<text>                      </text>
+<a name="59"/>
+<text>Non Veg. &#226;&#130;&#185; {$avg_cost_per_person_nonveg}</text>
+<text>{/}
+</text>
+<text>                                            {thali_wrapper}</text>
+<a name="60"/>
+<text>Thali </text>
+<text>
+</text>
+<text>                      </text>
+<a name="61"/>
+<text>&#226;&#130;&#185; {$avg_cost_per_person_thali}</text>
+<text>{/}
+</text>
+<text>                    </text>
+<text>
+</text>
+<text>                  </text>
+<text>
+</text>
+<text>                </text>
+<text>
+</text>
+<text>              </text>
+<text>
+</text>
+<text>              </text>
+<text>
+</text>
+<text>              </text>
+<a name="62"/>
+<text>                </text>
+<a name="63"/>
+<text>                  </text>
+<a name="64"/>
+<text>Events</text>
+<text>
+</text>
+<text>                </text>
+<text>
+</text>
+<text>                </text>
+<a name="65"/>
+<text>                  </text>
+<a name="66"/>
+<text>                    </text>
+<a name="67"/>
+<text>                      </text>
+<a name="68"/>
+<text>                        Maecenas purus sapien, pellentesque non consectetur eu, rhoncus in mauris.
+</text>
+<text>                        Duis et nisl metus. Sed ut pulvinar mauris, bibendum ullamcorper ex.
+</text>
+<text>                        Aliquam vitae ante diam. Nam eu blandit odio. Cras erat lorem, iaculis eu nulla eu, sodales aliquam eros.
+</text>
+<text>                      </text>
+<text>
+</text>
+<text>                    </text>
+<text>
+</text>
+<text>                  </text>
+<a name="69"/>
+<text>Show More</text>
+<text>
+</text>
+<text>                </text>
+<text>
+</text>
+<text>              </text>
+<text>
+</text>
+<text>              </text>
+<text>
+</text>
+<text>              </text>
+<text>
+</text>
+<text>              </text>
+<a name="70"/>
+<text>                </text>
+<a name="71"/>
+<text>                  </text>
+<a name="72"/>
+<text>Features</text>
+<text>
+</text>
+<text>                </text>
+<text>
+</text>
+<text>                </text>
+<a name="73"/>
+<text>                  </text>
+<a name="74"/>
+<text>                    </text>
+<a name="75"/>
+<text>{feature}
+</text>
+<text>                      </text>
+<a name="76"/>
+<text>                        </text>
+<a name="77"/>
+<text>                          </text>
+<a name="78"/>
+<a name="79"/>
+<text>&gt;</text>
+<text>
+</text>
+<text>                          </text>
+<a name="80"/>
+<text>                            </text>
+<a name="81"/>
+<text> {$Highlight}</text>
+<text>
+</text>
+<text>                          </text>
+<text>
+</text>
+<text>                        </text>
+<text>
+</text>
+<text>                      </text>
+<text>                      {/}
+</text>
+<text>                    </text>
+<text>
+</text>
+<text>                  </text>
+<text>
+</text>
+<text>                </text>
+<text>
+</text>
+<text>              </text>
+<text>
+</text>
+<text>              </text>
+<text>
+</text>
+<text>              </text>
+<text>
+</text>
+<text>              </text>
+<a name="82"/>
+<text>                </text>
+<a name="83"/>
+<text>                  </text>
+<a name="84"/>
+<text>Cuisines</text>
+<text>
+</text>
+<text>                </text>
+<text>
+</text>
+<text>                </text>
+<a name="85"/>
+<text>                  </text>
+<a name="86"/>
+<text>                    </text>
+<a name="87"/>
+<text>{cuisine}
+</text>
+<text>                      </text>
+<a name="88"/>
+<text>                        </text>
+<a name="89"/>
+<text>                          </text>
+<a name="90"/>
+<a name="91"/>
+<text>&gt;</text>
+<text>
+</text>
+<text>                          </text>
+<a name="92"/>
+<text>                            </text>
+<a name="93"/>
+<text> {$keyword}</text>
+<text>
+</text>
+<text>                          </text>
+<text>
+</text>
+<text>                        </text>
+<text>
+</text>
+<text>                      </text>
+<text>                      {/}
+</text>
+<text>                    </text>
+<text>
+</text>
+<text>                  </text>
+<text>
+</text>
+<text>                </text>
+<text>
+</text>
+<text>              </text>
+<text>
+</text>
+<text>              </text>
+<text>
+</text>
+<text>              </text>
+<text>
+</text>
+<text>              </text>
+<a name="94"/>
+<text>                </text>
+<a name="95"/>
+<text>                  </text>
+<a name="96"/>
+<text>Contact Form</text>
+<text>
+</text>
+<text>                </text>
+<text>
+</text>
+<text>                </text>
+<a name="97"/>
+<text>                  </text>
+<a name="98"/>
+<text>                    </text>
+<a name="99"/>
+<text>                      </text>
+<a name="100"/>
+<text>Name</text>
+<text>
+</text>
+<text>                      </text>
+<a name="101"/>
+<text>&gt;
+</text>
+<text>                    </text>
+<text>
+</text>
+<text>                    </text>
+<text>
+</text>
+<text>                    </text>
+<a name="102"/>
+<text>                      </text>
+<a name="103"/>
+<text>Email</text>
+<text>
+</text>
+<text>                      </text>
+<a name="104"/>
+<text>&gt;
+</text>
+<text>                    </text>
+<text>
+</text>
+<text>                    </text>
+<text>
+</text>
+<text>                    </text>
+<a name="105"/>
+<text>                      </text>
+<a name="106"/>
+<text>Message</text>
+<text>
+</text>
+<text>                      </text>
+<text>
+</text>
+<text>                    </text>
+<text>
+</text>
+<text>          </text>
+<text>          </text>
+<text>
+</text>
+<text>                    </text>
+<a name="108"/>
+<text>                      </text>
+<a name="109"/>
+<text>Send</text>
+<text>
+</text>
+<text>                    </text>
+<text>
+</text>
+<text>                    </text>
+<text>
+</text>
+<text>                  </text>
+<text>
+</text>
+<text>                </text>
+<text>
+</text>
+<text>              </text>
+<text>
+</text>
+<text>              </text>
+<text>
+</text>
+<text>            </text>
+<text>
+</text>
+<text>            </text>
+<text>
+</text>
+<text>            </text>
+<text>
+</text>
+<text>            </text>
+<a name="111"/>
+<text>              </text>
+<a name="112"/>
+<text>                </text>
+<a name="113"/>
+<text>                  </text>
+<text>
+</text>
+<text>                  </text>
+<a name="114"/>
+<text>                    </text>
+<a name="115"/>
+<a name="116"/>
+<text>Gallery</text>
+<text>
+</text>
+<text>                    </text>
+<a name="117"/>
+<a name="118"/>
+<text>Menu</text>
+<text>
+</text>
+<text>                    </text>
+<a name="119"/>
+<a name="120"/>
+<text>Description</text>
+<text>
+</text>
+<text>                    </text>
+<a name="121"/>
+<a name="122"/>
+<text>Operational Hours</text>
+<text>
+</text>
+<text>                    </text>
+<a name="123"/>
+<a name="124"/>
+<text>Offers</text>
+<text>
+</text>
+<text>                  </text>
+<text>
+</text>
+<text>                  </text>
+<text>
+</text>
+<text>                  </text>
+<a name="125"/>
+<text>                    </text>
+<a name="126"/>
+<text>{$gallery}
+</text>
+<text>                      </text>
+<text>
+</text>
+<text>                    </text>
+<text>
+</text>
+<text>                    </text>
+<a name="127"/>
+<text>{$menu}</text>
+<text>
+</text>
+<text>                    </text>
+<a name="128"/>
+<text>                      </text>
+<a name="129"/>
+<text>                        </text>
+<a name="130"/>
+<text>                          </text>
+<a name="131"/>
+<text>Description</text>
+<text>
+</text>
+<text>                        </text>
+<text>
+</text>
+<text>                        </text>
+<a name="132"/>
+<text>{$about_restaurant}</text>
+<text>
+</text>
+<text>                      </text>
+<text>
+</text>
+<text>                      </text>
+<text>
+</text>
+<text>                      </text>
+<a name="133"/>
+<text>                        </text>
+<a name="134"/>
+<text>                          </text>
+<a name="135"/>
+<text>Features</text>
+<text>
+</text>
+<text>                        </text>
+<text>
+</text>
+<text>                        </text>
+<a name="136"/>
+<text>                          {highlight}
+</text>
+<text>                          {siglehighlight}
+</text>
+<text>                          </text>
+<a name="137"/>
+<text>{$Highlight}</text>
+<text>{/}
+</text>
+<text>                                                    {/}
+</text>
+<text>                        </text>
+<text>
+</text>
+<text>                      </text>
+<text>
+</text>
+<text>                      </text>
+<text>
+</text>
+<text>                    </text>
+<text>
+</text>
+<text>                    </text>
+<a name="138"/>
+<text>                      </text>
+<a name="139"/>
+<text>                        </text>
+<a name="140"/>
+<text>                          </text>
+<a name="141"/>
+<text>Operational Hours</text>
+<text>
+</text>
+<text>                        </text>
+<text>
+</text>
+<text>                        </text>
+<a name="142"/>
+<text>                          </text>
+<a name="143"/>
+<text>                            </text>
+<a name="144"/>
+<text>Monday</text>
+<text>
+</text>
+<text>                            </text>
+<a name="145"/>
+<text>{monday}Holiday{/}</text>
+<text>
+</text>
+<text>                          </text>
+<text>
+</text>
+<text>                          </text>
+<a name="146"/>
+<text>                            </text>
+<a name="147"/>
+<text>Tuesday</text>
+<text>
+</text>
+<text>                            </text>
+<a name="148"/>
+<text>{tuesday}Holiday{/}</text>
+<text>
+</text>
+<text>                          </text>
+<text>
+</text>
+<text>                          </text>
+<a name="149"/>
+<text>                            </text>
+<a name="150"/>
+<text>Wednesday</text>
+<text>
+</text>
+<text>                            </text>
+<a name="151"/>
+<text>{wednesday}Holiday{/}</text>
+<text>
+</text>
+<text>                          </text>
+<text>
+</text>
+<text>                          </text>
+<a name="152"/>
+<text>                            </text>
+<a name="153"/>
+<text>Thursday</text>
+<text>
+</text>
+<text>                            </text>
+<a name="154"/>
+<text>{thursday}Holiday{/}</text>
+<text>
+</text>
+<text>                          </text>
+<text>
+</text>
+<text>                          </text>
+<a name="155"/>
+<text>                            </text>
+<a name="156"/>
+<text>Friday</text>
+<text>
+</text>
+<text>                            </text>
+<a name="157"/>
+<text>{friday}Holiday{/}</text>
+<text>
+</text>
+<text>                          </text>
+<text>
+</text>
+<text>                          </text>
+<a name="158"/>
+<text>                            </text>
+<a name="159"/>
+<text>Saturday</text>
+<text>
+</text>
+<text>                            </text>
+<a name="160"/>
+<text>{saturday}Holiday{/}</text>
+<text>
+</text>
+<text>                          </text>
+<text>
+</text>
+<text>                          </text>
+<a name="161"/>
+<text>                            </text>
+<a name="162"/>
+<text>Sunday</text>
+<text>
+</text>
+<text>                            </text>
+<a name="163"/>
+<text>{sunday}Holiday{/}</text>
+<text>
+</text>
+<text>                          </text>
+<text>
+</text>
+<text>                        </text>
+<text>
+</text>
+<text>                      </text>
+<text>
+</text>
+<text>                      </text>
+<text>
+</text>
+<text>                    </text>
+<text>
+</text>
+<text>                    </text>
+<a name="164"/>
+<text>{restaurantoffer}
+</text>
+<text>                      </text>
+<a name="165"/>
+<text>                        </text>
+<a name="166"/>
+<text>{$name}</text>
+<text>
+</text>
+<text>                        </text>
+<a name="167"/>
+<text>{$detail}</text>
+<text>
+</text>
+<text>                      </text>
+<text>{/}
+</text>
+<text>                    </text>
+<text>
+</text>
+<text>                  </text>
+<text>
+</text>
+<text>                </text>
+<text>
+</text>
+<text>              </text>
+<text>
+</text>
+<text>              </text>
+<text>{$review}
+</text>
+<text>              </text>
+<text>
+</text>
+<text>            </text>
+<text>
+</text>
+<text>            </text>
+<text>
+</text>
+<text>          </text>
+<text>
+</text>
+<text>          </text>
+<text>
+</text>
+<text>        </text>
+<text>
+</text>
+<text>        </text>
+<text>
+</text>
+<text>      </text>
+<text>
+</text>
+<text>      </text>
+<text>
+</text>
+<text>      </text>
+<text>
+</text>
+<text>      </text>
+<a name="168"/>
+<text>        </text>
+<a name="169"/>
+<text>          </text>
+<a name="170"/>
+<text>            </text>
+<a name="171"/>
+<text>Map Route</text>
+<text>
+</text>
+<text>          </text>
+<text>
+</text>
+<text>          </text>
+<a name="172"/>
+<text>{$routemap}</text>
+<text>
+</text>
+<text>        </text>
+<text>
+</text>
+<text>        </text>
+<a name="173"/>
+<text>          </text>
+<a name="174"/>
+<text>            </text>
+<a name="175"/>
+<text>Near By Restaurant</text>
+<text>
+</text>
+<text>          </text>
+<text>{$nearbyrestaurant}
+</text>
+<text>        </text>
+<text>
+</text>
+<text>        </text>
+<a name="176"/>
+<text>          </text>
+<a name="177"/>
+<text>            </text>
+<a name="178"/>
+<text>Recommend Restaurant</text>
+<text>
+</text>
+<text>          </text>
+<text>{$recommendedrestaurant}
+</text>
+<text>        </text>
+<text>
+</text>
+<text>      </text>
+<text>
+</text>
+<text>      </text>
+<text>
+</text>
+<text>      </text>
+<text>
+</text>
+<text>      </text>
+<text>
+</text>
+<text>      </text>
+<text>
+</text>
+<text>      </text>
+<text>
+</text>
+<text>    </text>
+<text>
+</text>
+<text>  </text>
+<text>
+</text>
+<text>  </text>
+<a name="179"/>
+<text>    </text>
+<a name="180"/>
+<text>      </text>
+<a name="181"/>
+<text>        </text>
+<a name="182"/>
+<text>          </text>
+<a name="183"/>
+<a name="184"/>
+<text>&#195;&#151;</text>
+<text>
+</text>
+<text>          </text>
+<a name="185"/>
+<text>Get Discount</text>
+<text>
+</text>
+<text>        </text>
+<text>
+</text>
+<text>        </text>
+<a name="186"/>
+<text>{$getdiscount}</text>
+<text>
+</text>
+<text>        </text>
+<a name="187"/>
+<text>          </text>
+<a name="188"/>
+<text>Get code</text>
+<text>
+</text>
+<text>          </text>
+<a name="189"/>
+<text>            Close
+</text>
+<text>            {$getdiscount_save_button}
+</text>
+<text>          </text>
+<text>
+</text>
+<text>        </text>
+<text>
+</text>
+<text>      </text>
+<text>
+</text>
+<text>    </text>
+<text>
+</text>
+<text>  </text>
+<text>
+</text>
+<text>  </text>
+<a name="190"/>
+<text>    </text>
+<a name="191"/>
+<text>      </text>
+<a name="192"/>
+<text>        </text>
+<a name="193"/>
+<text>          </text>
+<a name="194"/>
+<a name="195"/>
+<text>&#195;&#151;</text>
+<text>
+</text>
+<text>          </text>
+<a name="196"/>
+<text>Reserve Table</text>
+<text>
+</text>
+<text>        </text>
+<text>
+</text>
+<text>        </text>
+<a name="197"/>
+<text>{$reservetable}</text>
+<text>
+</text>
+<text>        </text>
+<a name="198"/>
+<text>          </text>
+<a name="199"/>
+<text>Book Table</text>
+<text>
+</text>
+<text>          </text>
+<a name="200"/>
+<text>            Close
+</text>
+<text>            {$reserv_save_btn}
+</text>
+<text>          </text>
+<text>
+</text>
+<text>        </text>
+<text>
+</text>
+<text>      </text>
+<text>
+</text>
+<text>    </text>
+<text>
+</text>
+<text>  </text>
+<text>
+</text>
+<text>  </text>
+<a name="201"/>
+<text>    </text>
+<a name="202"/>
+<text>      </text>
+<a name="203"/>
+<text>        </text>
+<a name="204"/>
+<text>          </text>
+<a name="205"/>
+<a name="206"/>
+<text>&#195;&#151;</text>
+<text>
+</text>
+<text>          </text>
+<a name="207"/>
+<text>Login</text>
+<text>
+</text>
+<text>        </text>
+<text>
+</text>
+<text>        </text>
+<a name="208"/>
+<text>{$login}{$Content}</text>
+<text>
+</text>
+<text>        </text>
+<a name="209"/>
+<text>          </text>
+<a name="210"/>
+<text>Close</text>
+<text>
+</text>
+<text>        </text>
+<text>
+</text>
+<text>      </text>
+<text>
+</text>
+<text>    </text>
+<text>
+</text>
+<text>  </text>
+</fot>

@@ -10,6 +10,8 @@ class page_destination extends Page{
 		
 		//Featured Restaurant
         $destination_model = $this->add('Model_Destination');
+        $destination_model->addCondition('is_verified',true);
+        $destination_model->addCondition('status','active');
 
          if($this->app->recall('venue_data')){
             $data = $this->app->recall('venue_data');

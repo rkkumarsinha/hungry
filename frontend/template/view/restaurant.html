@@ -15,7 +15,22 @@
                 </div>
               </div>
             </div>
-            <div class="item-specific"><span title="Distance" data-lat="{$latitude}" data-lng="{$longitude}"><i class="fa fa-map-marker"><span data-lat="{$latitude}" data-lng="{$longitude}" style="color:orange;" data-id="{$id}" class="current-distance"></span></i>{$distance}</span><span title="Average cost"><i class="fa fa-inr"></i>{avgcost}un defined{/}</span><span title="Area"><i class="fa fa-tags"></i> {offers}240m{/}</span></div><img src="{display_image}assets/img/small.jpg{/}" alt=""/></a>
+            <div class="item-specific">
+              <span title="Distance" data-lat="{$latitude}" data-lng="{$longitude}">
+                  <i class="fa fa-map-marker">
+                    <span data-lat="{$latitude}" data-lng="{$longitude}" style="color:orange;" data-id="{$id}" class="current-distance"></span>
+                  </i>
+                {$distance}
+              </span>
+              <span title="Average cost">
+                <i class="fa fa-inr"></i>&nbsp;{avgcost}un defined{/}*
+              </span>
+              <span title="Total Offer/Discount">
+                <i class="fa fa-tags"></i> {offer_discount_count}0{/}
+              </span>
+            </div>
+            <img src="{display_image}assets/img/small.jpg{/}" alt=""/>
+          </a>
           <div class="restaurant-category"><i class="fa fa-hungry">{$category}</i></div>
         </div>{getdiscount_wrapper}
         <div data-restaurantid="{$id}" class="btn-block atk-swatch-orange btn hungry-getdiscount container">Get Discount</div>{/}

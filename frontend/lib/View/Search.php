@@ -10,25 +10,30 @@ class View_Search extends View{
 		// $rest_tab = $tab->addTab('Restaurant');
 		// $event_tab = $tab->addTab('Event');
 		// $venue_tab = $tab->addTab('Venue');
-
+		$form = $this;
 		switch ($page_name) {
 			case 'index':
-				$this->add('Form_Search',null,'form_search');
+			case 'restaurantdetail':
+				$form = $this->add('Form_Search',['redirect_page'=>'index'],'form_search');
 				$this->template->trySet('tab_restaurant','active');
 				break;
 			case 'event':
-				$this->add('Form_Event',null,'form_search');
+			case 'eventdetail':
+				$form = $this->add('Form_Event',['redirect_page'=>'event'],'form_search');
 				$this->template->trySet('tab_event','active');
 				break;
 			case 'venue':
-				$this->add('Form_Venue',['redirect_page'=>'destination'],'form_search');
+				$form = $this->add('Form_Venue',null,'form_search');
 				$this->template->trySet('tab_venue','active');
 				break;
 			case 'destination':
-				$this->add('Form_Venue',null,'form_search');
+			case 'destinationdetail':
+				$form = $this->add('Form_Venue',['redirect_page'=>'venue'],'form_search');
 				$this->template->trySet('tab_venue','active');
 				break;
 		}
+
+		$form->layout->add('View_Location',null,'location');
 	}
 
 	function defaultTemplate(){

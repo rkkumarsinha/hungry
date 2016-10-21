@@ -5,6 +5,7 @@
 class Form_Search extends Form{
     public $city_id=false;
     public $btn_clicked = false;
+    public $redirect_page = 'index';
     function init(){
         parent::init();
         
@@ -12,6 +13,7 @@ class Form_Search extends Form{
 
         $this->setLayout('form/search');
         // $this->api->stickyGET('form_city_id');
+        // $this->layout->add('View_Location',null,'location');
 
         $search_phrase = $this->addField('autocomplete\Form_Field_RelavanceBasic',
                                         [
@@ -48,7 +50,7 @@ class Form_Search extends Form{
         if($this->isSubmitted()){
             if($this->app->city_id != $this['city'])  {
                 $this->app->memorize('city_id',$this['city']);
-                $this->app->redirect($this->app->url());
+                $this->app->redirect($this->app->url($this->redirect_page));
             }
 
             $restro_id = 0;

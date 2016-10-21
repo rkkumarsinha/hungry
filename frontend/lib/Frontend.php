@@ -82,7 +82,7 @@ class Frontend extends ApiFrontend {
             }
         }
 
-        $this->layout->add('View_Location',null,'location');
+        // $this->layout->add('View_Location',null,'location');
         // $this->js(true)->univ()->alert('hello');
         // $this->on('click','.host-list',function($js,$data){
         //     throw new \Exception("Error Processing Request", 1);

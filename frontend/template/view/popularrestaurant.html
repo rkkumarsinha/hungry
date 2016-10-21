@@ -26,22 +26,76 @@
             </div>
           </div><img src="{display_image}assets/img/items/restaurant/8.jpg{/}"/>
         </div>
-        <div class="wrapper"><a href="{$path}">
-            <h3>{name}Magma Bar and Grill{/}</h3></a>
-          <figure><i class="fa fa-map-marker"></i><span>{address}970 Chapel Street, Rosenberg, TX 77471{/}</span></figure>
-          <div class="info">
-            <div data-rating="4" class="rating">
-              <aside class="reviews">{rating}6 reviews{/}</aside>
+        <div class="wrapper">
+            <div class="row">
+              <div class=""><img src="assets/img/{$food_type}.png" alt="{$food_type}" style="float:left;width:25px;margin-left:2%;" /></div>
+              <div class="col-md-11"><a href="{$path}"><h2 style="font-size:20px;">{$name}</h2></a></div>
             </div>
-            <div class="type"><i><img src="assets/icons/restaurants-bars/restaurants/restaurant.png"/></i><span>{type}Restaurant{/}</span></div>
-          </div>
-          <!-- /.info-->
-          <p>{about_restaurant}            </p>{/}<a href="{$path}" class="read-more icon">Read More</a>
+            <figure>
+                <i class="fa fa-map-marker"></i>
+                <span>{$address}</span>
+            </figure>
+            <div class="info">
+                <div class="rating" data-rating="4">
+                    <aside class="reviews">{$approved_review_count} reviews</aside>
+                  <div class="rating-container rating-animate rating-disabled" style="float:left;">
+              <div class="rating">
+                <span class="empty-stars" style="font-size:15px;">
+                <span class="star">
+                  <i class="glyphicon glyphicon-star-empty"></i>
+                </span>
+                <span class="star">
+                  <i class="glyphicon glyphicon-star-empty"></i></span>
+                <span class="star">
+                  <i class="glyphicon glyphicon-star-empty"></i></span>
+                <span class="star">
+                  <i class="glyphicon glyphicon-star-empty"></i>
+                </span>
+                <span class="star">
+                  <i class="glyphicon glyphicon-star-empty"></i></span>
+                </span>
+                <span class="filled-stars" style="font-size:15px;width:{$rating_percentage};">
+                  <span class="star">
+                    <i class="glyphicon glyphicon-star"></i></span>
+                  <span class="star">
+                    <i class="glyphicon glyphicon-star"></i></span>
+                  <span class="star">
+                    <i class="glyphicon glyphicon-star"></i></span>
+                  <span class="star">
+                    <i class="glyphicon glyphicon-star"></i></span>
+                  <span class="star">
+                    <i class="glyphicon glyphicon-star"></i></span>
+                  </span>
+                </div>
+              </div>
+                </div>
+              <div class="type">
+                <span title="Distance" data-lat="{$latitude}" data-lng="{$longitude}" style="padding:0px 10px 0 10px;">
+                    <i class="fa fa-map-marker">
+                      <span data-lat="{$latitude}" data-lng="{$longitude}" style="color:orange;" data-id="{$id}" class="current-distance"></span>
+                    </i>
+                  {$distance}
+                </span>
+                <span title="Average cost" style="padding:0px 10px 0 10px;">
+                  <i class="fa fa-inr"></i>&nbsp;{avgcost}un defined{/}*
+                </span>
+                <span title="Total Offer/Discount" style="padding:0px 10px 0 10px;">
+                  <i class="fa fa-tags"></i> {offer_discount_count}0{/}
+                </span>
+              </div>
+                <div class="type">
+                    <i><img src="assets/icons/restaurants-bars/restaurants/restaurant.png"></i>
+                    <span>{$type}</span>
+                </div>
+            </div>
+            <!--/.info-->
+            <p>{$about_restaurant}
+            </p>
+            <a href="{$path}" class="read-more icon">Read More</a>
         </div>
-        <!-- /.wrapper-->
+
       </div>
-      <!-- /.inner-->
     </div>
-    <!-- /.slide-->{/}{/}
+    {/}{/}
   </div>
 </div>

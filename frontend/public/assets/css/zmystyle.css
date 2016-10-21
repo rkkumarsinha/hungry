@@ -44,6 +44,7 @@
 
 .nearbyrestaurant-thumb, .nearbyrestaurant-thumb img{
 	height:100px;
+	width: 100% !important;
 }
 
 .nearbyrestaurant-thumb{
@@ -1482,4 +1483,18 @@ input[type="radio"] .styled:checked + label::after {
 
 .dropzone.profile-picture > img{
 	z-index: 0 !important;
+}
+
+#outer-wrapper.show-nav .header .toggle-navigation .icon .line{
+	background-color:white !important;
+}
+
+body.modal-open .modal-backdrop.fade.in{
+	opacity: 0 !important;
+	display: none;
+}
+
+.hungryquicksearch .search-bar{
+	height:100px;
+	background-color: #474747 !important;
 }
