@@ -1498,3 +1498,14 @@ body.modal-open .modal-backdrop.fade.in{
 	height:100px;
 	background-color: #474747 !important;
 }
+
+.hungry-sidebardiscoountlink{
+	box-shadow: 0 10px 6px -6px grey;
+}
+
+.hungry-sidebardiscoountlink:hover{
+	background-color: #fa9634 !important;
+	color: white !important;
+	-webkit-transition: all 0.7s ease;
+	transition: all 0.7s ease;
+}
