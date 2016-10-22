@@ -7,6 +7,10 @@ class View_Restaurant_GetDiscount extends View{
 
         $restaurant_id = $this->restaurant_id;
 
+        if(!$restaurant_id){
+            $this->add('View_Error')->set('restaurant id not found');
+            return;
+        }
         //check for the login
         //if not logged in
         	//show the login and registration page

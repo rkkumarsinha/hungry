@@ -784,6 +784,14 @@ ul.horizontal-slide li[class*="span"]:first-child {
 #dashboard-section .ui-helper-reset {
 	font-size:100%;
 }
+
+#dashboard-section .image.item img,
+#dashboard-section .image.item
+{
+	max-height: 150px;
+	height: 150px;
+}
+
 .dashboard-section .comments .comment{
 	margin-bottom:10px !important;
 }
