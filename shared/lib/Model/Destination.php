@@ -67,6 +67,14 @@ class Model_Destination extends SQL_Model{
 		$this->addField('status')->enum(["active","deactive"])->defaultValue('deactive');
 		$this->addField('is_verified')->type('boolean')->defaultValue(false);
 
+		// SEO Field
+		$this->addField('title')->type('text')->hint('Ex: Best Venue in Udaipur - Destination/Venue Name');
+		$this->addField('keyword')->type('text')->hint('Ex: best destination, destination in udaipur etc.');
+		$this->addField('description')->type('text')->hint('Short description about your destination');
+		$this->addField('image_title')->type('text')->hint('Ex:Destination in Udaipur - Destination Name');
+		$this->addField('image_alt_text')->type('text')->hint('Ex:destination udaipur');
+
+
 		$this->hasMany('Destination_HighlightAssociation','destination_id');
 		$this->hasMany('Destination_Space','destination_id');
 		$this->hasMany('Destination_Package','destination_id');

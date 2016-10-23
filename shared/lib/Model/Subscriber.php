@@ -9,7 +9,8 @@ class Model_Subscriber extends SQL_Model{
 		$this->addField('name')->caption('Email')->mandatory(true);
 		$this->addField('created_at')->type('datetime')->defaultValue(date('Y-m-d h:i:s'));
 
-		// $this->add('dynamic_model/Controller_AutoCreator');
+		$this->addField('mobile_no')->mandatory(true);
+		$this->add('dynamic_model/Controller_AutoCreator');
 		
 	}
 

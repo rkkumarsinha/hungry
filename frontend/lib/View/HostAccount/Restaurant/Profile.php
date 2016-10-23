@@ -16,6 +16,7 @@ class View_HostAccount_Restaurant_Profile extends View{
 		$highlight_tab = $tab->addTab('Highlight');
 		$cuisine_tab = $tab->addTab('Cuisine');
 		$category_tab = $tab->addTab('Category');
+		$meta_tab = $tab->addTab('Meta Info');
 		
 		$basic_form = $basic_info_tab->add('Form');
 		$basic_form->setModel($host_restaurant,
@@ -44,16 +45,14 @@ class View_HostAccount_Restaurant_Profile extends View{
 								'website',
 								'facebook_page_url',
 								'instagram_page_url',
-								'rating',
 								'avg_cost_per_person_veg',
 								'avg_cost_per_person_nonveg',
 								'avg_cost_per_person_thali',
 								'avg_cost_of_a_beer',
 								'credit_card_accepted',
 								'reservation_needed',
-								'type',
-								'longitude',
 								'latitude',
+								'longitude',
 								'monday',
 								'tuesday',
 								'wednesday',
@@ -115,7 +114,7 @@ class View_HostAccount_Restaurant_Profile extends View{
 
         $menu_image->addHook('afterInsert',function($model)use($host_restaurant){
 			$notification = $this->add('Model_Notification');
-			$notification['name'] = "Request for new Gallery Image Approved";
+			$notification['name'] = "Request for new Menu Image Approved";
 			$notification['from_id'] = $host_restaurant->id;
 			$notification['from'] = "Restaurant";
 			$notification['to'] = "HungryDunia";
@@ -140,31 +139,63 @@ class View_HostAccount_Restaurant_Profile extends View{
                 $g->current_row_html['image'] = "No Icon Found";
         });
 
+        //highlight
         $r_hl = $highlight_tab->add('Model_Restaurant_Highlight')->addCondition('restaurant_id',$host_restaurant->id);
+		$r_hl->addExpression('image')->set($r_hl->refSQL('Highlight_id')->fieldQuery('image_id'));
+
         $hl_crud = $highlight_tab->add('CRUD');
         $hl_crud->grid->addHook('formatRow',function($g){
-            if($g->model['icon_url'])
-                $g->current_row_html['icon_url'] = "<img src=".$g->model['icon_url'].">";
-            else
+        	$f = $this->add('filestore/Model_File')->addCondition('id',$g->model['image']);
+            $f->tryLoadAny();
+            if($f->loaded()){
+                $path = $this->app->getConfig('imagepath').str_replace("..", "", $f->getPath());
+                $g->current_row_html['image'] = "<img width='100px' src=".$path.">";
+            }else
                 $g->current_row_html['image'] = "No Icon Found";
         });
-        $hl_crud->setModel($r_hl);
+        $hl_crud->setModel($r_hl,['Highlight_id','image'],['Highlight','image']);
 
+        //Restaurant keyword
         $cu_hl = $cuisine_tab->add('Model_Restaurant_Keyword')->addCondition('restaurant_id',$host_restaurant->id);
+		$cu_hl->addExpression('image')->set($cu_hl->refSQL('keyword_id')->fieldQuery('image_id'));
         $cu_crud = $cuisine_tab->add('CRUD');
-        $cu_crud->setModel($cu_hl);
         $cu_crud->grid->addHook('formatRow',function($g){
-            if($g->model['icon_url'])
-                $g->current_row_html['icon_url'] = "<img src=".$g->model['icon_url'].">";
-            else
+           	$f = $this->add('filestore/Model_File')->addCondition('id',$g->model['image']);
+            $f->tryLoadAny();
+            if($f->loaded()){
+                $path = $this->app->getConfig('imagepath').str_replace("..", "", $f->getPath());
+                $g->current_row_html['image'] = "<img width='100px' src=".$path.">";
+            }else
                 $g->current_row_html['image'] = "No Icon Found";
-        });
 
-        
+        });
+        $cu_crud->setModel($cu_hl,['keyword_id','image'],['keyword','image']);
+		
+
         $cat_crud = $category_tab->add('CRUD');
+        $cat_crud->grid->addHook('formatRow',function($g){
+           	$f = $this->add('filestore/Model_File')->addCondition('id',$g->model['image']);
+            $f->tryLoadAny();
+            if($f->loaded()){
+                $path = $this->app->getConfig('imagepath').str_replace("..", "", $f->getPath());
+                $g->current_row_html['image'] = "<img width='100px' src=".$path.">";
+            }else
+                $g->current_row_html['image'] = "No Icon Found";
+
+        });
         $cat_asso = $this->add('Model_CategoryAssociation');
         $cat_asso->addCondition('restaurant_id',$host_restaurant->id);
-        $cat_crud->setModel($cat_asso);
+        $cat_asso->addExpression('image')->set($cat_asso->refSQL('category_id')->fieldQuery('image_id'));
+        $cat_crud->setModel($cat_asso,['category_id','image'],['category','image']);
+
+        // Meta Forms
+        $meta_form = $meta_tab->add('Form',null,null,['form/stacked']);
+        $meta_form->setModel($host_restaurant,['title','keyword','description','image_title','image_alt_text']);
+ 		$meta_form->addSubmit('Save');
+ 		if($meta_form->isSubmitted()){
+ 			$meta_form->save();
+ 			$meta_form->js(null,$meta_form->js()->reload())->univ()->successMessage("Information Saved Successfully")->execute();
+ 		}
 
 	}
 }

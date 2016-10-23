@@ -43,11 +43,16 @@ class View_HostAccount_Restaurant_DiscountManagement extends View{
 				$notification['message'] = $host_restaurant['name'];
 				$notification['value'] = $discount_form['discount_percentage'];
 				$notification->save();
+				$discount_form->js(null,$discount_tab->js()->reload())->univ()->successMessage('Discount Submitted ')->execute();
 			}
 		}
 
 		$offer_form  = $offer_tab->add('Form');
-		$offer_form->addField('line','offer_name')->validateNotNull(true);
+
+		$offer_name_field = $offer_form->addField('DropDown','offer_name')->validateNotNull(true);
+		$offer_name_field->setModel('Offer');
+		$offer_name_field->setEmptyText('Please Select Offer');
+		$offer_form->addField('line','title')->validateNotNull(true);
 		$offer_form->addField('text','offer_detail')->validateNotNull(true);
 		$offer_form->addSubmit('Send For Approved');
 		
@@ -64,6 +69,9 @@ class View_HostAccount_Restaurant_DiscountManagement extends View{
 		$pending_grid->addPaginator($ipp=10);
 
 		if($offer_form->isSubmitted()){
+
+			$offer_model  = $this->add('Model_Offer')->load($offer_form['offer_name']);
+
 			$notification = $this->add('Model_Notification');
 			$notification['name'] = "Request for new offer";
 			$notification['from_id'] = $host_restaurant->id;
@@ -71,9 +79,21 @@ class View_HostAccount_Restaurant_DiscountManagement extends View{
 			$notification['to'] = "HungryDunia";
 			$notification['request_for'] = "offer";
 			$notification['status'] = "pending";
-			$notification['value'] = $offer_form['offer_name'];
+			$notification['value'] = $offer_model['name']." - ".$offer_form['title'];
 			$notification['message'] = $offer_form['offer_detail'];
 			$notification->save();
+
+			$new_offer = $this->add('Model_RestaurantOffer')
+					->addCondition('restaurant_id',$host_restaurant->id)
+					->addCondition('offer_id',$offer_form['offer_detail'])
+					->addCondition('sub_name',$offer_form['title'])
+					;
+			$new_offer->tryLoadAny();
+
+			$new_offer['detail'] = $offer_form['offer_detail'];
+			$new_offer['is_active'] = false;
+			$new_offer->save();
+
 			$js_event = [
 							$offer_form->js()->reload(),
 							$pending_grid->js()->reload()

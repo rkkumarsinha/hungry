@@ -21,10 +21,10 @@ class View_HostAccount_Restaurant_Sales extends View{
 		$dc_model->setOrder('created_at','desc');
 		$dc_model->getElement('name')->caption('Name');
 		$dc_model->getElement('discount_coupon')->caption('Coupon');
-
+		$dc_model->setOrder('created_at','desc');
 		$discount_offer_voucher = $discount_tab->add('Grid');
-		$discount_offer_voucher->setModel($dc_model,['name','email','mobile','created_at','discount_coupon','discount','offer']);
-		$discount_offer_voucher->addPaginator($ipp=15);
+		$discount_offer_voucher->setModel($dc_model,['name','email','mobile','created_at','discount_coupon','discount','offer','total_amount']);
+		$discount_offer_voucher->addPaginator($ipp=10);
 
 		// Table Reservation
 		$reserved_table = $table_tab->add('Model_ReservedTable');

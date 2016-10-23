@@ -67,6 +67,13 @@ class Model_Restaurant extends SQL_Model{
 		$this->addField('status')->enum(["active","deactive"])->defaultValue('deactive');
 		$this->addField('is_verified')->type('boolean')->defaultValue(false);
 
+		// SEO Field
+		$this->addField('title')->type('text')->hint('Ex: Best Restaurant in Udaipur - Restaurant Name');
+		$this->addField('keyword')->type('text')->hint('Ex: best restaurant, restaurant in udaipur etc.');
+		$this->addField('description')->type('text')->hint('Short description about your restaurant');
+		$this->addField('image_title')->type('text')->hint('Ex:Restaurant in Udaipur - Restaurant Name');
+		$this->addField('image_alt_text')->type('text')->hint('Ex:restaurant udaipur');
+
 		$this->hasMany('CategoryAssociation','restaurant_id');
 		$this->hasMany('Review','restaurant_id');
 		$this->hasMany('RestaurantImage');

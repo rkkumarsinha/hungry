@@ -33,7 +33,7 @@ class View_Search extends View{
 				break;
 		}
 
-		$form->layout->add('View_Location',null,'location');
+		// $form->layout->add('View_Location',null,'location');
 	}
 
 	function defaultTemplate(){

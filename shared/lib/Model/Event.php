@@ -51,6 +51,13 @@ class Model_Event extends SQL_Model{
 
 		$this->addField('created_at')->type('datetime')->defaultValue(date('Y-m-d H:i:s'));
 		
+		// SEO Field
+		$this->addField('title')->type('text')->hint('Ex: Best Event in Udaipur - Event Name');
+		$this->addField('keyword')->type('text')->hint('Ex: best event, event in udaipur etc.');
+		$this->addField('description')->type('text')->hint('Short description about your event');
+		$this->addField('image_title')->type('text')->hint('Ex:Event in Udaipur - Event Name');
+		$this->addField('image_alt_text')->type('text')->hint('Ex:event udaipur');
+
 		$this->hasMany('Event_Day','event_id');
 		$this->hasMany('Event_Ticket','event_id');
 		$this->hasMany('EventImage','event_id');

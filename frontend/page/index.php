@@ -40,6 +40,8 @@ class page_index extends Page
         $recent_list = $this->add('View_Lister_Restaurant',null,'recentlyadded',['view/recentrestaurant']);
         $recent_list->setModel($recent_rest_model);
 
+        $this->add('View_DownloadApp',null,'download_app');
+
         parent::recursiveRender();
     }
 

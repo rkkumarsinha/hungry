@@ -19,7 +19,7 @@ class Model_Outbox extends SQL_Model{
 		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 
-	function createNew($name,$to,$subject,$body,$type,$related_document,$related_document_id,$user){
+	function createNew($name,$to,$subject,$body,$type,$related_document,$related_document_id,$user=null){
 
 		$this['name'] = $name;
 		$this['to'] = $to;
@@ -28,7 +28,8 @@ class Model_Outbox extends SQL_Model{
 		$this['type'] = $type;
 		$this['related_document'] = $related_document;
 		$this['related_document_id'] = $related_document_id;
-		$this['user_id'] = $user->id;
+		if($user)
+			$this['user_id'] = $user->id;
 		$this->save();
 	}
 
@@ -75,7 +76,7 @@ class Model_Outbox extends SQL_Model{
         }
 	}
 
-	function sendSMS($to_number,$sms,$user_model){
+	function sendSMS($to_number,$sms,$user_model=null){
 		$sms_response = $this->add('Controller_SMS')->sendMessage($to_number,$sms);
 		return true;
 	}
