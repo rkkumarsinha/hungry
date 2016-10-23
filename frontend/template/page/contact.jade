@@ -1,0 +1,92 @@
+div(id="{$_name}" class="{$class}" style="{$style}")
+	div(id="page-content")
+		section(id="map-simple" class="map-contact")
+			iframe(src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3626.811585180777!2d73.693218!3d24.630177999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3967e4f09827e90d%3A0x7105aa0ec6a27e80!2shungrydunia!5e0!3m2!1sen!2sin!4v1477248540001" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen)
+		section.container
+			.row
+				// Content
+				.col-md-9
+					header
+						h1.page-title Contact
+					section
+						.row
+							.col-md-4.col-sm-4
+								header.no-border
+									h3 Address
+								address
+									div
+										strong hungrydunia.com
+									div 19, priyadarshni Nagar,
+									div Bedla Road, Udaipur(Raj.)
+									br
+									figure
+										.info
+											i.fa.fa-mobile
+											span +91 9521389201
+										.info
+											i.fa.fa-envelope
+											span info@hungrydunia.com
+										.info
+											i.fa.fa-globe
+											a(href='#') www.hungrydunia.com
+							// /.col-md-4
+							.col-md-4.col-sm-4
+								header.no-border
+									h3 Social Networks
+								a.social-button(href='http://www.twitter.com/HungryDunia' target="_blank")
+									i.fa.fa-twitter
+									| Twitter
+								a.social-button(href='http://www.facebook.com/HungryDunia' target="_blank")
+									i.fa.fa-facebook
+									| Facebook
+								a.social-button(href='https://www.instagram.com/hungrydunia/' target="_blank")
+									i.fa.fa-pinterest
+									| Pinterest
+							// /.col-md-4
+							.col-md-4.col-sm-4(style="display:none;")
+								header.no-border
+									h3 About Us
+								p
+									| Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tristique imperdiet
+									| nibh tincidunt fermentum. Nunc enim nibh, convallis et tincidunt in, vehicula a diam.
+									| Nullam in risus erat
+								a.read-more.icon(href='about-us.html') Read More
+							// /.col-md-4
+						// /.row
+					hr
+					section
+						header.no-border
+							h3 Contact Form
+						{contact_form}
+						div#contact-form.background-color-white(style="padding:10px;")
+							.row
+								.col-md-6.col-sm-6
+									.form-group.atk-form-row
+										label Name
+										{$name}
+									.form-group.atk-form-row
+										label Email
+										{$email}
+								.col-md-6.col-sm-6
+									.form-group.atk-form-row
+										label Subject
+										{$subject}
+									.form-group.atk-form-row
+										label Mobile Number
+										{$mobile_no}
+							.form-group.atk-form-row
+								label(for='company-form-message') Message
+								{$message}
+							// /.form-group
+							.form-group
+								button.btn.btn-default.icon(type='submit')
+									| Send a Message
+									i.fa.fa-angle-right
+							// /.form-group
+						// /#contact-form
+						{/}
+				// Sidebar
+				.col-md-3
+					{$downloadapp}
+				// /.col-md-3
+				// end Sidebar
