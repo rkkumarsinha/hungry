@@ -49,6 +49,7 @@ class page_eventdetail extends Page{
         // Date Format
         $this->template->trySet('starting_date_redable',date('M-d-Y',strtotime($this->model['starting_date'])));
         $this->template->trySet('closing_date_redable',date('M-d-Y',strtotime($this->model['closing_date'])));
+        $this->template->trySetHtml('event_attraction_list',$this->model['event_attraction']);
         // $event = $this->add('View_EventTicket');
         // $event->setModel($m);
     }
