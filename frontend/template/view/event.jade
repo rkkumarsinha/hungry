@@ -20,9 +20,9 @@ div(id="{$_name}" class="{$class}" style="{$style} width:95%;margin:0 auto;")
               span(title='')
                 i.fa.fa-inr
                 | {lowest_price}{/} *
-              span(title='Area')
+              span(title='Remaining Ticket')
                 i.fa.fa-tags
-                |  {offers}240m{/}
+                |  {remaining_tickets}0{/}
             div.icon.event-date
               div {$starting_date}
               div {$starting_month}
@@ -39,29 +39,29 @@ div(id="{$_name}" class="{$class}" style="{$style} width:95%;margin:0 auto;")
           figure(style="font-size:16px;") {address}{/}
     | {/}{/}
     // /.col-sm-4
-  script(type='text/javascript').
-    if ( navigator.geolocation ) {
-    function success(pos) {
-    $.each($(".current-distance"),function(index,element){
-    $.post('?page=getdistance',
-    {
-    'currentlat':pos.coords.latitude,
-    'currentlan':pos.coords.longitude,
-    'restlan':$(element).attr('data-lng'),
-    'restlat':$(element).attr('data-lat')
-    },
-    function(data) {
-    //- console.log(data);
-    $(element).html(data);
-    });
-    });
-    }
-    function fail(error) {
-    console.log("https://www.google.co.in/maps/@26.8852108,75.7905578,11z?hl=en");
-    }
-    function error(error){
-    }
-    navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 5, enableHighAccuracy:true, timeout: 6000});
+  //- script(type='text/javascript').
+  //-   if ( navigator.geolocation ) {
+  //-   function success(pos) {
+  //-   $.each($(".current-distance"),function(index,element){
+  //-   $.post('?page=getdistance',
+  //-   {
+  //-   'currentlat':pos.coords.latitude,
+  //-   'currentlan':pos.coords.longitude,
+  //-   'restlan':$(element).attr('data-lng'),
+  //-   'restlat':$(element).attr('data-lat')
+  //-   },
+  //-   function(data) {
+  //-   //- console.log(data);
+  //-   $(element).html(data);
+  //-   });
+  //-   });
+  //-   }
+  //-   function fail(error) {
+  //-   console.log("https://www.google.co.in/maps/@26.8852108,75.7905578,11z?hl=en");
+  //-   }
+  //-   function error(error){
+  //-   }
+  //-   navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 5, enableHighAccuracy:true, timeout: 6000});
 
-    //- navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true,timeout: 100000,maximumAge: 0});
-    }
+  //-   //- navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true,timeout: 100000,maximumAge: 0});
+  //-   }

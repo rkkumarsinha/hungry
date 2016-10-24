@@ -38,7 +38,10 @@ class page_event extends Page{
 								'lowest_price',
 								'event_attraction',
                                 'guidelines',
-                                'how_to_reach'
+                                'how_to_reach',
+                                'is_active',
+                                'is_verified',
+                                'disclaimer'
 							),
 						array
 							(

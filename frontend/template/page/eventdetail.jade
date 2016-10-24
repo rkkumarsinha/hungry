@@ -49,16 +49,15 @@
                       i.fa.fa-globe
                       a(href='#') {$website}
                     {/}
-                    {facebook_wrapper}
-                    .info
-                      i.fa.fa-facebook
-                      a(href='{$facebook_page_url}' target="_blank") Visit Facebook
-                    {/}
-                    {instagram_wrapper}
-                    .info
-                      i.fa.fa-instagram
-                      a(href='{$instagram_page_url}') Instagram URL
-                    {/}
+                    .social(style="margin-bottom:20px;margin-top:5px;")
+                      {facebook_wrapper}
+                      a.social-button(target="_blank" href="{$facebook_page_url}" style="float:left;")
+                        i.fa.fa-facebook.facebook(style="padding:0px !important;")
+                      {/}
+                      {instagram_wrapper}
+                      a.social-button(target="_blank" href="{$instagram_page_url}" style="float:left;")
+                        i.fa.fa-instagram.instagram(style="padding:0px !important;float:left;")
+                      {/}
               // end Contact
               section
                 header
@@ -69,11 +68,11 @@
                       div(style="margin-top:10px;margin-bottom:10px;font-weight:bold;")
                         i.fa.fa-calendar.text-success &nbsp;Starting Date&nbsp; 
                         span.pull-right
-                          {$starting_date}
+                          {$starting_date_redable}
                       div(style="margin-top:10px;margin-bottom:10px;font-weight:bold;")
                         i.fa.fa-calendar.text-danger &nbsp;Ending Date&nbsp;
                         span.pull-right
-                          {$closing_date}
+                          {$closing_date_redable}
               section
                 header
                   h3 Ticket Price
@@ -147,10 +146,16 @@
                       p 
                         {$detail}
                     #guidelines.tab-pane(role='tabpanel')
-                      {$guide_lines}
+                      h3 Guideline
+                      p {$guidelines}
+                      h3 How To Reach
+                      p {$how_to_reach}
                     #ticket.tab-pane(role='tabpanel')
                       {$ticket_and_their_detail}  
                       // /.block  
+              div(style="margin-top:20px;") 
+                b Disclaimer : 
+                {$disclaimer}
               // Reviews
               {$review}
               // end Review Form

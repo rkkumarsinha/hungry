@@ -67,6 +67,8 @@ class Model_Event extends SQL_Model{
 			return $m->refSQL('Event_Day')->count();
 		});
 
+		$this->addExpression('remaining_tickets')->set($this->refSQL('Event_Ticket')->sum('remaining_ticket'));
+
 		$this->addExpression('lowest_price')->set(function($m,$q){
 			return $m->refSQL('Event_Ticket')->setOrder('price','asc')->setLimit(1)->fieldQuery('price');
 		});

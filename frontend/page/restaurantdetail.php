@@ -33,11 +33,17 @@ class page_restaurantdetail extends Page{
         $this->setModel($restaurant_model);
 
         // Get Discount Review
-        $discount_view =  $this->add('View_Restaurant_GetDiscount',['restaurant_id'=>$restaurant_model->id],'getdiscount');
+        if($restaurant_model['discount_id'])
+            $discount_view =  $this->add('View_Restaurant_GetDiscount',['restaurant_id'=>$restaurant_model->id],'getdiscount');
+        else
+            $this->template->tryDel('discountcoupon_wrapper');
 
         // reservation table
-        if($restaurant_model['reservation_needed'])
+        if($restaurant_model['reservation_needed']){
             $reserve_table_view = $this->add('View_Restaurant_ReserveTable',['restaurant_id'=>$restaurant_model->id],'reservetable');
+        }else{
+            $this->template->tryDel('reservetable_wrapper');
+        }
         
         //Add Route Map
         $view_route_map = $this->add('View_RouteMap',['restaurant_lat'=>$restaurant_model['latitude'],'restaurant_lng'=>$restaurant_model['longitude']],'routemap');

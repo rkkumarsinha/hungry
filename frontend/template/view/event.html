@@ -15,13 +15,13 @@
                 </div>
               </div>
             </div>
-            <div class="item-specific"><span title="Distance" data-lat="{$latitude}" data-lng="{$longitude}"><i class="fa fa-map-marker"><span data-lat="{$latitude}" data-lng="{$longitude}" style="color:orange;" data-id="{$id}" class="current-distance"></span></i>{$distance}</span><span title=""><i class="fa fa-inr"></i>{lowest_price}{/} *</span><span title="Area"><i class="fa fa-tags"></i> {offers}240m{/}</span></div>
+            <div class="item-specific"><span title="Distance" data-lat="{$latitude}" data-lng="{$longitude}"><i class="fa fa-map-marker"><span data-lat="{$latitude}" data-lng="{$longitude}" style="color:orange;" data-id="{$id}" class="current-distance"></span></i>{$distance}</span><span title=""><i class="fa fa-inr"></i>{lowest_price}{/} *</span><span title="Remaining Ticket"><i class="fa fa-tags"></i> {remaining_tickets}0{/}</span></div>
             <div class="icon event-date">
               <div>{$starting_date}</div>
               <div>{$starting_month}</div>
             </div><img src="{display_image}assets/img/small.jpg{/}" alt="" onerror="this.src='assets/img/hungry-not-found.png';"/></a>
           <div class="restaurant-category"><i class="fa fa-hungry">{$event_category}</i></div>
-        </div>{bookticket_wrapper}<a href="?page=bookticket&amp;slug={$url_slug}" data-restaurantid="{$id}" style="width:60%;margin-top:10px;border-radius:10px;" class="btn-block atk-swatch-orange btn hungry-getdiscount container">Book Ticket</a>{/}
+        </div>{bookticket_wrapper}{/}
         <div class="wrapper"><a href="{$path}">
             <h3> {name}Hungry Event{/}</h3></a>
           <figure style="font-size:16px;">{address}{/}</figure>
@@ -30,31 +30,4 @@
     </div>{/}{/}
     <!-- /.col-sm-4-->
   </div>
-  <script type="text/javascript">
-    if ( navigator.geolocation ) {
-    function success(pos) {
-    $.each($(".current-distance"),function(index,element){
-    $.post('?page=getdistance',
-    {
-    'currentlat':pos.coords.latitude,
-    'currentlan':pos.coords.longitude,
-    'restlan':$(element).attr('data-lng'),
-    'restlat':$(element).attr('data-lat')
-    },
-    function(data) {
-    //- console.log(data);
-    $(element).html(data);
-    });
-    });
-    }
-    function fail(error) {
-    console.log("https://www.google.co.in/maps/@26.8852108,75.7905578,11z?hl=en");
-    }
-    function error(error){
-    }
-    navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 5, enableHighAccuracy:true, timeout: 6000});
-    
-    //- navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true,timeout: 100000,maximumAge: 0});
-    }
-  </script>
 </div>

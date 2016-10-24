@@ -28,14 +28,10 @@ class page_eventdetail extends Page{
     	$this->gallery_model = $this->add('Model_EventImage')->addCondition('event_id',$id);
         $this->setModel($event_model);
 
-        $bookticket_btn  = $this->add('Button','null','bookticket')->set('Book Ticket')->addClass('atk-swatch-orange btn-block')->setStyle('border','0px solid white');
-        
-        $bookticket_btn->js('click')->univ()->location($this->api->url('bookticket'));
-        // if($getdiscount_btn->isClicked()){
-            // 'autoOpen'=>false,'show'=>array('effect'=>'blind','duration'=> 1000)
-            // $options = array('width'=>'800');
-            // $this->js()->univ()->frameURL('Book Your Ticket',$this->api->url('bookticket',array('event_id'=>$id,'cut_page'=>0)),$options)->execute();
-        // }
+        if($event_model['remaining_tickets']){
+            $bookticket_btn  = $this->add('Button','null','bookticket')->set('Book Ticket')->addClass('atk-swatch-orange btn-block')->setStyle('border','0px solid white');
+            $bookticket_btn->js('click')->univ()->location($this->api->url('bookticket',['slug'=>$event_model['url_slug']]));
+        }
 
         //Add Route Map
         $view_route_map = $this->add('View_RouteMap',['restaurant_lat'=>$event_model['latitude'],'restaurant_lng'=>$event_model['longitude']],'routemap');
@@ -49,6 +45,10 @@ class page_eventdetail extends Page{
         
         $this->template->set('event_banner_image',$banner_image_url);
         $this->template->set('event_logo_image',$logo_image_url);
+
+        // Date Format
+        $this->template->trySet('starting_date_redable',date('M-d-Y',strtotime($this->model['starting_date'])));
+        $this->template->trySet('closing_date_redable',date('M-d-Y',strtotime($this->model['closing_date'])));
         // $event = $this->add('View_EventTicket');
         // $event->setModel($m);
     }
@@ -59,7 +59,10 @@ class page_eventdetail extends Page{
     	$gallery->setModel($this->gallery_model);
 
         //ticket price
-        $days = $this->add('Model_Event_Day')->addCondition('event_id',$this->event_id);
+        $days = $this->add('Model_Event_Day')
+                    ->addCondition('event_id',$this->event_id)
+                    ->setOrder('on_date','asc');
+
         $all_str = '';
         $event_day_time = "";
         $ticket_and_detail = "";
@@ -111,6 +114,8 @@ class page_eventdetail extends Page{
         $upcoming_event = $this->add('Model_Event');
         $upcoming_event->addCondition('starting_date','>=',$this->api->today);
         $upcoming_event->addCondition('id',"<>",$this->event_model->id);
+        $upcoming_event->addCondition('is_active',true);
+        $upcoming_event->addCondition('is_verified',true);
         $upcoming_event->setOrder('starting_date','asc');
         $upcoming_event->setLimit(3);
 

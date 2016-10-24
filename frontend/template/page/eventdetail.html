@@ -39,10 +39,9 @@
                     <div class="info"><i class="fa fa-envelope"></i><span>{$email}</span></div>{/}
                     {website_wrapper}
                     <div class="info"><i class="fa fa-globe"></i><a href="#">{$website}</a></div>{/}
-                    {facebook_wrapper}
-                    <div class="info"><i class="fa fa-facebook"></i><a href="{$facebook_page_url}" target="_blank">Visit Facebook</a></div>{/}
-                    {instagram_wrapper}
-                    <div class="info"><i class="fa fa-instagram"></i><a href="{$instagram_page_url}">Instagram URL</a></div>{/}
+                    <div style="margin-bottom:20px;margin-top:5px;" class="social">{facebook_wrapper}<a target="_blank" href="{$facebook_page_url}" style="float:left;" class="social-button"><i style="padding:0px !important;" class="fa fa-facebook facebook"></i></a>{/}
+                      {instagram_wrapper}<a target="_blank" href="{$instagram_page_url}" style="float:left;" class="social-button"><i style="padding:0px !important;float:left;" class="fa fa-instagram instagram"></i></a>{/}
+                    </div>
                   </figure>
                 </address>
               </section>
@@ -54,8 +53,8 @@
                 <figure>
                   <div id="detail-sidebar-event">
                     <div class="content ticket-price">
-                      <div style="margin-top:10px;margin-bottom:10px;font-weight:bold;"><i class="fa fa-calendar text-success">&nbsp;Starting Date&nbsp; </i><span class="pull-right">{$starting_date}</span></div>
-                      <div style="margin-top:10px;margin-bottom:10px;font-weight:bold;"><i class="fa fa-calendar text-danger">&nbsp;Ending Date&nbsp;</i><span class="pull-right">{$closing_date}</span></div>
+                      <div style="margin-top:10px;margin-bottom:10px;font-weight:bold;"><i class="fa fa-calendar text-success">&nbsp;Starting Date&nbsp; </i><span class="pull-right">{$starting_date_redable}</span></div>
+                      <div style="margin-top:10px;margin-bottom:10px;font-weight:bold;"><i class="fa fa-calendar text-danger">&nbsp;Ending Date&nbsp;</i><span class="pull-right">{$closing_date_redable}</span></div>
                     </div>
                   </div>
                 </figure>
@@ -141,13 +140,19 @@
                         {$detail}
                       </p>
                     </div>
-                    <div id="guidelines" role="tabpanel" class="tab-pane">{$guide_lines}</div>
+                    <div id="guidelines" role="tabpanel" class="tab-pane">
+                      <h3>Guideline</h3>
+                      <p>{$guidelines}</p>
+                      <h3>How To Reach</h3>
+                      <p>{$how_to_reach}</p>
+                    </div>
                     <div id="ticket" role="tabpanel" class="tab-pane">{$ticket_and_their_detail}  
                       <!-- /.block  -->
                     </div>
                   </div>
                 </div>
               </section>
+              <div style="margin-top:20px;"> <b>Disclaimer : </b>{$disclaimer}</div>
               <!-- Reviews-->{$review}
               <!-- end Review Form-->
             </div>

@@ -20,6 +20,10 @@ class Form_Event extends Form{
 
         $event_model = $this->add('Model_Event');
         $event_model->addCondition('city_id',$this->app->city_id);
+        $event_model->addCondition('is_active',true);
+        $event_model->addCondition('is_verified',true);
+        $event_model->addCondition('closing_date','>=',$this->app->today);
+        
         $search_phrase->setModel($event_model);
 
         // if($_GET['form_city_id']){
