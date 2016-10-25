@@ -1,4 +1,5 @@
 #page-content.page-item-detail.event-detail.hungry-restaurant-detail
+  {$redefine_search}
   // Hero Image
   section.hero-image.height-400.event-detail-banner.restaurant-detail-banner
     .inner(style="vertical-align: middle;")
@@ -32,7 +33,7 @@
                     {mobile_wrapper}
                     .info
                       i.fa.fa-mobile
-                      span {$mobile_no}
+                      span {$mobile_no}  disclaimer disclaimer  disclaimer disclaimer  disclaimer disclaimer 
                     {/}
                     {phone_wrapper}
                     .info
@@ -215,6 +216,9 @@
                       <hr/>
                       {/}
               // Reviews
+              div(style="margin-top:20px;") 
+                b Disclaimer : 
+                {$disclaimer}
               {$review}
               // end Review Form
             // /.col-md-8
@@ -237,7 +241,7 @@
                 #detail-sidebar-venue
                   .content
                   {$similar_destination}
-        section#main-content
+        section#main-content(style="display:none;")
           aside#detail-sidebar
             section
               header
@@ -269,6 +273,10 @@
                       .col-md-9
                         p(style="padding:5px;") {$name}
                   {/}
+        section#main-content
+          aside#detail-sidebar
+            {$downloadapp}
+
   .modal.fade(id='destination_enquiry_modalpopup' tabindex='-1' role='dialog' aria-labelledby='destination_enquiry_modalpopup')
     .modal-dialog(role='document')
       .modal-content

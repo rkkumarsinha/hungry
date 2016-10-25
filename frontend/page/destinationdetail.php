@@ -42,7 +42,8 @@ class page_destinationdetail extends Page{
     }
 
     function recursiveRender(){
-        
+        $this->add('View_RedefineSearch',null,'redefine_search');
+
         $gallery = $this->add('View_Lister_DestinationGallery',['destination_id'=>$this->destination_id],'gallery');
         $gallery->setModel($this->gallery_model);
 
@@ -81,7 +82,7 @@ class page_destinationdetail extends Page{
                         ->addCondition('is_active',true)
                         ->addCondition('destination_id',$this->destination_id)
                         ;
-        $this->add('Lister',null,'space',['page/destinationdetail','dest_space'])->setModel($space_model);
+        // $this->add('Lister',null,'space',['page/destinationdetail','dest_space'])->setModel($space_model);
         $this->add('Lister',null,'dest_space',['page/destinationdetail','dest_space'])->setModel($space_model);
 
         // //Destination Packages
@@ -125,6 +126,8 @@ class page_destinationdetail extends Page{
                     ];
         $this->js('click',$js_event)->_selector('.hungrydestination_enquiry');
 
+        // downloadapp
+        $this->add('View_DownloadApp',null,'downloadapp');
         parent::recursiveRender();
     }
 

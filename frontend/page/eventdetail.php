@@ -55,6 +55,7 @@ class page_eventdetail extends Page{
     }
 
     function recursiveRender(){
+        $this->add('View_RedefineSearch',null,'redefine_search');
         
         $gallery = $this->add('View_Lister_EventGallery',['event_id'=>$this->event_id],'gallery');
     	$gallery->setModel($this->gallery_model);

@@ -9,8 +9,8 @@ class View_Lister_Destination extends CompleteLister{
 	function init(){
 		parent::init();
 
-		$this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=false&language=en');
-        $this->app->jui->addStaticInclude('gmap3.min');
+		// $this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=false&language=en');
+  //       $this->app->jui->addStaticInclude('gmap3.min');
         $this->template->trySet('header',$this->header);
 	}
 
@@ -28,12 +28,15 @@ class View_Lister_Destination extends CompleteLister{
 		$this->current_row['starting_date'] = $day;
 		$this->current_row['starting_month'] = $month;
 
+		$review = $this->add('View_Review',['restaurant_rating'=>$this->model['rating']],'rating_star');
+		$this->current_row_html['rating_star'] = $review->getHtml();
+
 		parent::formatRow();
 	}
 
 	function render(){
-		$this->js(true)->_load('star-rating');
-		$this->js(true)->_load('hungry');
+		// $this->js(true)->_load('star-rating');
+		// $this->js(true)->_load('hungry');
 		parent::render();
 	}
 

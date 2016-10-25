@@ -32,6 +32,8 @@ class Form_Venue extends Form{
         $venue_asso_j = $destination_model->Join('destination_venue_association.destination_id',null,null,'dvass');
         $venue_asso_j->addField('venue_id');
         $destination_model->addCondition('city_id',$city_id);
+        $destination_model->addCondition('status','active');
+        $destination_model->addCondition('is_verified',true);
         $destination_model->_dsql()->group('id');
         $search_phrase->setModel($destination_model);
 

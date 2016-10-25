@@ -56,7 +56,10 @@ class page_destination extends Page {
         			'booking_policy',
         			'cancellation_policy',
                     'guidelines',
-                    'how_to_reach'
+                    'how_to_reach',
+                    'disclaimer',
+                    'status',
+                    'is_verified'
         			),
         		array('name')
         	);

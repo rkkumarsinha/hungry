@@ -21,8 +21,8 @@ div(id="{$_name}" class="{$class}" style="{$style}")
                   | {$distance}
                 span(title='Avg Cost')
                   i.fa.fa-inr
-                  | {avg_cost}un defined{/}
-                span(title='Area')
+                  | {avg_cost}un defined{/}*
+                span(title='Total Package')
                   i.fa.fa-tags
                   |  {package_count}{/}
               img(src='{display_image}assets/img/small.jpg{/}' alt='' onerror="this.src='assets/img/hungry-not-found.jpg'")
@@ -31,7 +31,7 @@ div(id="{$_name}" class="{$class}" style="{$style}")
           {requesttobook_wrapper}
           div.btn-block.atk-swatch-orange.btn.hungrydestination_enquiry.container( data-destinationid='{$id}') Request To Book
           {/}
-          .wrapper
+          .wrapper(style="padding-top:20px;")
             a(href='{$path}')
               h3
                 img(src='assets/img/{$food_type}.png', alt='{$food_type}')
@@ -42,34 +42,33 @@ div(id="{$_name}" class="{$class}" style="{$style}")
               i
                 img(src='{category_icon_url}assets/icons/restaurants-bars/restaurants/restaurant_indian.png{/}', alt='{$category}' onerror="this.src='assets/img/hungry-not-found.jpg'")
               span {type}{/}
-            .hungry-star-wrapper(data-rating='{rating}{/}')
-              input(id="{$id}" value="{$rating}" class="rating-loading")
+            {$rating_star}
             | {$menu}
       | {/}{/}
       // /.col-sm-4
-    script(type='text/javascript').
-      if ( navigator.geolocation ) {
-      function success(pos) {
-      $.each($(".current-distance"),function(index,element){
-      $.post('?page=getdistance',
-      {
-      'currentlat':pos.coords.latitude,
-      'currentlan':pos.coords.longitude,
-      'restlan':$(element).attr('data-lng'),
-      'restlat':$(element).attr('data-lat')
-      },
-      function(data) {
-      //- console.log(data);
-      $(element).html(data);
-      });
-      });
-      }
-      function fail(error) {
-      //- alert('failed');
-      }
-      function error(error){
-      }
-      navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 5, enableHighAccuracy:true, timeout: 6000});
+    //- script(type='text/javascript').
+    //-   if ( navigator.geolocation ) {
+    //-   function success(pos) {
+    //-   $.each($(".current-distance"),function(index,element){
+    //-   $.post('?page=getdistance',
+    //-   {
+    //-   'currentlat':pos.coords.latitude,
+    //-   'currentlan':pos.coords.longitude,
+    //-   'restlan':$(element).attr('data-lng'),
+    //-   'restlat':$(element).attr('data-lat')
+    //-   },
+    //-   function(data) {
+    //-   //- console.log(data);
+    //-   $(element).html(data);
+    //-   });
+    //-   });
+    //-   }
+    //-   function fail(error) {
+    //-   //- alert('failed');
+    //-   }
+    //-   function error(error){
+    //-   }
+    //-   navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 5, enableHighAccuracy:true, timeout: 6000});
 
-      //- navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true,timeout: 100000,maximumAge: 0});
-      }
+    //-   //- navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true,timeout: 100000,maximumAge: 0});
+    //-   }

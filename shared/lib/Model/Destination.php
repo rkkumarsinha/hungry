@@ -74,6 +74,7 @@ class Model_Destination extends SQL_Model{
 		$this->addField('image_title')->type('text')->hint('Ex:Destination in Udaipur - Destination Name');
 		$this->addField('image_alt_text')->type('text')->hint('Ex:destination udaipur');
 
+		$this->addField('disclaimer')->type('text');
 
 		$this->hasMany('Destination_HighlightAssociation','destination_id');
 		$this->hasMany('Destination_Space','destination_id');

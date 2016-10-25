@@ -4,9 +4,9 @@ div(id="{$_name}" class="{$class}" style="{$style}")
   .row
     | {rows}{row}
     .col-md-12.col-sm-12
-      .item
+      .item(style="margin-bottom:20px;")
         .image
-          a(href='{$path}')
+          a(href='{$path}' target="_blank")
             div(style="position:absolute;color:white;margin-top:50%;width:100%;text-align:center;")
               .inner
                 .content(style='')
@@ -18,10 +18,10 @@ div(id="{$_name}" class="{$class}" style="{$style}")
                 | {$distance}
               span(title='Avg Cost')
                 i.fa.fa-inr
-                | {avg_cost}un defined{/}
-              span(title='Area')
+                | {avg_cost}un defined{/} *
+              span(title='Total Package')
                 i.fa.fa-tags
-                |  {offers}{/}
+                |  {package_count}{/}
             img(src='{display_image}assets/img/small.jpg{/}' alt='' onerror="this.src='assets/img/hungry-not-found.jpg'")
           .restaurant-category(style="z-index:10;")
             i.fa.fa-hungry {$first_category}
@@ -30,7 +30,7 @@ div(id="{$_name}" class="{$class}" style="{$style}")
             i
               img(src='{category_icon_url}assets/icons/restaurants-bars/restaurants/restaurant_indian.png{/}', alt='{$category}' onerror="this.src='assets/img/hungry-not-found.jpg'")
             span {type}{/}
-          .hungry-star-wrapper(data-rating='{rating}{/}')
-            input(id="{$id}" value="{$rating}" class="rating-loading")
+          {$rating_star}
           | {$menu}
+
     | {/}{/}

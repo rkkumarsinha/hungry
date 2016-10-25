@@ -1,5 +1,5 @@
 
-<div id="page-content" class="page-item-detail event-detail hungry-restaurant-detail">
+<div id="page-content" class="page-item-detail event-detail hungry-restaurant-detail">{$redefine_search}
   <!-- Hero Image-->
   <section class="hero-image height-400 event-detail-banner restaurant-detail-banner">
     <div style="vertical-align: middle;" class="inner">
@@ -34,7 +34,7 @@
                 <address>
                   <div style="display:none;">{$address}</div>
                   <figure>{mobile_wrapper}
-                    <div class="info"><i class="fa fa-mobile"></i><span>{$mobile_no}</span></div>{/}
+                    <div class="info"><i class="fa fa-mobile"></i><span>{$mobile_no}  disclaimer disclaimer  disclaimer disclaimer  disclaimer disclaimer </span></div>{/}
                     {phone_wrapper}
                     <div class="info"><i class="fa fa-phone"></i><span>{$phone_no}</span></div>{/}
                     {email_wrapper}
@@ -227,7 +227,8 @@
                   </div>
                 </div>
               </section>
-              <!-- Reviews-->{$review}
+              <!-- Reviews-->
+              <div style="margin-top:20px;"> <b>Disclaimer : </b>{$disclaimer}</div>{$review}
               <!-- end Review Form-->
             </div>
             <!-- /.col-md-8-->
@@ -259,7 +260,7 @@
             </section>
           </aside>
         </section>
-        <section id="main-content">
+        <section id="main-content" style="display:none;">
           <aside id="detail-sidebar">
             <section>
               <header>
@@ -303,6 +304,9 @@
               </figure>
             </section>
           </aside>
+        </section>
+        <section id="main-content">
+          <aside id="detail-sidebar">{$downloadapp}</aside>
         </section>
       </div>
     </div>
