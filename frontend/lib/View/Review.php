@@ -11,8 +11,10 @@ class View_Review extends View{
 		// if(!$this->restaurant_id or !is_numeric($this->restaurant_id))
 		// 	throw new \Exception("must pass proper restaurant");
 		
-		if(!$this->restaurant_rating or !is_numeric($this->restaurant_rating))
-			throw new \Exception("must pass proper rating value");
+		if(!$this->restaurant_rating or !is_numeric($this->restaurant_rating)){
+			$this->restaurant_rating = 0;
+			// throw new \Exception("must pass proper rating value");
+		}
 
 		if(!$this->comment_id and !is_numeric($this->comment_id))
 			throw new \Exception("must pass proper comment value");

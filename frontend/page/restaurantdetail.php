@@ -162,6 +162,11 @@ class page_restaurantdetail extends Page{
         if(!$this->model['avg_cost_per_person_thali'] or $this->model['avg_cost_per_person_thali'] == 0)
             $this->template->tryDel('thali_wrapper');
 
+        // downloadapp
+        $this->add('View_DownloadApp',null,'downloadapp');
+        // rating_star
+        $review = $this->add('View_Review',['restaurant_rating'=>$this->model['rating']?:0],'rating_star');
+
     	parent::recursiveRender();
     }
 

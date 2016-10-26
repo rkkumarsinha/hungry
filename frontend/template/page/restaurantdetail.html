@@ -63,9 +63,7 @@
               <section class="clearfix">
                 <header><a href="#reviews1" class="roll">
                     <h3>Rating</h3></a></header>
-                <div data-rating="{rating}{/}" class="hungry-star-wrapper">
-                  <input id="{$id}" value="{$rating}" class="rating-loading"/>
-                </div>
+                    {$rating_star}
                 <!-- <figure data-rating="{$rating}" class="rating big pull-right"></figure>-->
               </section>
               <!-- end Rating-->
@@ -296,6 +294,7 @@
           </header>{$recommendedrestaurant}
         </section>
         {/}
+        {$downloadapp}
       </div>
       <!-- /.form-group-->
       <!-- /#sidebar-->

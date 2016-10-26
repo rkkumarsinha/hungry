@@ -40,9 +40,8 @@
         </div>
         <div class="info text-center">
           <div class="type"><i><img src="{category_icon_url}assets/icons/restaurants-bars/restaurants/restaurant.png{/}" alt="{$category}"/></i><span>{type}Restaurant{/}</span></div>
-          <div data-rating="{rating}{/}" class="hungry-star-wrapper">
-            <input id="{$id}" value="{$rating}" class="rating-loading"/>
-          </div>{$menu}
+          {$rating_star}          
+          {$menu}
         </div>
       </div>
     </div>{/}{/}

@@ -121,7 +121,10 @@ class page_eventdetail extends Page{
         $upcoming_event->setOrder('starting_date','asc');
         $upcoming_event->setLimit(3);
 
-        $this->add('View_Lister_Event',['template'=>'view/upcomingevent','header'=>'Upcoming Events'],'upcoming_event')->setModel($upcoming_event);
+        if($upcoming_event->count()->getOne())
+            $this->add('View_Lister_Event',['template'=>'view/upcomingevent','header'=>'Upcoming Events'],'upcoming_event')->setModel($upcoming_event);
+        else
+            $this->template->tryDel('upcoming_wrapper');
 
         //checking all if value has or not
         if(!$this->model['mobile_no'])
@@ -142,6 +145,8 @@ class page_eventdetail extends Page{
         if(!$this->model['instagram_page_url'])
             $this->template->tryDel('instagram_wrapper');
 
+        // downloadapp
+        $this->add('View_DownloadApp',null,'downloadapp');
     	parent::recursiveRender();
     }
 

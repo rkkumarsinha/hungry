@@ -27,8 +27,11 @@ class View_Lister_Restaurant extends CompleteLister{
 		// else if($this->model['avg_cost_per_person_thali'])
 
 		$this->current_row['avgcost'] = $this->model->avgCost();
-		$this->current_row['rating_percentage'] = ($this->model['rating'] /5 * 100)."%";
+		// $this->current_row['rating_percentage'] = ($this->model['rating'] /5 * 100)."%";
 		
+		$review = $this->add('View_Review',['restaurant_rating'=>$this->model['rating']?:0],'rating_star');
+		$this->current_row_html['rating_star'] = $review->getHtml();
+
 		if(!$this->show_discount)
 			$this->current_row['getdiscount_wrapper'] = "";
 			
