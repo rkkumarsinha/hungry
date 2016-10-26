@@ -58,8 +58,11 @@ class page_restaurantdetail extends Page{
         // $banner_image_url = $this->model['banner_image'];
         $banner_image_url =  str_replace("public/", "", $this->model['banner_image']);
         $logo_image_url = str_replace("public/", "", $this->model['logo_image']);
-        $this->template->set('rest_banner_image',$banner_image_url);
-        $this->template->set('rest_logo_image',$logo_image_url);
+        $this->template->trySet('rest_banner_image',$banner_image_url);
+        $this->template->trySet('rest_logo_image',$logo_image_url);
+
+        $this->template->trySetHtml('about_restaurant_html',$this->model['about_restaurant']);
+        $this->template->trySetHtml('disclaimer_html',$this->model['disclaimer']);
     }
 
     function recursiveRender(){

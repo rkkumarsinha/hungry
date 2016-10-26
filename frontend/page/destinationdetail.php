@@ -38,7 +38,15 @@ class page_destinationdetail extends Page{
         parent::setModel($m);
 
         $banner_image_url =  str_replace("public/", "", $this->model['banner_image']);
-        $this->template->set('destination_banner_image',$banner_image_url);
+        $this->template->trySet('destination_banner_image',$banner_image_url);
+        
+        $this->template->trySetHtml('about_restaurant_html',$this->model['about_restaurant']);
+        $this->template->trySetHtml('booking_policy_html',$this->model['booking_policy']);
+        $this->template->trySetHtml('cancellation_policy_html',$this->model['cancellation_policy']);
+        $this->template->trySetHtml('guidelines_html',$this->model['guidelines']);
+        $this->template->trySetHtml('how_to_reach_html',$this->model['how_to_reach']);
+        $this->template->trySetHtml('disclaimer_html',$this->model['disclaimer']);
+
     }
 
     function recursiveRender(){

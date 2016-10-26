@@ -172,12 +172,12 @@
                       <h2>About Destination</h2>
                       <p>
                          
-                        {$about_destination}
+                        {$about_destination_html}
                       </p>
                       <h2>Booking Policy</h2>
-                      <p>{$booking_policy}</p>
+                      <p>{$booking_policy_html}</p>
                       <h2>Cancellation Policy</h2>
-                      <p>{$cancellation_policy}</p>
+                      <p>{$cancellation_policy_html}</p>
                     </div>
                     <div id="operationlhours" role="tabpanel" class="tab-pane">{event_day_time}
                       <dl class="lines">
@@ -204,9 +204,9 @@
                     </div>
                     <div id="guidline" role="tabpanel" class="tab-pane">
                       <h2>Guidlines</h2>
-                      <p>{$guidelines}</p>
+                      <p>{$guidelines_html}</p>
                       <h2>How To Reach</h2>
-                      <p>{$how_to_reach}</p>
+                      <p>{$how_to_reach_html}</p>
                     </div>
                     <div id="space" role="tabpanel" class="tab-pane">{dest_space}
                       <div class="row">
@@ -228,7 +228,7 @@
                 </div>
               </section>
               <!-- Reviews-->
-              <div style="margin-top:20px;"> <b>Disclaimer : </b>{$disclaimer}</div>{$review}
+              <div style="margin-top:20px;"> <b>Disclaimer : </b>{$disclaimer_html}</div>{$review}
               <!-- end Review Form-->
             </div>
             <!-- /.col-md-8-->
