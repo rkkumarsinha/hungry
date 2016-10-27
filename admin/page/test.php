@@ -12,14 +12,15 @@ class page_test extends Page {
     function init() {
         parent::init();
 
-        $form = $this->add('Form');
-        $form->addField('RichText','text');
-        $form->addSubmit('submit');
+        $this->add('View_LocationPicker');
+        // $form = $this->add('Form');
+        // $form->addField('RichText','text');
+        // $form->addSubmit('submit');
 
-        if($form->isSubmitted()){
-        	throw new \Exception($form['text']);
+        // if($form->isSubmitted()){
+        // 	throw new \Exception($form['text']);
         	
-        }
+        // }
 
     }
 
