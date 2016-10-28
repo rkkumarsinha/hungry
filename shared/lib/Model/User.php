@@ -350,15 +350,18 @@ class Model_User extends SQL_Model{
 	function sendForgotPasswordLink(){
 		if(!$this->loaded())
 			throw new \Exception("model must loaded");
-		
-		$body = "Your Password Reset Link {reset_password_link}";
-		$subject = "Hungrydunia Verification Link";
+
+		$email_template = $this->add('Model_EmailTemplate')
+                            ->addCondition('name',"FORGOTPASSWORD")->tryLoadAny();
+		$subject = $email_template['subject'];
+        $body = $email_template['body'];
 
 		$this['password_hash'] = strtoupper(md5(rand(111111,999999)));
         $this->save();
         $url = $this->api->url('forgotpassword',['password_hash'=>$this['password_hash'],'email'=>$this['email']]);
+ 		$url = "http://hungrydunia.com/".$url;
         $body = str_replace("{reset_password_link}", $url, $body);
-
+        
 		$this->send($this['email'],$subject,$body);
 	}
 

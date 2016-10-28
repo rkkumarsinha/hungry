@@ -136,13 +136,16 @@ class Model_DiscountCoupon extends SQL_Model{
 		}
 
 		if($this['discount_id']){
-			$discount = $this->add('Model_Discount')->load($this['discount_id']);
-			$discount_name = "Discount name: ".$discount['name']."<br/>";
+			$rest = $this->add('Model_Restaurant')->tryLoad($this['restaurant_id']);
+			if(!$rest->loaded())
+				throw new \Exception("model rest not loaded", 1);
+			// $discount = $this->add('Model_Discount')->load($this['discount_id']);
+			$discount_name = "Discount name: Flat ".$rest['discount_percentage_to_be_given']." %<br/>";
 			$discount_detail = "";
 			$discount_coupon = "Discount code: ".$this['discount_coupon'];
 		}
 
-		$expire_date = date("Y-m-d (D)", strtotime("+3 days", strtotime($this['created_at'])));
+		$expire_date = date("Y-M-d (D)", strtotime("+3 days", strtotime($this['created_at'])));
 		// string manupulation
 		$body = str_replace("{user_name}", $user_model['name'], $body);
 		$body = str_replace("{restaurant_name}", $this['restaurant_name'], $body);
@@ -170,8 +173,14 @@ class Model_DiscountCoupon extends SQL_Model{
 		//load Offer template if offer id 
 		if($this['offer_id']){
 			$sms_template->addCondition('name',"DISCOUNTCOUPONOFFERSMS")->tryLoadAny();
-		}else
+			$discount_offer = $this['offer'];
+		}else{
 			$sms_template->addCondition('name',"DISCOUNTCOUPONSMS")->tryLoadAny();
+			$rest = $this->add('Model_Restaurant')->tryLoad($this['restaurant_id']);
+			if(!$rest->loaded())
+				throw new \Exception("model rest not loaded", 1);
+			$discount_offer = "Flat ".($rest['discount_percentage_to_be_given'])." % ";
+		}
 
 		if(!$sms_template->loaded())
 			throw new \Exception("something wrong, sms template may be delete");
@@ -186,13 +195,14 @@ class Model_DiscountCoupon extends SQL_Model{
 
 		//DISCOUNTCOUPONSMS
 		// Dear [user_name], Greetings! [restaurant_name] Offer Flat [discount]% Off Code [coupon]. Expire on $date, Rate & review on www.hungrydunia.com. T&C Apply
+		$expire_date = date("Y-M-d (D)", strtotime("+3 days", strtotime($this['created_at'])));
 
-		$body = str_replace("[user_name]", $this['name'], $body);
-		$body = str_replace("[restaurant_name]", $this['restaurant'], $body);
-		$body = str_replace("[offer_name]", $this['offer'], $body);
-		$body = str_replace("[coupon]", $this['discount_coupon'], $body);
-		$body = str_replace("[date]", $this['created_date'], $body);
-		$body = str_replace("[discount]", $this['discount_taken'], $body);
+		$body = str_replace("{user_name}", $this['name'], $body);
+		$body = str_replace("{restaurant_name}", $this['restaurant'], $body);
+		$body = str_replace("{offer_name}", $discount_offer, $body);
+		$body = str_replace("{coupon}", $this['discount_coupon'], $body);
+		$body = str_replace("{date}", $expire_date, $body);
+		$body = str_replace("{discount}", $this['discount_taken'], $body);
 
 		$outbox = $this->add('Model_Outbox');
 		$sms_response = $outbox->sendSMS($this['mobile'],$body,$this->api->auth->model);

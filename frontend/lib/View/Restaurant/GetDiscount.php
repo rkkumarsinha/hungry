@@ -29,6 +29,13 @@ class View_Restaurant_GetDiscount extends View{
             return;
         }
         
+        $v = $this->add('View');
+        if($_GET['reload']){
+            $v->add('View_Success')->set('Discount Coupon Send to your registered email id and mobile number.');
+            $this->js(true)->_selector('.getdiscount-hungry-submit')->hide();
+            return;
+        }
+            
         //check for restaurant today discount //only one user can take one discount on each restaurant in one day
             $dc = $this->add('Model_DiscountCoupon')
                     ->addCondition('user_id',$this->api->auth->model->id)

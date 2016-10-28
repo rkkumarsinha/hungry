@@ -1,4 +1,5 @@
 <?php
+
 class page_forgotpassword extends Page
 {
     function init()
@@ -51,6 +52,7 @@ class page_forgotpassword extends Page
 
                 $user->sendForgotPasswordLink();
 
+                $form->js(null,$form->js()->reload())->univ()->successMessage('reset password link sent to your registered email')->execute();
             }
         }
 

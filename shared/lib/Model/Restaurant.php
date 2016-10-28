@@ -112,6 +112,10 @@ class Model_Restaurant extends SQL_Model{
 		$this->addExpression('approved_review_count')->set("'0'");
 
 		$this->addExpression('discount_percentage')->set($this->refSQL('discount_id')->fieldQuery('name'));
+		$this->addExpression('discount_percentage_to_be_given')->set(function($m,$q){
+			return $q->expr('([0]-IFNULL([1],0))',[$m->getElement('discount_percentage'),$m->getElement('discount_subtract')]);
+		});
+		
 		$this->add('dynamic_model/Controller_AutoCreator');
 
 		$this->addHook('afterSave',$this);
