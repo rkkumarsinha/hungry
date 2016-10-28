@@ -58,12 +58,12 @@ class page_verify_destination extends Page {
 
 
         $email_template = $this->add('Model_EmailTemplate')
-                            ->addCondition('name',"WELCOMEEMAILHOST")->tryLoadAny();
+                            ->addCondition('name',"WELCOMEEMAILDESTINATION")->tryLoadAny();
         $subject = $email_template['subject'];
         $body = $email_template['body'];
 
         $user_model = $this->add('Model_User')->tryLoad($listing_model['user_id']);
-        $body = str_replace("{restaurant_name}", $listing_model['name'], $body);
+        $body = str_replace("{destination_name}", $listing_model['name'], $body);
         $body = str_replace("{address}", $listing_model['address'], $body);
 
         if($user_model->loaded() and $user_model['email']){
