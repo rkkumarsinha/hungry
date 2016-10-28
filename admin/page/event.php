@@ -9,6 +9,7 @@ class page_event extends Page{
 		$crud = $this->add('CRUD');
 		$crud->setModel('Model_Event',
 						array(
+                                'user_id',
 								'country_id',
 								'state_id',
 								'city_id',
@@ -44,7 +45,8 @@ class page_event extends Page{
                                 'disclaimer'
 							),
 						array
-							(
+							(    
+                                'user',
 								'name',
 								'starting_date',
 								'closing_date',

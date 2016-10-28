@@ -56,14 +56,14 @@ class page_verify_event extends Page {
         $email_tab = $tab->addTab('Send Verification Email');
         // Email Setting
         $email_template = $this->add('Model_EmailTemplate')
-                            ->addCondition('name',"WELCOMEEMAILHOST")->tryLoadAny();
+                            ->addCondition('name',"WELCOMEEMAILEVENT")->tryLoadAny();
         $subject = $email_template['subject'];
         $body = $email_template['body'];
 
         $user_model = $this->add('Model_User')->tryLoad($listing_model['user_id']);
-        $body = str_replace("{restaurant_name}", $listing_model['name'], $body);
+        $body = str_replace("{event_name}", $listing_model['name'], $body);
         $body = str_replace("{address}", $listing_model['address'], $body);
-
+        
         if($user_model->loaded() and $user_model['email']){
             $body = str_replace("{owner_name}", $user_model['name'], $body);
             $body = str_replace("{email_id}", $user_model['email'], $body);
