@@ -5,7 +5,7 @@ div(id="{$_name}" class="{$class}" style="{$style}")
 		{rows}{row}
 		.col-md-6.atk-push(data-recordid="{$id}")
 			{discount_wrapper}
-			div.btn.btn-block(style="background-color:#ededea;") {$discount_name}: {$discount}{$offer}
+			div.btn.btn-block(style="background-color:#ededea;overflow-x:scroll;") {$discount_name}: {$discount_offer_value}
 			{/}
 			div.promo-box
 				div.image.item(title="{$user}")

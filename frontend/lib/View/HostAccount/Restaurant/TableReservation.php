@@ -85,10 +85,10 @@ class View_HostAccount_Restaurant_TableReservation extends CompleteLister{
 	function formatRow(){
 		$this->current_row_html['created_at'] = date('(D) d-M-Y',strtotime($this->model['created_at']));
 		$this->current_row_html['created_time'] = date('h:i:s A',strtotime($this->model['created_at']));
-		if(!$this->model['offer_id'])
-			$this->current_row_html['discount_name'] = "Discount";
-		else
+		if($this->model['restoffer_id'])
 			$this->current_row_html['discount_name'] = "Offer";
+		else
+			$this->current_row_html['discount_name'] = "Discount";
 				
 		parent::formatRow();
 	}
