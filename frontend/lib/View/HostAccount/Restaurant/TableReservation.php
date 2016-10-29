@@ -20,13 +20,14 @@ class View_HostAccount_Restaurant_TableReservation extends CompleteLister{
 				}
 
 				if($_GET['actiontype'] === "Approve"){
-					$p->add('View_Info')->set('Todo Table Booking Information'.$_GET['actiontype']." = ".$_GET['actionon']);
+					// $p->add('View_Info')->set('Todo Table Booking Information'.$_GET['actiontype']." = ".$_GET['actionon']);
 					$form = $p->add('Form');
 					$form->addSubmit('Approved');
 					if($form->isSubmitted()){
 						$reserved_table = $this->add('Model_ReservedTable')->load($_GET['actionon']);
 						$reserved_table->approved();
-						
+
+						$reserved_table->sendReservedTable();
 						$js = [
 							$form->js()->closest('.dialog')->dialog('close'),
 							$grid->js()->_selector('div[data-recordid='.$_GET['actionon'].']')->hide()
@@ -35,7 +36,7 @@ class View_HostAccount_Restaurant_TableReservation extends CompleteLister{
 					}
 				}
 				if($_GET['actiontype'] === "Canclled"){
-					$p->add('View_Info')->set('Todo Table Booking Information'.$_GET['actiontype']." = ".$_GET['actionon']);
+					// $p->add('View_Info')->set('Todo Table Booking Information'.$_GET['actiontype']." = ".$_GET['actionon']);
 
 					$form = $p->add('Form');
 					$canceled_reason = $form->addField('DropDown','canceled_reason')->validateNotNull();
@@ -44,6 +45,7 @@ class View_HostAccount_Restaurant_TableReservation extends CompleteLister{
 
 					$form->addSubmit('Canclled');
 					if($form->isSubmitted()){
+						
 						$reserved_table = $this->add('Model_ReservedTable')->load($_GET['actionon']);
 						$reserved_table->canceled('host',$form['canceled_reason']);
 						

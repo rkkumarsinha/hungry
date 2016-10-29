@@ -38,6 +38,7 @@ class Admin extends App_Admin {
         $this->api->menu->addItem(['User','icon'=>'users'],'/user');
         $this->api->menu->addItem(['User Reviews','icon'=>'users'],'/review');
         $this->api->menu->addItem(['Configuration','icon'=>'cog'],'/configuration');
+        $this->api->menu->addItem(['cancleregion','icon'=>'cog'],'/cancleregion');
 
 
         // $this->js(true)->_load("selectize");
