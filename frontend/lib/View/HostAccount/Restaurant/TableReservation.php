@@ -27,7 +27,7 @@ class View_HostAccount_Restaurant_TableReservation extends CompleteLister{
 						$reserved_table = $this->add('Model_ReservedTable')->load($_GET['actionon']);
 						$reserved_table->approved();
 
-						$reserved_table->sendReservedTable();
+						$reserved_table->sendReservedTable(true,false);
 						$js = [
 							$form->js()->closest('.dialog')->dialog('close'),
 							$grid->js()->_selector('div[data-recordid='.$_GET['actionon'].']')->hide()
