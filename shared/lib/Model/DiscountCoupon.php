@@ -22,7 +22,6 @@ class Model_DiscountCoupon extends SQL_Model{
 		$this->addField('total_amount')->type('money')->defaultValue(0);
 		$this->addField('amount_paid')->type('money');
 		$this->addField('payment_mode')->setValueList(['cash'=>'Cash','card'=>"Card",'imps'=>"IMPS",'e_wallet'=>"E Wallet"]);
-		// $this->addExpression('created_date')->set($this['created_at']);
 		
 		$this->addExpression('restaurant_address')->set($this->refSQL('restaurant_id')->fieldQuery('address'));
 		$this->addExpression('restaurant_image')->set($this->refSQL('restaurant_id')->fieldQuery('display_image'));

@@ -13,7 +13,9 @@ class page_reservedtable extends Page {
         parent::init();
 
         $crud = $this->add('CRUD');
-        $crud->setModel('ReservedTable');
+        $model = $this->add('Model_ReservedTable');
+        $model->setOrder('created_at','desc');
+        $crud->setModel($model);
 
     }
 

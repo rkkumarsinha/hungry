@@ -9,16 +9,16 @@ class Model_ReservedTable extends SQL_Model{
 		$this->hasOne('Restaurant','restaurant_id');
 		$this->hasOne('User','user_id');
 		$this->hasOne('Discount','discount_id')->defaultValue(0);
-		$this->hasOne('Offer','offer_id')->defaultValue(0);
+		$this->hasOne('RestaurantOffer','restoffer_id')->defaultValue(0);
 
 		$this->addField('booking_id')->caption('reserved id')->defaultValue(strtoupper(substr(md5(rand(11111111,99999999)),8,9)));
 		$this->addField('book_table_for');//customer name
-		$this->addField('no_of_adult')->type('text');//json type 2:child,5:young
-		$this->addField('no_of_child')->type('text');//json type 2:child,5:young
+		$this->addField('no_of_adult');
+		$this->addField('no_of_child');//json type 2:child,5:young
 		$this->addField('email');
 		$this->addField('mobile');
 		$this->addField('booking_date')->type('date')->defaultValue(date('Y-m-d H:i:s'));
-		$this->addField('booking_time')->type('time');
+		$this->addField('booking_time');
 		$this->addField('message')->type('text');
 		$this->addField('status')->enum(['pending','confirmed','canceled'])->defaultValue('pending');
 		$this->addField('total_amount')->type('money')->defaultValue(0);
@@ -27,11 +27,13 @@ class Model_ReservedTable extends SQL_Model{
 		$this->addField('created_at')->type('datetime')->defaultValue(date('Y-m-d H:i:s'));
 
 		$this->addField('canceled_by')->enum(['host','user']);
+		$this->addField('discount_offer_value')->type('text');
+
 		$this->hasOne('CancledReason','cancled_reason_id');
 
 		$this->addExpression('restaurant_image')->set($this->refSQL('restaurant_id')->fieldQuery('display_image'));
 		$this->addExpression('restaurant_address')->set($this->refSQL('restaurant_id')->fieldQuery('address'));
-		// $this->add('dynamic_model/Controller_AutoCreator');
+		$this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 	function approved(){
@@ -106,8 +108,6 @@ class Model_ReservedTable extends SQL_Model{
 
 		$subject = $email_template['subject'];
 		$body = $email_template['body'];
-
-		
 
 		$outbox = $this->add('Model_Outbox');
 		$email_response = $outbox->sendEmail($this['email'],$subject,$body,$this->api->auth->model);

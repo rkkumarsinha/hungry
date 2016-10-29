@@ -14,6 +14,18 @@ class View_Restaurant_ReserveTable extends View{
             return;
         }
 
+        // $v = $this->add('View');
+        if($_GET['reservation_id']){
+            if($_GET['reservation_id'] == "delete"){
+                $this->add('View_Error')->set('please try agin, failed due to technical or internet connection');
+            }else{
+                $this->add('View_Success')->setHtml('Hi '.$this->app->auth->model['name'].'<br/> thank you for making reservation with hungrydunia.<br/> your reservation id: <b>'.$_GET['reservation_id'].'</b> is being processed you will shortly receive confirmation email/ sms. <br/>show the confirmation email/sms at restaurant to claim your reservation and offer.');
+            }
+            $this->js(true)->_selector('.reservetable-hungry-submit')->hide();
+
+            return;
+        }
+
         //check for the discount coupon max limit three in a day (before 12:0 clock)
         //today discount return count of discount before 12:00PM
         $discount_count = $this->api->auth->model->todayReservedTable();
@@ -41,18 +53,6 @@ class View_Restaurant_ReserveTable extends View{
             $restaurant = $this->add('Model_Restaurant')->load($restaurant_id);
             // $discount = $this->add('View');
             // $discount->add('View')->set('Flat Discount 20%');
-
-            // $v = $this->add('View');
-            if($_GET['reservation_id']){
-                if($_GET['reservation_id'] == "delete"){
-                    $this->add('View_Error')->set('please try agin, failed due to technical or internet connection');
-                }else{
-                    $this->add('View_Success')->setHtml('Hi '.$this->app->auth->model['name'].'<br/> thank you for making reservation with hungrydunia.<br/> your reservation id: <b>'.$_GET['reservation_id'].'</b> is being processed you will shortly receive confirmation email/ sms. <br/>show the confirmation email/sms at restaurant to claim your reservation and offer.');
-                }
-                $this->js(true)->_selector('.reservetable-hungry-submit')->hide();
-
-                return;
-            }
 
             $this->js(true)->_selector('.reservetable-hungry-submit')->show();
             $form = $this->add('Form',null,null,['form/stacked']);
@@ -114,7 +114,8 @@ class View_Restaurant_ReserveTable extends View{
                 $rt_model['user_id'] = $this->api->auth->model->id;
                 $rt_model['restaurant_id'] = $restaurant_id;
                 $rt_model['book_table_for'] = $form['name'];
-                $rt_model['no_of_person'] = ($form['adult']?:0) + ($form['child']?:0);
+                $rt_model['no_of_adult'] = $form['adult']?:0;
+                $rt_model['no_of_child'] = $form['child']?:0;
                 $rt_model['email'] = $form['email'];
                 $rt_model['mobile'] = $form['mobile'];
                 $rt_model['booking_date'] = $form['booking_date'];
@@ -122,16 +123,23 @@ class View_Restaurant_ReserveTable extends View{
                 $rt_model['message'] = $form['request'];
 
                 $temp_array = explode("_", $form['discount_or_offer']);
-                if($temp_array[0] === "d")
+                if($temp_array[0] === "d"){
                     $rt_model['discount_id'] = $temp_array[1];
+
+                    $rt_model['discount_offer_value'] = "Flat ".$restaurant['discount_percentage_to_be_given']." %";
+                }
                 
-                if($temp_array[0] === 'o')
-                    $rt_model['offer_id'] = $temp_array[1];
+                if($temp_array[0] === 'o'){
+                    $rt_model['restoffer_id'] = $temp_array[1];
+                    $offer_model = $this->add('Model_RestaurantOffer')->load($temp_array[1]);
+                    
+                    $rt_model['discount_offer_value'] = $offer_model['name']." ".$offer_model['sub_name']." ".$offer_model['detail'];
+                }
 
 
                 try{
                     $rt_model->save();
-                    $rt_model->asendReservedTable($form['email'],$form['mobile']);
+                    // $rt_model->sendReservedTable($form['email'],$form['mobile']);
                     $this->js()->univ()->reload(['reservation_id'=>$rt_model['booking_id']])->execute();
                 }catch(\Exception $e){
                     $rt_model->delete();
