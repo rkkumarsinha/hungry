@@ -62,9 +62,9 @@ class Model_ReservedTable extends SQL_Model{
 			throw new Exception("model must loaded, Book Table");
 		
 		//send SMS
-		// if($send_sms){
-			// $this->sendSMS();
-		// }
+		if($send_sms){
+			$this->sendSMS();
+		}
 		// send email
 		if($send_email){
 			$this->sendEmail();
@@ -125,9 +125,9 @@ class Model_ReservedTable extends SQL_Model{
 		$body = $sms_template['body'];
 		// Dear [user_name], your reservation id: [booking_id] is being processed you will shortly receive confirmation email/ sms.
 		
-		$body = str_replace("[user_name]", $this['book_table_for'], $body);
-		$body = str_replace("[booking_id]", $this['booking_id'], $body);
-
+		$body = str_replace("{user_name}", $this['book_table_for'], $body);
+		$body = str_replace("{booking_id}", $this['booking_id'], $body);
+		
 		$outbox = $this->add('Model_Outbox');
 		$sms_response = $outbox->sendSMS($this['mobile'],$body,$this->api->auth->model);
 		if($sms_response != true){
