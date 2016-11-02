@@ -32,9 +32,9 @@ class Model_User extends SQL_Model{
 
 		$this->addExpression('profile_image_url')->set(function($m,$q){
 			return $q->expr("IFNULL([0],IFNULL([1],[2]))",[
-							$m->refSQL('AccessToken')->addCondition('social_app','Facebook')->fieldQuery('profile_picture_url'),
-							$m->refSQL('AccessToken')->addCondition('social_app','Google')->fieldQuery('profile_picture_url'),
-							$m->refSQL('AccessToken')->addCondition('social_app','HungryDunia')->fieldQuery('profile_picture_url')
+							$m->refSQL('AccessToken')->addCondition('social_app','Facebook')->setLimit(1)->fieldQuery('profile_picture_url'),
+							$m->refSQL('AccessToken')->addCondition('social_app','Google')->setLimit(1)->fieldQuery('profile_picture_url'),
+							$m->refSQL('AccessToken')->addCondition('social_app','HungryDunia')->setLimit(1)->fieldQuery('profile_picture_url')
 
 						]);	
 		});
