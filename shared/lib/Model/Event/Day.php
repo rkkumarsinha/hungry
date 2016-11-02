@@ -22,13 +22,16 @@ class Model_Event_Day extends SQL_Model{
 
 	function beforeSave(){
 		
-		if(!($this['on_date'] >= $this['event_starting_date'] && $this['on_date'] <= $this['event_closing_date']) ){
-			throw $this->exception('date must in between starting date('.$this['event_starting_date'].') closing date ('.$this['event_closing_date'].')', 'ValidityCheck')->setField('on_date');
-		}
+		if(!$this['event_id'])
+			throw $this->exception('event not found', 'ValidityCheck')->setField('name');
 
-		// if($this['event_closing_date'] < $this['on_date']){
-		// 	throw $this->exception('must be less then event closing date('.$this['event_closing_date'].')', 'ValidityCheck')->setField('on_date');
-		// }	
+		$event_model = $this->add('Model_Event')->tryLoad($this['event_id']);
+		if(!$event_model->loaded())
+			throw $this->exception('event not found', 'ValidityCheck')->setField('name');
+
+		if(!($this['on_date'] >= $event_model['starting_date'] && $this['on_date'] <= $event_model['closing_date']) ){
+			throw $this->exception('date must in between starting date('.$event_model['starting_date'].') closing date ('.$event_model['closing_date'].')', 'ValidityCheck')->setField('on_date');
+		}
 	}
 
 }
