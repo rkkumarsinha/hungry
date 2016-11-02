@@ -65,10 +65,10 @@ class page_register extends Page
             $outbox = $this->add('Model_Outbox');
             try{
                 $email_response = $outbox->sendEmail($user['email'],$subject,$body,$user);
-                $outbox->createNew("New User Registered",$user['email'],$subject,$body,"Email","New User Registration",$user->id,$user_model);
+                $outbox->createNew("New User Registered",$user['email'],$subject,$body,"Email","New User Registration",$user->id,$user);
                 $f->js(null,$f->js()->reload())->univ()->successMessage('Registered Successfully')->execute();
             }catch(Exception $e){
-                $f->js(null,$f->js()->reload())->univ()->errorMessage('something happen wrong')->execute();
+                // $f->js(null,$f->js()->reload())->univ()->errorMessage('something happen wrong')->execute();
             }
 
         }

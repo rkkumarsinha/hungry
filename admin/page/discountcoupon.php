@@ -12,7 +12,13 @@ class page_discountcoupon extends Page {
     function init() {
         parent::init();
 
-        $this->add('CRUD')->setModel('DiscountCoupon');
+        $crud = $this->add('CRUD');
+        $model = $this->add('Model_DiscountCoupon');
+        $model->setOrder('created_at','Desc');
+
+        $crud->setModel($model);
+		$crud->setPaginator($ipp=50);
+		$crud->grid->addQuickSearch(['name','email','discount_coupon','mobile']);
     }
 
 }
