@@ -11,7 +11,7 @@ class Model_Restaurant extends SQL_Model{
 		$this->hasOne('State','state_id')->mandatory(true);
 		$this->hasOne('City','city_id')->mandatory(true);
 		$this->hasOne('Area','area_id')->mandatory(true);
-		$this->hasOne('Discount','discount_id');
+		$this->hasOne('Discount','discount_id')->mandatory(true);
 
 		$this->add('filestore/Field_File','logo_image_id');
 		$this->add('filestore/Field_File','banner_image_id'); //for detail
@@ -59,7 +59,7 @@ class Model_Restaurant extends SQL_Model{
 		$this->addField('url_slug');
 		
 		// $this->addField('discount')->hint('Original Discount in Percentage');
-		$this->addField('discount_subtract');
+		$this->addField('discount_subtract')->type('Number')->defaultValue(5);
 
 		$this->addField('food_type')->setValueList(['veg'=>'Veg','nonveg'=>'Nonveg','mix'=>'Mix'])->mandatory(true);
 
@@ -118,9 +118,14 @@ class Model_Restaurant extends SQL_Model{
 		
 		$this->add('dynamic_model/Controller_AutoCreator');
 
+		$this->addHook('beforeSave',$this);
 		$this->addHook('afterSave',$this);
 		$this->addHook('afterLoad',$this);
 		$this->addHook('beforeSave',[$this,'updateSearchString']);
+	}
+
+	function beforeSave(){
+		$this['discount_subtract'] = $this['discount_subtract']?$this['discount_subtract']:5;
 	}
 
 	function afterLoad(){

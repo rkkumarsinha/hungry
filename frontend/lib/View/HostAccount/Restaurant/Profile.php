@@ -60,8 +60,39 @@ class View_HostAccount_Restaurant_Profile extends View{
 								'friday',
 								'saturday',
 								'sunday',
-								'food_type'
+								'food_type',
+								'discount_id'
 							]);
+
+		$discount_field = $basic_form->getElement('discount_id');
+		$discount_field->setCaption('Discount %');
+		$basic_form->addField('Readonly','operational_cost')->set('5 %');
+		
+		// $rest_model =$this->add('Model_Restaurant')->load($host_restaurant['id']);
+
+		$discount_to_the_customer_field = $basic_form->add('View')->setElement('div')->addClass('atk-form-row atk-cells atk-push-small atk-form-row-readonly')
+							->setHtml('<div class="atk-cell atk-form-label atk-text-nowrap"><label for="8f7602b6__rofile_tabs_view_htmlelement_form_operational_cost"><span>Discount To The Customer :</span></label></div><div class="atk-cell atk-form-field atk-jackscrew "><div id="8f7602b6__rofile_tabs_view_htmlelement_form_operational_cost" name="8f7602b6__rofile_tabs_view_htmlelement_form_operational_cost" data-shortname="operational_cost" class="atk-form-field-readonly" disabled="true">'.($host_restaurant['discount'] - $host_restaurant['discount_subtract']?:5).' % </div></div>');
+		// $discount_to_the_customer_field = $basic_form->addField('Readonly','discount_to_the_customer');
+
+		$this->api->stickyGET('selected_discount_id');
+		$this->api->stickyGET('discount_subtract');
+		if($_GET['selected_discount_id']){
+			$discount_subtract = $_GET['discount_subtract']?:5;
+			$discount_model = $this->add('Model_Discount')->load($_GET['selected_discount_id']);
+
+			$discount_given = $discount_model['name'] - $discount_subtract;
+			$discount_to_the_customer_field
+				->setElement('div')->addClass('atk-form-row atk-cells atk-push-small atk-form-row-readonly')
+				->setHtml('<div class="atk-cell atk-form-label atk-text-nowrap"><label for="8f7602b6__rofile_tabs_view_htmlelement_form_operational_cost"><span>Discount To The Customer:</span></label></div><div class="atk-cell atk-form-field atk-jackscrew "><div id="8f7602b6__rofile_tabs_view_htmlelement_form_operational_cost" name="8f7602b6__rofile_tabs_view_htmlelement_form_operational_cost" data-shortname="operational_cost" class="atk-form-field-readonly" disabled="true">'.$discount_given.' % </div></div>');
+		}
+
+		$discount_field->js('change',
+							$discount_to_the_customer_field->js()->reload(null,null,
+																[
+																	$this->app->url(null,['cut_object'=>$discount_to_the_customer_field->name,'discount_subtract'=>$host_restaurant['discount_subtract']]),
+																	'selected_discount_id'=>$discount_field->js()->val()
+																	]));
+		// $discount_field->js('change',$this->js()->atk4_form('reloadField','discount_to_the_customer',[$this->app->url(),'selected_discount_id'=>$discount_to_the_customer_field->js()->val()]));
 
 		$basic_form->addSubmit("Update");
 		if($basic_form->isSubmitted()){
