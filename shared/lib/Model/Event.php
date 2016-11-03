@@ -96,6 +96,8 @@ class Model_Event extends SQL_Model{
 			throw $this->exception('closing day must be greater then starting day', 'ValidityCheck')->setField('closing_date');
 		}
 
+		if(!$this['url_slug'])
+			$this['url_slug'] = implode("-", explode(" ", $this['name']))."-".$this['city']."-HungryDunia";
 	}
 
 	function updateSearchString(){	

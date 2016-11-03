@@ -73,7 +73,9 @@ $.widget("ui.atk4_uploader", {
 		i[0].innerHTML='<iframe id="'+this.name+'_iframe" name="'+this.name+'_iframe" src="about:blank" style="width:0;height:0;border:0px solid black;"></iframe>';
 		i.insertBefore(this.element);
 
-		var g=$('<div class="atk-loader" id="'+this.name+'_progress"><i></i>Uploading '+this.element.val()+'</div>')
+		// var g=$('<div class="atk-loader" id="'+this.name+'_progress"><i></i>Uploading '+this.element.val()+'</div>')
+		// 	.insertBefore(this.element);
+		var g=$('<div class="atk-loader hungry-image-preuploading" id="'+this.name+'_progress"><i></i><img src="images/uploading.gif"/>Uploading '+this.element.val()+'</div>')
 			.insertBefore(this.element);
 
 		form

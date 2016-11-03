@@ -90,7 +90,7 @@ class View_HostAccount_Event_Profile extends View{
 			$notification->save();
         });
 
-        $crud->setModel($event_image,['image_id','image','is_active'],['image','status','is_active']);
+        $crud->setModel($event_image,['image_id','image'],['image','status','is_active']);
         $crud->grid->addPaginator(10);
         $crud->grid->addHook('formatRow',function($g){
             if($g->model['image_id']){
