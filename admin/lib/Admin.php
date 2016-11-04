@@ -42,6 +42,8 @@ class Admin extends App_Admin {
 
 
         // $this->js(true)->_load("selectize");
+        $this->api->jui->addStaticInclude('ckeditor/ckeditor');
+        $this->api->jui->addStaticInclude('ckeditor/adapters/jquery');
     }
 
     function initTopMenu(){

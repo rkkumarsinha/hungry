@@ -20,7 +20,7 @@ class Model_Restaurant extends SQL_Model{
 		$this->addField('name')->mandatory(true)->caption('Restaurant Name');
 		$this->addField('owner_name')->mandatory(true);
 		$this->addField('about_restaurant')->type('text')->mandatory(true);//->display(array('form'=>'RichText'));
-		$this->addField('disclaimer')->type('text')->mandatory(true);//->display(array('form'=>'RichText'));
+		$this->addField('disclaimer')->type('text')->mandatory(true)->display(array('form'=>'RichText'));
 		$this->addField('address')->type('text');
 		$this->addField('mobile_no')->hint('Comma separated multiple value');
 		$this->addField('phone_no');

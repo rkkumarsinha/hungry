@@ -26,7 +26,7 @@ class Model_Event extends SQL_Model{
 		$this->addField('phone_no');
 		$this->addField('email')->hint('Comma separated multiple value');
 		$this->addField('website');
-		$this->addField('event_attraction')->type('text')->mandatory(true);
+		$this->addField('event_attraction')->type('text')->mandatory(true)->display(array('form'=>'RichText'));
 		$this->addField('facebook_page_url');
 		$this->addField('instagram_page_url');
 
@@ -40,9 +40,9 @@ class Model_Event extends SQL_Model{
 		$this->addField('longitude')->mandatory(true);
 		$this->addField('latitude')->mandatory(true);
 
-		$this->addField('guidelines')->type('text')->mandatory(true);
-		$this->addField('how_to_reach')->type('text')->mandatory(true);
-		$this->addField('disclaimer')->type('text')->mandatory(true);
+		$this->addField('guidelines')->type('text')->mandatory(true)->display(array('form'=>'RichText'));
+		$this->addField('how_to_reach')->type('text')->mandatory(true)->display(array('form'=>'RichText'));
+		$this->addField('disclaimer')->type('text')->mandatory(true)->display(array('form'=>'RichText'));
 		//slug URL
 		$this->addField('url_slug');
 	
