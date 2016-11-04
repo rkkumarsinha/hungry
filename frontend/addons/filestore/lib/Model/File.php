@@ -386,7 +386,7 @@ class Model_File extends \SQL_Model
                         ->addMoreInfo('specified mode', $this->import_mode);
         }
 
-        chmod($destination, $this->api->getConfig('filestore/chmod', 0660));
+        //chmod($destination, $this->api->getConfig('filestore/chmod', 0660));
         clearstatcache();
 
         $this->set('filesize', filesize($destination));
