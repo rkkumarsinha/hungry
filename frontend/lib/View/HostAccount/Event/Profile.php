@@ -46,14 +46,24 @@ class View_HostAccount_Event_Profile extends View{
 								'starting_time',
 								'closing_date',
 								'closing_time',
-								'longitude',
-								'latitude',
 								'guidelines',
 								'how_to_reach',
-								'disclaimer'
+								'disclaimer',
+								'latitude',
+								'longitude'
 							]);
 
+
+		$latitude_field_name = $basic_form->getElement('name');
+		$longitude_field_name = $basic_form->getElement('longitude');
+
 		$basic_form->addSubmit("Save");
+		$basic_form->add('View_LocationPicker',
+							[
+								'latitude_field'=>$latitude_field_name,
+								'longitude_field'=>$longitude_field_name
+							]);
+
 		if($basic_form->isSubmitted()){
 			$basic_form->save();
 			

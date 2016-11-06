@@ -20,8 +20,9 @@ class Model_ReservedTable extends SQL_Model{
 		$this->addField('booking_date')->type('date')->defaultValue(date('Y-m-d H:i:s'));
 		$this->addField('booking_time');
 		$this->addField('message')->type('text');
-		$this->addField('status')->enum(['pending','confirmed','canceled'])->defaultValue('pending');
+		$this->addField('status')->enum(['pending','confirmed','canceled','verified'])->defaultValue('pending');
 		$this->addField('total_amount')->type('money')->defaultValue(0);
+		$this->addField('discount_taken')->type('money');
 		$this->addField('amount_paid')->type('money');
 		$this->addField('payment_mode')->setValueList(['cash'=>'Cash','card'=>"Card",'imps'=>"IMPS",'e_wallet'=>"E Wallet"]);
 		$this->addField('created_at')->type('datetime')->defaultValue(date('Y-m-d H:i:s'));
@@ -33,7 +34,7 @@ class Model_ReservedTable extends SQL_Model{
 
 		$this->addExpression('restaurant_image')->set($this->refSQL('restaurant_id')->fieldQuery('display_image'));
 		$this->addExpression('restaurant_address')->set($this->refSQL('restaurant_id')->fieldQuery('address'));
-		// $this->add('dynamic_model/Controller_AutoCreator');
+		$this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 	function approved(){

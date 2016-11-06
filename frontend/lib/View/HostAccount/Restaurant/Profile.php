@@ -38,6 +38,7 @@ class View_HostAccount_Restaurant_Profile extends View{
 								'name',
 								'owner_name',
 								'about_restaurant',
+								'disclaimer',
 								'address',
 								'mobile_no',
 								'phone_no',
@@ -97,7 +98,7 @@ class View_HostAccount_Restaurant_Profile extends View{
 		$basic_form->addSubmit("Update");
 		if($basic_form->isSubmitted()){
 			$basic_form->save();
-			$basic_form->js()->univ()->successMessage("Updated Successfully");
+			$basic_form->js()->univ()->successMessage("Updated Successfully")->execute();
 		}
 
 		$crud = $image_gallery_tab->add('CRUD');

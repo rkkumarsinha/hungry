@@ -92,6 +92,7 @@ class Frontend extends ApiFrontend {
         
         $this->api->jui->addStaticInclude('ckeditor/ckeditor');
         $this->api->jui->addStaticInclude('ckeditor/adapters/jquery');
+        
     }
 
     function addLocations() {        

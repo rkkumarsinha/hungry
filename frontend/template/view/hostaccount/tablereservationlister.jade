@@ -28,10 +28,14 @@ div(id="{$_name}" class="{$class}" style="{$style}")
 							div.col-md-6(title="Number of Child")
 								i.fa.fa-child &nbsp;{$no_of_child}
 			div.row
+				{cancled_button_wrapper}
 				div.col-md-6(style="padding-right:0px;")
 					div.btn.btn-primary.btn-block.hungry-action.btn-warning(data-actiontype="Canclled" data-tablereservationid="{$id}") Canclled
+				{/}
+				{button_wrapper}
 				div.col-md-6(style="padding-left:0px;")
 					div.btn.btn-primary.btn-block.hungry-action.atk-swatch-orange(data-actiontype="Approve" data-tablereservationid="{$id}") Approved
+				{/}
 		{/}
 		{/}
 	{$Paginator}

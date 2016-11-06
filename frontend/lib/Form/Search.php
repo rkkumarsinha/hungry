@@ -48,18 +48,22 @@ class Form_Search extends Form{
 
         $this->js('click')->_selector('.atk-swatch-orange.do-search')->submit();
         if($this->isSubmitted()){
+            
             if($this->app->city_id != $this['city'])  {
                 $this->app->memorize('city_id',$this['city']);
                 $this->app->redirect($this->app->url($this->redirect_page));
+                
             }
-
+            
             $restro_id = 0;
             $search_term = 0;
             if($this['keyword']){
                 $restro_id = $this['keyword'];
             }else{
                 $search_term = $this->app->recall('search_term');
-                $this->app->forget('search_term');
+                if($this->app->recall('search_term') != null){
+                    $this->app->forget('search_term');
+                }
             }
             
             if(!$this['city'] and !($restro_id or $search_term))
@@ -79,6 +83,7 @@ class Form_Search extends Form{
                         ];
             $this->app->memorize('search_data',$search_data);
 
+            
             $this->app->redirect($this->app->url('search'));
         }
     }

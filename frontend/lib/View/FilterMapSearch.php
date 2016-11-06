@@ -8,6 +8,7 @@ class View_FilterMapSearch extends View{
 	}
 
 	function render(){
+		
 		$search_data = $this->app->recall('search_data');
 		if($search_data['city'])
 			$city_id = $search_data['city'];

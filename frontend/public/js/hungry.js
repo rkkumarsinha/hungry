@@ -53,6 +53,23 @@ $.each({
       	else if (d<=1) return Math.round(d*1000)+"m";
 
       	return d;
+	},
+
+	hungryLocationPicker:function(map_display,location_lat,location_long,latitude_field,longitude_field,location_picker_field,radius_field){
+		$('#'+map_display).locationpicker({
+			location:{
+				latitude: location_lat,
+				longitude:location_long
+			},
+			radius:300,
+			inputBinding: {
+			    latitudeInput: $('#'+latitude_field),
+			    longitudeInput: $('#'+longitude_field),
+			    radiusInput: $('#'+radius_field),
+			    locationNameInput: $('#'+location_picker_field)
+			},
+			enableAutocomplete: true,
+		});
 	}
 
 },$.univ._import);
