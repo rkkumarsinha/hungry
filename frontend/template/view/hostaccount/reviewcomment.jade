@@ -9,7 +9,7 @@ div(class='{$class}', id='{$_name}', style='{$style}')
               figure(title="{$user}")
                 .image
                   img(alt='', src='{profile_image_url}assets/img/default-avatar.png{/}')
-                p {$user}
+                p(style="display:none;") {$user}
               .comment-wrapper
                 .name.pull-left(title="{$title}") {$title}
                 span.date.pull-right(style="background-color:rgb(244,244,242);")

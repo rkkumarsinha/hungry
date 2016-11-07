@@ -10,9 +10,9 @@ class View_HostAccount_Restaurant_Sales extends View{
 		$host_restaurant = $this->app->listmodel;
 		
 		$tabs = $this->add('Tabs');
-		$discount_tab = $tabs->addTab('Discount');
-		$table_tab = $tabs->addTab('Table Reservation');
-		$ticket_tab = $tabs->addTab('Ticket');
+		$discount_tab = $tabs->addTab('Discount')->setStyle('overflow','scroll');
+		$table_tab = $tabs->addTab('Table Reservation')->setStyle('overflow','scroll');
+		$ticket_tab = $tabs->addTab('Ticket')->setStyle('overflow','scroll');
 	
 		// Discount Coupon
 		$dc_model = $discount_tab->add('Model_DiscountCoupon');
@@ -23,7 +23,7 @@ class View_HostAccount_Restaurant_Sales extends View{
 		$dc_model->getElement('discount_coupon')->caption('Coupon');
 		$dc_model->setOrder('created_at','desc');
 		$discount_offer_voucher = $discount_tab->add('Grid');
-		$discount_offer_voucher->setModel($dc_model,['name','email','mobile','created_at','discount_coupon','discount','offer','total_amount']);
+		$discount_offer_voucher->setModel($dc_model,['name','email','mobile','created_at','discount_coupon','discount','offer','total_amount','payment_mode','amount_paid']);
 		$discount_offer_voucher->addPaginator($ipp=10);
 
 		// Table Reservation
@@ -34,7 +34,7 @@ class View_HostAccount_Restaurant_Sales extends View{
 
 		$grid = $table_tab->add('Grid');
 		$grid->addPaginator($ipp=10);
-		$grid->setModel($reserved_table,['book_table_for','email','mobile','booking_date','booking_time','booking_id','offer_id']);
+		$grid->setModel($reserved_table,['book_table_for','email','mobile','booking_date','booking_time','booking_id','offer_id','total_amount','payment_mode','amount_paid']);
 		$grid->addQuickSearch(['email','mobile','book_table_for','booking_date']);
 		// $ticket_tab
 		$ticket_tab->add('View_Warning')->set("Ticket");

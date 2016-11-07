@@ -3,13 +3,10 @@
   {rows}
   {row}
   <article class="review">
-    <figure class="author"><img alt="" src="assets/img/default-avatar.png"/>
-      <div class="date">{$created_at}</div>
-    </figure>
+    <figure class="author"><img alt="" src="assets/img/default-avatar.png"/></figure>
     <div class="wrapper">
-      <h5>{$name}</h5>
-      <p>{$message}</p>
-      <div class="individual-rating"><span>From : {$from}</span></div>
+      <h5>{$name}</h5>{$message}
+      <div class="individual-rating label label-info"><span>From : {$from} </span><span style="margin-left:20px;">Date : {$created_at}</span></div>
     </div>
   </article>{/}
   {/}

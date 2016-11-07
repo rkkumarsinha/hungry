@@ -4,12 +4,12 @@ div(id="{$_name}" class="{$class}" style="{$style}")
 	article.review
 		figure.author
 			img(alt='', src='assets/img/default-avatar.png')
-			.date {$created_at}
 		.wrapper
 			h5 {$name}
-			p {$message}
-			.individual-rating
-				span From : {$from}
+			{$message}
+			.individual-rating.label.label-info
+				span From : {$from} 
+				span(style="margin-left:20px;") Date : {$created_at}
 	{/}
 	{/}
 	{$not_found}

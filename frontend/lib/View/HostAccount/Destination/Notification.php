@@ -25,6 +25,11 @@ class View_HostAccount_Destination_Notification extends CompleteLister{
 		$paginator = $this->add("Paginator",null,'Paginator');
         $paginator->setRowsPerPage(10);
 	}
+	
+	function formatrow(){
+		$this->current_row_html['message'] = $this->model['message'];
+		parent::formatRow();
+	}
 
 	function setModel($model){
 		parent::setModel($model);

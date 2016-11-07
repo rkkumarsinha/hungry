@@ -22,7 +22,7 @@ class Model_Destination extends SQL_Model{
 
 		$this->addField('name')->mandatory(true);
 		$this->addField('owner_name')->mandatory(true);
-		$this->addField('about_destination')->type('text')->mandatory(true);
+		$this->addField('about_destination')->type('text')->mandatory(true)->display(array('form'=>'RichText'));
 		$this->addField('address')->type('text');
 		$this->addField('mobile_no')->hint('Comma separated multiple value');
 		$this->addField('phone_no');
@@ -58,10 +58,10 @@ class Model_Destination extends SQL_Model{
 		$this->addField('food_type')->setValueList(['veg'=>'Veg','nonveg'=>'Nonveg','mix'=>'Mix'])->mandatory(true);
 		$this->addField('payment_method')->setValueList(['cash'=>'Cash','cheque'=>'Cheque','Paytm'=>'Paytm'])->mandatory(true);
 
-		$this->addField('booking_policy')->type('text');
-		$this->addField('cancellation_policy')->type('text');
-		$this->addField('guidelines')->type('text');
-		$this->addField('how_to_reach')->type('text');
+		$this->addField('booking_policy')->type('text')->display(array('form'=>'RichText'));
+		$this->addField('cancellation_policy')->type('text')->display(array('form'=>'RichText'));
+		$this->addField('guidelines')->type('text')->display(array('form'=>'RichText'));
+		$this->addField('how_to_reach')->type('text')->display(array('form'=>'RichText'));
 		$this->addField('search_string')->type('text');
 
 		$this->addField('status')->enum(["active","deactive"])->defaultValue('deactive');
@@ -74,7 +74,7 @@ class Model_Destination extends SQL_Model{
 		$this->addField('image_title')->type('text')->hint('Ex:Destination in Udaipur - Destination Name');
 		$this->addField('image_alt_text')->type('text')->hint('Ex:destination udaipur');
 
-		$this->addField('disclaimer')->type('text');
+		$this->addField('disclaimer')->type('text')->display(array('form'=>'RichText'));
 
 		$this->hasMany('Destination_HighlightAssociation','destination_id');
 		$this->hasMany('Destination_Space','destination_id');

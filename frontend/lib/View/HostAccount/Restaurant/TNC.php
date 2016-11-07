@@ -4,6 +4,9 @@ class View_HostAccount_Restaurant_TNC extends View{
 	function init(){
 		parent::init();
 
-		$this->add('View',null,null,['view/restauranttnc']);
+		$model = $this->add('Model_Configuration')->tryLoadAny();
+
+		$this->add('View')->setHtml($model['restaurant_tnc']);
+
 	}
 }

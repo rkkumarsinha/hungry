@@ -26,6 +26,11 @@ class View_HostAccount_Event_Notification extends CompleteLister{
         $paginator->setRowsPerPage(10);
 	}
 
+	function formatrow(){
+		$this->current_row_html['message'] = $this->model['message'];
+		parent::formatRow();
+	}
+
 	function setModel($model){
 		parent::setModel($model);
 	}

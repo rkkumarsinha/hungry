@@ -6,6 +6,10 @@ class Model_Notification extends SQL_Model{
 	function init(){
 		parent::init();
 
+		$this->hasOne('Country','country_id');
+		$this->hasOne('State','state_id');
+		$this->hasOne('City','city_id');
+
 		$this->addField('name')->mandatory(true);
 		$this->addField('created_at')->type('DateTime')->defaultValue(date('Y-m-d H:i:s'));
 		$this->addField('from_id');
@@ -18,8 +22,8 @@ class Model_Notification extends SQL_Model{
 		$this->addField('request_for')->setValueList(['discount'=>'Discount','offer'=>"Offer",'package'=>"Package",'image'=>"Image","pull push sticker"=>"Pull Push Sticker",'table reservation signature'=>"Table reservation signature","android app"=>"Android App",'website'=>"Website"]);
 		$this->addField('status')->setValueList(['approved'=>'Approved','pending'=>"Pending",'cancled'=>"Cancled"]);
 		$this->addField('value'); 
-
-		// $this->add('dynamic_model/Controller_AutoCreator');
+		
+		$this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 }
