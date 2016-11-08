@@ -7,56 +7,63 @@ class page_event extends Page{
 		parent::init();
 		
 		$crud = $this->add('CRUD');
-		$crud->setModel('Model_Event',
+
+        $event_model = $this->add('Model_Event');
+        $event_model->addExpression('user_status')->set(function($m,$q){
+            return $m->refSQL('user_id')->fieldQuery('is_verified');
+        });
+
+		$crud->setModel($event_model,
 						array(
                                 'user_id',
-								'country_id',
-								'state_id',
-								'city_id',
-								'area_id',
-								'restaurant_id',
-								'event_category_id',
-								'logo_image_id',
+                                'country_id',
+                                'state_id',
+                                'city_id',
+                                'area_id',
+                                'restaurant_id',
+                                'event_category_id',
+                                'logo_image_id',
                                 'banner_image_id',
                                 'display_image_id',
-								'name',
-								'owner_name',
-								'detail',
-								'address',
-								'mobile_no',
-								'phone_no',
-								'email',
-								'website',
-								'facebook_page_url',
-								'instagram_page_url',
-								'starting_date',
+                                'name',
+                                'owner_name',
+                                'detail',
+                                'address',
+                                'mobile_no',
+                                'phone_no',
+                                'email',
+                                'website',
+                                'facebook_page_url',
+                                'instagram_page_url',
+                                'starting_date',
                                 'starting_time',
-								'closing_date',
+                                'closing_date',
                                 'closing_time',
-								'longitude',
-								'latitude',
-								'url_slug',
-								'lowest_price',
-								'event_attraction',
+                                'longitude',
+                                'latitude',
+                                'url_slug',
+                                'lowest_price',
+                                'event_attraction',
                                 'guidelines',
                                 'how_to_reach',
                                 'is_active',
                                 'is_verified',
                                 'disclaimer'
-							),
-						array
-							(    
+                            ),
+                        array
+                            (    
                                 'user',
-								'name',
-								'starting_date',
-								'closing_date',
-								'total_day',
-								'event_category',
-								'lowest_price'
-							)
-						);
+                                'name',
+                                'user_status',
+                                'starting_date',
+                                'closing_date',
+                                'total_day',
+                                'event_category',
+                                'lowest_price'
+                            )
+                        );
 
-		$crud->grid->add('VirtualPage')
+        $crud->grid->add('VirtualPage')
             ->addColumn('Days')
             ->set(function($page){
             	$event_id = $_GET[$page->short_name.'_id'];
@@ -66,7 +73,65 @@ class page_event extends Page{
             	$day_crud->setModel($day);
 	            	// $day_crud->addColumn
             });
-		
+		$crud->grid->addHook('formatRow',function($g){
+            $g->current_row_html['name'] = '<a style="width:100px;" target="_blank" href="'.$this->api->url('verify_event',['id'=>$g->model['id'],'type'=>'event']).'">'.$g->model['name'].'</a>';
+            // $g->current_row_html['name'] = '<a style="width:100px;" target="_blank" href="'.$this->api->url('restaurantdetail',['rest_id'=>$g->model['id']]).'">'.$g->model['name'].'</a>';
+            $g->current_row_html['user_status'] = $g->model['user_status']?'<div class="atk-swatch-green" style="padding:2px;text-align:center;">verified</div>':'<div class="atk-swatch-red" style="padding:2px;text-align:center;">to be verified</div>';
+        });
+
+        $crud->grid->add('VirtualPage')
+            ->addColumn('send_email_verification')
+            ->set(function($page){
+                $id = $_GET[$page->short_name.'_id'];
+
+                $business_model = $event = $this->add('Model_Event')->load($id);
+
+                if(!$event['user_id']){
+                    $page->add('View_Error')->set('Host not found');
+                    return;
+                }
+
+                $user = $page->add('Model_User')->tryLoad($event['user_id']);
+                if(!$user->loaded()){
+                    $page->add('View_Error')->set('Host not found');
+                    return;
+                }
+
+                if($user['type'] != "host"){
+                    $page->add('View_Error')->set('Host not found, user is not host type '.$user->id);
+                    return;
+                }
+                
+                if($user['is_verified']){
+                    $page->add('View_Info')->set('Host is verified, do you want to send email again'.$user['is_verified']);
+                }
+
+                $email_template = $page->add('Model_EmailTemplate')
+                                ->addCondition('name',"EMAILVERIFICATIONHOST")
+                                ->tryLoadAny();
+                $subject = $email_template['subject'];
+                $body = $email_template['body'];
+
+                $body = str_replace("{user_name}", $user['name'], $body);
+                $body = str_replace("{business_name}", $business_model['name'], $body);
+                $body = str_replace("{verification_email_link}", $user->getVerificationURL()."&business=".$business_model->id."&business_type=event", $body);
+
+                $form = $page->add('Form');
+                $form->add('View')->setHtml($body);
+                $form->addSubmit('Send Verification');
+
+                if($form->isSubmitted()){
+                    $outbox = $this->add('Model_Outbox');
+                    try{
+                        $email_response = $outbox->sendEmail($user['email'],$subject,$body,$user);
+                        $outbox->createNew("Verification Email From Admin",$user['email'],$subject,$body,"Email","New Host User Registration with ".$business_name['name'],$user->id,$user_model);
+                    }catch(Exception $e){
+                        // $form->js()->univ()->errorMessage('email not send')->execute();
+                    }
+                    $form->js()->univ()->successMessage('email send successfully')->execute();
+                }             
+        });
+
 		$crud->grid->add('VirtualPage')
             ->addColumn('Times')
             ->set(function($page){            	

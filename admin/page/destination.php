@@ -14,6 +14,9 @@ class page_destination extends Page {
 
         $c = $this->add('CRUD');
         $destination_model = $this->add('Model_Destination');
+        $destination_model->addExpression('user_status')->set(function($m,$q){
+            return $m->refSQL('user_id')->fieldQuery('is_verified');
+        });
 
         $c->setModel(
         		$destination_model,
@@ -61,9 +64,67 @@ class page_destination extends Page {
                     'status',
                     'is_verified'
         			),
-        		array('name')
+        		array('name','user','user_status')
         	);
+        
+        $c->grid->addHook('formatRow',function($g){
+            $g->current_row_html['name'] = '<a style="width:100px;" target="_blank" href="'.$this->api->url('verify_event',['id'=>$g->model['id'],'type'=>'event']).'">'.$g->model['name'].'</a>';
+            // $g->current_row_html['name'] = '<a style="width:100px;" target="_blank" href="'.$this->api->url('restaurantdetail',['rest_id'=>$g->model['id']]).'">'.$g->model['name'].'</a>';
+            $g->current_row_html['user_status'] = $g->model['user_status']?'<div class="atk-swatch-green" style="padding:2px;text-align:center;">verified</div>':'<div class="atk-swatch-red" style="padding:2px;text-align:center;">to be verified</div>';
+        });
 
+        $c->grid->add('VirtualPage')
+            ->addColumn('send_email_verification')
+            ->set(function($page){
+                $id = $_GET[$page->short_name.'_id'];
+
+                $business_model = $destination = $this->add('Model_Destination')->load($id);
+
+                if(!$destination['user_id']){
+                    $page->add('View_Error')->set('Host not found');
+                    return;
+                }
+
+                $user = $page->add('Model_User')->tryLoad($destination['user_id']);
+                if(!$user->loaded()){
+                    $page->add('View_Error')->set('Host not found');
+                    return;
+                }
+
+                if($user['type'] != "host"){
+                    $page->add('View_Error')->set('Host not found, user is not host type '.$user->id);
+                    return;
+                }
+                
+                if($user['is_verified']){
+                    $page->add('View_Info')->set('Host is verified, do you want to send email again'.$user['is_verified']);
+                }
+
+                $email_template = $page->add('Model_EmailTemplate')
+                                ->addCondition('name',"EMAILVERIFICATIONHOST")
+                                ->tryLoadAny();
+                $subject = $email_template['subject'];
+                $body = $email_template['body'];
+
+                $body = str_replace("{user_name}", $user['name'], $body);
+                $body = str_replace("{business_name}", $business_model['name'], $body);
+                $body = str_replace("{verification_email_link}", $user->getVerificationURL()."&business=".$business_model->id."&business_type=destination", $body);
+
+                $form = $page->add('Form');
+                $form->add('View')->setHtml($body);
+                $form->addSubmit('Send Verification');
+
+                if($form->isSubmitted()){
+                    $outbox = $this->add('Model_Outbox');
+                    try{
+                        $email_response = $outbox->sendEmail($user['email'],$subject,$body,$user);
+                        $outbox->createNew("Verification Email From Admin",$user['email'],$subject,$body,"Email","New Host User Registration with ".$business_name['name'],$user->id,$user_model);
+                    }catch(Exception $e){
+                        // $form->js()->univ()->errorMessage('email not send')->execute();
+                    }
+                    $form->js()->univ()->successMessage('email send successfully')->execute();
+                }             
+        });
 		$c->grid->add('VirtualPage')
             ->addColumn('Actions')
             ->set(function($page){
