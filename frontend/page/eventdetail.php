@@ -48,7 +48,9 @@ class page_eventdetail extends Page{
 
         // Date Format
         $this->template->trySet('starting_date_redable',date('M-d-Y',strtotime($this->model['starting_date'])));
+        $this->template->trySet('starting_time_redable',date('H:i a',strtotime($this->model['starting_time'])));
         $this->template->trySet('closing_date_redable',date('M-d-Y',strtotime($this->model['closing_date'])));
+        $this->template->trySet('closing_time_redable',date('H:i a',strtotime($this->model['closing_time'])));
         
         $this->template->trySetHtml('event_attraction_list',$this->model['event_attraction']);
         $this->template->trySetHtml('detail_html',$this->model['detail']);

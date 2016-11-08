@@ -65,7 +65,7 @@ class page_verify_rest extends Page {
         $category_tab = $tab->addTab('Category');
 
 
-        $email_tab = $tab->addTab('Send Verification Email');
+        $email_tab = $tab->addTab('Send Welcome Email');
         
         $email_template = $this->add('Model_EmailTemplate')
                             ->addCondition('name',"WELCOMEEMAILHOST")->tryLoadAny();
@@ -84,7 +84,7 @@ class page_verify_rest extends Page {
         }
 
         $verification_form = $email_tab->add('Form');
-        $verification_form->addSubmit('Verify & send Verification Email');
+        $verification_form->addSubmit('Verify & send Welcome Email');
         if($verification_form->isSubmitted()){
             if(!$listing_model->loaded())
                 throw new \Exception("model not loaded", 1);
