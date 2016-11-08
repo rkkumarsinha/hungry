@@ -27,6 +27,9 @@ class View_Lister_Restaurant extends CompleteLister{
 		// else if($this->model['avg_cost_per_person_thali'])
 
 		$this->current_row['avgcost'] = $this->model->avgCost();
+		if($this->template->hasTag('about_restaurant_html'))
+			$this->current_row_html['about_restaurant_html'] = $this->model['about_restaurant'];
+
 		// $this->current_row['rating_percentage'] = ($this->model['rating'] /5 * 100)."%";
 		
 		$review = $this->add('View_Review',['restaurant_rating'=>$this->model['rating']?:0],'rating_star');
