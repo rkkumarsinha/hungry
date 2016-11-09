@@ -37,6 +37,25 @@ class Frontend extends ApiFrontend {
         }
 
         $this->api->today = date('Y-m-d');
+        $this->api->now = date('Y-m-d H:i:s');
+
+        $this->app->city_name = $this->app->recall('city_id')?:$_GET['city']?:"Udaipur";
+        // throw new \Exception($this->app->city_name);
+        
+        if($this->app->city_name){
+            if(is_numeric($this->app->city_name)){
+                $this->app->city = $city = $this->add('Model_City')->load($this->app->city_name);
+                $this->app->city_id = $city->id;
+                $this->app->city_name = $city['name'];
+            }else{
+                $this->app->city = $city = $this->add('Model_City')->loadBy('name',$this->app->city_name);
+                $this->app->city_id = $city->id;
+                $this->app->city_name = $city['name'];
+                
+                // $area = $this->add('Model_Area')->loadBy('name',$this->app->city_name);
+                // $this->app->area_id = $area->id;
+            }
+        }
 
         if($this->api->auth->model->id){
             $this->layout->add('View',null,'username')->setElement('strong')->set("Hello ".$this->api->auth->model['name'])->setStyle('color','white');
@@ -61,25 +80,6 @@ class Frontend extends ApiFrontend {
                 ->addClass('signin')
                 ->set('Sign In');
             $this->layout->template->tryDel('login_menu');
-        }
-
-
-        $this->app->city_name = $this->app->recall('city_id')?:$_GET['city']?:"Udaipur";
-        // throw new \Exception($this->app->city_name);
-        
-        if($this->app->city_name){
-            if(is_numeric($this->app->city_name)){
-                $this->app->city = $city = $this->add('Model_City')->load($this->app->city_name);
-                $this->app->city_id = $city->id;
-                $this->app->city_name = $city['name'];
-            }else{
-                $this->app->city = $city = $this->add('Model_City')->loadBy('name',$this->app->city_name);
-                $this->app->city_id = $city->id;
-                $this->app->city_name = $city['name'];
-                
-                // $area = $this->add('Model_Area')->loadBy('name',$this->app->city_name);
-                // $this->app->area_id = $area->id;
-            }
         }
 
         // $this->layout->add('View_Location',null,'location');
