@@ -196,7 +196,7 @@ class View_HostAccount_Restaurant_Profile extends View{
             $f->tryLoadAny();
             if($f->loaded()){
                 $path = $this->app->getConfig('imagepath').str_replace("..", "", $f->getPath());
-                $g->current_row_html['image'] = "<img width='100px' src=".$path.">";
+                $g->current_row_html['image'] = "<img width='50px' src=".$path.">";
             }else
                 $g->current_row_html['image'] = "No Icon Found";
 
@@ -210,7 +210,7 @@ class View_HostAccount_Restaurant_Profile extends View{
             $f->tryLoadAny();
             if($f->loaded()){
                 $path = $this->app->getConfig('imagepath').str_replace("..", "", $f->getPath());
-                $g->current_row_html['image'] = "<img width='100px' src=".$path.">";
+                $g->current_row_html['image'] = "<img width='50px' src=".$path.">";
             }else
                 $g->current_row_html['image'] = "No Icon Found";
 
