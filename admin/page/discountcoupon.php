@@ -17,7 +17,7 @@ class page_discountcoupon extends Page {
         $model->setOrder('created_at','Desc');
 
         $crud->setModel($model);
-		$crud->setPaginator($ipp=50);
+		$crud->grid->addPaginator($ipp=50);
 		$crud->grid->addQuickSearch(['name','email','discount_coupon','mobile']);
     }
 

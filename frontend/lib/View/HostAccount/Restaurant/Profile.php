@@ -105,7 +105,7 @@ class View_HostAccount_Restaurant_Profile extends View{
         $rest_image = $this->add('Model_RestaurantImage')
         				->addCondition('restaurant_id',$host_restaurant->id)
         				->addCondition('type','restaurant')
-        				->addCondition('status','pending')
+        				// ->addCondition('status',['pending','app'])
         				;
 
         $rest_image->addHook('afterInsert',function($model)use($host_restaurant){
@@ -120,7 +120,7 @@ class View_HostAccount_Restaurant_Profile extends View{
 			$notification->save();
         });
 
-        $crud->setModel($rest_image,['image_id','image'],['image']);
+        $crud->setModel($rest_image,['image_id','image'],['image','status']);
         $crud->grid->addPaginator(10);
         $crud->grid->addHook('formatRow',function($g){
             if($g->model['image_id']){
@@ -141,7 +141,7 @@ class View_HostAccount_Restaurant_Profile extends View{
         $menu_image = $this->add('Model_RestaurantMenu')
         				->addCondition('restaurant_id',$host_restaurant->id)
         				->addCondition('type','menu')
-        				->addCondition('status','pending')
+        				// ->addCondition('status','pending')
         				;
 
         $menu_image->addHook('afterInsert',function($model)use($host_restaurant){
@@ -156,7 +156,7 @@ class View_HostAccount_Restaurant_Profile extends View{
 			$notification->save();
         });
 
-        $menu_crud->setModel($menu_image,['image_id','image'],['image']);
+        $menu_crud->setModel($menu_image,['image_id','image'],['image','status']);
         $menu_crud->grid->addPaginator(10);
         $menu_crud->grid->addHook('formatRow',function($g){
             if($g->model['image_id']){
@@ -181,7 +181,7 @@ class View_HostAccount_Restaurant_Profile extends View{
             $f->tryLoadAny();
             if($f->loaded()){
                 $path = $this->app->getConfig('imagepath').str_replace("..", "", $f->getPath());
-                $g->current_row_html['image'] = "<img width='100px' src=".$path.">";
+                $g->current_row_html['image'] = "<img width='50px' src=".$path.">";
             }else
                 $g->current_row_html['image'] = "No Icon Found";
         });

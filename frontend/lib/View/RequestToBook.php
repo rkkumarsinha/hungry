@@ -52,7 +52,7 @@ class View_RequestToBook extends View{
 
         $row_col1->addField('Number','adult')->validateNotNull();
         $row_col2->addField('Number','child')->validateNotNull();
-        $row_col3->addField('Number','budget_per_persion')->validateNotNull();
+        $row_col3->addField('Number','budget_per_persion','Budget Per Person')->validateNotNull();
 
         
         $row2 = $c1->add('Columns')->addClass('input-padding-remove');
