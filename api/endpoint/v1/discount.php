@@ -74,6 +74,9 @@ class endpoint_v1_discount extends HungryREST {
             throw new \Exception("some thing wrong 10006");
             
         $rests = $this->add('Model_Restaurant');
+        $rests->addCondition('status','active');
+        $rests->addCondition('is_verified',true);
+
         $rests->setOrder('discount_percentage','desc');
         $rests->setOrder('rating','desc');
 
@@ -207,7 +210,7 @@ class endpoint_v1_discount extends HungryREST {
         $this->validateParams();
         $model = parent::_model();
         
-        $model->setOrder('is_recommend','desc');
+        // $model->setOrder('is_recommend','desc');
         return $model;
     }
 
@@ -235,7 +238,7 @@ class endpoint_v1_discount extends HungryREST {
 
             if(!$_GET['city'] and !is_string($_GET['city']))
                 throw new \Exception("some thing error 1005", 1);
-            
+                            
             if(!$_GET['limit'] or $_GET['limit'] > $this->app->getConfig('max_limit'))
                 throw new \Exception("some thing error 1006", 1);
 
