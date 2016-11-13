@@ -109,6 +109,10 @@ class endpoint_v1_event extends HungryREST {
 
         // $model->addCondition('starting_date','<=',$this->api->today);
         $model->addCondition('closing_date','>=',$this->api->today);
+
+        $model->addCondition('is_active',true);
+        $model->addCondition('is_verified',true);
+
         $model->setOrder('is_featured','desc');
 
         if($_GET['city'] != "All")  

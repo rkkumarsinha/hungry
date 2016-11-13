@@ -259,6 +259,9 @@ class endpoint_v1_filter extends HungryREST {
         $this->validateParams();
         $model = parent::_model();
 
+        $model->addCondition('status','active');
+        $model->addCondition('is_verified',true);
+
         $model->addExpression('city')->set(function($m,$q){
             return $q->expr('UPPER([0])',[$m->refSQL('city_id')->fieldQuery('name')]);
         });
