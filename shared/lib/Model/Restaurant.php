@@ -137,8 +137,8 @@ class Model_Restaurant extends SQL_Model{
 					;
 		$total_review = $review->count()->getOne();
 		$total_rating = $review->sum('rating')->getOne();
-		$this['rating'] = ($this['rating'] + $total_rating) / ($total_review + 1);
-		$this['approved_review_count'] = $total_review;
+		$this['rating'] = round(($this['rating'] + $total_rating) / ($total_review + 1),1);
+		$this['approved_review_count'] = round($total_review,1);
 	}
 
 	function afterSave(){
