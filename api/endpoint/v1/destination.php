@@ -151,6 +151,9 @@ class endpoint_v1_destination extends HungryREST {
         $venue_j->addField('venue_name','name');
         $model->addCondition('venue_name',$_GET['venue']);
 
+        $model->addCondition('status','active');
+        $model->addCondition('is_verified',true);
+        
         $model->setOrder('rating','desc');
         $model->setOrder('is_featured','desc');
         $model->setOrder('is_recommend','desc');
