@@ -33,7 +33,7 @@ class endpoint_v1_cityrestaurant extends HungryREST {
         
         if(!$m)throw $this->exception('Specify model_class or define your method handlers');
 
-        if ($m->loaded()) {            
+        if ($m->loaded()) {
             if(!$this->allow_list_one)throw $this->exception('Loading is not allowed');
             $o = $m->get();
             $o['images'] = $this->outputManyImage();
@@ -96,7 +96,10 @@ class endpoint_v1_cityrestaurant extends HungryREST {
     function outputManyFeaturedRestaurant($city_id){        
         $restaurant = $this->add('Model_Restaurant')
             ->addCondition('city_id',$city_id)
-            ->addCondition('is_featured',true);
+            ->addCondition('is_featured',true)
+            ->addCondition('status','active')
+            ->addCondition('is_verified',true)
+            ;
 
         $data = [];
         foreach ($restaurant as $rest) {
