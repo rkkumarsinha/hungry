@@ -54,10 +54,15 @@ class endpoint_v1_keyword extends HungryREST {
 
             $rest = $this->add('Model_Restaurant')
                     ->addCondition('id',$keyword_asso['restaurant_id'])
+                    ->addCondition('status','active')
+                    ->addCondition('is_verified',true)
                     ->setOrder('is_recommend','desc')
                     ->tryLoadAny()
                     ;
-                    
+            
+            if(!$rest->loaded())
+                continue;
+            
             $rest_data['id'] = $rest['id'];
             $rest_data['name'] = $rest['name'];
             $rest_data['address'] = $rest['address'];

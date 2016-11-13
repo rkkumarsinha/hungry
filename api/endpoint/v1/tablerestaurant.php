@@ -77,6 +77,9 @@ class endpoint_v1_tablerestaurant extends HungryREST{
 
         $model =  parent::_model();
 
+        $model->addCondition('status','active');
+        $model->addCondition('is_verified',true);
+
         $model->addCondition('reservation_needed',true);
         $model->setOrder('rating','desc');
         $model->setOrder('is_featured','desc');
