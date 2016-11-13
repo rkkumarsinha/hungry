@@ -159,8 +159,20 @@ class endpoint_v1_category extends HungryREST {
             return $q->expr('IFNULL([0],0)',[$m->refSQL('restaurant_id')->fieldQuery('rating')]);
         });
 
+        $model->addExpression('is_verified')->set(function($m,$q){
+            return $q->expr('IFNULL([0],0)',[$m->refSQL('restaurant_id')->fieldQuery('is_verified')]);
+        });
+
+        $model->addExpression('status')->set(function($m,$q){
+            return $q->expr('IFNULL([0],0)',[$m->refSQL('restaurant_id')->fieldQuery('status')]);
+        });
+
         $model->addCondition('city',strtoupper($_GET['city']));
         $model->addCondition('category_id',$_GET['category']);
+
+        $model->addCondition('status','active');
+        $model->addCondition('is_verified',true);
+
         $model->setOrder('rating','desc');
         $model->setOrder('is_featured','desc');
         $model->setOrder('is_popular','desc');
