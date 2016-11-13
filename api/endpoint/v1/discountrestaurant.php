@@ -81,6 +81,8 @@ class endpoint_v1_discountrestaurant extends HungryREST {
             throw new \Exception("Error Processing Request 1005");
             
         // $model->addExpression('city_name')->set($model->refSQL('city_id')->fieldQuery('name'));
+        $model->addCondition('status','active');
+        $model->addCondition('is_verified',true);
 
         if($_GET['type']=="discount")
             $model->addCondition('discount_id','<>',null);
