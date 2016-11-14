@@ -15,10 +15,23 @@ class Admin extends App_Admin {
         date_default_timezone_set("Asia/Calcutta");
 
         $this->dbConnect();
+
         $auth=$this->add('Auth');
-        $auth->usePasswordEncryption();
-        $auth->setModel('User','email','password');
-        $auth->check();       
+        try{
+            $auth->usePasswordEncryption();
+            $user_model = $this->add('Model_User')->addCondition('type','superadmin');
+            $auth->setModel($user_model,'email','password');
+            $auth->check();
+        // $this->app->addHook('quick_searched',[$search_itemcategory,'quickSearch']);
+        }catch(Exception $e){
+            $this->js(true)->univ()->errorMessage('authentication error')->execute();
+            // exit;
+        }
+
+        if($this->api->auth->model['type'] != "superadmin"){
+            $this->api->auth->logout();
+            exit;
+        }
 
         $this->api->today = date('Y-m-d');
         $this->api->menu->addItem(['Event','icon'=>'ajust'],'/event');
