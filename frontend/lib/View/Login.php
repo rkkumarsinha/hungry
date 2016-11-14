@@ -25,6 +25,8 @@ class View_Login extends View{
 	        		$info->set('Your Password Changed Successfully');
 	        	}elseif($status=="verification"){
 	        		$info->set('You Account Activated Successfully');
+	        	}elseif($status=="verificationhost"){
+	        		$info->set('you email is verified, you can login once your account is activated by HungryDunia');
 	        	}
 	        	$this->api->stickyForget('from');
 	        }
@@ -88,8 +90,9 @@ class View_Login extends View{
 	            if(!$user_model['is_verified'])
 	                $f->displayError('email','Please Verified Your Account First');
 
-	            if(!$user_model['is_active'])
-	                $f->displayError('email','Please Activate Your Account First');
+	            if(!$user_model['is_active']){
+	                	$f->displayError('email','Please Activate Your Account First');
+	            }
 
 	            $this->api->auth->login($f['email']);
 				// $this->api->auth->login($user_model);

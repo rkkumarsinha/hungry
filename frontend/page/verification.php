@@ -35,12 +35,19 @@ class page_verification extends Page
       		}
 
       		$user['is_verified'] = true;
-      		$user['is_active'] = true;
+          if($user['type'] == "user"){
+            $user['is_active'] = true;
+            $this->api->memorize('from','verification');
+          }else{
+            $user['is_active'] = false;
+            $this->api->memorize('from','verificationhost');
+          }
+
           $user->save();
-      		$this->api->stickyForget('email');
-      		$this->api->stickyForget('verification_code');
+          $this->api->stickyForget('email');
+          $this->api->stickyForget('verification_code');
           
-          $this->api->memorize('from','verification');          
+
           try{
 
             if($user['type'] == "user"){
