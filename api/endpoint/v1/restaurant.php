@@ -373,7 +373,7 @@ class endpoint_v1_restaurant extends HungryREST {
                     'area_id'=>$model['area_id'],
                     'area'=>$model['area'],
                     'discount_id'=>$model['discount_id'],
-                    'discount'=>$model['discount'],
+                    'discount'=>$model['discount_percentage_to_be_given'],
                     "logo_image"=>$model['logo_image'],
                     "display_image"=>$model['display_image'],
                     "name"=>$model['name'],
@@ -393,7 +393,7 @@ class endpoint_v1_restaurant extends HungryREST {
                     "is_recommend"=>$model['is_recommend'],
                     "url_slug"=>$model['url_slug'],
                     "food_type"=>$model['food_type'],
-                    "discount_percentage"=>$model['discount_percentage'],
+                    "discount_percentage"=>$model['discount_percentage_to_be_given'],
                     "category_icon_url"=>$model['category_icon_url']
                 );
         return array_merge($temp2,$temp1);
