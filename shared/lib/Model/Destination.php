@@ -257,6 +257,7 @@ class Model_Destination extends SQL_Model{
         $gallery_model = $this->add('Model_DestinationImage')
         				->addCondition('destination_id',$this->id)
         				->addCondition('is_active',true)
+        				->addCondition('status','approved')
         				;
         $output = [];
         foreach ($gallery_model as $gallery) {

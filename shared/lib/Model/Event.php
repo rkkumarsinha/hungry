@@ -130,7 +130,10 @@ class Model_Event extends SQL_Model{
 		if(!$this->loaded())
 			throw new \Exception("something wrong 10009", 1);
 
-		$images_model = $this->ref('EventImage')->addCondition('is_active',true);
+		$images_model = $this->ref('EventImage')
+						->addCondition('is_active',true)
+						->addCondition('status','approved')
+						;
 
 		$output = [];
 		foreach ($images_model as $image) {
