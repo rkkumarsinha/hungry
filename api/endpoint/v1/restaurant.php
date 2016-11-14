@@ -127,6 +127,8 @@ class endpoint_v1_restaurant extends HungryREST {
                 //get all restaurant_images
                 $images = $this->add('Model_RestaurantImage')
                         ->addCondition('restaurant_id',$row->id)
+                        ->addCondition('status','approved')
+                        ->addCondition('is_active',true)
                         ->getRows(array('image'))
                         ;
                 $output[$row['id']]['restaurant_images'] = $this->outputMany($images);
@@ -134,6 +136,8 @@ class endpoint_v1_restaurant extends HungryREST {
                 //get all menus
                 $menus = $this->add('Model_RestaurantMenu')
                         ->addCondition('restaurant_id',$row->id)
+                        ->addCondition('status','approved')
+                        ->addCondition('is_active',true)
                         ->getRows(array('image'))
                         ;
                 $output[$row['id']]['restaurant_menu'] = $this->outputMany($menus);
@@ -251,6 +255,8 @@ class endpoint_v1_restaurant extends HungryREST {
                             ->addCondition('area_id',$_GET['area_id'])
                             ->addCondition('id','>',$last_id)
                             ->addCondition('is_featured',true)
+                            ->addCondition('is_verified',true)
+                            ->addCondition('status','active')
                             ->setLimit($limit);
 
                 elseif($_GET['type']=="previous")
@@ -259,6 +265,8 @@ class endpoint_v1_restaurant extends HungryREST {
                                     ->addCondition('area_id',$_GET['area_id'])
                                     ->addCondition('is_featured',true)
                                     ->addCondition('id','<',$last_id)
+                                    ->addCondition('is_verified',true)
+                                    ->addCondition('status','active')
                                     ->setOrder('id','desc')
                                     ->setLimit($limit);
                 else
@@ -266,6 +274,8 @@ class endpoint_v1_restaurant extends HungryREST {
                                     ->addCondition('city_id',$city->id)
                                     ->addCondition('area_id',$_GET['area_id'])
                                     ->addCondition('is_featured',true)
+                                    ->addCondition('is_verified',true)
+                                    ->addCondition('status','active')
                                     ->setLimit($limit);
             }
 
@@ -274,16 +284,24 @@ class endpoint_v1_restaurant extends HungryREST {
                                 ->addCondition('city_id',$city->id)
                                 ->addCondition('area_id',$_GET['area_id'])
                                 ->addCondition('id','>',$last_id)
+                                ->addCondition('is_verified',true)
+                                ->addCondition('status','active')
                                 ->setLimit($limit);
             elseif($_GET['type']=="previous")
                 return parent::_model()
                                 ->addCondition('city_id',$city->id)
                                 ->addCondition('area_id',$_GET['area_id'])
                                 ->addCondition('id','<',$last_id)
+                                ->addCondition('is_verified',true)
+                                ->addCondition('status','active')
                                 ->setOrder('id','desc')
                                 ->setLimit($limit);
             else
-                return parent::_model()->addCondition('city_id',$city->id)->addCondition('area_id',$_GET['area_id'])->setLimit($limit);
+                return parent::_model()->addCondition('city_id',$city->id)
+                                ->addCondition('area_id',$_GET['area_id'])
+                                ->addCondition('is_verified',true)
+                                ->addCondition('status','active')
+                                ->setLimit($limit);
         }
 
         if($_GET['featured'] and $_GET['featured']==="required"){
@@ -292,18 +310,24 @@ class endpoint_v1_restaurant extends HungryREST {
                             ->addCondition('city_id',$city->id)
                             ->addCondition('is_featured',true)
                             ->addCondition('id','>',$last_id)
+                            ->addCondition('is_verified',true)
+                            ->addCondition('status','active')
                             ->setLimit($limit);
             elseif($_GET['type'] =="previous")
                 return parent::_model()
                             ->addCondition('city_id',$city->id)
                             ->addCondition('is_featured',true)
                             ->addCondition('id','<',$last_id)
+                            ->addCondition('is_verified',true)
+                            ->addCondition('status','active')
                             ->setOrder('id','desc')
                             ->setLimit($limit);
             else
                 return parent::_model()
                             ->addCondition('city_id',$city->id)
                             ->addCondition('is_featured',true)
+                            ->addCondition('is_verified',true)
+                            ->addCondition('status','active')
                             ->setLimit($limit);
         }
         
@@ -312,17 +336,23 @@ class endpoint_v1_restaurant extends HungryREST {
             return parent::_model()
                     ->addCondition('city_id',$city->id)
                     ->addCondition('id','>',$last_id)
+                    ->addCondition('is_verified',true)
+                    ->addCondition('status','active')
                     ->setLimit($limit);
 
         elseif($_GET['type'] =="previous")
              return parent::_model()
                     ->addCondition('city_id',$city->id)
                     ->addCondition('id','<',$last_id)
+                    ->addCondition('is_verified',true)
+                    ->addCondition('status','active')
                     ->setOrder('id','desc')
                     ->setLimit($limit);
         else{            
             return parent::_model()
                     ->addCondition('city_id',$city->id)
+                    ->addCondition('is_verified',true)
+                    ->addCondition('status','active')
                     ->setLimit($limit);
         }
 
