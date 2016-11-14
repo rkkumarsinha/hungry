@@ -10,7 +10,7 @@ class Model_RestaurantOffer extends SQL_Model{
 		
 		$this->addField('sub_name')->caption('Title')->mandatory(true);
 		$this->addField('detail')->type('text');
-		$this->addExpression('name')->set($this->refSQL('offer_id')->fieldQuery('name'));
+		$this->addExpression('name')->set($this->dsql()->expr('[0]',[$this->getElement('sub_name')]));
 		// $this->addExpression('detail')->set($this->refSQL('offer_id')->fieldQuery('detail'));
 		$this->addField('is_active')->type('boolean')->defaultValue(true);
 
