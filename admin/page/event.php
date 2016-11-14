@@ -174,7 +174,7 @@ class page_event extends Page{
             	$event_id = $_GET[$page->short_name.'_id'];
             	$images = $page->add('Model_EventImage')->addCondition('event_id',$event_id);
             	$images_crud = $page->add('CRUD');
-            	$images_crud->setModel($images,array('event_id','name','is_active','image_id'),array('event','name','is_active','image'));
+            	$images_crud->setModel($images,array('event_id','name','is_active','image_id','status'),array('event','name','is_active','image','status'));
 
                 $images_crud->grid->addHook('formatRow',function($g){
                     if($g->model['image_id']){

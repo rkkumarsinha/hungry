@@ -19,7 +19,7 @@ class page_destination_gallery extends Page {
 
         $crud = $this->add('CRUD');
         $model = $this->add('Model_DestinationImage')->addCondition('destination_id',$destination_id);
-        $crud->setModel($model,array('destination','name','redirect_url','is_active','image_id','image'));
+        $crud->setModel($model,array('destination','name','redirect_url','is_active','image_id','image','status'));
         
         $crud->grid->addHook('formatRow',function($g){
 
