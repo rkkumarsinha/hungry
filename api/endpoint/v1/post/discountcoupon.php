@@ -64,7 +64,7 @@ class endpoint_v1_post_discountcoupon extends HungryREST {
             $m['user_id'] = $this->api->auth->model->id;
             $m['is_send'] = 1;
             $m->save();
-            // $m->sendDiscount();
+            $m->sendDiscount();
         }catch(\Exception_StopInit $e){
 
         }catch(Exception $e){
@@ -151,7 +151,7 @@ class endpoint_v1_post_discountcoupon extends HungryREST {
                 exit;
             }
 
-            if($om['is_active'] != true){
+            if($om['is_active'] != 1){
                 echo json_encode(array(
                             'status'=>"failed",
                             'message'=>"offer not found"
@@ -159,7 +159,9 @@ class endpoint_v1_post_discountcoupon extends HungryREST {
                 exit;
             }
 
-            $appli_offer = $this->add('Model_RestaurantOffer')->addCondition('restaurant_id',$rest->id)->addCondition('offer_id',$om->id);
+            $appli_offer = $this->add('Model_RestaurantOffer')
+                            ->addCondition('restaurant_id',$rest->id)
+                            ->addCondition('id',$om->id);
             if($appli_offer->count()->getOne() != 1){
                 echo json_encode(array(
                             'status'=>"failed",
