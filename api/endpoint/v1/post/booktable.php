@@ -58,6 +58,9 @@ class endpoint_v1_post_booktable extends HungryREST {
             // $this->api->db->beginTransaction();
 
             $m->set($data);
+            if(isset($data['offer_id']))
+                $m['restoffer_id'] = $data['offer_id'];
+            
             $m['user_id'] = $this->api->auth->model->id;
             $m['book_table_for'] = $data['name'];
             $m['no_of_adult'] = $data['adult'];
@@ -158,7 +161,7 @@ class endpoint_v1_post_booktable extends HungryREST {
                 exit;
             }
 
-            if($om['is_active'] != true){
+            if($om['is_active'] != 1){
                 echo json_encode(array(
                             'status'=>"failed",
                             'message'=>"offer not found"
@@ -174,7 +177,7 @@ class endpoint_v1_post_booktable extends HungryREST {
                 exit;
             }
 
-            $appli_offer = $this->add('Model_RestaurantOffer')->addCondition('restaurant_id',$rest->id)->addCondition('offer_id',$om->id);
+            $appli_offer = $this->add('Model_RestaurantOffer')->addCondition('restaurant_id',$rest->id)->addCondition('id',$om->id);
             if($appli_offer->count()->getOne() != 1){
                 echo json_encode(array(
                             'status'=>"failed",
