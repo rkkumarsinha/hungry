@@ -49,14 +49,15 @@ class View_HostAccount_Restaurant_DiscountManagement extends View{
 
 		$offer_form  = $offer_tab->add('Form');
 
-		$offer_name_field = $offer_form->addField('DropDown','offer_name')->validateNotNull(true);
+		$offer_name_field = $offer_form->addField('DropDown','offer_name','Offer Category')->validateNotNull(true);
 		$offer_name_field->setModel('Offer');
-		$offer_name_field->setEmptyText('Please Select Offer');
-		$offer_form->addField('line','title')->validateNotNull(true);
+		$offer_name_field->setEmptyText('Please Select Offer Category');
+		$offer_form->addField('line','title','Offer Name')->validateNotNull(true);
 		$offer_form->addField('text','offer_detail')->validateNotNull(true);
 		$offer_form->addSubmit('Send For Approved');
 		
 		$pending_grid = $offer_tab->add('Grid');
+		$pending_grid->add('View',null,'grid_buttons')->setElement('h2')->set('Pending Offer\'s for approval');
 		$pending_grid->setModel(
 							$this->add('Model_Notification')
 							->addCondition('from_id',$host_restaurant->id)

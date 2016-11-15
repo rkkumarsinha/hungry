@@ -197,7 +197,7 @@ class Model_Restaurant extends SQL_Model{
 			$array = ["d_".$this['discount_id']=>"Flat ".($this['discount_percentage'] - $this['discount_subtract'])." % "];
 		}		
 
-		$model = $this->add('Model_RestaurantOffer')->addCondition('restaurant_id',$this->id);
+		$model = $this->add('Model_RestaurantOffer')->addCondition('restaurant_id',$this->id)->addCondition('is_active',true);
 		foreach ($model as $offer) {
 			$v = $this->add('View')->setHtml('<h3 class="hungry-checkbox-label">'.$offer['name']."<p>".$offer['detail']."</p></h3>");
 			$array["o_".$offer->id] = $v;

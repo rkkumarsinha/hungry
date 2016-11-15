@@ -97,7 +97,7 @@ class endpoint_v1_restaurant extends HungryREST {
             if($this->single_restaurant){
                 $offers_temp = [];
                 foreach ($offer_asso as $temp) {
-                    $offers_temp[] = ['id'=>$temp['offer_id'],'name'=>$temp['name'],'detail'=>$temp['detail']];
+                    $offers_temp[] = ['id'=>$temp['id'],'name'=>$temp['name'],'detail'=>$temp['detail']];
                 }
                 $output[$row['id']]['restaurant_offers'] = $offers_temp;
             }

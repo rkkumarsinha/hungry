@@ -154,7 +154,7 @@ class endpoint_v1_discount extends HungryREST {
 
             $offers_temp = [];
             foreach ($offer_asso as $temp) {
-                $offers_temp[] = ['id'=>$temp['offer_id'],'name'=>$temp['name'],'detail'=>$temp['detail']];
+                $offers_temp[] = ['id'=>$temp['id'],'name'=>$temp['name'],'detail'=>$temp['detail']];
             }
             $rest_data['restaurant_offers'] = $offers_temp;
 

@@ -149,8 +149,24 @@ class endpoint_v1_post_booktable extends HungryREST {
         }
 
         if($data['offer_id']){
-            $om = $this->add('Model_Offer')->tryLoad($data['offer_id']);
+            $om = $this->add('Model_RestaurantOffer')->tryLoad($data['offer_id']);
             if(!$om->loaded()){
+                echo json_encode(array(
+                            'status'=>"failed",
+                            'message'=>"offer not found"
+                        ));
+                exit;
+            }
+
+            if($om['is_active'] != true){
+                echo json_encode(array(
+                            'status'=>"failed",
+                            'message'=>"offer not found"
+                        ));
+                exit;
+            }
+            
+            if($om['restaurant_id'] != $rest->id){
                 echo json_encode(array(
                             'status'=>"failed",
                             'message'=>"offer not found"
