@@ -99,7 +99,7 @@ class endpoint_v1_filter extends HungryREST {
                             'offer_count'=>$rest['offers'],
                             'discount_id'=>$rest['discount_id'],
                             'discount'=>($rest['discount_percentage'] - $rest['discount_subtract']?:0),
-                            'rating'=>$rest['rating']?((float)$rest['rating']):0,
+                            'rating'=>round($rest['rating']?((float)$rest['rating']):0,1),   
                             'avg_cost_of_a_beer'=>$rest['avg_cost_of_a_beer'],
                             'avg_cost_per_person_veg'=>$rest['avg_cost_per_person_veg'],
                             'avg_cost_per_person_nonveg'=>$rest['avg_cost_per_person_nonveg'],

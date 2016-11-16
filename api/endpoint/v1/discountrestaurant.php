@@ -132,6 +132,7 @@ class endpoint_v1_discountrestaurant extends HungryREST {
         $output = array();
         foreach ($data as $row) {
             $output[$row['id']] = $this->outputOne($row);
+            $output[$row['id']]['rating'] = round($output[$row['id']]['rating'],1);
             $output[$row['id']]['offer_count'] = $output[$row['id']]['offers'];
             unset($output[$row['id']]['offers']);
             unset($output[$row['id']]['discounts']);
