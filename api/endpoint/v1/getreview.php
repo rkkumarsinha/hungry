@@ -115,6 +115,8 @@ class endpoint_v1_getreview extends HungryREST {
                 break;
         }
 
+        $model->addCondition('is_approved',true);
+
         if($_GET['type'] === "next"){
             $model->addCondition('id','>',$_GET['offset']);
         }elseif($_GET['type'] === "previous"){

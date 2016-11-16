@@ -160,11 +160,12 @@ class endpoint_v1_restaurant extends HungryREST {
                 $reviews = $this->add('Model_Review')
                         ->addCondition('restaurant_id',$row->id)
                         ->addCondition('is_approved',true)
+                        ->setOrder('id','desc')
                         ->getRows()
                         ;
                 $temp_rew = [];
                 foreach ($reviews as $rew) {
-                    $comment_model =$this->add('Model_Comment')->addCondition('review_id',$rew['id'])->addCondition('is_approved',true);
+                    $comment_model =$this->add('Model_Comment')->addCondition('review_id',$rew['id'])->addCondition('is_approved',true)->setOrder('id','desc');
                     $temp_rew[] = [
                                     'id'=>$rew['id'],
                                     "restaurant_id"=>$rew['restaurant_id'],
