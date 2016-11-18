@@ -46,11 +46,14 @@ class endpoint_v1_post_review extends HungryREST {
         
         $this->validateParam($data);
 
+        date_default_timezone_set("Asia/Calcutta");
         $m->set($data);
         $m['user_id'] = $this->api->auth->model->id;
         $m['comment'] = $data['content'];
-        $m['created_at'] = $data['date'];
-        $m['created_time'] = $data['time'];
+        //$m['created_at'] = date('Y-m-d',strtotime($data['date']));
+        //$m['created_time'] = $data['time'];
+        $m['created_at'] = date('Y-m-d');
+        $m['created_time'] = date('H:i:s');
         $m->save();
         
         return json_encode(

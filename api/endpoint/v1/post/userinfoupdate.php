@@ -56,20 +56,29 @@ class endpoint_v1_post_userinfoupdate extends HungryREST {
 
         $this->model->addCondition('id',$this->api->auth->model->id)->tryLoadAny();
         if(!$this->model->loaded())
-            return json_encode(array('status'=>'failed','message'=>"authebtication failed"));
-        
-        $old_user = $this->add('Model_User')
-                    ->addCondition('mobile',$data['mobile'])
-                    ->addCondition('id','<>',$this->model->id)
-                    ->tryLoadAny();
-
-        if($old_user->loaded()){
-            return json_encode(array('status'=>'failed','message'=>"mobile number is already exist"));
+            return json_encode(array('status'=>'failed','message'=>"authentication failed"));
+            
+        if($data['mobile'] and strlen(trim($data['mobile'])) != 10){
+            return json_encode(array('status'=>'failed','message'=>"invalid mobile"));
         }
 
-        $this->model['name'] = $data['name'];
-        $this->model['dob'] = $data['dob'];
-        $this->model['mobile'] = $data['mobile'];
+        if($data['mobile']){
+            $old_user = $this->add('Model_User')
+                        ->addCondition('mobile',$data['mobile'])
+                        ->addCondition('id','<>',$this->model->id)
+                        ->tryLoadAny();
+
+            if($old_user->loaded()){
+                return json_encode(array('status'=>'failed','message'=>"mobile number is already exist"));
+            }            
+            $this->model['mobile'] = $data['mobile'];
+        }
+
+        if($data['dob'])
+            $this->model['dob'] = $data['dob'];
+        if($data['name'])
+            $this->model['name'] = $data['name'];
+
         $this->model->save();
         
         return json_encode(array('status'=>'success','message'=>"your profile has been updated."));

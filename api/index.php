@@ -4,5 +4,8 @@
 require_once '../vendor/autoload.php';
 include 'lib/Api.php';
 
+date_default_timezone_set("Asia/Calcutta");
+
 $api = new Api('apisrv');
 $api->main();
+

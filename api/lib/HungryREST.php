@@ -7,7 +7,8 @@ class HungryREST extends Endpoint_REST{
 
 	function init(){
 		parent::init();
-		
+        
+        date_default_timezone_set("Asia/Calcutta");		
 	}
 
 	// Implementing token based authetication

@@ -17,8 +17,8 @@ class Model_Review extends SQL_Model{
 		$this->addField('rating')->type('Number');
 		$this->addField('title')->mandatory(true);
 		$this->addField('comment')->type('text')->mandatory(true);
-		$this->addField('created_at')->type('date')->defaultValue(date('Y-m-d'));
-		$this->addField('created_time')->type('time')->defaultValue(date('H:i:s'));
+		$this->addField('created_at')->type('date');//->defaultValue(date('Y-m-d'));
+		$this->addField('created_time')->type('time');//->defaultValue(date('H:i:s'));
 		
 		$this->addField('is_approved')->type('boolean')->defaultValue(false);
 

@@ -5,6 +5,8 @@ class Frontend extends ApiFrontend {
     function init() {
         parent::init();
 
+        date_default_timezone_set("Asia/Calcutta");
+        
         $this->api_public_path = dirname(@$_SERVER['SCRIPT_FILENAME']);
         $this->api_base_path = dirname(dirname(@$_SERVER['SCRIPT_FILENAME']));
 
