@@ -8,7 +8,7 @@ class Model_Destination_Package extends SQL_Model{
 		$this->hasOne('Destination','destination_id');
 		$this->addField('name')->mandatory(true);
 		$this->addField('price')->type('money')->mandatory(true);
-		$this->addField('detail')->type('text')->mandatory(true);
+		$this->addField('detail')->type('text')->mandatory(true)->display(array('form'=>'RichText'));
 		
 		$this->addField('is_active')->type('boolean')->defaultValue(true);
 		

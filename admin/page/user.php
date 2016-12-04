@@ -13,7 +13,7 @@ class page_user extends Page{
 
 		$user_model = $this->add('Model_User')->addCondition('type','user');
 		$user_crud = $user_tab->add('CRUD');
-		$user_crud->setModel($user_model,['name','email','type','verification_code','password','created_at']);
+		$user_crud->setModel($user_model);
 		$user_crud->grid->addPaginator($ipp=30);
 		$user_crud->grid->addQuickSearch(['name','email']);
 		$user_model->setOrder('created_at','Desc');
