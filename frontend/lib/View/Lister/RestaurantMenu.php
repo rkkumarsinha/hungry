@@ -7,9 +7,14 @@ class View_Lister_RestaurantMenu extends CompleteLister{
 		parent::init();
 		
 		
-		$manu = $this->add('Model_RestaurantMenu')->addCondition('restaurant_id',$this->restaurant_id);
+		$manu = $this->add('Model_RestaurantMenu')
+				->addCondition('restaurant_id',$this->restaurant_id)
+				->addCondition('is_active',true)
+				->addCondition('status','approved')
+				;
+
 		if(!$manu->count()->getOne()){
-			$this->add('View_Error',null,'not_found')->set('No Menu Found');
+			$this->add('View_Info',null,'not_found')->set('we are collecting images');
 		}
 
 		$this->setModel($manu);
