@@ -22,15 +22,22 @@
     <link rel="stylesheet" href="assets/css/jquery.mCustomScrollbar.css" type="text/css">
     <link rel="stylesheet" href="css/star-rating.css" type="text/css">{$js_block}
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+    <style type="text/css">
+      div#hungry_preloader { position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overflow: visible; background: #333 url('http://files.mimoymima.com/images/loading.gif') no-repeat center center; }
+    </style>
     {$js_include}
     <script type="text/javascript">
       $(function(){
           {$document_ready}
       });
-      
+      $(window).load(function(){
+        $('#hungry_preloader').fadeOut('slow',function(){$(this).remove();});
+      });
     </script>
   </head>
   <body class="{$pagename} page-homepage navigation-off-canvas page-fade-in">
+    <div id="hungry_preloader"></div>
+    <div class="atk-layout" style="position: absolute;"></div>
     <!--[if lt IE 7]>
     <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->

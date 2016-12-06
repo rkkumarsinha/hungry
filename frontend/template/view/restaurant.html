@@ -48,30 +48,63 @@
     <!-- /.col-sm-4-->
   </div>
   <script type="text/javascript">
-    if ( navigator.geolocation ) {
-    function success(pos) {
-    $.each($(".current-distance"),function(index,element){
-    $.post('?page=getdistance',
-    {
-    'currentlat':pos.coords.latitude,
-    'currentlan':pos.coords.longitude,
-    'restlan':$(element).attr('data-lng'),
-    'restlat':$(element).attr('data-lat')
-    },
-    function(data) {
-    //- console.log(data);
-    $(element).html(data);
-    });
-    });
-    }
-    function fail(error) {
-      //- alert('failed');
-    }
-    function error(error){
-    }
-    navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 5, enableHighAccuracy:true, timeout: 6000});
     
-    //- navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true,timeout: 100000,maximumAge: 0});
+    if (navigator.geolocation) {
+      // navigator.geolocation.getCurrentPosition(showLocation,error,{enableHighAccuracy: false});
+      navigator.geolocation.getCurrentPosition(showLocation, fail, {maximumAge: 5000, enableHighAccuracy:true, timeout: 6000});
+      navigator.geolocation.watchPosition(showLocation, error, {enableHighAccuracy: true,timeout: 100000,maximumAge: 0});
+    } else { 
+      $(this).univ().errorMessage('Geolocation is not supported by this browser');
     }
+
+    function error(pos){
+      console.log(pos);
+    }
+
+    function fail(){
+      
+    }
+
+    function showLocation(position) {
+      var my_latitude = position.coords.latitude;
+      var my_longitude = position.coords.longitude;
+      $.each($(".current-distance"),function(index,element){
+        rest_longitude = $(element).attr('data-lng');
+        rest_latitude = $(element).attr('data-lat');
+        dist = distanceInKm(my_latitude,my_longitude,rest_latitude,rest_longitude,'K');
+        $(element).html(dist);
+      });
+    }
+
+    function distanceInKm(lat1, lon1, lat2, lon2, unit) {
+      var radlat1 = Math.PI * lat1/180
+      var radlat2 = Math.PI * lat2/180
+      var theta = lon1-lon2
+      var radtheta = Math.PI * theta/180
+      var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+      dist = Math.acos(dist)
+      dist = dist * 180/Math.PI
+      dist = dist * 60 * 1.1515
+      if (unit=="K") { dist = dist * 1.609344 }
+      if (unit=="N") { dist = dist * 0.8684 }
+      return dist.toFixed(1);
+    }
+    // if ( navigator.geolocation ) {
+    // function success(pos) {
+    // $.each($(".current-distance"),function(index,element){
+    //   console.log(pos.coords);
+    // // 'currentlat':pos.coords.latitude,
+    // // 'currentlan':pos.coords.longitude,
+    // });
+    // }
+    // function fail(error) {
+    //   //- alert('failed');
+    // }
+    // function error(error){
+    // }
+    // navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 5, enableHighAccuracy:true, timeout: 6000});
+    // navigator.geolocation.watchPosition(success, error, {enableHighAccuracy: true,timeout: 100000,maximumAge: 0});
+    
+    // }
   </script>
 </div>
