@@ -19,6 +19,8 @@ class page_destination_review extends Page {
 
         $crud = $this->add('CRUD');
         $model = $this->add('Model_Review')->addCondition('destination_id',$destination_id);
+        $model->setOrder('id','desc');
+        
         $crud->grid->add('VirtualPage')
             ->addColumn('Comments')
             ->set(function($page){
@@ -29,6 +31,8 @@ class page_destination_review extends Page {
         });
 
         $crud->setModel($model);
+        $crud->grid->addPaginator($ipp=10);
+        $crud->grid->addQuickSearch(['rating','title']);
     }
 
 }

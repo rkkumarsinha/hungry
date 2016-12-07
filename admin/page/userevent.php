@@ -5,7 +5,7 @@
  * Date: 21.2.15
  * Time: 14:57
  */
-class page_userevent extends Page {
+class page_userevent extends page_adminevent {
 
     public $title='User Event';
 
@@ -13,7 +13,11 @@ class page_userevent extends Page {
         parent::init();
 
         $crud = $this->add('CRUD');
-        $crud->setModel('UserEventTicket');
-    }
+        $event = $this->add('Model_UserEventTicket');
+        $event->setOrder('created_at','desc');
+        $crud->setModel($event);
 
+        $crud->grid->addPaginator($ipp=50);
+        $crud->grid->addQuickSearch(['ticket_booking_no','booking_date','mobile','email','booking_name']);
+    }
 }

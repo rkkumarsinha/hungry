@@ -36,6 +36,9 @@ class page_destination_serviceassociation extends Page {
             }else
                 $g->current_row_html['icon_url'] = "No Icon Found";
         });
+
+        $crud->grid->addPaginator($ipp=10);
+        $crud->grid->addQuickSearch(['destination_highlight']);
     }
 
 }

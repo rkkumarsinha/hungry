@@ -5,7 +5,7 @@
  * Date: 21.2.15
  * Time: 14:57
  */
-class page_destination_highlight extends Page {
+class page_destination_highlight extends page_admindestination {
 
     public $title='Highlight';
 

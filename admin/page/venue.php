@@ -5,7 +5,7 @@
  * Date: 21.2.15
  * Time: 14:57
  */
-class page_venue extends Page {
+class page_venue extends page_admindestination {
 
     public $title='Venue';
 
@@ -30,6 +30,10 @@ class page_venue extends Page {
 			}else
 				$g->current_row_html['image'] = "No Icon Found";
 		});
+		
+		$c->grid->addPaginator($ipp=10);
+        $c->grid->addQuickSearch(['name']);
+
     }
 
 }

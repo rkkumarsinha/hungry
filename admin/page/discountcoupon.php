@@ -5,7 +5,7 @@
  * Date: 21.2.15
  * Time: 14:57
  */
-class page_discountcoupon extends Page {
+class page_discountcoupon extends page_adminrestaurant {
 
     public $title='Discount Coupon';
 
@@ -14,6 +14,12 @@ class page_discountcoupon extends Page {
 
         $crud = $this->add('CRUD');
         $model = $this->add('Model_DiscountCoupon');
+
+        $temp = ['restaurant_address','restaurant_image','restaurant_name'];
+        foreach ($temp as $key => $field_name) {
+            $model->getElement($field_name)->destroy();
+        }
+
         $model->setOrder('created_at','Desc');
 
         $crud->setModel($model);

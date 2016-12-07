@@ -5,7 +5,7 @@
  * Date: 21.2.15
  * Time: 14:57
  */
-class page_destination extends Page {
+class page_destination extends page_admindestination {
 
     public $title='Destination';
 
@@ -142,6 +142,8 @@ class page_destination extends Page {
                 $review_tab = $t->addTabUrl($this->app->url('/destination/review',['destination_id'=>$id]),'Review');
         });
 
+    $c->grid->addPaginator($ipp=50);
+    $c->grid->addQuickSearch(['name','user']);
     }
 
 }

@@ -5,7 +5,7 @@
  * Date: 21.2.15
  * Time: 14:57
  */
-class page_cancleregion extends Page {
+class page_cancleregion extends page_adminconfiguration{
 
     public $title='Cancle Region';
 

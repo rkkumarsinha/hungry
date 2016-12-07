@@ -5,7 +5,7 @@
  * Date: 21.2.15
  * Time: 14:57
  */
-class page_category extends Page {
+class page_category extends page_adminrestaurant {
 
     public $title='Category';
 
@@ -27,6 +27,9 @@ class page_category extends Page {
 			}else
 				$g->current_row_html['image'] = "No Icon Found";
 		});
+
+        $crud->grid->addQuickSearch(['name']);
+		$crud->grid->addPaginator($ipp=50);
     }
 
 }

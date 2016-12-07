@@ -35,6 +35,9 @@ class page_destination_gallery extends Page {
                 $g->current_row_html['image'] = "No Icon Found";
         });
 
+        $crud->grid->addPaginator($ipp=50);
+        $crud->grid->addQuickSearch(['name']);
+
     }
 
 }

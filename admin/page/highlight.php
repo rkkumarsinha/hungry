@@ -1,6 +1,6 @@
 <?php
 
-class page_Highlight extends Page{
+class page_Highlight extends page_adminrestaurant{
 
 	 public $title='Highlight';
 
@@ -24,6 +24,8 @@ class page_Highlight extends Page{
 				$g->current_row_html['image'] = "No Icon Found";
 		});
 		
-
+		$crud->grid->addQuickSearch(['name']);
+		$crud->grid->addPaginator($ipp=50);
+		
 	}
 }

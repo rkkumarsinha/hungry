@@ -5,7 +5,7 @@
  * Date: 21.2.15
  * Time: 14:57
  */
-class page_eventcategory extends Page {
+class page_eventcategory extends page_adminevent {
 
     public $title='Event Category';
 
@@ -30,6 +30,9 @@ class page_eventcategory extends Page {
 			}else
 				$g->current_row_html['image'] = "No Icon Found";
 		});
+
+		$c->grid->addPaginator($ipp=50);
+        $c->grid->addQuickSearch(['name']);
     }
 
 }

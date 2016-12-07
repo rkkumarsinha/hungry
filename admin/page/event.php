@@ -1,6 +1,6 @@
 <?php
 
-class page_event extends Page{
+class page_event extends page_adminevent{
 	 public $title='Event';
 
 	function init(){
@@ -62,6 +62,8 @@ class page_event extends Page{
                                 'lowest_price'
                             )
                         );
+        $crud->grid->addPaginator($ipp=30);
+        $crud->grid->addQuickSearch(['name']);
 
         $crud->grid->add('VirtualPage')
             ->addColumn('Days')

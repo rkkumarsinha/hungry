@@ -19,10 +19,37 @@ class page_notification extends Page {
 		$destination_tab = $tabs->addTab('For Destination');
 
 
-        $crud = $admin_tab->add('Grid');
-        $crud->setModel('Notification');
-        $crud->addPaginator($ipp=50);
-        $crud->addQuickSearch(['name','created_at','message','from','request_for','status']);
+		$status = ['discount'=>'Discount','offer'=>"Offer",'package'=>"Package",'image'=>"Image","pull push sticker"=>"Pull Push Sticker",'table reservation signature'=>"Table reservation signature","android app"=>"Android App",'website'=>"Website"];
+		$notification_tab = $admin_tab->add('Tabs');
+		foreach ($status as $key => $value) {
+			$status_tab = $notification_tab->addTab($value);
+
+	        $crud = $status_tab->add('Grid');
+	        $notification_status_model = $status_tab->add('Model_Notification')
+	        							->addCondition('request_for',$key)
+	        							->addCondition('to','HungryDunia')
+	        							;
+			$crud->addHook('formatRow',function($g){
+				$message = "not found";
+				if($g->model['from'] == "Restaurant"){
+					$model = $g->add('Model_Restaurant')->tryLoad($g->model['from_id']);
+					$message = $model['name']."<br/>".$g->model['from_id'];
+				}elseif($g->model['from'] == "Event"){
+					$model = $g->add('Model_Event')->tryLoad($g->model['from_id']);
+					$message = $model['name']."<br/>".$g->model['from_id'];
+				}elseif($g->model['from'] == "Destination"){
+					$model = $g->add('Model_Destination')->tryLoad($g->model['from_id']);
+					$message = $model['name']."<br/>".$g->model['from_id'];
+				}
+
+				$g->current_row_html['from_id'] = $message;
+			});
+	        $crud->setModel($notification_status_model,['name','from_id','from','message','value','status','from_name']);
+	        $crud->addPaginator($ipp=25);
+	        $crud->addQuickSearch(['name','created_at','message','from','request_for','status']);
+			
+		}
+
 		
 		// Restaurant Form
 		$form = $rest_tab->add('Form',null,null,['form/stacked']);

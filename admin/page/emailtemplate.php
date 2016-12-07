@@ -5,7 +5,7 @@
  * Date: 21.2.15
  * Time: 14:57
  */
-class page_emailtemplate extends Page {
+class page_emailtemplate extends page_adminconfiguration {
 
     public $title='Email Template';
 

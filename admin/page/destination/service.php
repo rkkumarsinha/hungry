@@ -28,6 +28,10 @@ class page_destination_service extends Page {
 			}else
 				$g->current_row_html['image'] = "No Icon Found";
 		});
+
+		$grid = $crud->grid;
+		$grid->addPaginator($ipp=50);
+		$grid->addQuickSearch(['name']);   
     }
 
 }

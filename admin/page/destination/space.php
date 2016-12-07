@@ -19,7 +19,7 @@ class page_destination_space extends Page {
         
         $crud = $this->add('CRUD');
         $dest_model = $this->add('Model_Destination_Space')->addCondition('destination_id',$destination_id);
-        $crud->setModel($dest_model,array('name','cps','size','type','image_id','image','is_active'));
+        $crud->setModel($dest_model,array('name','cps','size','type','image_id','is_active'),array('name','cps','size','type','image','is_active'));
 
         $crud->grid->addHook('formatRow',function($g){
 
@@ -35,6 +35,8 @@ class page_destination_space extends Page {
                 $g->current_row_html['image'] = "No Icon Found";
         });
 
+        $crud->grid->addPaginator($ipp=10);
+        $crud->grid->addQuickSearch(['name','size','type']);
     }
 
 }

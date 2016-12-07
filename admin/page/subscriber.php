@@ -12,7 +12,13 @@ class page_subscriber extends Page {
     function init() {
         parent::init();
 
-        $this->add('CRUD')->setModel('Subscriber');
+        $subs = $this->add('Model_Subscriber');
+        $subs->setOrder('created_at','desc');
+
+        $crud = $this->add('CRUD');
+        $crud->setModel($subs);
+        $crud->grid->addPaginator($ipp=50);
+        $crud->grid->addQuickSearch(['name','mobile_no']);
     }
 
 }

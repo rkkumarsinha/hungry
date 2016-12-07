@@ -19,6 +19,9 @@ class page_destination_package extends Page {
 
         $crud = $this->add('CRUD');
         $crud->setModel($this->add('Model_Destination_Package')->addCondition('destination_id',$destination_id));
+        
+        $crud->grid->addPaginator($ipp=10);
+        $crud->grid->addQuickSearch(['name','price']);
     }
 
 }

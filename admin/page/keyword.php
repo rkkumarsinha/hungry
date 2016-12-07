@@ -1,6 +1,6 @@
 <?php
 
-class page_keyword extends Page{
+class page_keyword extends page_adminrestaurant{
 
 	 public $title='Keyword';
 
@@ -22,5 +22,8 @@ class page_keyword extends Page{
 			}else
 				$g->current_row_html['image'] = "No Icon Found";
 		});
+		
+		$crud->grid->addQuickSearch(['name']);
+		$crud->grid->addPaginator($ipp=50);
 	}
 }

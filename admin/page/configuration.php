@@ -1,6 +1,6 @@
 <?php
 
-class page_configuration extends Page{
+class page_configuration extends page_adminconfiguration{
 	function init(){
 		parent::init();
 		

@@ -5,7 +5,7 @@
  * Date: 21.2.15
  * Time: 14:57
  */
-class page_discount extends Page {
+class page_discount extends page_adminrestaurant {
 
     public $title='Discount';
 
@@ -17,8 +17,8 @@ class page_discount extends Page {
         $offer_model->setOrder('id','desc');
         
         $c->setModel($offer_model);
-        // $c->grid->addQuickSearch(['name','city','state','country']);
-        $c->grid->addPaginator(10);
+        $c->grid->addQuickSearch(['name']);
+        $c->grid->addPaginator(30);
     }
 
 }

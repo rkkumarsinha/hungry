@@ -5,7 +5,7 @@
  * Date: 21.2.15
  * Time: 14:57
  */
-class page_restaurant extends Page {
+class page_restaurant extends page_adminrestaurant {
 
     public $title='Restaurant';
 
