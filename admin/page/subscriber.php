@@ -19,6 +19,11 @@ class page_subscriber extends Page {
         $crud->setModel($subs);
         $crud->grid->addPaginator($ipp=50);
         $crud->grid->addQuickSearch(['name','mobile_no']);
+        $crud->add("misc/Export");
     }
 
+    function export(){
+        throw new \Exception("Error Processing Request", 1);
+        
+    }
 }

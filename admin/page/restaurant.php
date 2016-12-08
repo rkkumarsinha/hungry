@@ -199,5 +199,6 @@ class page_restaurant extends page_adminrestaurant {
 
         });
 
+        $c->add("misc/Export");
     }
 }

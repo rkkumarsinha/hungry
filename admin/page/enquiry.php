@@ -14,6 +14,7 @@ class page_enquiry extends Page {
 
         $crud = $this->add('CRUD',['allow_add'=>false]);
         $crud->setModel('Enquiry');
+        $crud->add('misc/Export');
     }
 
 }

@@ -13,6 +13,7 @@ class page_user extends Page{
 
 		$user_model = $this->add('Model_User')->addCondition('type','user');
 		$user_crud = $user_tab->add('CRUD');
+		$user_crud->add('misc/Export');
 		$user_crud->setModel($user_model);
 		$user_crud->grid->addPaginator($ipp=30);
 		$user_crud->grid->addQuickSearch(['name','email']);
@@ -24,7 +25,7 @@ class page_user extends Page{
 		$host_crud = $host_tab->add('CRUD');
 		$host_crud->setModel($host_model,['name','email','type','verification_code','password']);
 		$host_crud->grid->addPaginator($ipp=30);
-	
+		$host_crud->add('misc/Export');
 
 		$admin_model = $this->add('Model_User')->addCondition('type','admin');
 		$admin_model->setOrder('created_at','desc');
