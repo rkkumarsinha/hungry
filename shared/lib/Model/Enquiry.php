@@ -13,9 +13,10 @@ class Model_Enquiry extends SQL_Model{
 		$this->addField('subject');
 		$this->addField('message')->type('text');
 		$this->addField('location');
-
+		$this->addField('created_at')->defaultValue(date('Y-m-d H:i:s'));
 		$this->addField('status')->enum(['pending','reject','solved','progress'])->defaultValue('pending');
 
-		// $this->add('dynamic_model/Controller_AutoCreator');
+		$this->setOrder('id','desc');
+		$this->add('dynamic_model/Controller_AutoCreator');
 	}
 }
