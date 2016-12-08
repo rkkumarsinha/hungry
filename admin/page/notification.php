@@ -33,24 +33,40 @@ class page_notification extends Page {
 				$message = "not found";
 				if($g->model['from'] == "Restaurant"){
 					$model = $g->add('Model_Restaurant')->tryLoad($g->model['from_id']);
-					$message = $model['name']."<br/>".$g->model['from_id'];
+					if($model->loaded())
+						$message = '<div class="do-action-restaurant" data-id="'.$model->id.'">'.$model['name']."<br/>".$g->model['from_id'].'</div>';
+
 				}elseif($g->model['from'] == "Event"){
 					$model = $g->add('Model_Event')->tryLoad($g->model['from_id']);
-					$message = $model['name']."<br/>".$g->model['from_id'];
+					if($model->loaded())
+						$message = '<div class="do-action-event" data-id="'.$model->id.'">'.$model['name']."<br/>".$g->model['from_id'].'</div>';
+
 				}elseif($g->model['from'] == "Destination"){
 					$model = $g->add('Model_Destination')->tryLoad($g->model['from_id']);
-					$message = $model['name']."<br/>".$g->model['from_id'];
+					if($model->loaded())
+						$message = '<div class="do-action-destination" data-id="'.$model->id.'">'.$model['name']."<br/>".$g->model['from_id'].'</div>';
 				}
-
 				$g->current_row_html['from_id'] = $message;
 			});
 	        $crud->setModel($notification_status_model,['name','from_id','from','message','value','status','from_name']);
 	        $crud->addPaginator($ipp=25);
 	        $crud->addQuickSearch(['name','created_at','message','from','request_for','status']);
-			
 		}
 
+		$this->on('click','td .do-action-restaurant',function($js,$data){
+			return $js->univ()->redirect($this->api->url('verify_rest',['type'=>'restaurant','id'=>$data['id']]));
+			// return $js->univ()->frameURL('Restaurant Detail ',$this->api->url('verify_rest',['type'=>'=restaurant','id'=>$data['id']]));
+		});
+
+		$this->on('click','td .do-action-event',function($js,$data){
+			return $js->univ()->redirect($this->api->url('verify_event',['type'=>'event','id'=>$data['id']]));
+			// return $js->univ()->frameURL('Restaurant Detail ',$this->api->url('verify_rest',['type'=>'=restaurant','id'=>$data['id']]));
+		});
 		
+		$this->on('click','td .do-action-destination',function($js,$data){
+			return $js->univ()->redirect($this->api->url('verify_destination',['type'=>'destination','id'=>$data['id']]));
+			// return $js->univ()->frameURL('Restaurant Detail ',$this->api->url('verify_rest',['type'=>'=restaurant','id'=>$data['id']]));
+		});
 		// Restaurant Form
 		$form = $rest_tab->add('Form',null,null,['form/stacked']);
 		$col = $form->add('Columns');
