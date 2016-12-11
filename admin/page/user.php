@@ -12,13 +12,25 @@ class page_user extends Page{
 
 
 		$user_model = $this->add('Model_User')->addCondition('type','user');
+		$user_model->addExpression('register_via')->set(function($m,$q){
+			$ac = $m->add('Model_AccessToken',['table_alias'=>'hungry_access_token']);
+			return $ac->addCondition('user_id',$q->getField('id'))
+						->_dsql()->del('fields')->field($q->expr('group_concat([0] SEPARATOR "<br/>")',[$ac->getElement('social_app')]));
+		})->allowHTML(true)->sortable(true);
+
 		$user_crud = $user_tab->add('CRUD');
 		$user_crud->add('misc/Export');
 		$user_crud->setModel($user_model);
 		$user_crud->grid->addPaginator($ipp=30);
 		$user_crud->grid->addQuickSearch(['name','email']);
 		$user_model->setOrder('created_at','Desc');
+		$user_crud->grid->addHook('formatRow',function($g){
 
+			if($g->model['profile_image_url']){
+				$g->current_row_html['profile_image_url'] = '<img width="100px;" src="'.$g->model['profile_image_url'].'"/>';
+			}else
+				$g->current_row_html['profile_image_url'] = $g->model['profile_image_url'];
+		});
 
 		$host_model = $this->add('Model_User')->addCondition('type','host');
 		$host_model->setOrder('created_at','desc');

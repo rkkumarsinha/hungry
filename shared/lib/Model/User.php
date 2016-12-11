@@ -38,6 +38,7 @@ class Model_User extends SQL_Model{
 
 						]);	
 		});
+
 		$this->addField('gender')->enum(['Male','Female']);
 		$this->addField('is_blocked')->type('boolean')->defaultValue(0);
 		$this->addField('referral_code');
