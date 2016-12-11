@@ -24,7 +24,7 @@ class page_notification extends Page {
 		foreach ($status as $key => $value) {
 			$status_tab = $notification_tab->addTab($value);
 
-	        $crud = $status_tab->add('CRUD',['allow_del'=>false]);
+	        $crud = $status_tab->add('CRUD',['allow_del'=>false,'allow_add'=>false]);
 	        
 	        $grid = $crud->grid;
 	        $notification_status_model = $status_tab->add('Model_Notification')
