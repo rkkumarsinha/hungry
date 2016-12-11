@@ -35,20 +35,20 @@ class page_user extends Page{
 		$host_model = $this->add('Model_User')->addCondition('type','host');
 		$host_model->setOrder('created_at','desc');
 		$host_crud = $host_tab->add('CRUD');
-		$host_crud->setModel($host_model,['name','email','type','verification_code','password']);
+		$host_crud->setModel($host_model,['name','email','type','verification_code','password','is_verified','is_active']);
 		$host_crud->grid->addPaginator($ipp=30);
 		$host_crud->add('misc/Export');
 
 		$admin_model = $this->add('Model_User')->addCondition('type','admin');
 		$admin_model->setOrder('created_at','desc');
 		$admin_crud = $admin_tab->add('CRUD');
-		$admin_crud->setModel($admin_model,['name','email','type','verification_code','password']);
+		$admin_crud->setModel($admin_model,['name','email','type','verification_code','password','is_verified','is_active']);
 		$admin_crud->grid->addPaginator($ipp=30);
 
 		$sadmin_model = $this->add('Model_User')->addCondition('type','superadmin');
 		$sadmin_model->setOrder('created_at','desc');
 		$sadmin_crud = $sadmin_model->add('CRUD');
-		$sadmin_crud->setModel($sadmin_model,['name','email','type','verification_code','password']);
+		$sadmin_crud->setModel($sadmin_model,['name','email','type','verification_code','password','is_verified','is_active']);
 		$sadmin_crud->grid->addPaginator($ipp=30);
 
 	}
