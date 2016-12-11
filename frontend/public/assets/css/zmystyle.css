@@ -1517,3 +1517,15 @@ body.modal-open .modal-backdrop.fade.in{
 	-webkit-transition: all 0.7s ease;
 	transition: all 0.7s ease;
 }
+
+.host-account-change-password{
+	padding:20px 10px;
+	text-align: center;
+}
+
+.host-account-change-password .atk-cells-group.atk-cells-gutter-large{
+	clear: both;
+    margin: auto !important;
+    margin-left:auto !important; 
+    margin-right:auto !important; 
+}
