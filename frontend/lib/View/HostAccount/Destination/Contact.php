@@ -72,11 +72,21 @@ class View_HostAccount_Destination_Contact extends View{
 		}
 
 		$form = $this->add('Form',null,'enquiry_form');
-		$form->addField('line','subject');
-		$form->addField('text','description');
+		$form->addField('line','subject')->validateNotNull(true);
+		$form->addField('text','description')->validateNotNull(true);
 		$form->addSubmit('Send');
-
 		if($form->submitted()){
+			$notification = $this->add('Model_Notification');
+			$notification['name'] = "Query From ".$host_restaurant['name'];
+			$notification['from_id'] = $host_restaurant->id;
+			$notification['from'] = "Restaurant";
+			$notification['to'] = "HungryDunia";
+			$notification['request_for'] = "enquiry";
+			$notification['status'] = "pending";
+			$notification['country_id'] = $host_restaurant['country_id'];
+			$notification['state_id'] = $host_restaurant['state_id'];
+			$notification['city_id'] = $host_restaurant['city_id'];
+			$notification->save();
 			$form->js(null,$form->js()->reload())->univ()->successMessage('Request Send')->execute();
 		}
 

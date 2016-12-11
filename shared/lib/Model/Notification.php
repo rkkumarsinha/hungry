@@ -19,7 +19,7 @@ class Model_Notification extends SQL_Model{
 		$this->addField('to_id');
 		$this->addField('to')->setValueList(['Event'=>"Event",'Restaurant'=>"Restaurant",'Destination'=>"Destination","HungryDunia"=>"HungryDunia"]);
 
-		$this->addField('request_for')->setValueList(['discount'=>'Discount','offer'=>"Offer",'package'=>"Package",'image'=>"Image","pull push sticker"=>"Pull Push Sticker",'table reservation signature'=>"Table reservation signature","android app"=>"Android App",'website'=>"Website"]);
+		$this->addField('request_for')->setValueList(['discount'=>'Discount','offer'=>"Offer",'package'=>"Package",'image'=>"Image","pull push sticker"=>"Pull Push Sticker",'table reservation signature'=>"Table reservation signature","android app"=>"Android App",'website'=>"Website",'enquiry'=>"Enquiry"]);
 		$this->addField('status')->setValueList(['approved'=>'Approved','pending'=>"Pending",'cancled'=>"Cancled"]);
 		$this->addField('value');
 		
