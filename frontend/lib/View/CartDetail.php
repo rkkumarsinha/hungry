@@ -43,7 +43,7 @@ class View_CartDetail extends CompleteLister{
 		});
 
 		if($event_ticket_model->loaded()){
-			$f = $this->add('filestore/Model_File')->load($event_ticket_model['display_image_id']);
+			$f = $this->add('filestore/Model_File')->tryLoad($event_ticket_model['display_image_id']);
 			$path = $this->app->getConfig('imagepath').str_replace("..", "", $f->getPath());
 		}
 

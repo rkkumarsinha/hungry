@@ -34,6 +34,12 @@ class Model_Configuration extends SQL_Model{
 		$this->addField('event_tnc')->type('text')->mandatory(true)->display(array('form'=>'RichText'));
 		$this->addField('destination_tnc')->type('text')->mandatory(true)->display(array('form'=>'RichText'));
 		
+		//ccavenue api setting
+		$this->addField('test_mode')->setValueList([1=>'yes',0=>'no']);
+		$this->addField('merchant_id');
+		$this->addField('access_code');
+		$this->addField('working_key');
+
 		$this->add('dynamic_model/Controller_AutoCreator');
 	}
 }

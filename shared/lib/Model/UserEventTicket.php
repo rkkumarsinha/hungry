@@ -7,6 +7,7 @@ class Model_UserEventTicket extends SQL_Model{
 		parent::init();
 
 		$this->hasOne('Event_Ticket','event_ticket_id');
+		$this->hasOne('Invoice','invoice_id');
 		$this->hasOne('User','user_id');
 				
 		$this->addField('ticket_booking_no')->defaultValue(strtoupper(substr(md5(rand(11111111,99999999)),8,9)));
@@ -36,11 +37,11 @@ class Model_UserEventTicket extends SQL_Model{
 		$this->addExpression('eventtimeid')->set($this->refSQL('event_ticket_id')->fieldQuery('event_time_id'));
 		$this->addExpression('eventdayid')->set($this->refSQL('event_ticket_id')->fieldQuery('event_day_id'));
 
-		// $this->add('dynamic_model/Controller_AutoCreator');
+		$this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 	//book only the ticket
-	function bookTicket($user_id,$event_ticket_id,$booking_name,$qty,$offer_percentage,$ticket_price,$secondary_booking_name=null,$return_model=false){
+	function bookTicket($user_id,$event_ticket_id,$booking_name,$qty,$offer_percentage,$ticket_price,$secondary_booking_name=null,$return_model=false,$invoice_id){
 		$ticket_model = $this->add('Model_Event_Ticket')->load($event_ticket_id);
 		//check qty is remaining or not
 		
@@ -60,6 +61,7 @@ class Model_UserEventTicket extends SQL_Model{
 		$net_amount = $total_amount - $offer_amount;
 
 		$user_ticket_model = $this->add('Model_UserEventTicket');
+		$user_ticket_model['invoice_id'] = $invoice_id;
 		$user_ticket_model['user_id'] = $user_id;
 		$user_ticket_model['event_ticket_id'] = $event_ticket_id;
 		$user_ticket_model['booking_name'] = $booking_name;

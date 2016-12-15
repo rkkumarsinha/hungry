@@ -17,8 +17,13 @@ class View_AddToCartButton extends View{
 			$form = $this->add('Form',null,"addtocartform",array('form/stacked'));
 			$form->setLayout('form\eventaddtocart');
 			$price_field = $form->addField('Readonly','price')->set($m['price']);
-			$qty_field = $form->addField('Number','quantity')->validateNotNull(true)->set(1)->addClass('hungrySpinner');
-			$qty_field->js(true)->spinner(array('min'=>1,'max'=>$m['remaining_ticket'],"step"=>1));
+
+			$qty_field = $form->addField('Spinner','quantity');
+			$qty_field->min = 1;
+			$qty_field->max = $m['remaining_ticket'];
+			
+			$qty_field->validateNotNull(true)->set(1)->addClass('hungrySpinner');
+			// $qty_field->js(true)->spinner(array('min'=>1,'max'=>$m['remaining_ticket'],"step"=>1));
 
 			$amount_field = $form->addField('Readonly','amount')->set($m['price']);
 
