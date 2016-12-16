@@ -54,15 +54,19 @@ class View_HostAccount_Event_Profile extends View{
 							]);
 
 
-		$latitude_field_name = $basic_form->getElement('name');
+		$latitude_field_name = $basic_form->getElement('latitude');
 		$longitude_field_name = $basic_form->getElement('longitude');
 
-		$basic_form->addSubmit("Save");
+		
 		$basic_form->add('View_LocationPicker',
 							[
 								'latitude_field'=>$latitude_field_name,
-								'longitude_field'=>$longitude_field_name
+								'longitude_field'=>$longitude_field_name,
+								'lat_value'=>$event_model['latitude'],
+								'lng_value'=>$event_model['longitude']
 							]);
+
+		$basic_form->addSubmit("Save");
 
 		if($basic_form->isSubmitted()){
 			$basic_form->save();

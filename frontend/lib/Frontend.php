@@ -95,6 +95,9 @@ class Frontend extends ApiFrontend {
         $this->api->jui->addStaticInclude('ckeditor/ckeditor');
         $this->api->jui->addStaticInclude('ckeditor/adapters/jquery');
         
+        $this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=false&libraries=places&key='.$this->api->getConfig('Google/MapKey'));
+        $this->api->jui->addStaticInclude('locationpicker.jquery');
+        $this->api->jui->addStaticInclude('hungry');
     }
 
     function addLocations() {        
