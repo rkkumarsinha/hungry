@@ -18,7 +18,9 @@ class Model_Invoice extends SQL_Model{
 		$this->addField('transaction_status');
 
 		$this->hasMany('UserEventTicket','invoice_id');
-		
+		$this->addExpression('net_amount')->set(function($m,$q){
+			return $q->expr('sum([0])',[$m->refSQL('UserEventTicket')->fieldQuery('net_amount')]);
+		});
 		$this->addHook('beforeSave',$this);
 
 		$this->add('dynamic_model/Controller_AutoCreator');

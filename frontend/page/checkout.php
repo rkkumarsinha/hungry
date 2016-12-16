@@ -68,18 +68,18 @@ class page_checkout extends Page{
             $param = [
                         'working_key'=>$working_key,
                         'access_code'=>$access_code,
-                        'amount' => rand(1,100),
+                        'amount' => $this->invoice['net_amount'],
                         'currency' => 'INR',
-                        'transactionId' => rand(100,999),
+                        'transactionId' => $this->invoice->id,
                         'description' => 'Payment Against Event Ticket',
                         'headerImageUrl' => 'http://hungrydunia.com/assets/img/hungrydunia/logo.png',
                         'returnUrl' => $protocol.$_SERVER['HTTP_HOST'].$this->api->url(null,array('order_id'=>$this->invoice->id,'hstatus'=>'paid'))->getURL(),
                         'cancelUrl' => $protocol.$_SERVER['HTTP_HOST'].$this->api->url(null,array('canceled'=>'true','order_id'=>$this->invoice->id,'hstatus'=>'failed'))->getURL(),
                         'language' => 'EN',
-                        'tid'=>rand(500,999),
+                        'tid'=>rand(100,999).$this->invoice->id,
                         'merchant_id'=>$merchant_id,
                         'order_id'=>$this->invoice->id,
-                        'order_uid'=>rand(1000,9999)
+                        'order_uid'=>"HUN".rand(1000,9999).$this->invoice->id
                     ];
 
             foreach ($param as $key => $value){
