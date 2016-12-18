@@ -1,8 +1,65 @@
 
-<div id="{$_name}" style="{$style} margin-top:20px;" class="{$class} hungrycheckout">
-  <div style="width:80%;margin:0 auto;">
-    {$Content}
-    {stepOne}
-    {/}
-  </div>
+<div id="{$_name}" style="{$style} margin-top:20px;margin-bottom:20px;" class="{$class} hungrycheckout">
+  <div class="container">
+        <div class="row bs-wizard" style="border-bottom:0;"> 
+            <div class="col-xs-3 bs-wizard-step {$step_ticket}">
+              <div class="text-center bs-wizard-stepnum">Ticket</div>
+              <div class="progress"><div class="progress-bar"></div></div>
+              <a href="#" class="bs-wizard-dot"></a>
+              <div class="bs-wizard-info text-center"></div>
+            </div>
+            
+            <div class="col-xs-3 bs-wizard-step {$step_address}"><!-- complete -->
+              <div class="text-center bs-wizard-stepnum">Address</div>
+              <div class="progress"><div class="progress-bar"></div></div>
+              <a href="#" class="bs-wizard-dot"></a>
+              <div class="bs-wizard-info text-center"></div>
+            </div>
+            
+            <div class="col-xs-3 bs-wizard-step {$step_payment}"><!-- complete -->
+              <div class="text-center bs-wizard-stepnum">Payment</div>
+              <div class="progress"><div class="progress-bar"></div></div>
+              <a href="#" class="bs-wizard-dot"></a>
+              <div class="bs-wizard-info text-center"></div>
+            </div>
+
+            <div class="col-xs-3 bs-wizard-step {$step_complete}"><!-- complete -->
+              <div class="text-center bs-wizard-stepnum">Complete</div>
+              <div class="progress"><div class="progress-bar"></div></div>
+              <a href="#" class="bs-wizard-dot"></a>
+              <div class="bs-wizard-info text-center"></div>
+            </div>
+            
+        </div>
+    <div class="container" style="width:80%;">
+    	<section style="padding:20px 10px;padding-bottom:20px;">{$Content}</section>
+    </div>
+
+
+</div>
+  <style type="text/css">
+	.bs-wizard {margin-top: 40px;}
+	/*Form Wizard*/
+	.bs-wizard {border-bottom: solid 1px #e0e0e0; padding: 0 0 10px 0;}
+	.bs-wizard > .bs-wizard-step {padding: 0; position: relative;}
+	.bs-wizard > .bs-wizard-step + .bs-wizard-step {}
+	.bs-wizard > .bs-wizard-step .bs-wizard-stepnum {color: #595959; font-size: 16px; margin-bottom: 5px;}
+	.bs-wizard > .bs-wizard-step .bs-wizard-info {color: #999; font-size: 14px;}
+	.bs-wizard > .bs-wizard-step > .bs-wizard-dot {position: absolute; width: 30px; height: 30px; display: block; background: #fa9634; top: 45px; left: 50%; margin-top: -15px; margin-left: -15px; border-radius: 50%;} 
+	.bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {content: ' '; width: 14px; height: 14px; background: #4CB34D; border-radius: 50px; position: absolute; top: 8px; left: 8px; } 
+	.bs-wizard > .bs-wizard-step > .progress {position: relative; border-radius: 0px; height: 8px; box-shadow: none; margin: 20px 0;}
+	.bs-wizard > .bs-wizard-step > .progress > .progress-bar {width:0px; box-shadow: none; background: #fa9634;}
+	.bs-wizard > .bs-wizard-step.complete > .progress > .progress-bar {width:100%;}
+	.bs-wizard > .bs-wizard-step.active > .progress > .progress-bar {width:50%; }
+	.bs-wizard > .bs-wizard-step:first-child.active > .progress > .progress-bar {width:0%;}
+	.bs-wizard > .bs-wizard-step:last-child.active > .progress > .progress-bar {width: 100%;}
+	.bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot {background-color: #fa9634;}
+	.bs-wizard > .bs-wizard-step.disabled > .bs-wizard-dot:after {background-color:#fbbd19; }
+	.bs-wizard > .bs-wizard-step.disabled > .progress {background-color:white; }
+	.bs-wizard > .bs-wizard-step:first-child  > .progress {left: 50%; width: 50%;}
+	.bs-wizard > .bs-wizard-step:last-child  > .progress {width: 50%;}
+	.bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot{ pointer-events: none; }
+	.bs-wizard > .bs-wizard-step.active > .progress {background-color:#fa9634; }
+	/*END Form Wizard*/
+	  </style>
 </div>

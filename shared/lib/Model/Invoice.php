@@ -8,14 +8,35 @@ class Model_Invoice extends SQL_Model{
 
 		$this->hasOne('User','user_id');
 		$this->addField('name');
-		$this->addField('status')->setValueList(['Draft','Due','Paid','Cancled'])->defaultValue('Draft');
+		$this->addField('status')->setValueList(['Draft','Due','Paid','Aborted','Failure','Cancled'])->defaultValue('Due');
 		
-		$this->addField('prn');
-		$this->addField('bid');
-		$this->addField('amt');
-		$this->addField('pid');
-		$this->addField('txndatetime');
-		$this->addField('transaction_status');
+		$this->addField('billing_name');
+		$this->addField('billing_address')->type('text');
+		$this->addField('billing_city');
+		$this->addField('billing_state');
+		$this->addField('billing_zip');
+		$this->addField('billing_country');
+		$this->addField('billing_tel');
+		$this->addField('billing_email');
+		
+		$this->addField('delivery_name');
+		$this->addField('delivery_address')->type('text');
+		$this->addField('delivery_city');
+		$this->addField('delivery_state');
+		$this->addField('delivery_zip');
+		$this->addField('delivery_country');
+		$this->addField('delivery_tel');
+		$this->addField('delivery_email');
+
+		$this->addField('tracking_id');
+		$this->addField('bank_ref_no');
+		$this->addField('order_status');
+		$this->addField('payment_mode');
+		$this->addField('card_name');
+		$this->addField('amount');
+		$this->addField('trans_date');
+
+		$this->addField('transaction_detail')->type('text');
 
 		$this->hasMany('UserEventTicket','invoice_id');
 		$this->addExpression('net_amount')->set(function($m,$q){

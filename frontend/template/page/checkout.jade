@@ -1,5 +1,10 @@
-div(id="{$_name}" class="{$class} hungrycheckout" style="{$style} margin-top:20px;")
-	div(style="width:80%;margin:0 auto;")
-		{$Content}
-		{stepOne}
-		{/}
+div(id="{$_name}" class="{$class} hungrycheckout" style="{$style} margin-top:20px;margin-bottom:20px;")
+	.container
+		{$current_step}
+		.row
+			.col-md-3 Ticket 1
+			.col-md-3 Ticket 2
+			.col-md-3 Ticket 3
+			.col-md-3 Ticket 4
+		section(style="padding:20px 10px;padding-bottom:20px;")
+			| {$Content}
