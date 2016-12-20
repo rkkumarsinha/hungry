@@ -65,8 +65,14 @@ class View_Button extends View
      * @return $this
      * @todo Implement this trough Icon view
      */
-    function setIcon($icon)
-    {
+    function setIcon($icon,$new_class_define = false)
+    {   
+        if($new_class_define){
+            if($icon[0]!='<')$icon='<i class="'.$icon.'"></i>';
+            $this->template->trySetHTML('icon',$icon);
+            return $this;            
+        }
+
         if($icon[0]!='<')$icon='<i class="icon-'.$icon.'"></i>';
         $this->template->trySetHTML('icon',$icon);
         return $this;

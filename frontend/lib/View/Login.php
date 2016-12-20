@@ -8,7 +8,7 @@ class View_Login extends View{
 		parent::init();
 	
 		if($this->api->auth->model->id){
-			$container = $this->add("View")->addClass('container')->setStyle(['width'=>'40%','margin-top'=>'20px']);
+			$container = $this->add("View")->addClass('container')->setStyle(['width'=>'100%','margin-top'=>'20px']);
             $container->add('View_Info',null)->set('already logged in');
             $container->add('Button',null)->set('Logout')->addClass('atk-swatch-red')->js('click')->redirect($this->api->url('logout'));
 			$this->template->tryDel("login_wrapper");
@@ -37,7 +37,13 @@ class View_Login extends View{
 
 			$facebook_controller = $this->add('Controller_Facebook',['hfrom'=>$_GET['hfrom'],'isWebsiteCheck'=>true]);
 			$url = $facebook_controller->getLoginUrl();
-			$this->template->trySet('facebook_login_url',$url);
+
+			$fb_btn = $this->add('Button',null,'facebook_btn');
+			$fb_btn->set('Sign In with Facebook');
+			$fb_btn->addClass('facebook');
+			$fb_btn->setIcon('facebook');
+			$fb_btn->js('click')->univ()->redirect($url);
+			// $this->template->trySet('facebook_login_url',$url);
 
 			if($facebook_controller->user instanceof Model_User){
 				session_write_close();
@@ -57,7 +63,14 @@ class View_Login extends View{
 			
 			$google_controller = $this->add('Controller_Google',['hfrom'=>$_GET['hfrom']]);
 			$url = $google_controller->getLoginUrl();
-			$this->template->trySet('google_login_url',$url);
+
+			$g_btn = $this->add('Button',null,'google_btn');
+			$g_btn->set('Sign In with Google');
+			$g_btn->addClass('google');
+			$g_btn->setIcon('fa fa-google-plus',true);
+			$g_btn->js('click')->univ()->redirect($url);
+
+			// $this->template->trySet('google_login_url',$url);
 
 			if($google_controller->user instanceof Model_User){
 				$this->app->auth->model->load($google_controller->user->id);
@@ -73,7 +86,14 @@ class View_Login extends View{
 	        $f->addField('email')->validateNotNull()->validateField('filter_var($this->get(), FILTER_VALIDATE_EMAIL)')->setAttr('PlaceHolder','enter your email');
 	        $f->addField('password','password')->validateNotNull()->setAttr('PlaceHolder',"enter your password");
 	        $f->addSubmit('Login')->addClass('btn-block');
-	        
+			
+
+			$r_btn = $this->add('Button',null,'new_register');
+			$r_btn->set('Sign Up');
+			$r_btn->addClass('atk-swatch-orange btn-block');
+			$r_btn->setIcon('fa fa-sign-in',true);
+			$r_btn->js('click')->univ()->redirect($this->app->url('register'));
+
 	       	$this->add('View',null,'forgotpassword')
                 ->setElement('a')
                 ->setAttr('href', $this->api->url('forgotpassword'))
