@@ -805,9 +805,6 @@ ul.horizontal-slide li[class*="span"]:first-child {
 	margin-bottom: 20px !important;
 }
 
-.item > .wrapper figure{
-	height:50px;
-}
 
 .hungry-search .active, .hungry-search .active a{
 	background-color: #fa9634 !important;
@@ -1528,4 +1525,8 @@ body.modal-open .modal-backdrop.fade.in{
     margin: auto !important;
     margin-left:auto !important; 
     margin-right:auto !important; 
+}
+
+.hungrySpinner.ui-spinner-input{
+	border:1px solid ghostwhite !important;
 }

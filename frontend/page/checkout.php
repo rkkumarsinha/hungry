@@ -14,7 +14,8 @@ class page_checkout extends Page{
          $this->add('View_Login',['reload'=>"parent"]);
          return;
         }
-
+        
+        
         $invoice_id = $this->app->recall('hungryevent-checkout-saleinvoice');
         if(!$invoice_id AND $_GET['order_id'])
             $invoice_id = $_GET['order_id'];
@@ -24,16 +25,16 @@ class page_checkout extends Page{
         }
 
         // check authentiction
-        if($this->invoice->loaded() AND $this->invoice['user_id'] != $this->app->auth->model->id){
+        if($this->invoice AND $this->invoice->loaded() AND $this->invoice['user_id'] != $this->app->auth->model->id){
             $this->add('View_Error')->set('Order does not belongs to you');
-            exit();
+            return;
         }
 
         // $step = $this->api->recall('hungryevent-checkout-step')?$this->api->recall('hungryevent-checkout-step'):"One";
         $step = $this->app->stickyGET('step');
         $step = $step?$step:"One";
         
-        if($_GET['order_id'] === $invoice_id AND $_GET['hstatus'] === 'success')
+        if($_GET['order_id'] === $invoice_id AND ($_GET['hstatus'] === 'success' OR $_GET['hstatus'] === 'failure'))
             $step = "Complete";
 
         $this->view = $this->add('View');
@@ -54,11 +55,7 @@ class page_checkout extends Page{
                 $this->api->forget('hungryevent-checkout-saleinvoice');
                 return;
             }
-
-            if(!$this->invoice['net_amount']){
-                $this->add('View_Error')->set("Checkout invoice Not Found");
-                return;
-            }
+            
             // ccavRequestHandler
             error_reporting(0);            
             $configuration = $this->add('Model_Configuration')->tryLoad(1);
@@ -314,7 +311,7 @@ class page_checkout extends Page{
                 $this->invoice['delivery_email'] = $address_form['billing_email'];
             }
 
-            $this->invoice->save();
+            $this->invoice = $this->invoice->save();
 
             $this->app->memorize('hungryevent-checkout-paynow',true);
             // $this->app->memorize('hungryevent-checkout-step',"Complete");
