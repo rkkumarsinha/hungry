@@ -1,0 +1,31 @@
+.row.addtocartbtnform
+	.col-lg-2.col-md-2.col-sm-12.col-xs-12
+		strong Price
+		div(style="text-align:right;")
+			{$price}
+	.col-lg-2.col-md-2.col-sm-12.col-xs-12.atk-form-row
+		strong Quantity
+		div(style="text-align:right;")
+			{$quantity}
+	{discount_voucher_wrapper}
+	.col-lg-2.col-md-1.col-sm-12.col-xs-12.atk-form-row
+		strong Discount Voucher
+		div(style="text-align:right;")
+			{$discount_voucher}
+	.col-lg-2.col-md-1.col-sm-12.col-xs-12.atk-form-row
+		strong Discount Amount
+		div(style="text-align:right;")
+			{$discount_amount}
+	{/}
+	.col-lg-2.col-md-2.col-sm-12.col-xs-12
+		strong Amount
+		div(style="text-align:right;")
+			{$amount}
+	.col-lg-2.col-md-2.col-sm-12.col-xs-12
+		strong(style="border:10px solid white;")
+		{$submit_button}
+	{$Content}
+	style.
+		.addtocartbtnform input{
+			border:1px solid ghostwhite !important;
+		}

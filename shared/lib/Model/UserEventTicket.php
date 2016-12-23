@@ -9,16 +9,19 @@ class Model_UserEventTicket extends SQL_Model{
 		$this->hasOne('Event_Ticket','event_ticket_id');
 		$this->hasOne('Invoice','invoice_id');
 		$this->hasOne('User','user_id');
-				
+		
 		$this->addField('ticket_booking_no')->defaultValue(strtoupper(substr(md5(rand(11111111,99999999)),8,9)));
 		$this->addField('booking_name');
 		$this->addField('secondary_booking_name');
 		$this->addField('qty')->type('Number')->defaultValue(0);
-		$this->addField('offer_percentage')->defaultValue(0);
 		$this->addField('price')->type('money')->defaultValue(0); // ticket price
 		$this->addField('total_amount')->defaultValue(0);
+
+		$this->addField('discount_voucher')->defaultValue(0); // actually the disciunt voucher
 		$this->addField('offer_amount')->defaultValue(0);
+
 		$this->addField('net_amount')->defaultValue(0);
+
 		$this->addField('amount_paid')->type('money')->defaultValue(0);
 		$this->addField('status')->enum(['paid','due','cancel','expire'])->defaultValue('due');
 		$this->addField('payment_mode')->setValueList(['cash'=>'Cash','card'=>"Card",'imps'=>"IMPS",'e_wallet'=>"E Wallet",'no'=>"No"])->defaultValue('no');
@@ -41,24 +44,19 @@ class Model_UserEventTicket extends SQL_Model{
 	}
 
 	//book only the ticket
-	function bookTicket($user_id,$event_ticket_id,$booking_name,$qty,$offer_percentage,$ticket_price,$secondary_booking_name=null,$return_model=false,$invoice_id){
+	function bookTicket($user_id,$event_ticket_id,$booking_name,$secondary_booking_name=null,$qty,$ticket_price,$discount_voucher,$discount_amount,$return_model=false,$invoice_id){
 		$ticket_model = $this->add('Model_Event_Ticket')->load($event_ticket_id);
-		//check qty is remaining or not
 		
+		//check qty is remaining or not
 		if($qty > $ticket_model['remaining_ticket'])
 			return array("status"=>"failed","message"=>"tickets sold out");
-
-		if($offer_percentage != $ticket_model['offer_percentage'])
-			return array("status"=>"failed","message"=>"offer mismatch, try again");
 
 		if($ticket_price != $ticket_model['price'])
 			return array("status"=>"failed","message"=>"price mismatch, try again");
 
 		$total_amount = $ticket_model['price'] * $qty;
 		$offer_amount = 0;
-		if($ticket_model['offer_percentage']) //always calculate in percentage
-			$offer_amount = ($total_amount * $ticket_model['offer_percentage'] )/100;
-		$net_amount = $total_amount - $offer_amount;
+		$net_amount = $total_amount - $discount_amount;
 
 		$user_ticket_model = $this->add('Model_UserEventTicket');
 		$user_ticket_model['invoice_id'] = $invoice_id;
@@ -66,10 +64,10 @@ class Model_UserEventTicket extends SQL_Model{
 		$user_ticket_model['event_ticket_id'] = $event_ticket_id;
 		$user_ticket_model['booking_name'] = $booking_name;
 		$user_ticket_model['qty'] = $qty;
-		$user_ticket_model['offer_percentage'] = $offer_percentage;
 		$user_ticket_model['price'] = $ticket_price;
 		$user_ticket_model['total_amount'] = $total_amount;
-		$user_ticket_model['offer_amount'] = $offer_amount;
+		$user_ticket_model['discount_voucher'] = $discount_voucher;
+		$user_ticket_model['offer_amount'] = $discount_amount;
 		$user_ticket_model['net_amount'] = $net_amount;
 		$user_ticket_model['booking_date'] = $ticket_model['event_day'];
 		$user_ticket_model['booking_time'] = $ticket_model['event_time'];
@@ -88,8 +86,8 @@ class Model_UserEventTicket extends SQL_Model{
 				"booking_name" => $user_ticket_model['booking_name'],
 				"qty"=>$user_ticket_model['qty'],
 				"price"=>$user_ticket_model['price'],
-				"offer_percentage"=>$user_ticket_model['offer_percentage'],
 				"total_amount"=>$user_ticket_model['total_amount'],
+				"discount_voucher"=>$user_ticket_model['discount_voucher'],
 				"offer_amount"=>$user_ticket_model['offer_amount'],
 				"net_amount"=>$user_ticket_model['net_amount'],
 				"booking_date" => $user_ticket_model['booking_date'],

@@ -4,7 +4,7 @@ class View_CartDetail extends CompleteLister{
 	
 	function init(){
 		parent::init();
-
+		
 		$self = $this;
 		$this->on('click','.hungry-remove-event-cart-item',function($js,$data)use($self){
 			if($js->univ()->confirm('Are you sure?')){
@@ -57,7 +57,7 @@ class View_CartDetail extends CompleteLister{
 		}
 
 		$form = $this->add('Form',null,"addtocartform",array('form/stacked'));
-		$form->setLayout('form\eventaddtocart');
+		$form->setLayout('form\eventaddtocartdetail');
 
 		//cart id
 		$form->addField('Hidden','cartid')->set($m->id);

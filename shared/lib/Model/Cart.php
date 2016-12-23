@@ -139,7 +139,7 @@
 		$cart = $this->add('Model_Cart');
 		$net_amount = 0;
 		foreach ($cart as $model) {
-			$net_amount = round(($model['unit_price'] * $model['qty']) - $model['discount_amount']);
+			$net_amount += round(($model['unit_price'] * $model['qty']) - $model['discount_amount']);
 		}
 		return $net_amount;
 	}

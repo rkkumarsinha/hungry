@@ -40,7 +40,7 @@ class Model_Invoice extends SQL_Model{
 
 		$this->hasMany('UserEventTicket','invoice_id');
 		$this->addExpression('net_amount')->set(function($m,$q){
-			return $q->expr('sum([0])',[$m->refSQL('UserEventTicket')->fieldQuery('net_amount')]);
+			return $q->expr('IFNULL([0],0)',[$m->refSQL('UserEventTicket')->sum('net_amount')]);
 		});
 		$this->addHook('beforeSave',$this);
 

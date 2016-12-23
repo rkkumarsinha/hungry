@@ -142,19 +142,20 @@ class page_checkout extends Page{
                 if(!$event_ticket_model->loaded())
                     continue;
 
-                $applicable_offer = 0;
-                if($cart_ticket['qty'] >= $event_ticket_model['applicable_offer_qty'])
-                    $applicable_offer = $event_ticket_model['offer_percentage'];
+                // $applicable_offer = 0;
+                // if($cart_ticket['qty'] >= $event_ticket_model['applicable_offer_qty'])
+                //     $applicable_offer = $event_ticket_model['offer_percentage'];
 
                 $book_ticket_model = $this->add('Model_UserEventTicket');
                 $booked_ticket_model = $book_ticket_model->bookTicket(
                                 $this->app->auth->model->id,
                                 $cart_ticket['event_ticket_id'],
                                 $form['primary_booking_name'],
-                                $cart_ticket['qty'],
-                                $applicable_offer,
-                                $event_ticket_model['price'],
                                 $form['secondary_booking_name'],
+                                $cart_ticket['qty'],
+                                $event_ticket_model['price'],
+                                $cart_ticket['discount_voucher'],
+                                $cart_ticket['discount_amount'],
                                 true,
                                 $invoice->id
                             );
