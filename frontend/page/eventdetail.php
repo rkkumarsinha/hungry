@@ -119,6 +119,9 @@ class page_eventdetail extends Page{
         // $event = $this->add('View_EventTicket',null,'ticket_and_their_detail');
         // $event->setModel($this->model);
 
+        $vouchers = $this->add('Model_Voucher')->addCondition('event_id',$this->event_id);
+        $v_list = $this->add('View_Lister_EventVoucher',null,'discount_vouchers');
+        $v_list->setModel($vouchers);
         //upcomming event
         $upcoming_event = $this->add('Model_Event');
         $upcoming_event->addCondition('starting_date','>=',$this->api->today);

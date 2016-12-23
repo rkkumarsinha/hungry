@@ -1,16 +1,11 @@
 div(id="{$_name}" class="{$class}" style="{$style}")
 	section
 		.item.list.admin-view.hungry-event-ticket
-			.image
-				a(href='item-detail.html')
-					.overlay(style="display:none;")
-						.inner
-							.content
-								h4 Description
-								p Curabitur odio nibh, luctus non pulvinar a, ultricies ac diam. Donec neque massa
+			.image(style="width:120px;min-height:auto !important;height:auto !important;")
+				a(href='item-detail.html')					
 					.item-specific
 						span  {$remaining_ticket} Left
-					img(src='{first_image}{/}', alt='')
+					img(src='{first_image}{/}' style="width:120px;min-height:auto !important;height:auto !important;")
 			.wrapper(style="padding:20px 20px 10px;")
 				a(href='#')
 					h3(style="text-transform:uppercase;height:auto;") {$name}
@@ -20,7 +15,7 @@ div(id="{$_name}" class="{$class}" style="{$style}")
 				small(style="font-size:12px;")
 					span(style="color:red;") Disclaimer: 
 					span{$disclaimer}
-			.description
+			.description(style="width:200px !important;")
 				{remaining_count}
 				ul.list-unstyled.actions
 					{rows}

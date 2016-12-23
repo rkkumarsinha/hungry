@@ -19,6 +19,8 @@ class Model_Event_Ticket extends SQL_Model{
 		$this->addField('max_no_to_sale')->type('int')->mandatory(true);
 		$this->addField('disclaimer')->type('text')->mandatory(true);
 
+		$this->addField('is_voucher_applicable')->type('boolean')->defaultValue(true);
+
 		$this->addExpression('event_day')->set(function($m,$q){
 			return $m->refSQL('event_time_id')->fieldQuery('on_date');
 		});
@@ -39,11 +41,12 @@ class Model_Event_Ticket extends SQL_Model{
 			return $m->refSQL('event_id')->fieldQuery('name');
 		});
 
-		$this->hasMany('UserEventTicket','event_ticket_id');
 
 		$this->addExpression('remaining_ticket')->set(function($m,$q){
 			return $q->expr("( IFNULL([0],0) - IFNULL([1],0) )",[$m->getElement('max_no_to_sale'),$m->refSQL('UserEventTicket')->addCondition('status','paid')->sum('qty')]);
 		});
+
+		$this->hasMany('UserEventTicket','event_ticket_id');
 
 		// $this->add('dynamic_model/Controller_AutoCreator');
 	}

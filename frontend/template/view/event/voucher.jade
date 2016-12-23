@@ -1,0 +1,19 @@
+div(id="{$_name}" class="{$Class} hungry-event-voucher" style="{$Style}")
+	{rows}	
+	{row}
+	div.item.list.admin-view.hungry-event-ticket
+		div.wrapper(style="padding:20px;")
+			h3(style="text-transform:uppercase;") Discount Coupon: {$name}
+			h1 Discount Voucher Offfer: {$voucher_amount}
+			//- span.fa.fa-calendar&nbsp; Start Date: {$starting_date}
+			//- br
+			span.fa.fa-calendar.text-danger&nbsp; Expire Date: {$expiry_date}
+			figure {$detail}
+			div.info 
+				div Applicable On : {$voucher_based_on}
+				div Applicable Value : {$voucher_applicable_min_value}
+			small 
+		div.ribbon.in-queue
+			i.fa.fa-clock-o
+	{/}
+	{/}

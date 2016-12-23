@@ -1,17 +1,31 @@
-.row
-	.col-md-3.col-sm-12
+.row.addtocartbtnform
+	.col-lg-2.col-md-2.col-sm-12.col-xs-12(style="margin-top:17px;")
 		strong Price
 		div(style="text-align:right;")
 			{$price}
-	.col-md-3.col-sm-12.atk-form-row
+	.col-lg-2.col-md-2.col-sm-12.col-xs-12.atk-form-row(style="margin-top:17px;")
 		strong Quantity
 		div(style="text-align:right;")
 			{$quantity}
-	.col-md-3.col-sm-12
+	{discount_voucher_wrapper}
+	.col-lg-2.col-md-1.col-sm-12.col-xs-12.atk-form-row
+		strong Discount Voucher
+		div(style="text-align:right;")
+			{$discount_voucher}
+	.col-lg-2.col-md-1.col-sm-12.col-xs-12.atk-form-row
+		strong Discount Amount
+		div(style="text-align:right;")
+			{$discount_amount}
+	{/}
+	.col-lg-2.col-md-2.col-sm-12.col-xs-12(style="margin-top:17px;")
 		strong Amount
 		div(style="text-align:right;")
 			{$amount}
-	.col-md-3.col-sm-12
+	.col-lg-2.col-md-2.col-sm-12.col-xs-12(style="margin-top:17px;")
 		strong(style="border:10px solid white;")
 		{$submit_button}
 	{$Content}
+	style.
+		.addtocartbtnform input{
+			border:1px solid ghostwhite !important;
+		}

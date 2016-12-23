@@ -131,7 +131,8 @@
                     <li role="presentation" class="active"><a href="#gallery" aria-controls="gallery" role="tab" data-toggle="tab">Gallery</a></li>
                     <li role="presentation"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
                     <li role="presentation"><a href="#guidelines" aria-controls="operationlhours" role="tab" data-toggle="tab">Guide Lines</a></li>
-                    <li role="presentation"><a href="#ticket" aria-controls="offers" role="tab" data-toggle="tab">Ticket & Their Detail</a></li>
+                    <li role="presentation"><a href="#ticket" aria-controls="offers" role="tab" data-toggle="tab">Ticket Detail</a></li>
+                    <li role="presentation"><a href="#vouchers" aria-controls="vouchers" role="tab" data-toggle="tab">Discount Coupons</a></li>
                   </ul>
                   <!-- Tab panes-->
                   <div class="tab-content">
@@ -149,6 +150,11 @@
                     </div>
                     <div id="ticket" role="tabpanel" class="tab-pane">{$ticket_and_their_detail}  
                       <!-- /.block  -->
+                    </div>
+                    <div id="vouchers" role="tabpanel" class="tab-pane">
+                      
+                      {discount_vouchers}
+                      {/}
                     </div>
                   </div>
                 </div>

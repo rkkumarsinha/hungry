@@ -1,36 +1,25 @@
 
-<div id="{$_name}" style="{$style}" class="{$class} container">{$empty_cart}
+<div id="{$_name}" style="{$style}" class="{$class} container">
+  {$empty_cart}
+  {$Content}
   <section>{rows}{row}
     <div class="item list admin-view hungry-event-ticket">
-      <div class="image"><a href="item-detail.html">
-          <div style="display:none;" class="overlay">
-            <div class="inner">
-              <div class="content">
-                <h4>Description</h4>
-                <p>Curabitur odio nibh, luctus non pulvinar a, ultricies ac diam. Donec neque massa</p>
-              </div>
-            </div>
-          </div>
-          <div class="item-specific"><span> {$remaining_ticket} Left</span></div><img src="{first_image}{/}" alt=""/></a></div>
-      <div style="padding:0px 20px 10px;" class="wrapper">
-        <h1 style="font-weight:normal;padding-top:10px;">{$event_name}{$sequence}</h1><a href="#">
+      <div style="width:100px;height:auto !important;min-height:auto !important;" class="image"><a href="item-detail.html">
+          <div class="item-specific"><span> {$remaining_ticket} Left</span></div><img src="{first_image}{/}" alt="" style="width:100%;height:auto !important;min-height:auto !important;"/></a>
+        <p>{$event_name}{$sequence}</p>
+      </div>
+      <div class="wrapper"><a href="#">
           <h3 style="text-transform:uppercase;height:auto;">{$name}</h3><span class="fa fa-calendar">&nbsp; {$event_day}</span><span style="margin-left:20px;margin-bottom:10px;" class="fa fa-clock-o">&nbsp; {$event_time}</span></a>
-        <figure>{$detail}</figure>
         <div class="info">{$addtocartform}</div><small style="font-size:12px;"><span style="color:red;">Disclaimer: </span><span>{$disclaimer}</span></small>
       </div>
-      <div class="description">{remaining_count}
-        <ul class="list-unstyled actions">
-          {rows}
-          {row}
-          <li style="background-color:#f2f2f2;"><a href="#">{$name}</a></li>{/}{/}
-          <p style="text-align:right;font-weight:bold;">Ticket's Left</p>
-        </ul>{/}
-      </div>{$ribben}
-    </div>{/}
+    </div>{$Content}
+    {/}
     {/}
   </section>{checkout_button}
-  <div class="row">
+  <div style="padding:0px 0px;" class="row">
     <div class="col-md-6"></div>
-    <div class="col-md-6 col-sm-12 col-xs-12"><a href="?page=checkout" class="btn btn-block btn-success atk-swatch-orange hungrydunia-event-checkout">Checkout</a></div>
+    <div class="col-md-6">
+      <h3 style="text-align:right;">Total Amount: {net_amount}0{/} &nbsp; <i class="fa fa-rupee"></i></h3><a href="?page=checkout" style="margin-top:20px;" class="btn btn-block btn-success atk-swatch-orange hungrydunia-event-checkout">Checkout</a>
+    </div>
   </div>{/}
 </div>

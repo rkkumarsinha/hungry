@@ -2,22 +2,14 @@
 <div id="{$_name}" style="{$style}" class="{$class}">
   <section>
     <div class="item list admin-view hungry-event-ticket">
-      <div class="image"><a href="item-detail.html">
-          <div style="display:none;" class="overlay">
-            <div class="inner">
-              <div class="content">
-                <h4>Description</h4>
-                <p>Curabitur odio nibh, luctus non pulvinar a, ultricies ac diam. Donec neque massa</p>
-              </div>
-            </div>
-          </div>
-          <div class="item-specific"><span> {$remaining_ticket} Left</span></div><img src="{first_image}{/}" alt=""/></a></div>
+      <div style="width:120px;min-height:auto !important;height:auto !important;" class="image"><a href="item-detail.html">					
+          <div class="item-specific"><span> {$remaining_ticket} Left</span></div><img src="{first_image}{/}" style="width:120px;min-height:auto !important;height:auto !important;"/></a></div>
       <div style="padding:20px 20px 10px;" class="wrapper"><a href="#">
           <h3 style="text-transform:uppercase;height:auto;">{$name}</h3></a>
         <figure>{$detail}</figure>
         <div class="info">{$addtocartform}</div><small style="font-size:12px;"><span style="color:red;">Disclaimer: </span><span>{$disclaimer}</span></small>
       </div>
-      <div class="description">{remaining_count}
+      <div style="width:200px !important;" class="description">{remaining_count}
         <ul class="list-unstyled actions">
           {rows}
           {row}

@@ -1,47 +1,34 @@
 div(id="{$_name}" class="{$class} container" style="{$style}")
 	{$empty_cart}
+	{$Content}
 	section
 		{rows}{row}
 		.item.list.admin-view.hungry-event-ticket
-			.image
+			.image(style="width:100px;height:auto !important;min-height:auto !important;")
 				a(href='item-detail.html')
-					.overlay(style="display:none;")
-						.inner
-							.content
-								h4 Description
-								p Curabitur odio nibh, luctus non pulvinar a, ultricies ac diam. Donec neque massa
 					.item-specific
 						span  {$remaining_ticket} Left
-					img(src='{first_image}{/}', alt='')
-			.wrapper(style="padding:0px 20px 10px;")
-				h1(style="font-weight:normal;padding-top:10px;") {$event_name}{$sequence}
+					img(src='{first_image}{/}', alt='' style="width:100%;height:auto !important;min-height:auto !important;")
+				p {$event_name}{$sequence}
+			.wrapper
 				a(href='#')
 					h3(style="text-transform:uppercase;height:auto;") {$name}
 					span.fa.fa-calendar: &nbsp; {$event_day}
 					span.fa.fa-clock-o(style="margin-left:20px;margin-bottom:10px;"): &nbsp; {$event_time}
-				figure {$detail}
 				.info
 					{$addtocartform}
 				small(style="font-size:12px;")
 					span(style="color:red;") Disclaimer: 
 					span{$disclaimer}
-			.description
-				{remaining_count}
-				ul.list-unstyled.actions
-					{rows}
-					{row}
-					li(style="background-color:#f2f2f2;")
-						a(href='#')
-							{$name}
-					{/}{/}
-					p(style="text-align:right;font-weight:bold;") Ticket's Left
-				{/}
-			{$ribben}
+		{$Content}
 		{/}
 		{/}
+
 	{checkout_button}
-	.row
+	.row(style="padding:0px 0px;")
 		.col-md-6
-		.col-md-6.col-sm-12.col-xs-12
-			a.btn.btn-block.btn-success.atk-swatch-orange.hungrydunia-event-checkout(href="?page=checkout") Checkout
+		.col-md-6
+			h3(style="text-align:right;") Total Amount: {net_amount}0{/} &nbsp; 
+				i.fa.fa-rupee
+			a.btn.btn-block.btn-success.atk-swatch-orange.hungrydunia-event-checkout(href="?page=checkout" style="margin-top:20px;") Checkout
 	{/}

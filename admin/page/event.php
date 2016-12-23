@@ -161,7 +161,7 @@ class page_event extends page_adminevent{
                 //     $event_day_field->setModel($page->add('Model_Event_Day')->addCondition('event_id',$event_id)->setOrder('id','asc'));
                 // }
 
-                $ticket_crud->setModel($ticket,array('event_time_id','name','price','detail','applicable_offer_qty','offer','offer_percentage','max_no_to_sale','disclaimer'),array('event_time','name','price','detail','applicable_offer_qty','offers','offer_percentage','max_no_to_sale','disclaimer'));
+                $ticket_crud->setModel($ticket,array('event_time_id','name','price','detail','applicable_offer_qty','offer','offer_percentage','max_no_to_sale','disclaimer','is_voucher_applicable'),array('event_time','name','price','detail','applicable_offer_qty','offers','offer_percentage','max_no_to_sale','disclaimer','is_voucher_applicable'));
 
                 if($ticket_crud->isEditing()){
                     $event_time_model = $ticket_crud->form->getElement('event_time_id')

@@ -12,6 +12,14 @@ class page_index extends Page {
     function init() {
         parent::init();
 
+
+        $model = $this->add('Model_Voucher');
+        $crud = $this->add('CRUD');
+        $crud->setModel($model);
+
+        $used_model = $this->add('Model_VoucherUsed');
+        $crud = $this->add('CRUD');
+        $crud->setModel($used_model);
         
     }
 }
