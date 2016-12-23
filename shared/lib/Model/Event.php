@@ -54,7 +54,7 @@ class Model_Event extends SQL_Model{
 		// SEO Field
 		$this->addField('title')->type('text')->hint('Ex: Best Event in Udaipur - Event Name');
 		$this->addField('keyword')->type('text')->hint('Ex: best event, event in udaipur etc.');
-		$this->addField('description')->type('text')->hint('Short description about your event');
+		$this->addField('description')->type('text')->display(array('form'=>'RichText'))->hint('Short description about your event');
 		$this->addField('image_title')->type('text')->hint('Ex:Event in Udaipur - Event Name');
 		$this->addField('image_alt_text')->type('text')->hint('Ex:event udaipur');
 
