@@ -13,10 +13,10 @@ class page_bookticket extends Page{
             $event_model = $this->add('Model_Event')->tryLoad($event_id);
         }
 
-        // if(!$this->api->auth->model->id){
-        //  $this->add('View_Login',['reload'=>"parent"]);
-        //  return;
-        // }
+        if(!$this->api->auth->model->id){
+         $this->add('View_Login',['reload'=>"parent"]);
+         return;
+        }
 
         if(!$event_model->loaded()){
             $this->add('View_Error')->set('no record found');
