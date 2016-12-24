@@ -13,9 +13,9 @@ class Model_Event_Ticket extends SQL_Model{
 		$this->addField('price')->type('money')->mandatory(true);
 
 		$this->addField('detail')->type('text')->mandatory(true);
-		$this->addField('offer')->type('text')->mandatory(true);
-		$this->addField('applicable_offer_qty')->type('int')->mandatory(true);
-		$this->addField('offer_percentage')->type('int')->mandatory(true);
+		// $this->addField('offer')->type('text')->mandatory(true);
+		// $this->addField('applicable_offer_qty')->type('int')->mandatory(true);
+		// $this->addField('offer_percentage')->type('int')->mandatory(true);
 		$this->addField('max_no_to_sale')->type('int')->mandatory(true);
 		$this->addField('disclaimer')->type('text')->mandatory(true);
 
