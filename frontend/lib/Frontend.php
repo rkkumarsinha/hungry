@@ -20,11 +20,21 @@ class Frontend extends ApiFrontend {
         $this->initAddons();
 
         $this->dbConnect();
-        
+
         $auth=$this->add('Auth');
         $auth->usePasswordEncryption();
         $auth->setModel('User','email','password');
+        
+        if($_GET['hungry_user_id'] AND $this->app->page == "bookticket"){
+            try{
+                $auth->loginByID($_GET['hungry_user_id']);
+                if($this->app->auth->model['type'] != "user")
+                    $this->app->redirect($this->app->url('logout'));
+            }catch(\Exception $e){
 
+            }
+        }
+        
         //Subscription Form
         $f = $this->layout->add('Form',null,'subscription',['form\stacked'])->addClass('hungry-subscription');
         $f->addField('email')->validateNotNull()->validateField('filter_var($this->get(), FILTER_VALIDATE_EMAIL)');

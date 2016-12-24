@@ -14,8 +14,10 @@ class page_bookticket extends Page{
         }
 
         if(!$this->api->auth->model->id){
-         $this->add('View_Login',['reload'=>"parent"]);
+         $this->add('View_Login',['reload'=>"parent"],'login_panel');
          return;
+        }else{
+            $this->template->tryDel('login_wrapper');
         }
 
         if(!$event_model->loaded()){

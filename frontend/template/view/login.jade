@@ -8,7 +8,7 @@ div(id="{$_name}" class="{$class}" style="{$style}")
       .modal-body.login-modal(style="border:0px;")
         .clearfix
         #social-icons-conatainer.row
-          .col-md-6.col-lg-6.col-sm-6.col-xs-12
+          .col-md-6.col-lg-6.col-sm-12.col-xs-12
             {generalloginform}
             .form-group
               input#username.form-control.login-field(type='text', value='', placeholder='Enter your name' style="border:1px solid ghostwhite !important")
@@ -19,7 +19,7 @@ div(id="{$_name}" class="{$class}" style="{$style}")
             a.btn.btn-success.modal-login-btn(href='#') Login
             {/}
             div(style="margin-top:10px;padding-bottom:30px;") {$forgotpassword}
-          .col-md-6.col-lg-6.col-sm-6.col-xs-12
+          .col-md-6.col-lg-6.col-sm-12.col-xs-12
             .modal-social-icons(style="margin-top:20px;")
               {facebook_btn}
               div.btn.btn-default.facebook.btn-block
