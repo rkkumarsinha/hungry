@@ -105,14 +105,14 @@ class Model_Voucher extends SQL_Model{
 			return $return;
 		}
 
-		// if($this['one_user_how_many_time']){
-		// 	$used_model = $this->add('Model_VoucherUsed')
-		// 					->addCondition('voucher_id',$this->id)
-		// 					->addCondition('user_id',$this->app->auth->id)
-		// 					;
-		// 	if($used_model->count()->getOne() >= $this['one_user_how_many_time'])
-		// 		return $return;
-		// }
+		if($this['one_user_how_many_time']){
+			$used_model = $this->add('Model_VoucherUsed')
+							->addCondition('voucher_id',$this->id)
+							->addCondition('user_id',$this->app->auth->id)
+							;
+			if($used_model->count()->getOne() >= $this['one_user_how_many_time'])
+				return $return;
+		}
 
 		$temp = explode("%", $this['voucher_amount']);
 

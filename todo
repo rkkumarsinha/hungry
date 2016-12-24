@@ -1,0 +1,9 @@
+meta description
+<head>
+<link rel="image_src" href="http://URL-TO-YOUR-IMAGE" / >
+<title>Elegant, Professional Website Design | HyperArts</title> not more then 67 chare
+<meta name="description" content="HyperArts designs elegant, professional, easy to navigate websites, coded to Web Standards - for better SEO - and devoid of clutter and confusion." /> 150 max chracter
+<meta property=”og:title” content=”Your eye-catching title here” />
+<meta property=”og:description” content=”Your entertaining and descriptive copy here, if your meta description is good, use it.” />
+<meta property=”og:image” content=”http://www.yourdomain.com/image-name.jpg” />
+</head>
