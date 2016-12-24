@@ -50,13 +50,20 @@ class View_HostAccount_Event_BookedTicket extends View{
 			$this->template->set('bookedticket',"");
 		}
 
-		$lister = $this->add('Lister',null,'bookedticket',['view\hostaccount\event\bookedticket','bookedticket']);
+		$lister = $this->add('CompleteLister',null,'bookedticket',['view\hostaccount\event\bookedticket','bookedticket']);
 		$lister->addHook('formatRow',function($l){
 			$l->current_row_html['event_image'] = str_replace("frontend", "", $l->model['event_image']);
 		});
 
 		$lister->setModel($model);
 
+
+        $quick_search = $lister->add('QuickSearch',null,'quick_search')
+				            ->useWith($lister)
+				            ->useFields(['ticket_booking_no','booking_name','net_amount']);	
+
+		$paginator = $lister->add("Paginator",null,'Paginator');
+        $paginator->setRowsPerPage(10);
 
 		$vp_url = $vp->getURL();
 		$this->on('click','.eventactiontype',function($js,$data)use($vp_url){

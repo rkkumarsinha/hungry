@@ -14,6 +14,7 @@ class Model_VoucherUsed extends SQL_Model{
 
 		$this->addField('voucher_amount')->type('money');
 
+		// $this->addExpression('event_id')->set($this->refSQL('user_event_ticket_id')->fieldQuery('eventid'));
 		// $this->addHook('beforeSave',$this);
 		$this->add('dynamic_model/Controller_AutoCreator');
 	}

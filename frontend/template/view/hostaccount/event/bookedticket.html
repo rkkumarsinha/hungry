@@ -1,8 +1,10 @@
 <div id="{$_name}" class="{$class}" style="{$sytyle};">
     <section id="items">
-        <div class="row">
         {bookedticket}
-        {$quicksearch}
+        <div style="margin-bottom: 10px;">
+        {$quick_search}
+        </div>
+        <div class="row">
         {rows}{row}
         <div data-recordid="{$id}" class="col-md-6 atk-push">
             <div style="background-color:#ededea;" class="btn btn-block">
@@ -39,8 +41,10 @@
             <div data-verifyticket="{$id}" class="btn btn-primary btn-block hungry-action atk-swatch-orange eventactiontype">Verify</div>
         </div>
         {/}{/}
-        {/}
-        {no_record_found}
+        <div style="clear:both;">
+        {$Paginator}
+        </div>
+        {no_record_found}{/}
         {/}
         </div>
     </section>

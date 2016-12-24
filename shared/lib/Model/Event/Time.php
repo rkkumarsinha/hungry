@@ -7,7 +7,7 @@ class Model_Event_Time extends SQL_Model{
 		parent::init();
 
 		$this->hasOne('Event','event_id');
-		$this->hasOne('Event_Day','event_day_id');
+		$this->hasOne('Event_Day','event_day_id')->mandatory(true);
 		$this->addField('name')->caption('time'); // Days
 		$this->hasMany('Event_Ticket','event_ticket_id');
 

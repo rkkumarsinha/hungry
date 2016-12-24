@@ -29,7 +29,6 @@ class View_HostAccount_Event_ManageTicket extends View{
 							->addCondition('event_id',$event_model->id)
 							;
 		$ticket_model->addExpression('sold')->set($ticket_model->refSQL('UserEventTicket')->addCondition('status','paid')->sum('qty'))->type('int');
-		$ticket_model->getElement('max_no_to_sale')->caption('Total');
 							
 		if($_GET['event_time']){
 			$ticket_model->addCondition('event_time_id',$_GET['event_time']);
@@ -41,9 +40,13 @@ class View_HostAccount_Event_ManageTicket extends View{
 		$ticket_model->setOrder('id','desc');
 
 		$ticket_crud->setModel($ticket_model,
-							['name','price','detail','offer','applicable_offer_qty','offer_percentage','max_no_to_sale','disclaimer'],
-							['name','price','event_day','event_time','total','max_no_to_sale','sold','remaining_ticket']
-						);
+										['event_id','event_time_id','name','price','detail','max_no_to_sale','disclaimer','is_voucher_applicable'],
+										['name','price','offer_percentage','is_voucher_applicable']
+									);
+		
+		if($ticket_crud->isEditing()){
+			$ticket_crud->form->getElement('event_time_id')->getModel()->addCondition('event_id',$event_model->id);
+		}
 		$ticket_crud->grid->addPaginator(30);
 
 		// form submittion

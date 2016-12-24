@@ -6,8 +6,8 @@ class Model_Event_Ticket extends SQL_Model{
 	function init(){
 		parent::init();
 
-		$this->hasOne('Event','event_id');
-		$this->hasOne('Event_Time','event_time_id',$this->time_title_field);
+		$this->hasOne('Event','event_id')->mandatory(true);
+		$this->hasOne('Event_Time','event_time_id',$this->time_title_field)->mandatory(true);
 
 		$this->addField('name')->mandatory(true); // Days
 		$this->addField('price')->type('money')->mandatory(true);

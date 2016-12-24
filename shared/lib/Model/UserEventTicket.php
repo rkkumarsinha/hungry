@@ -6,7 +6,7 @@ class Model_UserEventTicket extends SQL_Model{
 	function init(){
 		parent::init();
 
-		$this->hasOne('Event_Ticket','event_ticket_id');
+		$this->hasOne('Event_Ticket','event_ticket_id')->mandatory(true);
 		$this->hasOne('Invoice','invoice_id');
 		$this->hasOne('User','user_id');
 		
