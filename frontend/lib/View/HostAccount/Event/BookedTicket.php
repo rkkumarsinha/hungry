@@ -41,7 +41,7 @@ class View_HostAccount_Event_BookedTicket extends View{
 		$model->addExpression('event_image')->set($model->refSQL('event_ticket_id')->fieldQuery('event_image'));
 		$model->addExpression('event_name')->set($model->refSQL('event_ticket_id')->fieldQuery('event_name'));
 		$model->addExpression('event_id')->set($model->refSQL('event_ticket_id')->fieldQuery('event_id'));
-		// $model->addCondition('event_id',$event_model->id);
+		$model->addCondition('event_id',$event_model->id);
 		$model->addCondition('is_verified',false);
 		$model->setOrder('id','desc');
 
