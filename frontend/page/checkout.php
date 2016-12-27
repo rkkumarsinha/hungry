@@ -402,6 +402,10 @@ class page_checkout extends Page{
         $this->invoice['transaction_detail']  = json_encode($decryptValues,true);
         $this->invoice->save();
 
+        if($this->invoice['status'] == "Paid"){
+            $this->invoice->send();
+        }
+
         $wrapper->add($view)->set($msg);
 
         $wrapper->add('Button')->set('Continue Booking')->js('click')->univ()->redirect('index');
