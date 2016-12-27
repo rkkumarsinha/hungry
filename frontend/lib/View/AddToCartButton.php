@@ -23,15 +23,24 @@ class View_AddToCartButton extends View{
 			$form->setLayout('form\eventaddtocart');
 			$price_field = $form->addField('Readonly','price')->set($m['price']);
 
-			$qty_field = $form->addField('Spinner','quantity');
-			$qty_field->min = 1;
-			$qty_field->max = $m['remaining_ticket'];
+			$ticket_list = [];
 			
-			$qty_field->validateNotNull(true)->set(1)->addClass('hungrySpinner');
+			for ($i=1; $i < $m['remaining_ticket']; $i++) { 
+				$ticket_list[$i] = $i;
+			}
+
+			$qty_field = $form->addField('Dropdown','quantity');
+			$qty_field->setValueList($ticket_list);
+
+
+			// $qty_field->min = 1;
+			// $qty_field->max = $m['remaining_ticket'];
+			
+			// $qty_field->validateNotNull(true)->set(1)->addClass('hungrySpinner');
 			// $qty_field->js(true)->spinner(array('min'=>1,'max'=>$m['remaining_ticket'],"step"=>1));
 
 			$amount_field = $form->addField('Readonly','amount')->set($m['price']);
-			$amount_field = $form->addField('hidden','amount_hidden')->set($m['price']);
+			$amount_hidden_field = $form->addField('hidden','amount_hidden')->set($m['price']);
 
 			
 			$voucher_field = $form->addField('line','discount_voucher');
@@ -49,9 +58,8 @@ class View_AddToCartButton extends View{
 			if($this->app->stickyGET('hungry_event_qty')){
 				$amount_field->set($m['price'] * $_GET['hungry_event_qty']);
 			}
-
+			
 			$qty_field->js('change',$amount_field->js()->reload(null,null,[$this->app->url(null,['cut_object'=>$amount_field->name]),'hungry_event_qty'=>$qty_field->js()->val()]));
-
 
 
 			if($form->isSubmitted()){

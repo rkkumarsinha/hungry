@@ -64,10 +64,18 @@ class View_CartDetail extends CompleteLister{
 		// price
 		$price_field = $form->addField('Readonly','price')->set($event_ticket_model['price']);
 		//quantity field
-		$qty_field = $form->addField('Number','quantity')->validateNotNull(true)->set(1)->addClass('hungrySpinner');
-		$qty_field->js(true)->spinner(array('min'=>1,'max'=>$event_ticket_model['remaining_ticket'],"step"=>1));
-		$qty_field->set($m['qty']);
+		// $qty_field = $form->addField('Number','quantity')->validateNotNull(true)->set(1)->addClass('hungrySpinner');
+		// $qty_field->js(true)->spinner(array('min'=>1,'max'=>$event_ticket_model['remaining_ticket'],"step"=>1));
+		// $qty_field->set($m['qty']);
+		$ticket_list = [];
+			
+		for ($i=1; $i < $event_ticket_model['remaining_ticket']; $i++) {
+			$ticket_list[$i] = $i;
+		}
 
+		$qty_field = $form->addField('Dropdown','quantity');
+		$qty_field->setValueList($ticket_list);
+		$qty_field->set($m['qty']);
 		
 		$amount_field = $form->addField('hidden','amount_hidden')->set($m['price']);
 	
