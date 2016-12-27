@@ -54,6 +54,7 @@ class Model_Voucher extends SQL_Model{
 
 		$old_model = $this->add('Model_Voucher');
 		$old_model->addCondition('name',$this['name']);
+		$old_model->addCondition('event_id',$this['event_id']);
 		$old_model->addCondition('id','<>',$this['id']);
 		$old_model->tryLoadAny();
 		if($old_model->loaded())

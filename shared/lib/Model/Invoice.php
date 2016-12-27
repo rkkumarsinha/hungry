@@ -89,6 +89,7 @@ class Model_Invoice extends SQL_Model{
 		$tickets = $this->add('Model_UserEventTicket')
 					->addCondition('invoice_id',$this->id);
 		$tickets->addExpression('event_url')->set($tickets->refSQL('event_ticket_id')->fieldQuery('event_image'));
+		$tickets->addExpression('event_name')->set($tickets->refSQL('event_ticket_id')->fieldQuery('event'));
 
 		$temp = $this->app->add('View_UserTicketRow');
 		$temp->setModel($tickets);

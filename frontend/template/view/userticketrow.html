@@ -3,12 +3,13 @@
   {rows}
   {row}
   <tr style="border-bottom:1px solid #f3f3f3;">
-    <td style="padding:10px;" width="20%"><img src="{$event_display_url}" style="width:100%;"/><span style=""></span></td>
+    <td style="padding:10px;" width="20%"><img src="{$event_display_url}" style="width:100%;"/><span>{$}</span></td>
     <td width="80%" style="padding-top:5px;">
       <table style="" width="100%" cellspacing="0" cellpadding="0">
         <tbody>
           <tr>
             <td>
+              <h4 style="color:#fa9634;">{$event_name}</h4>
               <h3>Booking No: <span style="color:#fa9634 !important;">{$ticket_booking_no}</span></h3>
               <div style="margin-bottom:10px;">{$booking_date_human} {$booking_time}</div>
               <div style="margin-bottom:10px;">Ticket:&nbsp;<span style="color:#fa9634;">{$event_ticket}</span></div>
