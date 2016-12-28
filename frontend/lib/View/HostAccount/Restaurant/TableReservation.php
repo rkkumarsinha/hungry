@@ -112,7 +112,7 @@ class View_HostAccount_Restaurant_TableReservation extends CompleteLister{
 				if($data['actiontype'] == "Approve"){
 					$reserved_table = $this->add('Model_ReservedTable')->load($data['tablereservationid']);
 					$reserved_table->approved();
-					// $reserved_table->sendReservedTable(true,false);
+					$reserved_table->sendReservedTable(true,false);
 					return $this->js(null,$this->js()->univ()->successMessage('Reservation Approved'))->reload(['selectedmenu'=>"TableReservation"],null,$this_url);
 				}
 
