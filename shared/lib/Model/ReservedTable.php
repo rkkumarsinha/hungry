@@ -113,8 +113,9 @@ class Model_ReservedTable extends SQL_Model{
 		return true;
 	}
 	
-	function sendSMS(){
-		
+
+	function sendProcessingSMS(){
+
 		$sms_template = $this->add('Model_EmailTemplate')->addCondition('name',"RESERVEDTABLESMS")->tryLoadAny();
 		if(!$sms_template->loaded()){
 			throw new \Exception("sms template is missing");
@@ -128,6 +129,41 @@ class Model_ReservedTable extends SQL_Model{
 		
 		$body = str_replace("{user_name}", $this['book_table_for'], $body);
 		$body = str_replace("{booking_id}", $this['booking_id'], $body);
+		
+		$outbox = $this->add('Model_Outbox');
+		$sms_response = $outbox->sendSMS($this['mobile'],$body,$this->api->auth->model);
+		if($sms_response != true){
+			throw new \Exception($sms_response);
+		}
+		$outbox->createNew("Book Table",$this['mobile']," SMS ",$body,"SMS","ReservedTable",$this->id,$this->api->auth->model);
+		return true;
+	}
+
+	function sendSMS(){
+		
+		$sms_template = $this->add('Model_EmailTemplate')->addCondition('name',"TABLECONFIRMATIONSMS")->tryLoadAny();
+		if(!$sms_template->loaded()){
+			throw new \Exception("sms template is missing");
+		}
+
+		if(!trim($sms_template['body']))
+			throw new \Exception("sms template body missing");
+
+		$body = $sms_template['body'];
+		//Dear {name}, Greetings! your booking request conformed at {restaurant} on {day},{date} at {hh;mm-am/pm} for {A}A+{C}C Pax , booking id {id} {REQUEST}. offers {DIS/OFF} code {}. Rate & Review us on www.hungrydunia.com.T&C Apply
+		
+		$body = str_replace("{name}", $this['book_table_for'], $body);
+		$body = str_replace("{restaurant}", $this['restaurant'], $body);
+		$body = str_replace("{day}", date("D",strtotime($this['booking_date'])), $body);
+		$body = str_replace("{date}", date("d-M-Y",strtotime($this['booking_date'])), $body);
+		$body = str_replace("{hh;mm-am/pm}",date('h:i a',strtotime($this['booking_time'])), $body);
+		$body = str_replace("{A}", $this['no_of_adult'], $body);
+		$body = str_replace("{C}", $this['no_of_child'], $body);
+		$body = str_replace("{id}", $this['booking_id'], $body);
+		$body = str_replace("{REQUEST}", $this['message'], $body);
+
+		$body = str_replace("{DIS/OFF}", $this['discount_offer_value'], $body);
+		$body = str_replace("{}", "", $body);
 		
 		$outbox = $this->add('Model_Outbox');
 		$sms_response = $outbox->sendSMS($this['mobile'],$body,$this->api->auth->model);
