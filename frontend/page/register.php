@@ -41,6 +41,15 @@ class page_register extends Page
             $user['type'] = "user";
             $user->save();
             
+            //hungry access
+            $md5_access_token = md5(uniqid($user['email']."-".$user['created_at'], true));
+            $acc_token = $this->add('Model_AccessToken');
+            $acc_token['user_id'] = $user->id;
+            $acc_token['social_app'] = "HungryDunia";
+            $acc_token['social_access_token'] = $md5_access_token;
+            $acc_token->save();
+
+
             $email_template = $this->add('Model_EmailTemplate')
                                 ->addCondition('name',"EMAILVERIFICATIONUSER")->tryLoadAny();
             if(!$email_template->loaded()){
