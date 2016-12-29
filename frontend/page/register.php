@@ -49,7 +49,7 @@ class page_register extends Page
             $acc_token['social_access_token'] = $md5_access_token;
             $acc_token->save();
 
-
+            
             $email_template = $this->add('Model_EmailTemplate')
                                 ->addCondition('name',"EMAILVERIFICATIONUSER")->tryLoadAny();
             if(!$email_template->loaded()){
