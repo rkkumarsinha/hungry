@@ -15,6 +15,7 @@ class page_register extends Page
         $f->addField('DatePicker','date_of_birth')->validateNotNull(true);
 
         $email = $f->addField('email')->validateField('filter_var($this->get(), FILTER_VALIDATE_EMAIL)');
+        $phone = $f->addField('Number','mobile_no')->validateNotNull(true);
 
         $f->addField('password','password')->validateNotNull();
         $f->addField('password','confirm_password')->validateNotNull();
@@ -24,13 +25,26 @@ class page_register extends Page
             if($f['password']!= $f['confirm_password'])
                 $f->error('password',"password and confirm password are not same");
 
+            // check mobile number is valid or 10 digin only
+            preg_match_all("/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/", $f['mobile_no'], $matches);
+            if(!count($matches[0]))
+                $f->displayError('mobile_no','not a valid mobile number');
+            
+            //check for the email is already exist or not
+            $user_m = $this->add('Model_User');
+            $user_m->addCondition('mobile',$f['mobile_no']);
+            $user_m->tryLoadAny();
+            if($user_m->loaded())
+                $f->displayError('mobile_no','mobile number already exist');
+
+
             //check for the email is already exist or not
             $user = $this->add('Model_User');
             $user->addCondition('email',$f['email']);
             $user->tryLoadAny();
             if($user->loaded())
                 $f->displayError('email','email already exist');
-            
+                
             $user['name'] = $f['full_name']; 
             $user['email'] = $f['email'];
             $user['password'] = $f['password'];
@@ -39,6 +53,7 @@ class page_register extends Page
             $user['received_newsletter'] = $f['received_newsletter'];
             $user['is_active'] = true;
             $user['type'] = "user";
+            $user['mobile'] = $f['mobile_no'];
             $user->save();
             
             //hungry access
