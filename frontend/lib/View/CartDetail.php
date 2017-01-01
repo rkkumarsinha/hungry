@@ -4,17 +4,30 @@ class View_CartDetail extends CompleteLister{
 	function init(){
 		parent::init();
 		
-		$this->on('click','.hungry-remove-event-cart-item',function($js,$data){
-			if($js->univ()->confirm('Are you sure?')){
-				$cart = $this->add('Model_Cart')->load($data['cartid'])->delete();
-				// return $this->js()->univ()->_selector('.hungry-cartdetail-event')->reload();
-				return $js->location();
-			}
-			
-			return $js->univ()->consoleError('good choice not delete');
-		});
+		$this->addClass('hungry-cart-detail');
+		$this->js('reload')->reload();
+
+		$this->on('click','.hungry-remove-event-cart-item')->univ()->confirm('Are you sure?')
+			->ajaxec(array(
+            	$this->app->url(),
+            	['remove_cart_item_id'=>$this->js()->_selectorThis()->data('cartid')]
+        ));
+
+		$remove_cart_item_id = $this->app->stickyGET('remove_cart_item_id');
+		
+		if($remove_cart_item_id){
+			$this->add('Model_Cart')->load($remove_cart_item_id)->delete();
+			$js_event = [
+				// $this->js()->_selector('.')->html($count),
+				$this->js()->closest('.hungry-event-ticket')->hide(),
+				$this->js()->univ()->successMessage('removed successfully'),
+				$this->js()->_selector('.hungry-cart-detail')->trigger('reload')
+			];
+			$this->js(null,$js_event)->execute();
+		}
 
 		$this->template->trySet('net_amount', $this->add('Model_Cart')->getNetAmount());
+
 	}
 	
 	function setModel($m){
