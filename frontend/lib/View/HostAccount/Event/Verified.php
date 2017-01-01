@@ -20,7 +20,7 @@ class View_HostAccount_Event_Verified extends View{
 		$model = $this->add('Model_UserEventTicket');		
 		$model->addExpression('event_name')->set($model->refSQL('event_ticket_id')->fieldQuery('event_name'));
 		$model->addExpression('event_id')->set($model->refSQL('event_ticket_id')->fieldQuery('event_id'));
-		// $model->addCondition('event_id',$event_model->id);
+		$model->addCondition('event_id',$event_model->id);
 		$model->addCondition('is_verified',true);
 		$model->setOrder('id','desc');
 		$model->getElement('ticket_booking_no')->caption('Booking No');

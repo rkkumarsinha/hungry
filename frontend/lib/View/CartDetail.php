@@ -1,16 +1,14 @@
 <?php
 
 class View_CartDetail extends CompleteLister{
-	
 	function init(){
 		parent::init();
 		
-		$self = $this;
-		$this->on('click','.hungry-remove-event-cart-item',function($js,$data)use($self){
+		$this->on('click','.hungry-remove-event-cart-item',function($js,$data){
 			if($js->univ()->confirm('Are you sure?')){
 				$cart = $this->add('Model_Cart')->load($data['cartid'])->delete();
-				return $self->js()->reload();
-				// return $js->location();
+				// return $this->js()->univ()->_selector('.hungry-cartdetail-event')->reload();
+				return $js->location();
 			}
 			
 			return $js->univ()->consoleError('good choice not delete');
