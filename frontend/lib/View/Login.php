@@ -36,44 +36,56 @@ class View_Login extends View{
 	        }	        
 
 			$facebook_controller = $this->add('Controller_Facebook',['hfrom'=>$_GET['hfrom'],'isWebsiteCheck'=>true]);
-			$url = $facebook_controller->getLoginUrl();
 
 			$fb_btn = $this->add('Button',null,'facebook_btn');
 			$fb_btn->set('Sign In with Facebook');
 			$fb_btn->addClass('facebook');
 			$fb_btn->setIcon('facebook');
-			$fb_btn->js('click')->univ()->redirect($url);
+			if($fb_btn->isClicked()){
+				$url = $facebook_controller->getLoginUrl();
+				$this->app->redirect($url);
+			}
+			// $fb_btn->js('click')->univ()->redirect($url);
 			// $this->template->trySet('facebook_login_url',$url);
 
 			if($facebook_controller->user instanceof Model_User){
-				session_write_close();
+				// session_write_close();
 				$user_model = $this->add('Model_User')->load($facebook_controller->user->id);
-				$this->api->auth->login($user_model);
-				if(!$user_model['email']){
+				// $this->api->auth->login($user_model);
+				if(!$user_model['email'] OR !$user_model['mobile']){
 					// $this->app->memorize('facebook_email_not_found',$facebook_controller->user->id);
 					$this->app->redirect($this->app->url('validate',['email_not_found'=>$facebook_controller->user->id."_"]));
 				}
 				else{
-					$this->api->auth->login($user_model);
+					$this->api->auth->loginById($user_model->id);
+					// $this->api->auth->login($user_model);
           			$this->api->redirect($this->api->url('account'));
-          			
 				}
 			}
 			// $_SESSION["FBRLH_persist"] = $_SESSION["FBRLH_state"];
 			
 			$google_controller = $this->add('Controller_Google',['hfrom'=>$_GET['hfrom']]);
-			$url = $google_controller->getLoginUrl();
 
 			$g_btn = $this->add('Button',null,'google_btn');
 			$g_btn->set('Sign In with Google');
 			$g_btn->addClass('google');
 			$g_btn->setIcon('fa fa-google-plus',true);
-			$g_btn->js('click')->univ()->redirect($url);
 
-			// $this->template->trySet('google_login_url',$url);
+			if($g_btn->isClicked()){
+				$url = $google_controller->getLoginUrl();
+				$this->app->redirect($url);
+			}
 
-			if($google_controller->user instanceof Model_User){
-				$this->app->auth->model->load($google_controller->user->id);
+			if($google_controller->user instanceof Model_User){				
+				$user_model = $this->add('Model_User')->load($google_controller->user->id);
+				
+				if(!$user_model['email'] OR !$user_model['mobile']){
+					$this->app->redirect($this->app->url('validate',['email_not_found'=>$google_controller->user->id."_"]));
+				}else{
+					$this->api->auth->loginById($user_model->id);
+          			$this->api->redirect($this->api->url('account'));
+				}
+				// $this->app->auth->model->load($google_controller->user->id);
 			}
 
 			if($this->app->auth->model->loaded()){
@@ -114,7 +126,8 @@ class View_Login extends View{
 	                	$f->displayError('email','Please Activate Your Account First');
 	            }
 
-	            $this->api->auth->login($f['email']);
+	            // $this->api->auth->login($f['email']);
+	            $this->api->auth->loginById($user_model->id);
 				// $this->api->auth->login($user_model);
 	            // user type is host then always redirect to host account or admin panel
 	            if($user_model['type'] === 'host'){

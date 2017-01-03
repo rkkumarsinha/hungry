@@ -90,7 +90,7 @@ class Controller_Google extends AbstractController {
         $access_token['social_content'] = $this->social_content;
 
       $access_token->save();
-      return $this->add('Model_User')->load($access_token['user_id']);
+      return $this->user = $this->add('Model_User')->load($access_token['user_id']);
     }
 
     $new_user = $this->add('Model_User');
@@ -154,6 +154,7 @@ class Controller_Google extends AbstractController {
     $access_token['user_id'] = $new_user->id;
     $access_token->save();
     // var_dump($this->user->id);
-    return $new_user;
+    $this->app->auth->model = $new_user;
+    return $this->user = $new_user;
   }
 }

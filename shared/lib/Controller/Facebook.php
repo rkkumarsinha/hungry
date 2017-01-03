@@ -12,6 +12,10 @@ class Controller_Facebook extends AbstractController {
   function init(){
     parent::init();
 
+    if (!session_id()) {
+      session_start();
+    }
+
     $this->config = $config = $this->app->getConfig('Facebook');
     $this->fb = $fb = new \Facebook\Facebook([
               'app_id' => $config['app_id'],
@@ -35,7 +39,7 @@ class Controller_Facebook extends AbstractController {
     
     // cross broser state mismatch error solved
     if($this->isWebsiteCheck){
-      $_SESSION["FBRLH_state"] = $_SESSION["FBRLH_persist"];
+      // $_SESSION["FBRLH_state"] = $_SESSION["FBRLH_persist"];
     }
 
     if($accessToken_app){
@@ -59,7 +63,7 @@ class Controller_Facebook extends AbstractController {
 
     if (isset($accessToken)) {
       // Logged in!
-      $_SESSION['facebook_access_token'] = (string) $accessToken;
+        $_SESSION['facebook_access_token'] = (string) $accessToken;
         
         $oAuth2Client = $this->fb->getOAuth2Client();
         // Exchanges a short-lived access token for a long-lived one
@@ -91,8 +95,8 @@ class Controller_Facebook extends AbstractController {
           $new_user = $this->updateUser($longLivedAccessToken,$userNode,isset($headers['Location'])?$headers['Location']:false,$url);
           $this->user = $new_user;
         // }
-
-        return $new_user;
+          $this->app->auth->model = $this->user;
+        return $this->user = $new_user;
       }
 
       return false;
