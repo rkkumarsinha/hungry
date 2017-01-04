@@ -35,7 +35,7 @@ class page_user extends Page{
 		$host_model = $this->add('Model_User')->addCondition('type','host');
 		$host_model->setOrder('created_at','desc');
 		$host_crud = $host_tab->add('CRUD');
-		$host_crud->setModel($host_model,['name','email','type','verification_code','password','is_verified','is_active']);
+		$host_crud->setModel($host_model);
 		$host_crud->grid->addPaginator($ipp=30);
 		$host_crud->add('misc/Export');
 
