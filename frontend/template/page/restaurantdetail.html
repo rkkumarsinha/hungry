@@ -278,7 +278,8 @@
           <header>
             <h2>Map Route</h2>
           </header>
-          <div style="height:200px;">{$routemap}</div>
+          <div style="min-height:200px;">{$routemap}</div>
+          <div title="View map in large" type="button" data-toggle="modal" data-target="#rest_route_map_large" style="font-size:16px;margin-top:8px;color:white;cursor:pointer; cursor: hand;background-color:#5cb85c;border-radius:5px;margin:5px 10px;" class="btn atk-swatch-green btn-block">view large map</div>
         </section>
         {near_by_wrapper}
         <section id="nearbyrestaurant" class="block near-by-restaurant-container">
@@ -348,6 +349,21 @@
           <h4 id="{$_name}_model_label" style="font-size:16px;" class="modal-title text-hungry">Login</h4>
         </div>
         <div class="modal-body hungry-comment_modalpopup">{$login}{$Content}</div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Route Map -->
+  <div id="rest_route_map_large" tabindex="-1" role="dialog" aria-labelledby="rest_route_map_large_modalpopup" class="modal fade">
+    <div role="document" class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true" style="margin-right:20px;">×</span></button>
+          <h4 id="{$_name}_model_label" style="font-size:16px;" class="modal-title text-hungry">Map Route</h4>
+        </div>
+        <div class="modal-body rest_route_map_large_modalpopup">{$large_route_map}</div>
         <div class="modal-footer">
           <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
         </div>
