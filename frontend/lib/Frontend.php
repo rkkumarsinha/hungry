@@ -102,11 +102,13 @@ class Frontend extends ApiFrontend {
         //     return $js->alert("hello");
         // });
         
-        $this->api->jui->addStaticInclude('ckeditor/ckeditor');
-        $this->api->jui->addStaticInclude('ckeditor/adapters/jquery');
+        // $this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=false&libraries=places&key='.$this->api->getConfig('Google/MapKey'));
         
-        $this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=false&libraries=places&key='.$this->api->getConfig('Google/MapKey'));
-        $this->api->jui->addStaticInclude('locationpicker.jquery');
+        if($this->app->auth->model['type'] == "host"){
+            $this->api->jui->addStaticInclude('ckeditor/ckeditor');
+            $this->api->jui->addStaticInclude('ckeditor/adapters/jquery');
+            $this->api->jui->addStaticInclude('locationpicker.jquery');
+        }
         $this->api->jui->addStaticInclude('hungry');
     }
 
@@ -223,22 +225,3 @@ class Frontend extends ApiFrontend {
         parent::initLayout();
     }
 }
-
-
-
-
-
-//        $publicDir = dirname(@$_SERVER['SCRIPT_FILENAME']);
-//        $baseDir   = dirname($publicDir);
-//
-//
-//        //$parent_directory=/*dirname(*/dirname(@$_SERVER['SCRIPT_FILENAME'])/*)*/;
-//        var_dump($baseDir);
-//
-//        $this->pathfinder->public_location->addRelativeLocation('public/',
-//            array(
-//                'css'=>'css',
-//                'public'=>'.',
-//            )
-//        );
-//
