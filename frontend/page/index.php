@@ -4,6 +4,10 @@ class page_index extends Page
     function init(){
         parent::init();
         
+        $this->setMetaTag('keyword','hungrydunia');
+        $this->setMetaTag('description','hungrydunia description');
+        
+
         $v = $this->add('View_Lister_HomeSlider',['city'=>$this->app->city_name?:"Udaipur",'type'=>"RestaurantGallery"],'homeslider');
         $this->add('View_Search',null,'search_form');
     }
