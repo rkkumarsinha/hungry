@@ -46,8 +46,8 @@ class page_restaurantdetail extends Page{
         }
         
         //Add Route Map
-        $view_route_map = $this->add('View_RouteMap',['restaurant_lat'=>$restaurant_model['latitude'],'restaurant_lng'=>$restaurant_model['longitude']],'routemap');
-        
+        $view_route_map = $this->add('View_RouteMap',['restaurant_lat'=>$restaurant_model['latitude'],'restaurant_lng'=>$restaurant_model['longitude'],'zoom'=>3],'routemap');
+        $this->add('View_RouteMap',['restaurant_lat'=>$restaurant_model['latitude'],'restaurant_lng'=>$restaurant_model['longitude'],'zoom'=>3],'large_route_map');
         $this->add('View_Review',['restaurant_id'=>$this->restaurant_id,'restaurant_rating'=>$restaurant_model['rating']],'hungryuserrating');
     }
 
