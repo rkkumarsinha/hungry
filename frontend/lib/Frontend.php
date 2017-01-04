@@ -102,7 +102,7 @@ class Frontend extends ApiFrontend {
         //     return $js->alert("hello");
         // });
         
-        // $this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=false&libraries=places&key='.$this->api->getConfig('Google/MapKey'));
+        $this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=false&libraries=places&key='.$this->api->getConfig('Google/MapKey'));
         
         if($this->app->auth->model['type'] == "host"){
             $this->api->jui->addStaticInclude('ckeditor/ckeditor');
