@@ -18,13 +18,13 @@ class View_RouteMap extends View{
 
 	public $restaurant_lat;
 	public $restaurant_lng;
+	public $zoom = 13;
 	function init(){
 		parent::init();
 
 		
-		$this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=true&language=en&key='.$this->api->getConfig('Google/MapKey'));
+		// $this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=true&language=en&key='.$this->api->getConfig('Google/MapKey'));
         $this->app->jui->addStaticInclude('gmap3.min');
-
 	}
 
 	function render(){
@@ -33,14 +33,15 @@ class View_RouteMap extends View{
 								[
 									'map'=>$this->mapOptions,
 									'target_latitude'=>$this->restaurant_lat,
-									'target_longitude'=>$this->restaurant_lng
+									'target_longitude'=>$this->restaurant_lng,
+									'zoom'=>$this->zoom
 									]
 								);
 		parent::render();
 	}
 
 	function getJSID(){
-		return "routemap";
+		return $this->name;
 	}
 
 	function defaultTemplate(){
