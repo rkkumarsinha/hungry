@@ -4,7 +4,8 @@ jQuery.widget("ui.routemap",{
 		source_latitude:undefined,
 		source_longitude:undefined,
 		target_latitude:undefined,
-		target_longitude:undefined
+		target_longitude:undefined,
+		zoom:5
 	},
 	_create: function(){
 		var self = this;	
@@ -29,7 +30,7 @@ jQuery.widget("ui.routemap",{
         	function error(error){
 
         	}
-        	navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 5000, enableHighAccuracy:true, timeout: 6000});
+        	navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 5000, enableHighAccuracy:true, timeout: 600});
         }
 	},
 
@@ -42,6 +43,7 @@ jQuery.widget("ui.routemap",{
 			        origin:[self.options.source_latitude,self.options.source_longitude],
 			        destination:[self.options.target_latitude,self.options.target_longitude],
 			        travelMode: google.maps.DirectionsTravelMode.DRIVING
+
 			    },
 			    callback: function(results){
 			      if (!results) return;
@@ -62,15 +64,16 @@ jQuery.widget("ui.routemap",{
 			      $(self.element).gmap3({
 			        map:{
 			          options:{
-			            zoom: 13,  
-			            center: [-33.879, 151.235]
+			            zoom: self.options.zoom,
+			            center: [self.options.target_latitude,self.options.target_longitude]
 			          }
 			        },
 			        directionsrenderer:{
 			          options:{
 			            directions:results
 			          } 
-			        }
+			        },
+			        action:'setCenter', args:[ new google.maps.LatLng(self.options.target_latitude, self.options.target_longitude) ]
 			      });
 			    }
 			  }
