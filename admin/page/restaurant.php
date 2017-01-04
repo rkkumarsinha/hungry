@@ -49,7 +49,7 @@ class page_restaurant extends page_adminrestaurant {
         }
 
         $c->setModel($rst_model,
-                        ['user_id','country_id','state_id','city_id','area_id','discount_id','logo_image_id','banner_image_id','display_image_id','name','owner_name','about_restaurant','address','mobile_no','phone_no','email','website','facebook_page_url','instagram_page_url','rating','avg_cost_per_person_veg','avg_cost_per_person_nonveg','avg_cost_per_person_thali','avg_cost_of_a_beer','credit_card_accepted','reservation_needed','monday','tuesday','wednesday','thursday','friday','saturday','sunday','url_slug','discount','discount_subtract','is_featured','is_popular','is_recommend','latitude','longitude','food_type','is_verified','status','disclaimer'],
+                        ['user_id','country_id','state_id','city_id','area_id','discount_id','logo_image_id','banner_image_id','display_image_id','name','owner_name','about_restaurant','address','mobile_no','phone_no','email','website','facebook_page_url','instagram_page_url','rating','avg_cost_per_person_veg','avg_cost_per_person_nonveg','avg_cost_per_person_thali','avg_cost_of_a_beer','credit_card_accepted','reservation_needed','monday','tuesday','wednesday','thursday','friday','saturday','sunday','url_slug','discount','discount_subtract','is_featured','is_popular','is_recommend','latitude','longitude','food_type','is_verified','status','disclaimer','title','keyword','description','image_title','image_alt_text'],
                         ['user','name','address','user_status','status']
                     );
         $c->grid->addQuickSearch(['name']);
