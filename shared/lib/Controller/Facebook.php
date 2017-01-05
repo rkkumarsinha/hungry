@@ -12,9 +12,9 @@ class Controller_Facebook extends AbstractController {
   function init(){
     parent::init();
 
-    if (!session_id()) {
-      session_start();
-    }
+    // if (!session_id()) {
+    //   session_start();
+    // }
 
     $this->config = $config = $this->app->getConfig('Facebook');
     $this->fb = $fb = new \Facebook\Facebook([
@@ -38,15 +38,18 @@ class Controller_Facebook extends AbstractController {
     }
     
     // cross broser state mismatch error solved
-    if($this->isWebsiteCheck){
-      // $_SESSION["FBRLH_state"] = $_SESSION["FBRLH_persist"];
-    }
+    // if($this->isWebsiteCheck){
+    //   // $_SESSION["FBRLH_state"] = $_SESSION["FBRLH_persist"];
+    // }
 
     if($accessToken_app){
         $accessToken = $accessToken_app;
     }else{
         $helper = $this->fb->getRedirectLoginHelper();
-        
+        if (isset($_GET['state'])) {
+          $helper->getPersistentDataHandler()->set('state', $_GET['state']);
+        }
+
         try {
           $accessToken = $helper->getAccessToken();
         } catch(Facebook\Exceptions\FacebookResponseException $e) {
