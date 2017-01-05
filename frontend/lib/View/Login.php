@@ -126,14 +126,12 @@ class View_Login extends View{
 	                	$f->displayError('email','Please Activate Your Account First');
 	            }
 
-	            // $this->api->auth->login($f['email']);
-	            $this->api->auth->loginById($user_model->id);
-				// $this->api->auth->login($user_model);
+	            $this->app->auth->loginById($id);
 	            // user type is host then always redirect to host account or admin panel
 	            if($user_model['type'] === 'host'){
 	            	$this->app->redirect($this->app->url('account'));
 	            }
-
+	            
 	            if($this->reload_page){
 	            	$this->app->redirect($this->app->url());
 	            }
