@@ -94,7 +94,7 @@ class Model_Destination extends SQL_Model{
 		});
 
 		$this->addHook('afterSave',[$this,'updateSearchString']);
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 	function updateSearchString(){

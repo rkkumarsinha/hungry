@@ -17,6 +17,6 @@ class Model_Enquiry extends SQL_Model{
 		$this->addField('status')->enum(['pending','reject','solved','progress'])->defaultValue('pending');
 
 		$this->setOrder('id','desc');
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 }

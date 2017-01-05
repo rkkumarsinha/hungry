@@ -40,6 +40,6 @@ class Model_Configuration extends SQL_Model{
 		$this->addField('access_code');
 		$this->addField('working_key');
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 }

@@ -116,7 +116,7 @@ class Model_Restaurant extends SQL_Model{
 			return $q->expr('([0]-IFNULL([1],0))',[$m->getElement('discount_percentage'),$m->getElement('discount_subtract')]);
 		});
 		
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 
 		$this->addHook('beforeSave',$this);
 		$this->addHook('afterSave',$this);

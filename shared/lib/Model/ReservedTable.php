@@ -34,7 +34,7 @@ class Model_ReservedTable extends SQL_Model{
 
 		$this->addExpression('restaurant_image')->set($this->refSQL('restaurant_id')->fieldQuery('display_image'));
 		$this->addExpression('restaurant_address')->set($this->refSQL('restaurant_id')->fieldQuery('address'));
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 	function approved(){

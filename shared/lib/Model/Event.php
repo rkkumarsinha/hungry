@@ -82,7 +82,7 @@ class Model_Event extends SQL_Model{
 
 		$this->addHook('beforeSave',[$this,'beforeSave']);
 		$this->addHook('beforeSave',[$this,'updateSearchString']);
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 
 	}
 
