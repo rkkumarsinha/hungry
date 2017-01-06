@@ -98,7 +98,7 @@ class Controller_Facebook extends AbstractController {
           $new_user = $this->updateUser($longLivedAccessToken,$userNode,isset($headers['Location'])?$headers['Location']:false,$url);
           $this->user = $new_user;
         // }
-          $this->app->auth->model = $this->user;
+          // $this->app->auth->model = $this->user;
         return $this->user = $new_user;
       }
 
