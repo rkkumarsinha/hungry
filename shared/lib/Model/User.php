@@ -71,7 +71,12 @@ class Model_User extends SQL_Model{
 		$this->hasMany('ReferralUser','referral_user_id');
 		
 		$this->addHook('afterSave',$this);
+		$this->addHook('beforeDelete',$this);
 		// $this->add('dynamic_model/Controller_AutoCreator');
+	}
+
+	function beforeDelete(){
+		$this->add('Model_AccessToken')->addCondition('user_id',$this->id)->deleteAll();
 	}
 
 	function beforeSave(){

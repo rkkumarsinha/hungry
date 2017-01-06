@@ -154,7 +154,8 @@ class Controller_Google extends AbstractController {
     $access_token['user_id'] = $new_user->id;
     $access_token->save();
     // var_dump($this->user->id);
-    $this->app->auth->model = $new_user;
-    return $this->user = $new_user;
+    // $this->app->auth->model = $new_user;
+    // $this->user = $new_user;
+    return $new_user;
   }
 }
