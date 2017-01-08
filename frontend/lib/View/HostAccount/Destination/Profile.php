@@ -49,8 +49,6 @@ class View_HostAccount_Destination_Profile extends View{
 								'avg_cost',
 								'credit_card_accepted',
 								'reservation_needed',
-								'longitude',
-								'latitude',
 								'monday',
 								'tuesday',
 								'wednesday',
@@ -62,13 +60,26 @@ class View_HostAccount_Destination_Profile extends View{
 								'booking_policy',
 								'cancellation_policy',
 								'guidelines',
-								'how_to_reach'
+								'how_to_reach',
+								'latitude',
+								'longitude'
 							]);
 
+		$latitude_field_name = $basic_form->getElement('latitude');
+		$longitude_field_name = $basic_form->getElement('longitude');
+
+	
+		$basic_form->add('View_LocationPicker',
+							[
+								'latitude_field'=>$latitude_field_name,
+								'longitude_field'=>$longitude_field_name,
+								'lat_value'=>$host_destination['latitude'],
+								'lng_value'=>$host_destination['longitude']
+							]);
 		$basic_form->addSubmit("Update");
 		if($basic_form->isSubmitted()){
 			$basic_form->save();
-			$basic_form->js()->univ()->successMessage("Updated Successfully");
+			$basic_form->js()->univ()->successMessage("Updated Successfully")->execute();
 		}
 
 		$gallary_crud = $image_gallery_tab->add('CRUD');

@@ -52,8 +52,6 @@ class View_HostAccount_Restaurant_Profile extends View{
 								'avg_cost_of_a_beer',
 								'credit_card_accepted',
 								'reservation_needed',
-								'latitude',
-								'longitude',
 								'monday',
 								'tuesday',
 								'wednesday',
@@ -62,9 +60,12 @@ class View_HostAccount_Restaurant_Profile extends View{
 								'saturday',
 								'sunday',
 								'food_type',
-								'discount_id'
+								'discount_id',
+								// 'latitude',
+								// 'longitude'
 							]);
 
+		
 		$discount_field = $basic_form->getElement('discount_id');
 		$discount_field->setCaption('Discount %');
 		$basic_form->addField('Readonly','operational_cost')->set('5 %');
@@ -94,10 +95,28 @@ class View_HostAccount_Restaurant_Profile extends View{
 																	'selected_discount_id'=>$discount_field->js()->val()
 																	]));
 		// $discount_field->js('change',$this->js()->atk4_form('reloadField','discount_to_the_customer',[$this->app->url(),'selected_discount_id'=>$discount_to_the_customer_field->js()->val()]));
+		$latitude_field_name = $basic_form->addField('latitude')->set($host_restaurant['latitude']);
+		$longitude_field_name = $basic_form->addField('longitude')->set($host_restaurant['longitude']);
+
+		// $latitude_field_name = $basic_form->getElement('latitude');
+		// $longitude_field_name = $basic_form->getElement('longitude');
+		$basic_form->add('View_LocationPicker',
+							[
+								'latitude_field'=>$latitude_field_name,
+								'longitude_field'=>$longitude_field_name,
+								'lat_value'=>$host_restaurant['latitude'],
+								'lng_value'=>$host_restaurant['longitude']
+							]);
 
 		$basic_form->addSubmit("Update");
 		if($basic_form->isSubmitted()){
+			// $basic_form->save();
+			$temp_model = $basic_form->model;
+			$temp_model['latitude'] = $basic_form['latitude'];
+			$temp_model['longitude'] = $basic_form['longitude'];
+			// $temp_model->save();
 			$basic_form->save();
+
 			$basic_form->js()->univ()->successMessage("Updated Successfully")->execute();
 		}
 
