@@ -35,6 +35,12 @@ class page_eventdetail extends Page{
 
         //Add Route Map
         $view_route_map = $this->add('View_RouteMap',['restaurant_lat'=>$event_model['latitude'],'restaurant_lng'=>$event_model['longitude']],'routemap');
+        
+        //set meta tags
+        $this->setTitle($event_model['title']);
+        $this->setMetaTag('title',$event_model['title']);
+        $this->setMetaTag('keyword',$event_model['keyword']);
+        $this->setMetaTag('description',$event_model['description']);
     }
 
     function setModel($m){

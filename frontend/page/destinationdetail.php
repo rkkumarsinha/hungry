@@ -31,6 +31,12 @@ class page_destinationdetail extends Page{
 
         //Add Route Map
         $view_route_map = $this->add('View_RouteMap',['restaurant_lat'=>$destination_model['latitude'],'restaurant_lng'=>$destination_model['longitude']],'routemap');
+
+        //set meta tags
+        $this->setTitle($destination_model['title']);
+        $this->setMetaTag('title',$destination_model['title']);
+        $this->setMetaTag('keyword',$destination_model['keyword']);
+        $this->setMetaTag('description',$destination_model['description']);       
     }
 
     function setModel($m){

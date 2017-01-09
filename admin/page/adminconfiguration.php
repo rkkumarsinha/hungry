@@ -11,6 +11,7 @@ class page_adminconfiguration extends Page {
         $this->api->menu->addItem(['Configuration','icon'=>'cog'],'/configuration');
         $this->api->menu->addItem(['Cancle Reason','icon'=>'cog'],'/cancleregion');
 		$this->api->menu->addItem(['Email Template','icon'=>'ajust'],'/emailtemplate');
+		$this->api->menu->addItem(['Page Meta Tags','icon'=>'ajust'],'/seoconfig');
 		$this->api->menu->addItem(['TNC','icon'=>'ajust'],'/tnc');
     }
 }

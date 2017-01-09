@@ -29,6 +29,11 @@ class page_bookticket extends Page{
         $event_view = $this->add('View_EventTicket');
         $event_view->setModel($event_model);
         
+        //seo meta tags
+        $this->setTitle($event_model['title']);
+        $this->setMetaTag('title',$event_model['title']);
+        $this->setMetaTag('keyword',$event_model['keyword']);
+        $this->setMetaTag('description',$event_model['description']);
     }
     function defaultTemplate(){
         return ['page/bookticket'];
