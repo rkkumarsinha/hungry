@@ -91,21 +91,27 @@ class endpoint_v1_geteventticket extends HungryREST {
 
         $next_url = null;
         $previous_url = null;
+        
+        $next_offset = $_GET['offset'] + $_GET['limit'];
+        $previous_offset = $_GET['offset'] - $_GET['limit'];
+        if($previous_offset < 0){
+            $previous_offset = 0;
+        }
 
         if($_GET['type'] === "next"){
             if($this->totalRecord > $_GET['limit'])
-                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"next",'for'=>$_GET['for']]);
+                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$next_offset,'type'=>"next",'for'=>$_GET['for']]);
             if(isset($_GET['offset']) and ($_GET['offset'] > 0) )
-                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"previous",'for'=>$_GET['for']]);
+                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$previous_offset,'type'=>"previous",'for'=>$_GET['for']]);
         }elseif($_GET['type'] === "previous"){
-            $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$first_id,'type'=>"next",'for'=>$_GET['for']]);
+            $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$next_offset,'type'=>"next",'for'=>$_GET['for']]);
             if($this->totalRecord > 1)
-                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"previous",'for'=>$_GET['for']]);
+                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$previous_offset,'type'=>"previous",'for'=>$_GET['for']]);
         }else{
             if($this->totalRecord > $_GET['limit'])
-                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"next",'for'=>$_GET['for']]);
+                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$next_offset,'type'=>"next",'for'=>$_GET['for']]);
             if(isset($_GET['offset']) and ($_GET['offset'] > 0) )
-                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"previous",'for'=>$_GET['for']]);
+                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$previous_offset,'type'=>"previous",'for'=>$_GET['for']]);
         }
         // echo "<pre>";
         // print_r($output);
@@ -130,21 +136,25 @@ class endpoint_v1_geteventticket extends HungryREST {
                 break;
         }
 
-        if($_GET['type'] === "next"){
-            $model->addCondition('id','>',$_GET['offset']);
-        }elseif($_GET['type'] === "previous"){
-            $model->addCondition('id','<',$_GET['offset']);
-            $model->setOrder('id','desc');
-        }else{
-            $offset = 0;
-        }
+        // if($_GET['type'] === "next"){
+        //     $model->addCondition('id','>',$_GET['offset']);
+        // }elseif($_GET['type'] === "previous"){
+        //     $model->addCondition('id','<',$_GET['offset']);
+        //     $model->setOrder('id','desc');
+        // }else{
+        //     $offset = 0;
+        // }
+
+        $offset = 0;
+        if($_GET['offset'] > 0)
+            $offset = $_GET['offset'];
 
         $this->totalRecord = $model->count()->getOne();
         if($_GET['limit']){
-            $model->setLimit($_GET['limit']);
+            $model->setLimit($_GET['limit'],$offset);
         }
 
-        if($model->count()->getOne() == 0){
+        if($this->totalRecord == 0){
             echo "no record found";
             exit;
         }

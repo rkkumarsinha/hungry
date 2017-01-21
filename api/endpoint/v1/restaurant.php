@@ -39,11 +39,11 @@ class endpoint_v1_restaurant extends HungryREST {
             throw new \Exception("some thing wrong...3001");
         }
 
-        if($_GET['last_id'] and !(is_numeric($_GET['last_id'])))
-            throw new \Exception("some thing wrong...4001"); //last id must numeric
+        // if($_GET['last_id'] and !(is_numeric($_GET['last_id'])))
+        //     throw new \Exception("some thing wrong...4001"); //last id must numeric
 
-        if($_GET['first_id'] and !(is_numeric($_GET['first_id'])))
-            throw new \Exception("some thing wrong...5001"); //first_id must numeric
+        // if($_GET['first_id'] and !(is_numeric($_GET['first_id'])))
+        //     throw new \Exception("some thing wrong...5001"); //first_id must numeric
                 
         //check for the area id
         $m=$this->model;
@@ -77,16 +77,22 @@ class endpoint_v1_restaurant extends HungryREST {
         if($_GET['limit'] and is_numeric($_GET['limit']))
             $limit = $_GET['limit'];
 
-        $last_id=0;
-        $first_id=0;
+        $next_offset = $_GET['offset'] + $limit;
+        $previous_offset = $_GET['offset'] - $limit;
+        if($previous_offset < 0){
+            $previous_offset = 0;
+        }
+
+        // $last_id=0;
+        // $first_id=0;
         $output = array();
         $count = 1;
 
         foreach ($data as $row) {
             
             $output[$row['id']] = $this->outputOneRest($row);
-            if($count==1)
-                $first_id = $row['id'];
+            // if($count==1)
+            //     $first_id = $row['id'];
 
             //get offers
             $offer_asso = $this->add('Model_RestaurantOffer')
@@ -216,34 +222,36 @@ class endpoint_v1_restaurant extends HungryREST {
                 $output[$row['id']]['events'] = $temp_event;
             }
 
-            $last_id = $row['id'];
+            // $last_id = $row['id'];
             $count++;
         }
 
         // throw new \Exception($this->app->getConfig('frontendpath'));
         // echo "<pre>";
+
         return $data = array(
                         'restaurants'=>array_values($output),
-                        'next_url'=>$this->app->getConfig('apipath').$this->app->url(null,['limit'=>$limit,'last_id'=>$last_id,'type'=>"next",'first_id'=>$first_id,'city'=>$_GET['city'],'area_id'=>$_GET['area_id']]),
-                        'previous_url'=>$this->app->getConfig('apipath').$this->app->url(null,['limit'=>$limit,'last_id'=>$last_id,'first_id'=>$first_id,'type'=>"previous",'city'=>$_GET['city'],'area_id'=>$_GET['area_id']])
+                        'next_url'=>$this->app->getConfig('apipath').$this->app->url(null,['limit'=>$limit,'type'=>"next",'offset'=>$next_offset,'city'=>$_GET['city'],'area_id'=>$_GET['area_id']]),
+                        'previous_url'=>$this->app->getConfig('apipath').$this->app->url(null,['limit'=>$limit,'offset'=>$previous_offset,'type'=>"previous",'city'=>$_GET['city'],'area_id'=>$_GET['area_id']])
                     );
         // print_r($data);
     }
 
     function _model(){
         $limit = 10;
-        $last_id = 0;
-        $first_id = 0;
+        // $last_id = 0;
+        // $first_id = 0;
 
         if($_GET['limit'] and is_numeric($_GET['limit']))
-                $limit = $_GET['limit'];
+            $limit = $_GET['limit'];
         
-        if($_GET['last_id'] and is_numeric($_GET['last_id']))
-            $last_id = $_GET['last_id'];
+        // if($_GET['last_id'] and is_numeric($_GET['last_id']))
+        //     $last_id = $_GET['last_id'];
 
-        if($_GET['first_id'] and is_numeric($_GET['first_id']))
-            $first_id = $_GET['first_id'];
+        // if($_GET['first_id'] and is_numeric($_GET['first_id']))
+        //     $first_id = $_GET['first_id'];
 
+        $offset = $_GET['offset']?:0;
 
         $city = $this->add('Model_City')->addCondition('name',$_GET['city'])->tryLoadAny();
 
@@ -254,22 +262,22 @@ class endpoint_v1_restaurant extends HungryREST {
                     return parent::_model()
                             ->addCondition('city_id',$city->id)
                             ->addCondition('area_id',$_GET['area_id'])
-                            ->addCondition('id','>',$last_id)
+                            // ->addCondition('id','>',$last_id)
                             ->addCondition('is_featured',true)
                             ->addCondition('is_verified',true)
                             ->addCondition('status','active')
-                            ->setLimit($limit);
+                            ->setLimit($limit,$offset);
 
                 elseif($_GET['type']=="previous")
                     return parent::_model()
                                     ->addCondition('city_id',$city->id)
                                     ->addCondition('area_id',$_GET['area_id'])
                                     ->addCondition('is_featured',true)
-                                    ->addCondition('id','<',$last_id)
+                                    // ->addCondition('id','<',$last_id)
                                     ->addCondition('is_verified',true)
                                     ->addCondition('status','active')
-                                    ->setOrder('id','desc')
-                                    ->setLimit($limit);
+                                    // ->setOrder('id','desc')
+                                    ->setLimit($limit,$offset);
                 else
                     return parent::_model()
                                     ->addCondition('city_id',$city->id)
@@ -284,19 +292,19 @@ class endpoint_v1_restaurant extends HungryREST {
                 return parent::_model()
                                 ->addCondition('city_id',$city->id)
                                 ->addCondition('area_id',$_GET['area_id'])
-                                ->addCondition('id','>',$last_id)
+                                // ->addCondition('id','>',$last_id)
                                 ->addCondition('is_verified',true)
                                 ->addCondition('status','active')
-                                ->setLimit($limit);
+                                ->setLimit($limit,$offset);
             elseif($_GET['type']=="previous")
                 return parent::_model()
                                 ->addCondition('city_id',$city->id)
                                 ->addCondition('area_id',$_GET['area_id'])
-                                ->addCondition('id','<',$last_id)
+                                // ->addCondition('id','<',$last_id)
                                 ->addCondition('is_verified',true)
                                 ->addCondition('status','active')
-                                ->setOrder('id','desc')
-                                ->setLimit($limit);
+                                // ->setOrder('id','desc')
+                                ->setLimit($limit,$offset);
             else
                 return parent::_model()->addCondition('city_id',$city->id)
                                 ->addCondition('area_id',$_GET['area_id'])
@@ -310,19 +318,19 @@ class endpoint_v1_restaurant extends HungryREST {
                 return parent::_model()
                             ->addCondition('city_id',$city->id)
                             ->addCondition('is_featured',true)
-                            ->addCondition('id','>',$last_id)
+                            // ->addCondition('id','>',$last_id)
                             ->addCondition('is_verified',true)
                             ->addCondition('status','active')
-                            ->setLimit($limit);
+                            ->setLimit($limit,$offset);
             elseif($_GET['type'] =="previous")
                 return parent::_model()
                             ->addCondition('city_id',$city->id)
                             ->addCondition('is_featured',true)
-                            ->addCondition('id','<',$last_id)
+                            // ->addCondition('id','<',$last_id)
                             ->addCondition('is_verified',true)
                             ->addCondition('status','active')
-                            ->setOrder('id','desc')
-                            ->setLimit($limit);
+                            // ->setOrder('id','desc')
+                            ->setLimit($limit,$offset);
             else
                 return parent::_model()
                             ->addCondition('city_id',$city->id)
@@ -336,19 +344,19 @@ class endpoint_v1_restaurant extends HungryREST {
         if($_GET['type']=="next")
             return parent::_model()
                     ->addCondition('city_id',$city->id)
-                    ->addCondition('id','>',$last_id)
+                    // ->addCondition('id','>',$last_id)
                     ->addCondition('is_verified',true)
                     ->addCondition('status','active')
-                    ->setLimit($limit);
+                    ->setLimit($limit,$offset);
 
         elseif($_GET['type'] =="previous")
              return parent::_model()
                     ->addCondition('city_id',$city->id)
-                    ->addCondition('id','<',$last_id)
+                    // ->addCondition('id','<',$last_id)
                     ->addCondition('is_verified',true)
                     ->addCondition('status','active')
-                    ->setOrder('id','desc')
-                    ->setLimit($limit);
+                    // ->setOrder('id','desc')
+                    ->setLimit($limit,$offset);
         else{            
             return parent::_model()
                     ->addCondition('city_id',$city->id)

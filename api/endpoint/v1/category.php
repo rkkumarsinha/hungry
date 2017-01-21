@@ -111,21 +111,28 @@ class endpoint_v1_category extends HungryREST {
 
         $next_url = null;
         $previous_url = null;
+
+        $next_offset = $_GET['offset'] + $_GET['limit'];
+        $previous_offset = $_GET['offset'] - $_GET['limit'];
+        if($previous_offset < 0){
+            $previous_offset = 0;
+        }
+
         if($_GET['type'] === "next"){
             if($this->totalRecord > $_GET['limit'])
-                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"next",'city'=>$_GET['city'],'category'=>$_GET['category']]);
+                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$next_offset,'type'=>"next",'city'=>$_GET['city'],'category'=>$_GET['category']]);
             if(isset($_GET['offset']) and ($_GET['offset'] > 0) )
-                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"previous",'city'=>$_GET['city'],'category'=>$_GET['category']]);
+                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$previous_offset,'type'=>"previous",'city'=>$_GET['city'],'category'=>$_GET['category']]);
         }
         elseif($_GET['type'] === "previous"){
-            $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"next",'city'=>$_GET['city'],'category'=>$_GET['category']]);
+            $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$previous_offset ,'type'=>"next",'city'=>$_GET['city'],'category'=>$_GET['category']]);
             if($this->totalRecord > 1)
-                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$first_id,'type'=>"previous",'city'=>$_GET['city'],'category'=>$_GET['category']]);
+                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$previous_offset,'type'=>"previous",'city'=>$_GET['city'],'category'=>$_GET['category']]);
         }else{
             if($this->totalRecord > $_GET['limit'])
-                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"next",'city'=>$_GET['city'],'category'=>$_GET['category']]);
+                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$next_offset,'type'=>"next",'city'=>$_GET['city'],'category'=>$_GET['category']]);
             if(isset($_GET['offset']) and ($_GET['offset'] > 0) )
-                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"previous",'city'=>$_GET['city'],'category'=>$_GET['category']]);
+                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$previous_offset,'type'=>"previous",'city'=>$_GET['city'],'category'=>$_GET['category']]);
         }
 
         $data_out['next_url']  = $next_url;
@@ -173,26 +180,31 @@ class endpoint_v1_category extends HungryREST {
         $model->addCondition('status','active');
         $model->addCondition('is_verified',true);
 
-        $model->setOrder('rating','desc');
-        $model->setOrder('is_featured','desc');
-        $model->setOrder('is_popular','desc');
-        $model->setOrder('is_recommend','desc');
+        // $model->setOrder('rating','desc');
+        // $model->setOrder('is_featured','desc');
+        // $model->setOrder('is_popular','desc');
+        // $model->setOrder('is_recommend','desc');
 
-        if($_GET['type'] === "next"){
-            $model->addCondition('id','>',$_GET['offset']);
+        // if($_GET['type'] === "next"){
+        //     $model->addCondition('id','>',$_GET['offset']);
 
-        }elseif($_GET['type'] === "previous"){
-            $model->addCondition('id','<',$_GET['offset']);
-            $model->setOrder('id','desc');
-        }else{
-            $offset = 0;
-        }
+        // }elseif($_GET['type'] === "previous"){
+        //     $model->addCondition('id','<',$_GET['offset']);
+        //     // $model->setOrder('id','desc');
+        // }else{
+        //     $offset = 0;
+        // }
         
-        $this->totalRecord = $model->count()->getOne();
-        $model->setLimit($_GET['limit']);
+        $offset = 0;
+        if($_GET['offset'] > 0)
+            $offset = $_GET['offset'];
 
-        if($model->count()->getOne() == 0){
-            echo "no record found";
+        $this->totalRecord = $model->count()->getOne();
+        
+        $model->setLimit($_GET['limit'],$offset);
+
+        if($this->totalRecord == 0){
+            echo "no record found ".$this->totalRecord;
             exit;
         }
             

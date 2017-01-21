@@ -38,30 +38,36 @@ class endpoint_v1_tablerestaurant extends HungryREST{
 
         $output['restaurants'] = $this->outputMany($m);
 
-        $last_model = clone($m);
-        $first_model = clone($m);
-        $first_id = $last_model->setOrder('id','desc')->tryLoadAny()->id;
-        $last_id = $first_model->setOrder('id','asc')->tryLoadAny()->id;
+        // $last_model = clone($m);
+        // $first_model = clone($m);
+        // $first_id = $last_model->setOrder('id','desc')->tryLoadAny()->id;
+        // $last_id = $first_model->setOrder('id','asc')->tryLoadAny()->id;
 
         $next_url = null;
         $previous_url = null;
 
+        $next_offset = $_GET['offset'] + $_GET['limit'];
+        $previous_offset = $_GET['offset'] - $_GET['limit'];
+        if($previous_offset < 0){
+            $previous_offset = 0;
+        }
+
         if($_GET['type'] === "next"){
             if($this->totalRecord > $_GET['limit'])
-                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"next",'city'=>$_GET['city']]);
+                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$next_offset,'type'=>"next",'city'=>$_GET['city']]);
             if(isset($_GET['offset']) and ($_GET['offset'] > 0) )
-                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"previous",'city'=>$_GET['city']]);
+                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$previous_offset,'type'=>"previous",'city'=>$_GET['city']]);
         }
         elseif($_GET['type'] === "previous"){
-            $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"next",'city'=>$_GET['city']]);
+            $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$next_offset,'type'=>"next",'city'=>$_GET['city']]);
             if($this->totalRecord > 1)
-                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$first_id,'type'=>"previous",'city'=>$_GET['city']]);
+                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$previous_offset,'type'=>"previous",'city'=>$_GET['city']]);
         }else{
             
             if($this->totalRecord > $_GET['limit'])
-                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"next",'city'=>$_GET['city']]);
+                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$next_offset,'type'=>"next",'city'=>$_GET['city']]);
             if(isset($_GET['offset']) and ($_GET['offset'] > 0) )
-                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"previous",'city'=>$_GET['city']]);
+                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$previous_offset,'type'=>"previous",'city'=>$_GET['city']]);
         }
 
         $output['next_url'] = $next_url;
@@ -94,18 +100,22 @@ class endpoint_v1_tablerestaurant extends HungryREST{
         if($_GET['city'])
             $model->addCondition('city_id',$city_model->id);
 
-        if($_GET['type'] === "next"){
-            $model->addCondition('id','>',$_GET['offset']);
+        // if($_GET['type'] === "next"){
+        //     $model->addCondition('id','>',$_GET['offset']);
 
-        }elseif($_GET['type'] === "previous"){
-            $model->addCondition('id','<',$_GET['offset']);
-            $model->setOrder('id','desc');
-        }else{
-            $offset = 0;
-        }
+        // }elseif($_GET['type'] === "previous"){
+        //     $model->addCondition('id','<',$_GET['offset']);
+        //     $model->setOrder('id','desc');
+        // }else{
+        //     $offset = 0;
+        // }
+
+        $offset = 0;
+        if($_GET['offset'] > 0)
+            $offset = $_GET['offset'];
 
         $this->totalRecord = $model->count()->getOne();
-        $model->setLimit($_GET['limit']?:10);
+        $model->setLimit($_GET['limit']?:10,$offset);
 
         return $model;
         // return $model->addCondition('status','active');

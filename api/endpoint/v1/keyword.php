@@ -114,22 +114,28 @@ class endpoint_v1_keyword extends HungryREST {
         $next_url = null;
         $previous_url = null;
 
+        $next_offset = $_GET['offset'] + $_GET['limit'];
+        $previous_offset = $_GET['offset'] - $_GET['limit'];
+        if($previous_offset < 0){
+            $previous_offset = 0;
+        }
+
         if($_GET['type'] === "next"){            
             if($this->totalRecord > $_GET['limit'])
-                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"next",'city'=>$_GET['city'],'keyword'=>$_GET['keyword']]);
+                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$next_offset,'type'=>"next",'city'=>$_GET['city'],'keyword'=>$_GET['keyword']]);
             if(isset($_GET['offset']) and ($_GET['offset'] > 0) )
-                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"previous",'city'=>$_GET['city'],'keyword'=>$_GET['keyword']]);
+                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$previous_offset,'type'=>"previous",'city'=>$_GET['city'],'keyword'=>$_GET['keyword']]);
         }
         elseif($_GET['type'] === "previous"){
-            $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"next",'city'=>$_GET['city'],'keyword'=>$_GET['keyword']]);
+            $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$next_offset,'type'=>"next",'city'=>$_GET['city'],'keyword'=>$_GET['keyword']]);
             if($this->totalRecord > 1)
-                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$first_id,'type'=>"previous",'city'=>$_GET['city'],'keyword'=>$_GET['keyword']]);
+                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$previous_offset,'type'=>"previous",'city'=>$_GET['city'],'keyword'=>$_GET['keyword']]);
         }else{
             
             if($this->totalRecord > $_GET['limit'])
-                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"next",'city'=>$_GET['city'],'keyword'=>$_GET['keyword']]);
+                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$next_offset,'type'=>"next",'city'=>$_GET['city'],'keyword'=>$_GET['keyword']]);
             if(isset($_GET['offset']) and ($_GET['offset'] > 0) )
-                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'type'=>"previous",'city'=>$_GET['city'],'keyword'=>$_GET['keyword']]);
+                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$previous_offset,'type'=>"previous",'city'=>$_GET['city'],'keyword'=>$_GET['keyword']]);
         }
 
         $data_out['next_url'] = $next_url;
@@ -153,20 +159,24 @@ class endpoint_v1_keyword extends HungryREST {
         $model->addCondition('city',strtoupper($_GET['city']));
         $model->addCondition('keyword_id',$_GET['keyword']);
 
-        if($_GET['type'] === "next"){
-            $model->addCondition('id','>',$_GET['offset']);
+        // if($_GET['type'] === "next"){
+        //     $model->addCondition('id','>',$_GET['offset']);
 
-        }elseif($_GET['type'] === "previous"){
-            $model->addCondition('id','<',$_GET['offset']);
-            $model->setOrder('id','desc');
-        }else{
-            $offset = 0;
-        }
+        // }elseif($_GET['type'] === "previous"){
+        //     $model->addCondition('id','<',$_GET['offset']);
+        //     $model->setOrder('id','desc');
+        // }else{
+        //     $offset = 0;
+        // }
         
-        $this->totalRecord = $model->count()->getOne();
-        $model->setLimit($_GET['limit']);
+        $offset = 0;
+        if($_GET['offset'] > 0)
+            $offset = $_GET['offset'];
 
-        if($model->count()->getOne() == 0){
+        $this->totalRecord = $model->count()->getOne();
+        $model->setLimit($_GET['limit'],$offset);
+
+        if($this->totalRecord == 0){
             echo "no record found";
             exit;
         }
@@ -202,8 +212,8 @@ class endpoint_v1_keyword extends HungryREST {
         if(!is_numeric($_GET['limit']))
             throw new \Exception("some thing wrong ...1003"); //must pass limit
 
-        if($_GET['last_id'] and !(is_numeric($_GET['last_id'])))
-            throw new \Exception("some thing wrong...4001"); //last id must numeric
+        // if($_GET['last_id'] and !(is_numeric($_GET['last_id'])))
+        //     throw new \Exception("some thing wrong...4001"); //last id must numeric
 
         if($_GET['type'] and !in_array($_GET['type'], array('next','previous')))
             throw new \Exception("some thing wrong...5001", 1); //type must be in array
