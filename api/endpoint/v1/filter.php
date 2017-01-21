@@ -122,6 +122,12 @@ class endpoint_v1_filter extends HungryREST {
             $next_url = null;
             $previous_url = null;
 
+            $next_offset = $_GET['offset'] + $_GET['limit'];
+            $previous_offset = $_GET['offset'] - $_GET['limit'];
+            if($previous_offset < 0){
+                $previous_offset = 0;
+            }
+
             if($_GET['type'] === "next"){
                 if($this->totalRecord > $_GET['limit'])
                     $next_url = $this->app->getConfig('apipath').$this->app->url(null,[
@@ -138,7 +144,7 @@ class endpoint_v1_filter extends HungryREST {
                                                                                             'rating_order'=>$_GET['rating_order'],
                                                                                             'rating'=>$_GET['rating'],
                                                                                             'cat_id'=>$_GET['cat_id'],
-                                                                                            'offset'=>$last_id,
+                                                                                            'offset'=>$next_offset,
                                                                                             'type'=>"next",
                                                                                             'limit'=>$_GET['limit']
                                                                                             ]);
@@ -159,7 +165,7 @@ class endpoint_v1_filter extends HungryREST {
                                                                                             'rating_order'=>$_GET['rating_order'],
                                                                                             'rating'=>$_GET['rating'],
                                                                                             'cat_id'=>$_GET['cat_id'],
-                                                                                            'offset'=>$last_id,
+                                                                                            'offset'=>$previous_offset,
                                                                                             'type'=>"previous",
                                                                                             'limit'=>$_GET['limit']
                                                                                         ]);
@@ -179,7 +185,7 @@ class endpoint_v1_filter extends HungryREST {
                                                                                             'rating_order'=>$_GET['rating_order'],
                                                                                             'rating'=>$_GET['rating'],
                                                                                             'cat_id'=>$_GET['cat_id'],
-                                                                                            'offset'=>$last_id,
+                                                                                            'offset'=>$next_offset,
                                                                                             'type'=>"next",
                                                                                             'limit'=>$_GET['limit']
                                                                         ]);
@@ -199,7 +205,7 @@ class endpoint_v1_filter extends HungryREST {
                                                                                                     'rating'=>$_GET['rating'],
                                                                                                     'cat_id'=>$_GET['cat_id'],
                                                                                                     'limit'=>$_GET['limit'],
-                                                                                                    'offset'=>$first_id,
+                                                                                                    'offset'=>$previous_offset,
                                                                                                     'type'=>"previous"
                                                                                                     ]);
             }else{
@@ -219,7 +225,7 @@ class endpoint_v1_filter extends HungryREST {
                                                                                                     'rating'=>$_GET['rating'],
                                                                                                     'cat_id'=>$_GET['cat_id'],
                                                                                                     'limit'=>$_GET['limit'],
-                                                                                                    'offset'=>$last_id,
+                                                                                                    'offset'=>$next_offset,
                                                                                                     'type'=>"next"
                                                                                                 ]);
                 // echo "<pre>";
@@ -241,7 +247,7 @@ class endpoint_v1_filter extends HungryREST {
                                                                                                     'rating'=>$_GET['rating'],
                                                                                                     'cat_id'=>$_GET['cat_id'],                                
                                                                                                     'limit'=>$_GET['limit'],
-                                                                                                    'offset'=>$last_id,
+                                                                                                    'offset'=>$previous_offset,
                                                                                                     'type'=>"previous"
                                                                                             ]);
             }
@@ -258,6 +264,12 @@ class endpoint_v1_filter extends HungryREST {
 
         $this->validateParams();
         $model = parent::_model();
+        
+        $current_lat = $_GET['lat']?:0;
+        $current_long = $_GET['lng']?:0;
+        $model->addExpression('distance_lat_lng')->set(function($m,$q)use($current_lat,$current_long){
+            return $q->expr('ABS(ABS([0] - [1]) + ABS([2] - [3]))',[$m->getElement('latitude'),$current_lat,$m->getElement('longitude'),$current_long]);
+        });
 
         $model->addCondition('status','active');
         $model->addCondition('is_verified',true);
@@ -291,13 +303,10 @@ class endpoint_v1_filter extends HungryREST {
     
         //near by restaurant
         if($_GET['lat'] and $_GET['lng']){
-            $current_lat = $_GET['lat'];
-            $current_long = $_GET['lng'];
-            $q = $model->dsql();
-
-            $latlng = $q->expr('ABS(ABS([0] - [1]) + ABS([2] - [3]))',[$model->getElement('latitude'),$current_lat,$model->getElement('longitude'),$current_long]);
-            $model->addCondition($latlng,"<=",10);
-            $model->setOrder($latlng,'asc');
+            // $q = $model->dsql();
+            // $latlng = $q->expr('ABS(ABS([0] - [1]) + ABS([2] - [3]))',[$model->getElement('latitude'),$current_lat,$model->getElement('longitude'),$current_long]);
+            $model->addCondition('distance_lat_lng',"<=",10);
+            $model->setOrder('distance_lat_lng','asc');
         }
 
         
@@ -384,22 +393,26 @@ class endpoint_v1_filter extends HungryREST {
 
         $model->setOrder('rating',$rating_order);
     
-        if($_GET['type'] === "next"){
-            $model->addCondition('id','>',$_GET['offset']);
+        // if($_GET['type'] === "next"){
+        //     $model->addCondition('id','>',$_GET['offset']);
 
-        }elseif($_GET['type'] === "previous"){
-            $model->addCondition('id','<',$_GET['offset']);
-            $model->setOrder('id','desc');
-        }else{
-            $offset = 0;
-        }
+        // }elseif($_GET['type'] === "previous"){
+        //     $model->addCondition('id','<',$_GET['offset']);
+        //     $model->setOrder('id','desc');
+        // }else{
+        //     $offset = 0;
+        // }
         
-        $this->totalRecord = $model->count()->getOne();
-        if($_GET['limit'] ){            
-            $model->setLimit($_GET['limit']);
-        }
+        $offset = 0;
+        if($_GET['offset'] > 0)
+            $offset = $_GET['offset'];
 
-        if($model->count()->getOne() === 0){
+        $this->totalRecord = $model->count()->getOne();
+        // if($_GET['limit']){
+        $model->setLimit($_GET['limit'],$offset);
+        // }
+
+        if($this->totalRecord === 0){
             echo "no record found";
             exit;
         }
