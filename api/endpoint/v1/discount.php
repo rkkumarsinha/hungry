@@ -83,10 +83,11 @@ class endpoint_v1_discount extends HungryREST {
         if($_GET['type'] === "discount"){
             $rests->addCondition('discount_id',explode(",",$_GET['ids']));
             $rests->addCondition('city_id',$city->id);
-            if($_GET['next']==1)
-                $rests->addCondition('id','>',$_GET['last_id']);
-            if($_GET['previous'] == 1)
-                $rests->addCondition('id','<',$_GET['last_id']);
+
+            // if($_GET['next']==1)
+            //     $rests->addCondition('id','>',$_GET['last_id']);
+            // if($_GET['previous'] == 1)
+            //     $rests->addCondition('id','<',$_GET['last_id']);
         }
 
         if($_GET['type'] === "offer"){
@@ -98,21 +99,24 @@ class endpoint_v1_discount extends HungryREST {
             $rests->_dsql()->group($group_element);
         }
 
-        if($_GET['paginator'] === "next"){
-            $rests->addCondition('id','>',$_GET['offset']);
+        // if($_GET['paginator'] === "next"){
+        //     $rests->addCondition('id','>',$_GET['offset']);
 
-        }elseif($_GET['paginator'] === "previous"){
-            $rests->addCondition('id','<',$_GET['offset']);
-            $rests->setOrder('id','desc');
-        }else{
-            $offset = 0;
-        }
+        // }elseif($_GET['paginator'] === "previous"){
+        //     $rests->addCondition('id','<',$_GET['offset']);
+        //     $rests->setOrder('id','desc');
+        // }else{
+        //     $offset = 0;
+        // }
 
+        $offset = 0;
+        if($_GET['offset'] > 0)
+            $offset = $_GET['offset'];
         
         $this->totalRecord = $rests->count()->getOne();
-        $rests->setLimit($_GET['limit']?:10);
+        $rests->setLimit($_GET['limit'],$offset);
 
-        if(!$rests->count()->getOne()){
+        if(!$this->totalRecord){
             echo "no record found";
             exit;
         }
@@ -171,27 +175,33 @@ class endpoint_v1_discount extends HungryREST {
         $data_out['restaurants'] = $output;
         // $data_out['recommend'] = $rest_recommend;
          
-        $original_last_id = $rests->setOrder('id','desc')->setLimit(1)->tryLoadAny()->get('id');
+        // $original_last_id = $rests->setOrder('id','desc')->setLimit(1)->tryLoadAny()->get('id');
                 
                 // //get last restaurant id
         $next_url = null;
         $previous_url = null;
 
+        $next_offset = $_GET['offset'] + $_GET['limit'];
+        $previous_offset = $_GET['offset'] - $_GET['limit'];
+        if($previous_offset < 0){
+            $previous_offset = 0;
+        }
+
         if($_GET['paginator'] === "next"){
             if($this->totalRecord > $_GET['limit'])
-                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'paginator'=>"next",'city'=>$_GET['city'],'required'=>$_GET['required'],'ids'=>$_GET['ids'],'type'=>$_GET['type']]);
+                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$next_offset,'paginator'=>"next",'city'=>$_GET['city'],'required'=>$_GET['required'],'ids'=>$_GET['ids'],'type'=>$_GET['type']]);
             if(isset($_GET['offset']) and ($_GET['offset'] > 0) )
-                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'paginator'=>"previous",'city'=>$_GET['city'],'required'=>$_GET['required'],'ids'=>$_GET['ids'],'type'=>$_GET['type']]);
+                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$previous_offset,'paginator'=>"previous",'city'=>$_GET['city'],'required'=>$_GET['required'],'ids'=>$_GET['ids'],'type'=>$_GET['type']]);
         }
         elseif($_GET['type'] === "previous"){
-            $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'paginator'=>"next",'city'=>$_GET['city'],'required'=>$_GET['required'],'ids'=>$_GET['ids'],'type'=>$_GET['type']]);
+            $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$next_offset,'paginator'=>"next",'city'=>$_GET['city'],'required'=>$_GET['required'],'ids'=>$_GET['ids'],'type'=>$_GET['type']]);
             if($this->totalRecord > 1)
-                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'paginator'=>"previous",'city'=>$_GET['city'],'required'=>$_GET['required'],'ids'=>$_GET['ids'],'type'=>$_GET['type']]);
+                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$previous_offset,'paginator'=>"previous",'city'=>$_GET['city'],'required'=>$_GET['required'],'ids'=>$_GET['ids'],'type'=>$_GET['type']]);
         }else{
             if($this->totalRecord > $_GET['limit'])
-                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'paginator'=>"next",'city'=>$_GET['city'],'required'=>$_GET['required'],'ids'=>$_GET['ids'],'type'=>$_GET['type']]);
+                $next_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$next_offset,'paginator'=>"next",'city'=>$_GET['city'],'required'=>$_GET['required'],'ids'=>$_GET['ids'],'type'=>$_GET['type']]);
             if(isset($_GET['offset']) and ($_GET['offset'] > 0) )
-                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$last_id,'paginator'=>"next",'city'=>$_GET['city'],'required'=>$_GET['required'],'ids'=>$_GET['ids'],'type'=>$_GET['type']]);
+                $previous_url = $this->app->getConfig('apipath').$this->app->url(null,['limit'=>$_GET['limit'],'offset'=>$previous_offset,'paginator'=>"previous",'city'=>$_GET['city'],'required'=>$_GET['required'],'ids'=>$_GET['ids'],'type'=>$_GET['type']]);
         }
 
         $data_out['next_url'] = $next_url;
