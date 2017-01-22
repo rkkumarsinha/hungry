@@ -16,7 +16,7 @@ class View_LocationPicker extends \View{
 		$form = $this->owner;
 		// $form = $this->add('Form');
 		$this->location_field = $form->addField('location');
-		$this->radius_field = $form->addField('Number','radius');
+		$this->radius_field = $form->addField('hidden','radius');
 		// $this->latitude_field = $form->addField('latitude');
 		// $this->longitude_field = $form->addField('longitude');
 		$view = $form->add('View_Box');

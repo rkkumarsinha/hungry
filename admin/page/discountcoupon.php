@@ -24,7 +24,7 @@ class page_discountcoupon extends page_adminrestaurant {
 
         $crud->setModel($model);
 		$crud->grid->addPaginator($ipp=50);
-		$crud->grid->addQuickSearch(['name','email','discount_coupon','mobile']);
+		$crud->grid->addQuickSearch(['name','email','discount_coupon','mobile','restaurant']);
     }
 
 }

@@ -21,5 +21,19 @@ class Model_Destination_HighlightAssociation extends SQL_Model{
 		});
 
 		// $this->add('dynamic_model/Controller_AutoCreator');
+
+		$this->addHook('beforeSave',$this);
+	}
+
+	function beforeSave(){
+		$old = $this->add('Model_Destination_HighlightAssociation');
+		$old->addCondition('destination_id',$this['destination_id'])
+			->addCondition('highlight_type',$this['highlight_type'])
+			->addCondition('destination_highlight_id',$this['destination_highlight_id'])
+			->addCondition('id','<>',$this['id']);
+		
+		if($old->count()->getOne())
+			throw $this->exception('Already Added', 'ValidityCheck')->setField('destination_highlight_id');
+
 	}
 }

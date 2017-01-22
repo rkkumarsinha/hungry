@@ -45,7 +45,7 @@ class View_HostAccount_Destination_Profile extends View{
 								'website',
 								'facebook_page_url',
 								'instagram_page_url',
-								'rating',
+								// 'rating',
 								'avg_cost',
 								'credit_card_accepted',
 								'reservation_needed',
@@ -117,15 +117,65 @@ class View_HostAccount_Destination_Profile extends View{
         });
 
         // Highlight
-        $r_hl = $highlight_tab->add('Model_Destination_HighlightAssociation')->addCondition('destination_id',$host_destination->id);
-        $hl_crud = $highlight_tab->add('CRUD');
-        $hl_crud->grid->addHook('formatRow',function($g){
+        $h_tabs = $highlight_tab->add('Tabs');
+        $occasion = $h_tabs->addTab('Occasion');
+        $facility = $h_tabs->addTab('Facility');
+        $service = $h_tabs->addTab('Service');
+
+        //occassion
+        $r_hl = $occasion->add('Model_Destination_HighlightAssociation')
+        		->addCondition('destination_id',$host_destination->id)
+        		->addCondition('highlight_type','occasion')
+        		;
+        $occ_crud = $occasion->add('CRUD',['entity_name'=>'Occasion']);
+        $occ_crud->grid->addHook('formatRow',function($g){
             if($g->model['icon_url'])
                 $g->current_row_html['icon_url'] = "<img src=".$g->model['icon_url'].">";
             else
                 $g->current_row_html['image'] = "No Icon Found";
         });
-        $hl_crud->setModel($r_hl,['destination_highlight','destination_highlight_id','destination_id'],['destination_highlight','highlight_type','icon_url']);
+        $occ_crud->setModel($r_hl,['destination_highlight','destination_highlight_id','destination_id'],['destination_highlight','icon_url']);
+        
+        if($occ_crud->isEditing()){
+        	$form = $occ_crud->form;
+        	$form->getElement('destination_highlight_id')->getModel()->addCondition('type','occasion');
+        }
+
+        //facility
+        $r_hl = $facility->add('Model_Destination_HighlightAssociation')
+        		->addCondition('destination_id',$host_destination->id)
+        		->addCondition('highlight_type','facility')
+        		;
+        $fac_crud = $facility->add('CRUD',['entity_name'=>'Facility']);
+        $fac_crud->grid->addHook('formatRow',function($g){
+            if($g->model['icon_url'])
+                $g->current_row_html['icon_url'] = "<img src=".$g->model['icon_url'].">";
+            else
+                $g->current_row_html['image'] = "No Icon Found";
+        });
+        $fac_crud->setModel($r_hl,['destination_highlight','destination_highlight_id','destination_id'],['destination_highlight','icon_url']);
+        if($fac_crud->isEditing()){
+        	$form = $fac_crud->form;
+        	$form->getElement('destination_highlight_id')->getModel()->addCondition('type','facility');
+        }
+
+        //service
+        $r_hl = $service->add('Model_Destination_HighlightAssociation')
+        		->addCondition('destination_id',$host_destination->id)
+        		->addCondition('highlight_type','service')
+        		;
+        $ser_crud = $service->add('CRUD',['entity_name'=>'Service']);
+        $ser_crud->grid->addHook('formatRow',function($g){
+            if($g->model['icon_url'])
+                $g->current_row_html['icon_url'] = "<img src=".$g->model['icon_url'].">";
+            else
+                $g->current_row_html['image'] = "No Icon Found";
+        });
+        $ser_crud->setModel($r_hl,['destination_highlight','destination_highlight_id','destination_id'],['destination_highlight','icon_url']);
+        if($ser_crud->isEditing()){
+        	$form = $ser_crud->form;
+        	$form->getElement('destination_highlight_id')->getModel()->addCondition('type','service');
+        }
 
 
         // Destination Space
