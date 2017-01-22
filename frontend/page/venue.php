@@ -5,7 +5,10 @@ class page_venue extends Page{
     function init(){
         parent::init();
 		
-		$this->app->forget('from_venue_id');
+		if($this->app->recall('from_venue_id'))
+			$this->app->forget('from_venue_id');
+		if($this->app->recall('from_venue_id'))
+			$this->app->forget('from_city_id');
 
 		$this->api->stickyGET('city');
 		

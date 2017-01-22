@@ -51,7 +51,7 @@ class Form_Venue extends Form{
         if($_GET['form_city_id']){
             $this->app->memorize('form_city_id',$_GET['form_city_id']);
         }
-
+        
         //City Dropdown
         $city_f = $this->addField('DropDown','city','');
         $city_f->setEmptyText('Select City');
@@ -66,7 +66,7 @@ class Form_Venue extends Form{
         $venue_model = $this->add('Model_Venue')->setOrder('name');
         $venue_f->setModel($venue_model);
         
-        $venue_f->set($venue_id);
+        $venue_f->set($venue_id?:0);
         
         $venue_js = [
                     $search_phrase->js()->reload(null,null,[$this->app->url(null,['cut_object'=>$search_phrase->name]),'form_venue_id'=>$venue_f->js()->val()])
@@ -100,9 +100,16 @@ class Form_Venue extends Form{
                         ];
             $this->app->memorize('venue_data',$venue_data);
 
+            $url = $this->app->url($this->redirect_page,['venue'=>$this['venue']]);
+            if(!$this['venue']){
+                $this->app->stickyForget('venue');
+                $this->redirect_page = "venue";
+                $url = $this->app->url($this->redirect_page);
+            }
+
             if($this->redirect_page){
                 $this->app->forget('form_venue_id');
-                $this->app->redirect($this->app->url($this->redirect_page,['venue'=>$venue_id]));
+                $this->app->redirect($url);
             }else{
                 $this->js()->_selector('.hungrydestinationlister')->trigger('reload')->execute();
             }
