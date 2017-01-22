@@ -140,6 +140,7 @@ class View_Restaurant_ReserveTable extends View{
                 try{
                     $rt_model->save();
                     $rt_model->sendProcessingSMS();
+                    $rt_model->sendEnquiryEmailToHost();
                     $this->js()->univ()->reload(['reservation_id'=>$rt_model['booking_id']])->execute();
                 }catch(\Exception $e){
                     $rt_model->delete();
