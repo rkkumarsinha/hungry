@@ -5,6 +5,8 @@ class page_venue extends Page{
     function init(){
         parent::init();
 		
+		$this->app->forget('from_venue_id');
+
 		$this->api->stickyGET('city');
 		
 		$v = $this->add('View_Lister_HomeSlider',['city'=>$this->app->city_name,'type'=>"VenueGallery"],'homeslider');

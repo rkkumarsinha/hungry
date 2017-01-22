@@ -23,12 +23,12 @@ class View_Search extends View{
 				$this->template->trySet('tab_event','active');
 				break;
 			case 'venue':
-				$form = $this->add('Form_Venue',null,'form_search');
+				$form = $this->add('Form_Venue',['redirect_page'=>'destination'],'form_search');
 				$this->template->trySet('tab_venue','active');
 				break;
 			case 'destination':
 			case 'destinationdetail':
-				$form = $this->add('Form_Venue',['redirect_page'=>'venue'],'form_search');
+				$form = $this->add('Form_Venue',['redirect_page'=>'destination'],'form_search');
 				$this->template->trySet('tab_venue','active');
 				break;
 		}

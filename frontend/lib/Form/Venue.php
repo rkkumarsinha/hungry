@@ -101,7 +101,8 @@ class Form_Venue extends Form{
             $this->app->memorize('venue_data',$venue_data);
 
             if($this->redirect_page){
-                $this->app->redirect($this->app->url($this->redirect_page));
+                $this->app->forget('form_venue_id');
+                $this->app->redirect($this->app->url($this->redirect_page,['venue'=>$venue_id]));
             }else{
                 $this->js()->_selector('.hungrydestinationlister')->trigger('reload')->execute();
             }
