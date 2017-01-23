@@ -141,6 +141,7 @@ class endpoint_v1_discountrestaurant extends HungryREST {
             $output[$row['id']]['offer_count'] = $output[$row['id']]['offers'];
             unset($output[$row['id']]['offers']);
             unset($output[$row['id']]['discounts']);
+            $output[$row['id']]['discount'] = $output[$row['id']]['discount_percentage_to_be_given'];
             //get offers
             $offer_asso = $this->add('Model_RestaurantOffer')
                             ->addCondition('restaurant_id',$row['id'])

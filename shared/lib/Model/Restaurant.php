@@ -92,7 +92,12 @@ class Model_Restaurant extends SQL_Model{
 		});
 
 		$this->addExpression('offers')->set(function($m,$q){
-			return $m->refSQL('RestaurantOffer')->count();
+			// return $m->add('Model_RestaurantOffer')
+			//          ->addCondition('restaurant_id',$m->getElement('id'))
+			//          ->addCondition('is_active',true)
+			//          ->count();
+
+			return $m->refSQL('RestaurantOffer')->addCondition('is_active',true)->count();
 		});
 		
 		$this->addExpression('discounts')->set(function($m,$q){

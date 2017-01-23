@@ -146,7 +146,7 @@ class endpoint_v1_discount extends HungryREST {
             $rest_data['food_type'] = $rest['food_type'];
             $rest_data['offer_count'] = $rest['offers'];
             $rest_data['rating'] = $rest['rating'];
-            $rest_data['discount'] = $rest['discount'];
+            $rest_data['discount'] = $rest['discount_percentage_to_be_given'];
             $rest_data['discount_id'] = $rest['discount_id'];
 
             // getting offers
