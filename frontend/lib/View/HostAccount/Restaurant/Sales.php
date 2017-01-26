@@ -23,7 +23,7 @@ class View_HostAccount_Restaurant_Sales extends View{
 		$dc_model->getElement('discount_coupon')->caption('Coupon');
 		$dc_model->setOrder('created_at','desc');
 		$discount_offer_voucher = $discount_tab->add('Grid');
-		$discount_offer_voucher->setModel($dc_model,['name','email','mobile','created_at','discount_coupon','discount','offer','total_amount','payment_mode','amount_paid']);
+		$discount_offer_voucher->setModel($dc_model,['name','email','mobile','created_at','discount_coupon','discount_percentage_given','offer','total_amount','payment_mode','amount_paid']);
 		$discount_offer_voucher->addPaginator($ipp=10);
 
 		// Table Reservation

@@ -52,7 +52,7 @@ class View_HostAccount_Restaurant_DiscountCoupon extends CompleteLister{
 						$form = $page->add('Form',null,null,['form/empty']);
 						$total_amount_field = $form->addField('Number','total_amount')->validateNotNull();
 						$d_percentage_field = $form->addField('Number','discount_percentage')->setAttr('Disabled',true);
-						$discount = str_replace("%", "", $discount_model['discount']);
+						$discount = str_replace("%", "", $discount_model['discount_percentage_given']);
 						$d_percentage_field->set($discount);
 
 						$discount_amount_field = $form->addField('Number','discount_amount');
@@ -69,7 +69,7 @@ class View_HostAccount_Restaurant_DiscountCoupon extends CompleteLister{
 
 						if($form->isSubmitted()){
 							// $discout_model = $page->add('Model_DiscountCoupon')->load($id);
-							$discount = str_replace("%", "", $discount_model['discount']);
+							$discount = str_replace("%", "", $discount_model['discount_percentage_given']);
 							$discount_taken = $form['total_amount'] * $discount / 100.00;
 							$discount_model['discount_taken'] = $discount_taken;
 							$discount_model['status'] = 'redeemed';

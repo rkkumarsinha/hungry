@@ -10,6 +10,8 @@ class Model_DiscountCoupon extends SQL_Model{
 		$this->hasOne('User','user_id');
 		$this->hasOne('Discount','discount_id');
 		$this->hasOne('RestaurantOffer','offer_id');
+		
+		$this->addField('discount_percentage_given');
 
 		$this->addField('name')->caption('username');
 		$this->addField('email');
@@ -34,9 +36,9 @@ class Model_DiscountCoupon extends SQL_Model{
 	function beforeSave(){
 		$this['created_date'] = date('Y-m-d',strtotime($this['created_at']));
 
-		if(($this['discount_id'] && $this['restaurant_id']) && !$this['discount_taken']){
+		if(($this['discount_id'] && $this['restaurant_id']) && !$this['discount_percentage_given']){
 			$rest = $this->add('Model_Restaurant')->load($this['restaurant_id']);
-			$this['discount_taken'] = $rest['discount_percentage_to_be_given'];
+			$this['discount_percentage_given'] = $rest['discount_percentage_to_be_given'];
 		}
 	}
 	// function afterInsert($m){
