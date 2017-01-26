@@ -33,6 +33,11 @@ class Model_DiscountCoupon extends SQL_Model{
 
 	function beforeSave(){
 		$this['created_date'] = date('Y-m-d',strtotime($this['created_at']));
+
+		if(($this['discount_id'] && $this['restaurant_id']) && !$this['discount_taken']){
+			$rest = $this->add('Model_Restaurant')->load($this['restaurant_id']);
+			$this['discount_taken'] = $rest['discount_percentage_to_be_given'];
+		}
 	}
 	// function afterInsert($m){
 	// 	$this->sendDiscount();
