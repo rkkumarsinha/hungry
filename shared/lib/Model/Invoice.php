@@ -8,7 +8,7 @@ class Model_Invoice extends SQL_Model{
 
 		$this->hasOne('User','user_id');
 		$this->addField('name');
-		$this->addField('status')->setValueList(['Draft','Due','Paid','Aborted','Failure','Cancled'])->defaultValue('Due');
+		$this->addField('status')->setValueList(['Draft'=>'Draft','Due'=>'Due','Paid'=>'Paid','Aborted'=>'Aborted','Failure'=>'Failure','Cancled'=>'Cancled'])->defaultValue('Due');
 		
 		$this->addField('billing_name');
 		$this->addField('billing_address')->type('text');
@@ -43,6 +43,7 @@ class Model_Invoice extends SQL_Model{
 			return $q->expr('IFNULL([0],0)',[$m->refSQL('UserEventTicket')->sum('net_amount')]);
 		});
 		$this->addHook('beforeSave',$this);
+		$this->addHook('afterSave',$this);
 
 		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
@@ -52,6 +53,31 @@ class Model_Invoice extends SQL_Model{
 		// generate Unique Invoice number
 		if(!$this['name'])
 			$this['name'] = strtoupper('HNG'.$this->id.rand(111,999));
+		
+		if($this['status'] == "Paid"){
+			// check has ticket or not
+			$booked_tickets = $this->getTickets();
+			foreach ($booked_tickets as $ticket_model) {
+				$ticket_model['status'] = "paid";
+				$ticket_model->save();
+			}
+		}
+	}
+
+	function afterSave(){
+		if($this['status'] == "Paid"){
+			// check has ticket or not
+			$booked_tickets = $this->getTickets();
+			foreach ($booked_tickets as $ticket_model) {
+				$ticket_model['status'] = "paid";
+				$ticket_model->save();
+			}
+		}
+	}
+	function getTickets(){
+		if(!$this->loaded()) throw new \Exception("invoice model must loaded", 1);
+
+		return $this->add('Model_UserEventTicket')->addCondition('invoice_id',$this->id);
 	}
 
 	function send($send_email=true,$send_sms=true){

@@ -22,15 +22,26 @@ class page_notification extends Page {
 		$status = ['discount'=>'Discount','offer'=>"Offer",'package'=>"Package",'image'=>"Image","pull push sticker"=>"Pull Push Sticker",'table reservation signature'=>"Table reservation signature","android app"=>"Android App",'website'=>"Website",'enquiry'=>"Enquiry"];
 		$notification_tab = $admin_tab->add('Tabs');
 		foreach ($status as $key => $value) {
-			$status_tab = $notification_tab->addTab($value);
+	        
+	        $notification_status_model = $this->add('Model_Notification')
+	        							->addCondition('request_for',$key)
+	        							->addCondition('to','HungryDunia')
+	        							;
+	        $notification_status_model->setOrder('id','desc');
+	        $notification_status_model->setOrder('status','desc');
+
+	        $notification_status_count = $this->add('Model_Notification')
+	        							->addCondition('request_for',$key)
+	        							->addCondition('to','HungryDunia')
+	        							->addCondition('status','pending')
+	        							->count()->getOne()
+	        							;
+			$status_tab = $notification_tab->addTab($value." ".$notification_status_count);
 
 	        $crud = $status_tab->add('CRUD',['allow_del'=>false,'allow_add'=>false]);
 	        
 	        $grid = $crud->grid;
-	        $notification_status_model = $status_tab->add('Model_Notification')
-	        							->addCondition('request_for',$key)
-	        							->addCondition('to','HungryDunia')
-	        							;
+
 			$grid->addHook('formatRow',function($g){
 				$message = "not found";
 				if($g->model['from'] == "Restaurant"){

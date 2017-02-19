@@ -312,6 +312,7 @@ class page_checkout extends Page{
                 $this->invoice['delivery_email'] = $address_form['billing_email'];
             }
 
+            $this->invoice['status'] = "Due";
             $this->invoice = $this->invoice->save();
 
             $this->app->memorize('hungryevent-checkout-paynow',true);

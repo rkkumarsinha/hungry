@@ -52,6 +52,7 @@ class Admin extends App_Admin {
         $top_menu->addItem(['Subscriber','icon'=>'ajust'],'/subscriber');
         $top_menu->addItem(['User','icon'=>'users'],'/user');
         $top_menu->addItem(['Enquiry','icon'=>'users'],'/enquiry');
+        $top_menu->addItem(['Report','icon'=>'ajust'],'/report');
             
     }
 }
