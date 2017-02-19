@@ -105,6 +105,7 @@ class endpoint_v1_event extends HungryREST {
         $output[$data['id']]['image'] = $data->getImage();
         $output[$data['id']]['destination'] = $data->getDestination();
         $output[$data['id']]['restaurant'] = $data->getRestaurant();
+        $output[$data['id']]['voucher'] = $data->getVoucher();
 
         return array_values($output); 
     }

@@ -201,9 +201,9 @@ class Model_Event extends SQL_Model{
 										'name'=>$ticket['name'],
 										'price'=>$ticket['price'],
 										'detail'=>$ticket['detail'],
-										'offer'=>$ticket['offer'],
-										'applicable_offer_qty'=>$ticket['applicable_offer_qty'],
-										'offer_percentage'=>$ticket['offer_percentage'],
+										'max_no_to_sale'=>$ticket['max_no_to_sale'],
+										'disclaimer'=>$ticket['disclaimer'],
+										'is_voucher_applicable'=>$ticket['is_voucher_applicable'],
 										'remaining_ticket'=>$ticket['remaining_ticket']
 									];
 				}
@@ -221,4 +221,15 @@ class Model_Event extends SQL_Model{
 		}
 		return $output;
 	}
+
+
+	function getVoucher(){
+		if(!$this->loaded())
+			return array('event model must loaded');
+
+		$voucher = $this->add('Model_Voucher');
+		$voucher->addCondition('event_id',$this->id);
+		return $voucher->getRows(['id','name','starting_date','expiry_date','voucher_based_on','voucher_applicable_min_value','voucher_amount','limit','one_user_how_many_time','detail']);
+	}
+
 }
