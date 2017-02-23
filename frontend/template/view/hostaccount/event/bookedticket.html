@@ -1,4 +1,5 @@
 <div id="{$_name}" class="{$class}" style="{$sytyle};">
+    {$Content}
     <section id="items">
         {bookedticket}
         <div style="margin-bottom: 10px;">
@@ -6,7 +7,7 @@
         </div>
         <div class="row">
         {rows}{row}
-        <div data-recordid="{$id}" class="col-md-6 atk-push">
+        <div data-recordid="{$id}" class="col-xl-12 col-md-12 col-sm-12 col-xs-12 atk-push">
             <div style="background-color:#ededea;" class="btn btn-block">
                 Event Ticket: {$event_ticket}
             </div>
@@ -16,47 +17,66 @@
                     <div style="font-size:16px;font-size:bold;font-size:16px;background-color:rgba(128, 100, 128,0.8);color:white;" class="item-specific">
                         <strong>{$event_name}</strong>
                     </div>
-                    <img alt="" src="{event_image}assets/img/hotel-flight.jpg{/}"/>
+                    <img alt="" src="{profile_image_url}assets/img/hotel-flight.jpg{/}"/>
                 </a>
             </div>
             <div class="wrapper">
                 <h3 style="padding-top:5px;padding-bottom:5px;">
                     Booking No: {$ticket_booking_no}
                 </h3>
+                <div class="row">
+                    <div class="col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                        <i class="fa fa-user" title="Booking Name">&nbsp;{$booking_name}</i>
+                        <br/>
+                        <i class="fa fa-user" title="Secondary Booking Name">&nbsp;{$secondary_booking_name}</i><br/>
+                        <p class="atk-swatch-green " style="padding:5px;font-weight:bold;" >Status : {$status}</p>
+                    </div>
+
+                    <div class="col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                        <i class="fa fa-calendar" title="Booking Date">&nbsp;{$booking_date}</i>
+                        <i class="fa fa-clock-o" title="Booking Time">&nbsp;{$booking_time}</i>
+                        <div style="font-size:16px;color:#3C71DE;" class="fa fa-mobile" title="mobile number">&nbsp;{$mobile}</div><br/>
+                        <div style="font-size:16px;color:#3C71DE;" class="fa fa-envelope" title="email">&nbsp;{$email}</div>
+                    </div>
+                </div>
                 <div class="icon">
-                    <i class="fa fa-user" title="Booking Name">&nbsp;{$booking_name}</i>
-                    <i class="fa fa-user" title="Secondary Booking Name">&nbsp;{$secondary_booking_name}</i>
-                    <i class="fa fa-calendar" title="Booking Date">&nbsp;{$booking_date}</i>
-                    <i class="fa fa-clock-o" title="Booking Time">&nbsp;{$booking_time}</i>
-                    <!-- <div class="row"> -->
-<!--                         <div title="Ticket Qty" class="col-md-4">Qty: &nbsp;{$qty}</div>
-                        <div title="Ticket Price" class="col-md-8">Price: &nbsp;{$price} <i class="fa fa-rupee">&nbsp;</i></div>
-                        <div title="Ticket Price" class="col-md-8">Net Amount: &nbsp;{$net_amount} <i class="fa fa-rupee">&nbsp;</i></div>
-                        <div title="Ticket Price" class="col-md-8">Amount Paid: &nbsp;{$amount_paid} <i class="fa fa-rupee">&nbsp;</i></div> -->
-                    <!-- </div> -->
-                    <div class="fa fa-mobile" title="mobile number">&nbsp;{$mobile}</div><br/>
-                    <div class="fa fa-envelope" title="email">&nbsp;{$email}</div>
+                    <!-- <i class="fa fa-user" title="Booking Name">&nbsp;{$booking_name}</i> -->
+                    <!-- <i class="fa fa-user" title="Secondary Booking Name">&nbsp;{$secondary_booking_name}</i> -->
+                    <!-- <i class="fa fa-calendar" title="Booking Date">&nbsp;{$booking_date}</i> -->
+                    <!-- <i class="fa fa-clock-o" title="Booking Time">&nbsp;{$booking_time}</i> -->
+                    <!-- <div class="fa fa-mobile" title="mobile number">&nbsp;{$mobile}</div><br/>
+                    <div class="fa fa-envelope" title="email">&nbsp;{$email}</div> -->
                 </div>
                 {$cancled_reason}
-                <table width="100%" border="1" style="text-align:right;">
+                <table width="100%" border="1" style="text-align:center;">
                 <tr>
-                    <th>Qty</th>
-                    <th>Price</th>
-                    <th>Net Amount</th>
+                    <th style="text-align:center;">Qty</th>
+                    <th style="text-align:center;">Price</th>
+                    <th style="text-align:center;">Total Amount</th>
                 </tr>
                 <tr>
                     <td>{$qty}</td>
-                    <td>{$price}</td>
-                    <td>{$net_amount}</td>
+                    <td>{$price} <i class="fa fa-rupee">&nbsp;</i></td>
+                    <td>{$total_amount} <i class="fa fa-rupee">&nbsp;</i></td>
                 </tr>
                 <tr>
+                    <td colspan="2">Discount Amount <b>({$discount_voucher})</b></th>
+                    <td colspan="1">{$offer_amount} <i class="fa fa-rupee">&nbsp;</i></td>
+                </tr>
+                <tr style="background-color:orange;color:white;font-weight:bold;">
+                    <td colspan="2">Net Amount</td>
+                    <td colspan="1">{$net_amount} <i class="fa fa-rupee">&nbsp;</i></td>
+                </tr>
+                <tr style="background-color:#f3f3f3;">
                     <td colspan="2">Amount Paid</td>
-                    <td colspan="1">{$amount_paid}</td>
+                    <td colspan="1">{$amount_paid} <i class="fa fa-rupee">&nbsp;</i></td>
                 </tr>
             </table>
             </div>
           </div>
+        {verifyButton}
             <div data-verifyticket="{$id}" class="btn btn-primary btn-block hungry-action atk-swatch-orange eventactiontype">Verify</div>
+        {/}
         </div>
         {/}{/}
         <div style="clear:both;">

@@ -39,6 +39,7 @@ class Model_UserEventTicket extends SQL_Model{
 		$this->addExpression('eventid')->set($this->refSQL('event_ticket_id')->fieldQuery('event_id'));
 		$this->addExpression('eventtimeid')->set($this->refSQL('event_ticket_id')->fieldQuery('event_time_id'));
 		$this->addExpression('eventdayid')->set($this->refSQL('event_ticket_id')->fieldQuery('event_day_id'));
+		$this->addExpression('profile_image_url')->set($this->refSQL('user_id')->fieldQuery('profile_image_url'));
 
 		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
@@ -177,12 +178,20 @@ class Model_UserEventTicket extends SQL_Model{
 
     }	
 
-    function verify($narration=null){
+    function verify($narration=null,$paid_amount = 0,$payment_mode=null){
     	if(!$this->loaded())
     		throw new \Exception("user event ticket must loaded", 1);
     	
     	$this['narration'] = $narration;
     	$this['is_verified'] = true;
+    	
+    	if($this['status'] == "due"){
+    		$this['status'] = "paid";
+    		$this['amount_paid'] = $paid_amount;
+    	}
+    	if($payment_mode)
+    		$this['payment_mode'] = $payment_mode;
+
     	$this->save();
     }
 
