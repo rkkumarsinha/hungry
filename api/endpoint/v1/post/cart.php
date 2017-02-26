@@ -47,21 +47,23 @@ class endpoint_v1_post_cart extends HungryREST {
 
         $this->validateParam($data);
 
-        // try{
+        try{
             $return_array = $m->addToWish(
                                     $this->api->auth->model->id,
                                     $data['event_ticket_id'],
                                     $data['qty'],
                                     $data['unit_price'],
                                     $data['discount_voucher'],
-                                    $data['discount_amount']
+                                    $data['discount_amount'],
+                                    $data['wishlist_id'],
+                                    $data['type']
                                 );
-        // }catch(\Exception $e){
-        //     return json_encode(array(
-        //             'status'=>"failed",
-        //             'message'=>'server error '
-        //         ));
-        // }
+        }catch(\Exception $e){
+            return json_encode(array(
+                    'status'=>"failed",
+                    'message'=>'server error '
+                ));
+        }
         return json_encode($return_array);
 	}
 
@@ -75,7 +77,9 @@ class endpoint_v1_post_cart extends HungryREST {
                     'qty'=>'int',
                     'unit_price'=>'number',
                     'discount_voucher'=>'varchar',
-                    'discount_amount'=>'int'
+                    'discount_amount'=>'int',
+                    'wishlist_id'=>'int',
+                    'type'=>'varchar'
                 ];
         foreach ($required_param as $param =>$type) {
             if(!array_key_exists($param, $data)){
@@ -83,6 +87,12 @@ class endpoint_v1_post_cart extends HungryREST {
                 exit;
             }
         }
+
+        if(!in_array($data['type'], ['add','update','delete'])){
+            echo "Param Error 1002";
+            exit;
+        }
+
     }
 
 }

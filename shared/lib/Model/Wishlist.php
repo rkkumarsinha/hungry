@@ -24,11 +24,21 @@
 		$this->add('dynamic_model/Controller_AutoCreator');
 	}
 
-	function addToWish($user_id,$event_ticket_id,$qty,$unit_price,$discount_voucher,$discount_amount){
+	function addToWish($user_id,$event_ticket_id,$qty,$unit_price,$discount_voucher,$discount_amount,$wishlist_id=0,$type="add"){
 		
-		if($this->loaded())
-			throw new \Exception("model must not loaded");
-		
+		if(!in_array($type, ['add','update','delete'])){
+			return ['status'=>'failed','message'=>'type not found'];
+		}
+
+		$wishlist_model = $this->add('Model_Wishlist');
+		if($type == "delete"){
+			$wishlist_model->load($wishlist_id);
+			if($wishlist_model['user_id'] != $user_id)
+				return ['status'=>'failed','message'=>'cannot delete, not associated with user'];
+			$wishlist_model->delete();
+			return ['status'=>'success','message'=>'delete successfully'];
+		}
+
 		$ticket_model = $this->add('Model_Event_Ticket')
 						->addCondition('id',$event_ticket_id)
 						;
@@ -70,21 +80,25 @@
 			// 		];
 		}
 
-		$this['name'] = $ticket_model['name'];
-		$this['user_id'] = $user_id;
-		$this['event_ticket_id'] = $ticket_model->id;
-		$this['qty'] = $qty;
-		$this['event_time_id'] = $ticket_model['event_time_id'];
-		$this['event_time'] = $ticket_model['event_time'];
-		$this['event_day_id'] = $ticket_model['event_day_id'];
-		$this['event_day'] = $ticket_model['event_day'];
-		$this['unit_price'] = $ticket_model['price'];
-		$this['disclaimer'] = $ticket_model['disclaimer'];
-		$this['discount_voucher'] = $discount_voucher;
-		$this['discount_amount'] = $re_cal_discount_amount;
-		$this->save();
+		if($wishlist_id AND $type == "update"){
+			$wishlist_model->load($wishlist_id);
+		}
 
-        return json_encode(['status'=>"success",'message'=>'your ticket added to cart','wishlist_id'=>$this->id]);
+		$wishlist_model['name'] = $ticket_model['name'];
+		$wishlist_model['user_id'] = $user_id;
+		$wishlist_model['event_ticket_id'] = $ticket_model->id;
+		$wishlist_model['qty'] = $qty;
+		$wishlist_model['event_time_id'] = $ticket_model['event_time_id'];
+		$wishlist_model['event_time'] = $ticket_model['event_time'];
+		$wishlist_model['event_day_id'] = $ticket_model['event_day_id'];
+		$wishlist_model['event_day'] = $ticket_model['event_day'];
+		$wishlist_model['unit_price'] = $ticket_model['price'];
+		$wishlist_model['disclaimer'] = $ticket_model['disclaimer'];
+		$wishlist_model['discount_voucher'] = $discount_voucher;
+		$wishlist_model['discount_amount'] = $re_cal_discount_amount;
+		$wishlist_model->save();
+
+        return json_encode(['status'=>"success",'message'=>'your ticket added to cart','wishlist_id'=>$wishlist_model->id]);
 	}
 
 	function emptyWishList($user_id){
