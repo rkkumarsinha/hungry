@@ -21,6 +21,7 @@
 
 		$this->addField('disclaimer');
 		
+		$this->addField('is_wishcomplete')->type('boolean')->defaultValue(false);
 		$this->add('dynamic_model/Controller_AutoCreator');
 	}
 
@@ -84,6 +85,9 @@
 			$wishlist_model->load($wishlist_id);
 		}
 
+		//add - update are only on if is_wishcomplete is false
+		$wishlist_model->addCondition('is_wishcomplete',0);
+
 		$wishlist_model['name'] = $ticket_model['name'];
 		$wishlist_model['user_id'] = $user_id;
 		$wishlist_model['event_ticket_id'] = $ticket_model->id;
@@ -96,6 +100,7 @@
 		$wishlist_model['disclaimer'] = $ticket_model['disclaimer'];
 		$wishlist_model['discount_voucher'] = $discount_voucher;
 		$wishlist_model['discount_amount'] = $re_cal_discount_amount;
+		// $wishlist_model['is_wishcomplete'] = 0;
 		$wishlist_model->save();
 
         return json_encode(['status'=>"success",'message'=>'your ticket added to cart','wishlist_id'=>$wishlist_model->id]);
