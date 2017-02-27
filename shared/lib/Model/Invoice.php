@@ -134,6 +134,118 @@ class Model_Invoice extends SQL_Model{
 	}
 
 
+	function placeOrderFromWishList($data){
+
+		//check validation here
+        // creating user ticket
+        $wishlist = $this->add('Model_Wishlist')
+        			->addCondition("user_id",$this->app->auth->model->id)
+        			->addCondition('is_wishcomplete',false);
+
+       	foreach ($wishlist as $cart) {
+
+			$re_cal_discount_amount = 0;
+			$discount_voucher = $cart['discount_voucher'];
+			$ticket_model = $this->add('Model_Event_Ticket')
+	            			->load($cart['event_ticket_id']);
+	        
+	        // event ticket condition checked
+	        if($cart['qty'] > $ticket_model['remaining_ticket']){
+				return array("status"=>"failed","message"=>"tickets sold out");
+				exit();
+	        }
+
+	        if($cart['unit_price'] != $ticket_model['price']){
+				return array("status"=>"failed","message"=>"price mismatch, try again ".$ticket_model['price']." = ".$cart['price']);
+	        	exit();
+	        }
+
+       		//check discount voucher is applicable or not
+			if($discount_voucher){
+				if(!$ticket_model['is_voucher_applicable']){
+					return [
+							'status'=>'failed',
+							'message'=>'this voucher ['.$discount_voucher.'] is not applicable on this ticket '.$ticket_model['name']
+						];
+					exit();
+				}
+
+				$voucher = $this->add('Model_Voucher')
+							->addCondition('name',$discount_voucher)
+							->addCondition('event_id',$ticket_model['event_id']);
+				$voucher->tryLoadAny();
+				$voucher_status = $voucher->applyCoupon($cart['qty'],$ticket_model['price']);
+				if($voucher_status['status'] == "success"){
+					$re_cal_discount_amount = $voucher_status['discount_amount'];
+
+				}else{
+					return [
+							'status'=>'failed',
+							'message'=>'this voucher ['.$discount_voucher.'] is not applicable on this ticket '.$ticket_model['name']
+						];
+					exit();
+				}
+				
+			// 	// if($re_cal_discount_amount != $discount_amount)
+			// 	// 	return [
+			// 	// 			'status'=>'failed',
+			// 	// 			'message'=>'discount amount ['.$discount_amount.'] is not applicable on this event ticket, actual discount amount = '.$re_cal_discount_amount
+			// 	// 		];
+			}
+       	}
+
+       	// saving invoice id
+		$this['user_id'] = $this->app->auth->model->id;
+		$this['status'] = "Due";
+		$this['delivery_name'] = $this['billing_name'] = $data['billing_name'];
+        $this['delivery_address'] = $this['billing_address'] = $data['billing_address'];
+        $this['delivery_city'] = $this['billing_city'] = $data['billing_city'];
+        $this['delivery_state'] = $this['billing_state'] = $data['billing_state'];
+        $this['delivery_zip'] = $this['billing_zip'] = $data['billing_zip'];
+        $this['delivery_country'] = $this['billing_country'] = $data['billing_country'];
+        $this['delivery_tel'] = $this['billing_tel']= $data['billing_tel'];
+        $this['delivery_email']= $this['billing_email'] = $data['billing_email'];
+        $this->save();
+        
+        foreach ($wishlist as $cart_ticket) {
+        	// just checking event ticket is available or not
+	        $event_ticket_model = $this->add('Model_Event_Ticket')
+	            ->addCondition('id',$cart_ticket['event_ticket_id']);
+	        $event_ticket_model->tryLoadAny();
+	        
+	        if(!$event_ticket_model->loaded()){
+	        	// $this->delete();
+	            return ['status'=>'failed','message'=>'ticket not found'];
+	            exit();
+	        }
+	        
+
+	        $book_ticket_model = $this->add('Model_UserEventTicket');
+	        $booked_ticket_model = $book_ticket_model->bookTicket(
+	                        $this->app->auth->model->id,
+	                        $cart_ticket['event_ticket_id'],
+	                        $data['primary_booking_name'],
+	                        $data['secondary_booking_name'],
+	                        $cart_ticket['qty'],
+	                        $event_ticket_model['price'],
+	                        $cart_ticket['discount_voucher'],
+	                        $cart_ticket['discount_amount'],
+	                        true,
+	                        $this->id
+	                    );
+	        if(is_array($booked_ticket_model) AND $booked_ticket_model['status'] == "failed"){
+	        	// $this->delete();
+	        	return $booked_ticket_model;
+	        	exit();
+	        }
+
+	       $cart_ticket['is_wishcomplete'] = true;
+	       $cart_ticket->saveAndUnload();
+	    }
+        return $this;
+	}
+
+
 // <tr><td style="" align=""><img src="http://localhost/hungry//upload/0/20161213232950_0_09.jpg" style="width:100%;"><span style="">event name</span></td>
 //                                                         <td width="80%">
 //                                                             <table style="" width="100%" cellspacing="0" cellpadding="0">
