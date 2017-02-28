@@ -70,7 +70,7 @@
 			}else{
 				return [
 						'status'=>'failed',
-						'message'=>'this voucher ['.$discount_voucher.'] is not applicable on this ticket'
+						'message'=>'this discount voucher ['.$discount_voucher.'] is not applicable on this ticket'
 					];
 			}
 			
@@ -103,7 +103,7 @@
 		// $wishlist_model['is_wishcomplete'] = 0;
 		$wishlist_model->save();
 
-        return json_encode(['status'=>"success",'message'=>'your ticket added to cart','wishlist_id'=>$wishlist_model->id]);
+        return json_encode(['status'=>"success",'message'=>'your ticket added to cart','wishlist_id'=>$wishlist_model->id,'discount_amount'=>$re_cal_discount_amount,'net_amount'=>$this->getNetAmount()]);
 	}
 
 	function emptyWishList($user_id){
@@ -123,5 +123,16 @@
 		return $max_number	+ 1;
 	}
 
+	function getNetAmount(){
+		$cart = $this->add('Model_Wishlist')
+				->addCondition('user_id',$this->app->auth->model->id)
+				->addCondition('is_wishcomplete',false)
+			;
+		$net_amount = 0;
+		foreach ($cart as $model) {
+			$net_amount += round(($model['unit_price'] * $model['qty']) - $model['discount_amount']);
+		}
+		return $net_amount;
+	}
 }
  
