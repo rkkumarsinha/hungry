@@ -88,6 +88,8 @@ class Model_Voucher extends SQL_Model{
 		if(!$this->loaded())
 			return $return;
 
+		
+
 		if(!($this['expiry_date'] >= $this->api->today AND $this->api->today >=$this['starting_date']))
 			return $return;
 
@@ -109,7 +111,7 @@ class Model_Voucher extends SQL_Model{
 		if($this['one_user_how_many_time']){
 			$used_model = $this->add('Model_VoucherUsed')
 							->addCondition('voucher_id',$this->id)
-							->addCondition('user_id',$this->app->auth->id)
+							->addCondition('user_id',$this->app->auth->model->id)
 							;
 			if($used_model->count()->getOne() >= $this['one_user_how_many_time'])
 				return $return;
