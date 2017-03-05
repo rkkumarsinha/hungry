@@ -8,6 +8,7 @@ class Model_UserEventTicket extends SQL_Model{
 
 		$this->hasOne('Event_Ticket','event_ticket_id')->mandatory(true);
 		$this->hasOne('Invoice','invoice_id');
+		$this->hasOne('Wishlist','wishlist_id');
 		$this->hasOne('User','user_id');
 		
 		$this->addField('ticket_booking_no')->defaultValue(strtoupper(substr(md5(rand(11111111,99999999)),8,9)));
@@ -41,11 +42,11 @@ class Model_UserEventTicket extends SQL_Model{
 		$this->addExpression('eventdayid')->set($this->refSQL('event_ticket_id')->fieldQuery('event_day_id'));
 		$this->addExpression('profile_image_url')->set($this->refSQL('user_id')->fieldQuery('profile_image_url'));
 
-		// $this->add('dynamic_model/Controller_AutoCreator');
+		$this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 	//book only the ticket
-	function bookTicket($user_id,$event_ticket_id,$booking_name,$secondary_booking_name=null,$qty,$ticket_price,$discount_voucher,$discount_amount,$return_model=false,$invoice_id){
+	function bookTicket($user_id,$event_ticket_id,$booking_name,$secondary_booking_name=null,$qty,$ticket_price,$discount_voucher,$discount_amount,$return_model=false,$invoice_id,$wishlist_id=null){
 		$ticket_model = $this->add('Model_Event_Ticket')->load($event_ticket_id);
 		
 		//check qty is remaining or not
@@ -76,8 +77,9 @@ class Model_UserEventTicket extends SQL_Model{
 		$user_ticket_model['secondary_booking_name'] = $secondary_booking_name;
 		$user_ticket_model['mobile'] = $this->app->auth->model['mobile']; 
 		$user_ticket_model['email'] = $this->app->auth->model['email'];
+		$user_ticket_model['wishlist_id'] = $wishlist_id;
 		$user_ticket_model->save();
-
+		
 		if($return_model)
 			return $user_ticket_model;
 

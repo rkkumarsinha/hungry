@@ -231,7 +231,8 @@ class Model_Invoice extends SQL_Model{
 	                        $cart_ticket['discount_voucher'],
 	                        $cart_ticket['discount_amount'],
 	                        true,
-	                        $this->id
+	                        $this->id,
+	                        $cart_ticket['id']
 	                    );
 	        if(is_array($booked_ticket_model) AND $booked_ticket_model['status'] == "failed"){
 	        	// $this->delete();
@@ -239,10 +240,43 @@ class Model_Invoice extends SQL_Model{
 	        	exit();
 	        }
 
-	       $cart_ticket['is_wishcomplete'] = true;
-	       $cart_ticket->saveAndUnload();
+	       // $cart_ticket['is_wishcomplete'] = true;
+	       // $cart_ticket->saveAndUnload();
 	    }
         return $this;
+	}
+
+	function updateInvoiceTransaction($data){
+		if(!$this->loaded()) throw new \Exception("order must loaded");
+		
+		$this['tracking_id'] = $data['tracking_id'];
+		$this['bank_ref_no'] = $data['bank_ref_no'];
+		$this['order_status'] = $data['order_status'];
+		$this['payment_mode'] = $data['payment_mode'];
+		$this['card_name'] = $data['card_name'];
+		$this['trans_date'] = $data['trans_date'];
+		$this['transaction_detail'] = $data['transaction_detail'];
+		if($data['order_status'] = "Success")
+			$this['status'] = "Paid";
+		
+		$this->save();
+		
+		if($this['order_status'] != "Success") return $this;
+
+		$ticket = $this->add('Model_UserEventTicket')
+			->addCondition('user_id',$this->app->auth->model->id)
+			->addCondition('invoice_id',$this->id)
+			;
+
+		foreach ($ticket as $user_ticket) {
+			$user_ticket['status'] = "paid";
+			$user_ticket->save();
+			$wish = $this->add('Model_Wishlist')->load($user_ticket['wishlist_id']);
+			$wish['is_wishcomplete'] = true;
+			$wish->save();
+		}
+
+		return $this;
 	}
 
 

@@ -56,8 +56,8 @@ class endpoint_v1_post_generateorder extends HungryREST {
         
         try{
             $order = $m->placeOrderFromWishList($data);
-
             if($order instanceof Model_Invoice){
+                $order->reload();
 
                 $return_array = [
                             'order_id'=>$order->id,

@@ -22,6 +22,10 @@
 		$this->addField('disclaimer');
 		
 		$this->addField('is_wishcomplete')->type('boolean')->defaultValue(false);
+		
+		$this->addExpression('amount',function($m,$q){
+			return $q->expr('((IFNULL([0],0) * IFNULL([1],0)) - IFNULL([2],0))',[$m->getElement('qty'),$m->getElement('unit_price'),$m->getElement('discount_amount')]);
+		});		
 		$this->add('dynamic_model/Controller_AutoCreator');
 	}
 
@@ -103,7 +107,7 @@
 		// $wishlist_model['is_wishcomplete'] = 0;
 		$wishlist_model->save();
 
-        return json_encode(['status'=>"success",'message'=>'your ticket added to cart','wishlist_id'=>$wishlist_model->id,'discount_amount'=>$re_cal_discount_amount,'net_amount'=>$this->getNetAmount()]);
+        return ['status'=>'success','message'=>'your ticket added to cart','wishlist_id'=>$wishlist_model->id,'discount_amount'=>$re_cal_discount_amount,'net_amount'=>$this->getNetAmount()];
 	}
 
 	function emptyWishList($user_id){
