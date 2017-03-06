@@ -19,7 +19,7 @@ class Model_Event extends SQL_Model{
 		$this->add('filestore/Field_File','display_image_id')->hint('image dimension: 555 * 415 px'); //for list
 
 		$this->addField('name')->mandatory(true)->caption('Event Name');
-		$this->addField('owner_name')->mandatory(true)->caption('Owner/Manager Name');
+		$this->addField('owner_name')->mandatory(true)->caption('Organizer Name');
 		$this->addField('detail')->type('text')->mandatory(true)->display(array('form'=>'RichText'));
 		$this->addField('address')->type('text');
 		$this->addField('mobile_no')->hint('Comma separated multiple value');

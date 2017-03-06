@@ -12,7 +12,13 @@ class View_HostAccount_Event_BookedTicket extends View{
 		
 		$event_model = $this->app->listmodel;
 		if(!$event_model->loaded()){
-			$this->add('View_Error',null,'no_record_found')->set('no record found');
+			$this->add('View_Error')->set('no record found');
+			return;
+		}
+
+		if($this->app->today > $event_model['closing_date']){
+			$this->add('View_Error')->set('no record found');
+			return;
 		}
 
 		$col = $this->add('Columns');
