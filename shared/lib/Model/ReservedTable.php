@@ -65,11 +65,19 @@ class Model_ReservedTable extends SQL_Model{
 		
 		//send SMS
 		if($send_sms){
-			$this->sendSMS();
+			try{
+				$this->sendSMS();
+			}catch(\Exception $e){
+
+			}
 		}
 		// send email
 		if($send_email){
-			$this->sendEmail();
+			try{
+				$this->sendEmail();
+			}catch(\Exception $e){
+				
+			}
 		}
 
 		return true;

@@ -47,6 +47,9 @@ class page_test extends Page{
 
         // echo "<pre>";
         // print_r($restaurant_array);
+        // $reserved_table = $this->add('Model_ReservedTable')->load(217);
+        // $reserved_table->approved();
+        // $reserved_table->sendReservedTable(true,true);
     }
 
     function defaultTemplate(){
