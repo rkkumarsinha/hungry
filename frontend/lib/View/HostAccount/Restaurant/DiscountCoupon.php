@@ -12,6 +12,14 @@ class View_HostAccount_Restaurant_DiscountCoupon extends CompleteLister{
 		$dc_model = $this->add('Model_DiscountCoupon');
 		$dc_model->addCondition('restaurant_id',$host_restaurant->id);
 		$dc_model->addCondition('status','to be redeemed');
+		
+		$dc_model->addExpression('date_count')->set(function($m,$q){
+			return $q->expr('(DATEDIFF([0],[1]))',["'".$this->app->today."'",$q->getField('created_at')]);
+		});
+
+		// $this->add('Grid')->setModel($dc_model,['date_count','created_at']);
+		$dc_model->addCondition('date_count','<',3);
+
 		$dc_model->addExpression('profile_image_url')->set($dc_model->refSQL('user_id')->fieldQuery('profile_image_url'));
 		$dc_model->setOrder('created_at','desc');
 		$discount_offer_voucher = $this;
@@ -115,7 +123,7 @@ class View_HostAccount_Restaurant_DiscountCoupon extends CompleteLister{
 		$this->current_row_html['created_at'] = date('(D) d-M-Y',strtotime($this->model['created_at']));
 		$this->current_row_html['created_time'] = date('h:i:s A',strtotime($this->model['created_at']));
 		if(!$this->model['offer_id'])
-			$this->current_row_html['discount_name'] = "Discount";
+			$this->current_row_html['discount_name'] = "Discount ";
 		else
 			$this->current_row_html['discount_name'] = "Offer";
 				

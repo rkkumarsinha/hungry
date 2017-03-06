@@ -16,12 +16,12 @@ class Model_Destination extends SQL_Model{
 			return $m->refSQL('area_id')->fieldQuery('city');
 		});
 
-		$this->add('filestore/Field_Image','logo_image_id');
-		$this->add('filestore/Field_Image','banner_image_id'); //for detail
-		$this->add('filestore/Field_Image','display_image_id'); //for list
+		$this->add('filestore/Field_Image','logo_image_id')->hint('image dimension: 100 * 100 px');
+		$this->add('filestore/Field_Image','banner_image_id')->hint('image dimension: 2102 * 889 px'); //for detail
+		$this->add('filestore/Field_Image','display_image_id')->hint('image dimension: 555 * 415 px'); //for list
 
 		$this->addField('name')->mandatory(true);
-		$this->addField('owner_name')->mandatory(true);
+		$this->addField('owner_name')->mandatory(true)->caption('Owner/Manager Name');
 		$this->addField('about_destination')->type('text')->mandatory(true)->display(array('form'=>'RichText'));
 		$this->addField('address')->type('text');
 		$this->addField('mobile_no')->hint('Comma separated multiple value');

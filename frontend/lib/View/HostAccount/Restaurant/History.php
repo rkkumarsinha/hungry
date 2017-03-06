@@ -17,7 +17,12 @@ class View_HostAccount_Restaurant_History extends View{
 		// Discount Coupon
 		$dc_model = $discount_tab->add('Model_DiscountCoupon');
 		$dc_model->addCondition('restaurant_id',$host_restaurant->id);
+		$dc_model->addExpression('date_count')->set(function($m,$q){
+			return $q->expr('(DATEDIFF([0],[1]))',["'".$this->app->today."'",$q->getField('created_at')]);
+		});
+		$dc_model->addCondition('date_count','>',3);
 		$dc_model->addCondition('created_at','<',$this->api->today);
+		
 		$dc_model->setOrder('created_at','desc');
 
 		$discount_offer_voucher = $discount_tab->add('Grid');

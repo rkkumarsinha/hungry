@@ -46,12 +46,6 @@ class View_HostAccount_Restaurant_Profile extends View{
 								'website',
 								'facebook_page_url',
 								'instagram_page_url',
-								'avg_cost_per_person_veg',
-								'avg_cost_per_person_nonveg',
-								'avg_cost_per_person_thali',
-								'avg_cost_of_a_beer',
-								'credit_card_accepted',
-								'reservation_needed',
 								'monday',
 								'tuesday',
 								'wednesday',
@@ -60,6 +54,12 @@ class View_HostAccount_Restaurant_Profile extends View{
 								'saturday',
 								'sunday',
 								'food_type',
+								'avg_cost_per_person_veg',
+								'avg_cost_per_person_nonveg',
+								'avg_cost_per_person_thali',
+								'avg_cost_of_a_beer',
+								'credit_card_accepted',
+								'reservation_needed',
 								'discount_id',
 								// 'latitude',
 								// 'longitude'
@@ -222,10 +222,21 @@ class View_HostAccount_Restaurant_Profile extends View{
         });
         $cu_crud->setModel($cu_hl,['keyword_id','image'],['keyword','image']);
 		
+		// Category Association
+		$category_tab->add('View_Info')->set('add maximum 6 category');
+		$cat_form = $category_tab->add('Form');
+		$cat_field = $cat_form->addField('hidden','cat_ids');
 
-        $cat_crud = $category_tab->add('CRUD');
-        $cat_crud->grid->addHook('formatRow',function($g){
-           	$f = $this->add('filestore/Model_File')->addCondition('id',$g->model['image']);
+		$cat_asso = $this->add('Model_CategoryAssociation');
+	    $cat_asso->addCondition('restaurant_id',$host_restaurant->id);
+	    $cat_asso = $cat_asso->_dsql()->del('fields')->field('category_id')->getAll();
+		$associated_cat = iterator_to_array(new \RecursiveIteratorIterator(new \RecursiveArrayIterator($cat_asso)),false);
+
+		$cat_field->set(json_encode($associated_cat));
+
+        $cat_crud = $category_tab->add('Grid');
+        $cat_crud->addHook('formatRow',function($g){
+           	$f = $this->add('filestore/Model_File')->addCondition('id',$g->model['image_id']);
             $f->tryLoadAny();
             if($f->loaded()){
                 $path = $this->app->getConfig('imagepath').str_replace("..", "", $f->getPath());
@@ -234,10 +245,37 @@ class View_HostAccount_Restaurant_Profile extends View{
                 $g->current_row_html['image'] = "No Icon Found";
 
         });
-        $cat_asso = $this->add('Model_CategoryAssociation');
-        $cat_asso->addCondition('restaurant_id',$host_restaurant->id);
-        $cat_asso->addExpression('image')->set($cat_asso->refSQL('category_id')->fieldQuery('image_id'));
-        $cat_crud->setModel($cat_asso,['category_id','image'],['category','image']);
+        $cat_crud->addSelectable($cat_field);
+
+        $cat_crud->setModel($this->add('Model_Category'));
+        $category_tab->add('Button')->set('Save')->js('click',$cat_form->js()->submit());
+        // $cat_form->addSubmit('Save');
+        if($cat_form->isSubmitted()){
+        	$cat_array = json_decode($cat_form['cat_ids']);
+        	if(count($cat_array) > 6){
+        		$cat_form->js()->univ()->alert('can\'t add more then 6 category')->execute();
+        	}
+   			
+   			$cat_asso = $this->add('Model_CategoryAssociation');
+	        $cat_asso->addCondition('restaurant_id',$host_restaurant->id);
+	        // $cat_asso->addExpression('image')->set($cat_asso->refSQL('category_id')->fieldQuery('image_id'));
+	        if($cat_asso->count()->getOne()){
+	        	$cat_asso->deleteAll();
+	        }
+
+   			foreach ($cat_array as $key => $cat_id) {
+				$cat_asso = $this->add('Model_CategoryAssociation');
+	        	$cat_asso->addCondition('restaurant_id',$host_restaurant->id);
+	        	$cat_asso->addCondition('category_id',$cat_id);
+   				$cat_asso->tryLoadAny();
+   				$cat_asso->save();
+   			}     	
+   			$cat_form->js()->univ()->successMessage('Saved Successfully')->execute();
+        }
+        // $cat_asso = $this->add('Model_CategoryAssociation');
+        // $cat_asso->addCondition('restaurant_id',$host_restaurant->id);
+        // $cat_asso->addExpression('image')->set($cat_asso->refSQL('category_id')->fieldQuery('image_id'));
+        // $cat_crud->setModel($cat_asso,['category','image']);//,['category','image']);
 
         // Meta Forms
         $meta_form = $meta_tab->add('Form',null,null,['form/stacked']);

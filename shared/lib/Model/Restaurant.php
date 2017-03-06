@@ -13,12 +13,12 @@ class Model_Restaurant extends SQL_Model{
 		$this->hasOne('Area','area_id')->mandatory(true);
 		$this->hasOne('Discount','discount_id')->mandatory(true);
 
-		$this->add('filestore/Field_File','logo_image_id');
-		$this->add('filestore/Field_File','banner_image_id'); //for detail
-		$this->add('filestore/Field_File','display_image_id'); //for list
+		$this->add('filestore/Field_File','logo_image_id')->hint('image dimension: 100 * 100 px');
+		$this->add('filestore/Field_File','banner_image_id')->hint('image dimension: 2102 * 889 px'); //for detail
+		$this->add('filestore/Field_File','display_image_id')->hint('image dimension: 555 * 415 px'); //for list
 
 		$this->addField('name')->mandatory(true)->caption('Restaurant Name');
-		$this->addField('owner_name')->mandatory(true);
+		$this->addField('owner_name')->mandatory(true)->caption('Owner/Manager Name');
 		$this->addField('about_restaurant')->type('text')->mandatory(true)->display(array('form'=>'RichText'));
 		$this->addField('disclaimer')->type('text')->mandatory(true)->display(array('form'=>'RichText'));
 		$this->addField('address')->type('text');

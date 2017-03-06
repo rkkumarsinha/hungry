@@ -14,7 +14,7 @@ class View_HostAccount_Restaurant_DiscountManagement extends View{
 		$discount_tab = $tab->addTab('Create Discount');
 		$offer_tab = $tab->addTab('Create Offer');
 		$approved_tab = $tab->addTab('Approved Offer');
-		$canclled_tab = $tab->addTab('Canclled Offer');
+		$canclled_tab = $tab->addTab('Cancled Offer');
 
 
 		$old_request = $this->add('Model_Notification')
@@ -109,7 +109,8 @@ class View_HostAccount_Restaurant_DiscountManagement extends View{
 										->addCondition('status','approved')
 										->addCondition('from','Restaurant')
 										->addCondition('request_for','offer')
-										->setOrder('created_at','desc')
+										->setOrder('created_at','desc'),
+										['name','message','request_for','value','created_at']
 									);
 
 		$canclled_tab->add('Grid')->setModel(
@@ -118,7 +119,8 @@ class View_HostAccount_Restaurant_DiscountManagement extends View{
 								->addCondition('status','cancled')
 								->addCondition('from','Restaurant')
 								->addCondition('request_for','offer')
-								->setOrder('created_at','desc')
+								->setOrder('created_at','desc'),
+								['name','message','request_for','value','created_at']
 							);
 		
 	}

@@ -141,9 +141,11 @@ class View_HostAccount_Restaurant_TableReservation extends CompleteLister{
 			$this->current_row_html['discount_name'] = "Discount";
 		
 		if($this->model['status'] == "confirmed"){
-			$this->current_row_html['button_wrapper'] = '<div style="padding-left:0px;" class="col-md-6"><div data-actiontype="Verify" data-tablereservationid="'.$this->model->id.'" class="btn btn-primary btn-block hungry-action atk-swatch-orange">Verify</div></div>';
+			$this->current_row_html['button_wrapper'] = '<div style="padding-left:0px;" class="col-md-12 col-sm-12 col-lg-12"><div data-actiontype="Verify" data-tablereservationid="'.$this->model->id.'" class="btn btn-primary btn-block hungry-action atk-swatch-orange">Verify</div></div>';
+			$this->current_row_html['cancled_button_wrapper'] = " ";
 		}else{
-			$this->current_row_html['button_wrapper'] = '<div style="padding-left:0px;" class="col-md-6"><div data-actiontype="Approve" data-tablereservationid="'.$this->model->id.'" class="btn btn-primary btn-block hungry-action atk-swatch-orange">Approved</div></div>';
+			$this->current_row_html['button_wrapper'] = '<div style="padding-left:0px;" class="col-md-6 col-sm-6 col-lg-6"><div data-actiontype="Approve" data-tablereservationid="'.$this->model->id.'" class="btn btn-primary btn-block hungry-action atk-swatch-orange">Approved</div></div>';
+			$this->current_row_html['cancled_button_wrapper'] = '<div style="padding-right:0px;" class="col-md-6 col-sm-6 col-lg-6"> <div data-actiontype="Canclled" data-tablereservationid="'.$this->model->id.'" class="btn btn-primary btn-block hungry-action btn-warning">Cancel</div></div>';
 		}
 		parent::formatRow();
 	}
