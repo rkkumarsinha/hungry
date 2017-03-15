@@ -9,9 +9,18 @@
   		
   		if(href!= undefined && href.length)
   			window.location.href = href;
-  		
+
 	}).on('click', 'div.hungry-search-form > div.container', function(e) {
     	e.stopPropagation();
 	});
   </script>
+  <style type="text/css">
+  	.hero-image > .inner:hover{
+  		cursor: pointer !important;
+  	}
+
+  	.search-bar.horizontal.main-search:hover{
+  		cursor: initial !important;
+  	}
+  </style>
 </div>
