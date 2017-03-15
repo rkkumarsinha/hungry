@@ -166,8 +166,8 @@ class endpoint_v1_post_registration extends Endpoint_REST{
         // sending email after user saved into database        
         try{
             if($data['social'] == "HungryDunia"){
-                $m->sendAppRegistrationWelcomeMail();
                 $m->sendOTP();
+                $m->sendAppRegistrationWelcomeMail();
             }
 
             return json_encode(array(
