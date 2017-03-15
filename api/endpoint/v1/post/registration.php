@@ -163,10 +163,13 @@ class endpoint_v1_post_registration extends Endpoint_REST{
             $access_token->save();
         }
 
-        // sending email after user savd into database        
+        // sending email after user saved into database        
         try{
-            // $m->sendAppRegistrationWelcomeMail();
-            // $m->sendOTP();
+            if($data['social'] == "HungryDunia"){
+                $m->sendAppRegistrationWelcomeMail();
+                $m->sendOTP();
+            }
+
             return json_encode(array(
                                 'status'=>"success",
                                 "message"=>"your account has been created successfully",
