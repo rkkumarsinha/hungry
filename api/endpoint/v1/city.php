@@ -93,10 +93,10 @@ class endpoint_v1_city extends HungryREST {
 
 
     function _model(){
-        if($_GET['city']){   
-            return parent::_model()->addCondition('name',$_GET['city'])->tryLoadAny();
+        if($_GET['city']){
+            return parent::_model()->addCondition('is_active',true)->addCondition('name',$_GET['city'])->tryLoadAny();
         }
-        return parent::_model();  
+        return parent::_model()->addCondition('is_active',true);  
     }
 
 	function put($data){
