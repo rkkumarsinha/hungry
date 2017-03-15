@@ -127,7 +127,7 @@ class page_restaurantdetail extends Page{
         }
 
         // Restaurant offers
-        $offer_model = $this->add('Model_RestaurantOffer')->addCondition('restaurant_id',$this->restaurant_id)->addCondition('is_active',false);
+        $offer_model = $this->add('Model_RestaurantOffer')->addCondition('restaurant_id',$this->restaurant_id)->addCondition('is_active',true);
         $offer = $this->add('Lister',null,'restaurantoffer',['page/restaurantdetail','restaurantoffer']);
         $offer->setModel($offer_model);
 
