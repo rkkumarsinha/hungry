@@ -1,6 +1,17 @@
 
 <div id="carousel-example-generic" data-ride="carousel" class="carousel slide hungryduniaslideshow">
   <div role="listbox" class="carousel-inner">{rows}{row}
-    <div class="item {$firstslide}">{$image}</div>{/}{/}
+    <div class="item {$firstslide}">{$image}</div>{/}{/}  	
   </div>
+  <script type="text/javascript">
+	$('.hero-image.search-filter-middle > .inner').on('click', function(e) {
+  		var href = $(this).siblings('.background').find('.item.active > a').attr('href');
+  		
+  		if(href!= undefined && href.length)
+  			window.location.href = href;
+  		
+	}).on('click', 'div.hungry-search-form > div.container', function(e) {
+    	e.stopPropagation();
+	});
+  </script>
 </div>
