@@ -68,6 +68,7 @@ class View_HostAccount_Restaurant_Profile extends View{
 		
 		$discount_field = $basic_form->getElement('discount_id');
 		$discount_field->setCaption('Discount %');
+		$discount_field->getModel()->addCondition('name','<>',10);
 		$basic_form->addField('Readonly','operational_cost')->set('5 %');
 		
 		// $rest_model =$this->add('Model_Restaurant')->load($host_restaurant['id']);
