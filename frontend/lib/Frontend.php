@@ -11,13 +11,32 @@ class Frontend extends ApiFrontend {
         $this->api_base_path = dirname(dirname(@$_SERVER['SCRIPT_FILENAME']));
 
         // $this->add('Layout_Centered');
-        $this->add('Layout_HungryDunia');
 
         $this->addLocations();
-        $this->addProjectLocations();
-        $this->addAddonsLocations();
+        // $this->addProjectLocations();
+        // $this->addAddonsLocations();
         $this->add('jUI');
-        $this->initAddons();
+        // $this->initAddons();
+
+        // $this->app->jui->addStaticStyleSheet('fonts/font-awesome');
+        // $this->app->jui->addStaticStyleSheet('bootstrap-select.min');
+        // $this->app->jui->addStaticStyleSheet('jquery.nouislider.min');
+        // $this->app->jui->addStaticStyleSheet('bootstrap/css/bootstrap');
+        // $this->app->jui->addStaticStyleSheet('zmystyle');
+        // $this->app->jui->addStaticStyleSheet('style');
+
+        // $this->app->jui->addStaticInclude('bootstrap/js/bootstrap.min');
+        // $this->app->jui->addStaticInclude('jquery-migrate-1.2.1.min');
+        // $this->app->jui->addStaticInclude('smoothscroll');
+        // $this->app->jui->addStaticInclude('jquery.hotkeys');
+        // $this->app->jui->addStaticInclude('jquery.nouislider.all.min');
+        // $this->app->jui->addStaticInclude('custom');
+        // $this->app->jui->addStaticInclude('owl.carousel.min');
+        // $this->app->jui->addStaticInclude('gmap3');
+        // $this->app->jui->addStaticInclude('hungrydunia');
+        // $this->app->jui->addStaticInclude('star-rating');
+        
+        $this->add('Layout_HungryDunia');
 
         $this->dbConnect();
 
@@ -110,17 +129,42 @@ class Frontend extends ApiFrontend {
             $this->api->jui->addStaticInclude('locationpicker.jquery');
         }
         $this->api->jui->addStaticInclude('hungry');
+
+        // $this->makeSEF();
     }
 
-    function addLocations() {        
+    function makeSEF(){
+        $this->add('Controller_PatternRouter')
+            ->link('restaurantdetail', ['slug'])
+            ->route();
+
+        if($this->app->page == "restaurantdetail"){
+
+            $this->app->jui->addStaticStyleSheet('lightgallery');
+            $this->app->jui->addStaticStyleSheet('magnific-popup');
+
+            $this->app->jui->addStaticInclude('lightgallery');
+            $this->app->jui->addStaticInclude('lg-fullscreen');
+            $this->app->jui->addStaticInclude('lg-thumbnail');
+            $this->app->jui->addStaticInclude('lg-autoplay');
+            $this->app->jui->addStaticInclude('lg-hash');
+            $this->app->jui->addStaticInclude('lg-pager');
+        }
+            $this->app->jui->addStaticInclude('jquery.magnific-popup');
+        
+    }
+
+    function addLocations() {
         $this->api->pathfinder->base_location->defineContents(array(
             'docs'=>array('docs','doc'),   // Documentation (external)
             'content'=>'content',          // Content in MD format
-            'addons'=>array('vendor','../addons','../shared'),
-            'php'=>array('shared','vender'),
-            'js'=>array('shared','vender','addons','vendor'),
-            'cs'=>array('shared','vender','addons','vendor'),
-        ))->setBasePath($this->api_base_path);
+            'addons'=>array('vendor','../addons','../shared','addons'),
+            'php'=>array('shared','vender','frontend','shared/lib'),
+            'js'=>array('shared','vender','addons','frontend/public/js','frontend/public/assets/js','frontend/public/assets'),
+            'css'=>array('shared','vender','addons','frontend/public/css','frontend/public/assets/css','frontend/public/assets'),
+            'page'=>array('frontend/page'),
+            'template'=>array('frontend/template')
+        ))->setBasePath($this->pathfinder->base_location->getPath());
     }
 
     function addProjectLocations() {
