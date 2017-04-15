@@ -130,11 +130,16 @@ class Frontend extends ApiFrontend {
         }
         $this->api->jui->addStaticInclude('hungry');
 
-        // $this->makeSEF();
+        $this->makeSEF();
     }
 
     function makeSEF(){
+        if(strtolower($this->app->page) ==  strtolower($this->app->city_name)){
+            $this->app->page = "index";
+        }
+
         $this->add('Controller_PatternRouter')
+            ->link('index', ['city'])
             ->link('restaurantdetail', ['slug'])
             ->route();
 
@@ -165,6 +170,8 @@ class Frontend extends ApiFrontend {
             'page'=>array('frontend/page'),
             'template'=>array('frontend/template')
         ))->setBasePath($this->pathfinder->base_location->getPath());
+
+        $this->pathfinder->base_location->setBaseUrl($this->url('/'));
     }
 
     function addProjectLocations() {

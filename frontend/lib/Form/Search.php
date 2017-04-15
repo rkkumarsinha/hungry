@@ -48,10 +48,10 @@ class Form_Search extends Form{
 
         $this->js('click')->_selector('.atk-swatch-orange.do-search')->submit();
         if($this->isSubmitted()){
-            
+            $city_model->load($this['city']);
             if($this->app->city_id != $this['city'])  {
                 $this->app->memorize('city_id',$this['city']);
-                $this->app->redirect($this->app->url($this->redirect_page));
+                $this->app->redirect($this->app->url($this->redirect_page,['city'=>$city_model['name']]));
                 
             }
             
