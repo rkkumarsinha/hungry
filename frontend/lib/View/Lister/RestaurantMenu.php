@@ -17,6 +17,7 @@ class View_Lister_RestaurantMenu extends CompleteLister{
 			$this->add('View_Info',null,'not_found')->set('we are collecting images');
 		}
 
+		$this->template->trySet('absolute_url',$this->app->getConfig('absolute_url'));
 		$this->setModel($manu);
 	}
 
@@ -31,7 +32,9 @@ class View_Lister_RestaurantMenu extends CompleteLister{
 		// $path = "http://localhost/hungrydunia/frontend/".str_replace("..", "", $f->getPath());
 		$path = $this->app->getConfig('imagepath').str_replace("..", "", $f->getPath());
 		
-		$this->current_row['image'] = $path;		
+		$this->current_row['image'] = $path;
+		$this->current_row['absolute_url'] = $this->app->getConfig('absolute_url');
+
 		parent::formatRow();
 	}
 	

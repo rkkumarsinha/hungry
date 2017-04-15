@@ -8,6 +8,7 @@ class page_index extends Page
         $this->add('View_Search',null,'search_form');
 
         // echo $this->app->page."";
+        $this->template->trySet('absolute_url',$this->app->getConfig('absolute_url'));
     }
 
     function recursiveRender(){

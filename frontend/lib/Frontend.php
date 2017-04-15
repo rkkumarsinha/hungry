@@ -130,6 +130,9 @@ class Frontend extends ApiFrontend {
         }
         $this->api->jui->addStaticInclude('hungry');
 
+        $this->app->template->appendHTML('absolute_url','http://test.com/hungry/');
+        $this->app->layout->template->trySet('absolute_url','http://test.com/hungry/');
+
         $this->makeSEF();
     }
 
@@ -144,22 +147,22 @@ class Frontend extends ApiFrontend {
             ->route();
 
         if($this->app->page == "restaurantdetail"){
+            $this->app->jui->addStaticStyleSheet($this->app->getConfig('absolute_url').'frontend/public/css/lightgallery.css');
+            $this->app->jui->addStaticStyleSheet($this->app->getConfig('absolute_url').'frontend/public/css/magnific-popup.css');
 
-            $this->app->jui->addStaticStyleSheet('lightgallery');
-            $this->app->jui->addStaticStyleSheet('magnific-popup');
-
-            $this->app->jui->addStaticInclude('lightgallery');
-            $this->app->jui->addStaticInclude('lg-fullscreen');
-            $this->app->jui->addStaticInclude('lg-thumbnail');
-            $this->app->jui->addStaticInclude('lg-autoplay');
-            $this->app->jui->addStaticInclude('lg-hash');
-            $this->app->jui->addStaticInclude('lg-pager');
+            $this->app->jui->addStaticInclude($this->app->getConfig('absolute_url').'frontend/public/js/lightgallery.js');
+            $this->app->jui->addStaticInclude($this->app->getConfig('absolute_url').'frontend/public/js/lg-fullscreen.js');
+            $this->app->jui->addStaticInclude($this->app->getConfig('absolute_url').'frontend/public/js/lg-thumbnail.js');
+            $this->app->jui->addStaticInclude($this->app->getConfig('absolute_url').'frontend/public/js/lg-autoplay.js');
+            $this->app->jui->addStaticInclude($this->app->getConfig('absolute_url').'frontend/public/js/lg-hash.js');
+            $this->app->jui->addStaticInclude($this->app->getConfig('absolute_url').'frontend/public/js/lg-pager.js');
         }
-            $this->app->jui->addStaticInclude('jquery.magnific-popup');
+        $this->app->jui->addStaticInclude($this->app->getConfig('absolute_url').'frontend/public/js/jquery.magnific-popup.js');
         
     }
 
     function addLocations() {
+        
         $this->api->pathfinder->base_location->defineContents(array(
             'docs'=>array('docs','doc'),   // Documentation (external)
             'content'=>'content',          // Content in MD format
@@ -170,8 +173,6 @@ class Frontend extends ApiFrontend {
             'page'=>array('frontend/page'),
             'template'=>array('frontend/template')
         ))->setBasePath($this->pathfinder->base_location->getPath());
-
-        $this->pathfinder->base_location->setBaseUrl($this->url('/'));
     }
 
     function addProjectLocations() {

@@ -74,6 +74,8 @@ class Page extends AbstractView {
         }
 
         $this->addMetaTag();
+        // for static loading of files
+        $this->template->trySet('absolute_url','http://test.com/hungry/');
         parent::init();
     }
     function defaultTemplate(){
