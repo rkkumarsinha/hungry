@@ -53,7 +53,7 @@ class Form_Event extends Form{
 
             if($this->app->city_id != $this['city'])  {
                 $this->app->memorize('city_id',$this['city']);
-                $this->app->redirect($this->app->url($this->redirect_page));
+                $this->app->redirect($this->app->url($this->redirect_page,['city'=>$this->app->active_city[$this['city']]]));
             }
             
             $event_model = $this->add('Model_Event')->tryLoad($this['keyword']);
