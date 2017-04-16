@@ -9,6 +9,7 @@ class page_index extends Page
 
         // echo $this->app->page."";
         $this->template->trySet('absolute_url',$this->app->getConfig('absolute_url'));
+        $this->template->trySet('current_city',$this->app->city_name);
     }
 
     function recursiveRender(){

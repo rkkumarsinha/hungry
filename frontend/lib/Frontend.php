@@ -162,9 +162,11 @@ class Frontend extends ApiFrontend {
             ->link('venue', ['city'])
             ->link('destination', ['city','venue'])
             ->link('destinationdetail', ['slug'])
+            ->link('eventdetail', ['slug'])
+            ->link('discount', ['city','discount'])
             ->route();
 
-        if(in_array($this->app->page,["restaurantdetail",'destinationdetail'])){
+        if(in_array($this->app->page,["restaurantdetail",'destinationdetail','eventdetail'])){
             $this->app->jui->addStaticStyleSheet($this->app->getConfig('absolute_url').'frontend/public/css/lightgallery.css');
             $this->app->jui->addStaticStyleSheet($this->app->getConfig('absolute_url').'frontend/public/css/magnific-popup.css');
 

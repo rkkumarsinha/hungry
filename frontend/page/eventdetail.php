@@ -51,7 +51,7 @@ class page_eventdetail extends Page{
         
         $this->template->set('event_banner_image',$banner_image_url);
         $this->template->set('event_logo_image',$logo_image_url);
-
+        
         // Date Format
         $this->template->trySet('starting_date_redable',date('M-d-Y',strtotime($this->model['starting_date'])));
         $this->template->trySet('starting_time_redable',date('H:i a',strtotime($this->model['starting_time'])));
@@ -63,6 +63,7 @@ class page_eventdetail extends Page{
         $this->template->trySetHtml('guidelines_html',$this->model['guidelines']);
         $this->template->trySetHtml('how_to_reach_html',$this->model['how_to_reach']);
         $this->template->trySetHtml('disclaimer_html',$this->model['disclaimer']);
+        $this->template->trySetHtml('absolute_url',$this->app->getConfig('absolute_url'));
         // $event = $this->add('View_EventTicket');
         // $event->setModel($m);
     }
@@ -116,7 +117,7 @@ class page_eventdetail extends Page{
             $event_day_time .= "</div>";
         }
 
-        //ticket price
+     //    //ticket price
         $this->add('View',null,'ticket_price')->setHtml($all_str);
         //event ticket day time        
         // $this->add('View',null,'event_day_time')->setHtml('<div class="hungry-event-timing">'.$event_day_time."</div>");

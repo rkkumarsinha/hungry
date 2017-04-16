@@ -6,7 +6,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-9 col-sm-12 text-left restaurant-info">
-            <div class="restaurant-logo-image"><img src="{event_logo_image}assets/img/hungry-not-found.png{/}" onerror="this.src='assets/img/hungry-not-found.jpg';"/></div>
+            <div class="restaurant-logo-image"><img src="{event_logo_image}{/}" onerror="this.src='{$absolute_url}assets/img/hungry-not-found.jpg';"/></div>
             <h1>{name}Find Place For Fun and Eat{/}</h1>
             <div>{address}{/}</div>
           </div>
@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div style="background:rgba(0, 0, 0, 0.45) none repeat scroll 0 0;" class="background"><img src="{event_banner_image}assets/img/restaurant-detail-banner.jpg{/}" alt="" style="width:100%;"/></div>
+    <div style="background:rgba(0, 0, 0, 0.45) none repeat scroll 0 0;" class="background"><img src="{event_banner_image}assets/img/restaurant-detail-banner.jpg{/}" alt="" style="width:100%;height: 100%;"/></div>
   </section>{$Content}
   <section class="container">
     <div class="row">
@@ -38,7 +38,7 @@
                     {email_wrapper}
                     <div class="info"><i class="fa fa-envelope"></i><span>{$email}</span></div>{/}
                     {website_wrapper}
-                    <div class="info"><i class="fa fa-globe"></i><a href="#">{$website}</a></div>{/}
+                    <div class="info"><i class="fa fa-globe"></i><a href="{$website}" target="_blank">{$website}</a></div>{/}
                     <div style="margin-bottom:20px;margin-top:5px;" class="social">{facebook_wrapper}<a target="_blank" href="{$facebook_page_url}" style="float:left;" class="social-button"><i style="padding:0px !important;" class="fa fa-facebook facebook"></i></a>{/}
                       {instagram_wrapper}<a target="_blank" href="{$instagram_page_url}" style="float:left;" class="social-button"><i style="padding:0px !important;float:left;" class="fa fa-instagram instagram"></i></a>{/}
                     </div>

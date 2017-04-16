@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="{$absolute_url}frontend/public/assets/css/style.css" type="text/css">
     
     <style type="text/css">
-      div#hungry_preloader { position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overflow: visible; background: #333 url('http://hungrydunia.com/assets/img/loading.gif') no-repeat center center; }
+      div#hungry_preloader { position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overflow: visible; background: #333 url('{$absolute_url}assets/img/loading.gif') no-repeat center center; }
     </style>
     {$js_include}
     <script type="text/javascript">
@@ -39,7 +39,7 @@
           {$document_ready}
       });
       $(window).load(function(){
-        $('#hungry_preloader').fadeOut('slow',function(){$(this).remove();});
+        $('#hungry_preloader').fadeOut('fast',function(){$(this).remove();});
       });
     </script>
   </head>
