@@ -5,41 +5,23 @@ class Frontend extends ApiFrontend {
     function init() {
         parent::init();
 
+        
         date_default_timezone_set("Asia/Calcutta");
         
         $this->api_public_path = dirname(@$_SERVER['SCRIPT_FILENAME']);
         $this->api_base_path = dirname(dirname(@$_SERVER['SCRIPT_FILENAME']));
 
-        // $this->add('Layout_Centered');
-
         $this->addLocations();
         // $this->addProjectLocations();
         // $this->addAddonsLocations();
-        $this->add('jUI');
         // $this->initAddons();
-
-        // $this->app->jui->addStaticStyleSheet('fonts/font-awesome');
-        // $this->app->jui->addStaticStyleSheet('bootstrap-select.min');
-        // $this->app->jui->addStaticStyleSheet('jquery.nouislider.min');
-        // $this->app->jui->addStaticStyleSheet('bootstrap/css/bootstrap');
-        // $this->app->jui->addStaticStyleSheet('zmystyle');
-        // $this->app->jui->addStaticStyleSheet('style');
-
-        // $this->app->jui->addStaticInclude('bootstrap/js/bootstrap.min');
-        // $this->app->jui->addStaticInclude('jquery-migrate-1.2.1.min');
-        // $this->app->jui->addStaticInclude('smoothscroll');
-        // $this->app->jui->addStaticInclude('jquery.hotkeys');
-        // $this->app->jui->addStaticInclude('jquery.nouislider.all.min');
-        // $this->app->jui->addStaticInclude('custom');
-        // $this->app->jui->addStaticInclude('owl.carousel.min');
-        // $this->app->jui->addStaticInclude('gmap3');
-        // $this->app->jui->addStaticInclude('hungrydunia');
-        // $this->app->jui->addStaticInclude('star-rating');
+        $this->add('jUI');
         
+        $this->add('performance/Controller_Profiler');
         $this->add('Layout_HungryDunia');
 
         $this->dbConnect();
-
+        
         $auth=$this->add('Auth');
         $auth->usePasswordEncryption();
         $auth->setModel('User','email','password');
