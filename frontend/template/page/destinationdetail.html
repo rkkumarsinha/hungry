@@ -6,7 +6,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-9 col-sm-12 text-left restaurant-info">
-            <div class="restaurant-logo-image"><img src="{destination_logo_image}assets/img/hungry-not-found.png{/}" onerror="this.src='assets/img/hungry-not-found.jpg';"/></div>
+            <div class="restaurant-logo-image"><img src="{destination_logo_image}assets/img/hungry-not-found.png{/}" onerror="this.src='{$absolute_url}assets/img/hungry-not-found.jpg';"/></div>
             <h1>{name}Find Place For Fun and Eat{/}</h1>
             <div>{address}{/}</div>
           </div>
@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div style="background:rgba(0, 0, 0, 0.45) none repeat scroll 0 0;z-index:-1;" class="background"><img src="{destination_banner_image}assets/img/restaurant-detail-banner.jpg{/}" alt="" style="width:100%;" onerror="this.src='assets/img/hungry-not-found.jpg'"/></div>
+    <div style="background:rgba(0, 0, 0, 0.45) none repeat scroll 0 0;z-index:-1;" class="background"><img src="{destination_banner_image}assets/img/restaurant-detail-banner.jpg{/}" alt="" style="width:100%;height: 100%;" onerror="this.src='{$absolute_url}assets/img/hungry-not-found.jpg'"/></div>
   </section>{$Content}
   <section class="container">
     <div class="row">
@@ -60,7 +60,7 @@
                     <div class="content">{facilites}
                       <div class="info">
                         <div class="row">
-                          <div class="col-md-3"><img src="{$icon_url}" style="width:30px;float:left" onerror="this.src='assets/img/hungry-not-found.jpg'"/></div>
+                          <div class="col-md-3"><img src="{$icon_url}" style="width:30px;float:left" onerror="this.src='{$absolute_url}assets/img/hungry-not-found.jpg'"/></div>
                           <div class="col-md-9">
                             <p style="padding:5px;">{$destination_highlight}</p>
                           </div>
@@ -80,7 +80,7 @@
                     <div class="content"></div>{occassion}
                     <div class="info">
                       <div class="row">
-                        <div class="col-md-3"><img src="{$icon_url}" style="width:30px;float:left" onerror="this.src='assets/img/hungry-not-found.jpg'"/></div>
+                        <div class="col-md-3"><img src="{$icon_url}" style="width:30px;float:left" onerror="this.src='{$absolute_url}assets/img/hungry-not-found.jpg'"/></div>
                         <div class="col-md-9">
                           <p style="padding:5px;">{$destination_highlight}</p>
                         </div>
@@ -99,7 +99,7 @@
                     <div class="content"></div>{service}
                     <div class="info">
                       <div class="row">
-                        <div class="col-md-3"><img src="{$icon_url}" style="width:30px;float:left" onerror="this.src='assets/img/hungry-not-found.jpg'"/></div>
+                        <div class="col-md-3"><img src="{$icon_url}" style="width:30px;float:left" onerror="this.src='{$absolute_url}assets/img/hungry-not-found.jpg'"/></div>
                         <div class="col-md-9">
                           <p style="padding:5px;">{$destination_highlight}</p>
                         </div>
@@ -210,7 +210,7 @@
                     </div>
                     <div id="space" role="tabpanel" class="tab-pane">{dest_space}
                       <div class="row">
-                        <div class="col-md-3"><img src="{$icon_url}" style="width:30px;float:left" onerror="this.src='assets/img/hungry-not-found.jpg'"/></div>
+                        <div class="col-md-3"><img src="{$icon_url}" style="width:30px;float:left" onerror="this.src='{$absolute_url}assets/img/hungry-not-found.jpg'"/></div>
                         <div class="col-md-9">
                           <h4 style="text-transform:uppercase;">{$name}</h4>
                           <div class="row">
@@ -272,7 +272,7 @@
                   <div class="content">{space}
                     <div class="info">
                       <div class="row">
-                        <div class="col-md-3"><img src="{$icon_url}" style="width:30px;float:left" onerror="this.src='assets/img/hungry-not-found.jpg'"/></div>
+                        <div class="col-md-3"><img src="{$icon_url}" style="width:30px;float:left" onerror="this.src='{$absolute_url}assets/img/hungry-not-found.jpg'"/></div>
                         <div class="col-md-9">
                           <p style="padding:5px;">{$name}</p>
                         </div>
@@ -295,7 +295,7 @@
                   <div class="content"></div>{venue}
                   <div class="info">
                     <div class="row">
-                      <div class="col-md-3"><img src="{$icon_url}" style="width:30px;float:left" onerror="this.src='assets/img/hungry-not-found.jpg'"/></div>
+                      <div class="col-md-3"><img src="{$icon_url}" style="width:30px;float:left" onerror="this.src='{$absolute_url}assets/img/hungry-not-found.jpg'"/></div>
                       <div class="col-md-9">
                         <p style="padding:5px;">{$name}</p>
                       </div>

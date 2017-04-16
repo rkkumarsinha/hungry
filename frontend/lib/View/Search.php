@@ -5,7 +5,7 @@ class View_Search extends View{
 		parent::init();
 
 		$page_name = $this->app->page_object->short_name;
-
+		
 		// $tab = $this->add('Tabs');
 		// $rest_tab = $tab->addTab('Restaurant');
 		// $event_tab = $tab->addTab('Event');
@@ -33,6 +33,9 @@ class View_Search extends View{
 				break;
 		}
 
+		$this->template->trySet('restaurat_url',$this->app->getConfig('absolute_url')."index/".$this->app->city_name);
+		$this->template->trySet('event_url',$this->app->getConfig('absolute_url')."event/".$this->app->city_name);
+		$this->template->trySet('venue_url',$this->app->getConfig('absolute_url')."venue/".$this->app->city_name);
 		// $form->layout->add('View_Location',null,'location');
 	}
 

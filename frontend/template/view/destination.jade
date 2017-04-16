@@ -25,7 +25,7 @@ div(id="{$_name}" class="{$class}" style="{$style}")
                 span(title='Total Package')
                   i.fa.fa-tags
                   |  {package_count}{/}
-              img(src='{display_image}assets/img/small.jpg{/}' alt='' onerror="this.src='assets/img/hungry-not-found.jpg'")
+              img(src='{display_image}{$absolute_url}assets/img/small.jpg{/}' alt='' onerror="this.src='{$absolute_url}assets/img/hungry-not-found.jpg'")
             .restaurant-category
               i.fa.fa-hungry {$first_category}
           {requesttobook_wrapper}
@@ -34,13 +34,13 @@ div(id="{$_name}" class="{$class}" style="{$style}")
           .wrapper(style="padding-top:20px;")
             a(href='{$path}')
               h3
-                img(src='assets/img/{$food_type}.png', alt='{$food_type}')
+                img(src='{$absolute_url}assets/img/{$food_type}.png', alt='{$food_type}')
                 |  {name}Steak House Restaurant{/}
             figure {address}63 Birch Street{/}
           .info.text-center
             .type
               i
-                img(src='{category_icon_url}assets/icons/restaurants-bars/restaurants/restaurant_indian.png{/}', alt='{$category}' onerror="this.src='assets/img/hungry-not-found.jpg'")
+                img(src='{$absolute_url}{category_icon_url}assets/icons/restaurants-bars/restaurants/restaurant_indian.png{/}', alt='{$category}' onerror="this.src='{$absolute_url}assets/img/hungry-not-found.jpg'")
               span {type}{/}
             {$rating_star}
             | {$menu}

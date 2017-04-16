@@ -12,7 +12,9 @@ class Model_Destination_VenueAssociation extends SQL_Model{
 		$this->addExpression('icon_url')->set(function($m,$q){
 			return $q->expr("replace([0],'/public','')",[$m->refSQL('venue_id')->fieldQuery('image')]);
 		});
-
+		$this->addExpression('absolute_url')->set(function($m,$q){
+			return $q->expr("'[0]'",[$m->app->getConfig('absolute_url')]);
+		});
 		$this->addHook('afterSave',[$this,'updateSearchString']);
 		// $this->add('dynamic_model/Controller_AutoCreator');
 	}

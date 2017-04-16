@@ -22,13 +22,13 @@ div(id="{$_name}" class="{$class}" style="{$style}")
               span(title='Total Package')
                 i.fa.fa-tags
                 |  {package_count}{/}
-            img(src='{display_image}assets/img/small.jpg{/}' alt='' onerror="this.src='assets/img/hungry-not-found.jpg'")
+            img(src='{display_image}assets/img/small.jpg{/}' alt='' onerror="this.src='{$absolute_url}assets/img/hungry-not-found.jpg'")
           .restaurant-category(style="z-index:10;")
             i.fa.fa-hungry {$first_category}
         .info.text-center(style="display:none")
           .type
             i
-              img(src='{category_icon_url}assets/icons/restaurants-bars/restaurants/restaurant_indian.png{/}', alt='{$category}' onerror="this.src='assets/img/hungry-not-found.jpg'")
+              img(src='{category_icon_url}assets/icons/restaurants-bars/restaurants/restaurant_indian.png{/}', alt='{$category}' onerror="this.src='{$absolute_url}assets/img/hungry-not-found.jpg'")
             span {type}{/}
           {$rating_star}
           | {$menu}

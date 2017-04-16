@@ -5,10 +5,11 @@ class page_destination extends Page{
     function init(){
         parent::init();
         
-        $this->api->stickyGET('venue');
 		$this->api->stickyGET('city');
-		
-		//Featured Restaurant
+        $this->api->stickyGET('venue');
+        
+        $this->template->trySet('absolute_url',$this->app->getConfig('absolute_url'));
+		// //Featured Restaurant
         $destination_model = $this->add('Model_Destination');
         $destination_model->addCondition('is_verified',true);
         $destination_model->addCondition('status','active');
@@ -36,7 +37,7 @@ class page_destination extends Page{
             $this->app->forget('venue_data');
         }else
             $destination_model->addCondition('city_id',$this->app->city_id);
-
+        
         
         $list = $this->add('View_Lister_Destination',null,'destinationlist');
         $list->addClass('hungrydestinationlister');

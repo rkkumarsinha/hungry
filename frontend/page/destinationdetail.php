@@ -1,14 +1,16 @@
 <?php
 
 class page_destinationdetail extends Page{
-	
+    
     public $gallery_model;
-	public $destination_model;
-	public $event_id=0;
+    public $destination_model;
+    public $event_id=0;
 
     function init(){
         parent::init();
 
+        
+        $this->template->set('absolute_url',$this->app->getConfig('absolute_url'));
         //loading required model
         $slug = trim($this->api->stickyGET('slug'));
         $destination_model = $this->add('Model_Destination')
@@ -38,6 +40,7 @@ class page_destinationdetail extends Page{
         $this->setMetaTag('title',$destination_model['title']);
         $this->setMetaTag('keyword',$destination_model['keyword']);
         $this->setMetaTag('description',$destination_model['description']);       
+
     }
 
     function setModel($m){
@@ -53,16 +56,18 @@ class page_destinationdetail extends Page{
         $this->template->trySetHtml('guidelines_html',$this->model['guidelines']);
         $this->template->trySetHtml('how_to_reach_html',$this->model['how_to_reach']);
         $this->template->trySetHtml('disclaimer_html',$this->model['disclaimer']);
-
+            
+        $this->template->trySet('absolute_url',$this->app->getConfig('absolute_url'));
     }
 
     function recursiveRender(){
+
         $this->add('View_RedefineSearch',null,'redefine_search');
 
         $gallery = $this->add('View_Lister_DestinationGallery',['destination_id'=>$this->destination_id],'gallery');
         $gallery->setModel($this->gallery_model);
 
-        //Add Facilitiy
+        // //Add Facilitiy
         $facility_model = $this->add('Model_Destination_HighlightAssociation')
                         ->addCondition('destination_id',$this->destination_id)
                         ->addCondition('highlight_type',"facility")
@@ -70,7 +75,7 @@ class page_destinationdetail extends Page{
                         ;
         $this->add('Lister',null,'facilites',['page/destinationdetail','facilites'])->setModel($facility_model);
 
-        //add Occassion/ Destination For
+        // //add Occassion/ Destination For
         $occasion_model = $this->add('Model_Destination_HighlightAssociation')
                         ->addCondition('destination_id',$this->destination_id)
                         ->addCondition('highlight_type',"occasion")
@@ -78,7 +83,7 @@ class page_destinationdetail extends Page{
                         ;
         $this->add('Lister',null,'occassion',['page/destinationdetail','occassion'])->setModel($occasion_model);
 
-        //service available
+        // //service available
         $service_model = $this->add('Model_Destination_HighlightAssociation')
                         ->addCondition('destination_id',$this->destination_id)
                         ->addCondition('highlight_type',"service")
@@ -97,7 +102,7 @@ class page_destinationdetail extends Page{
                         ->addCondition('is_active',true)
                         ->addCondition('destination_id',$this->destination_id)
                         ;
-        // $this->add('Lister',null,'space',['page/destinationdetail','dest_space'])->setModel($space_model);
+        // // $this->add('Lister',null,'space',['page/destinationdetail','dest_space'])->setModel($space_model);
         $this->add('Lister',null,'dest_space',['page/destinationdetail','dest_space'])->setModel($space_model);
 
         // //Destination Packages
@@ -108,7 +113,7 @@ class page_destinationdetail extends Page{
         $this->add('Lister',null,'packages',['page/destinationdetail','packages'])->setModel($package_model);
         
 
-        //Similar Destination
+        // //Similar Destination
         $similar_destination_model = $this->add('Model_Destination')->setLimit(3);
         $list = $this->add('View_Lister_Destination',['template'=>'view/similardestination'],'similar_destination');
         $list->setModel($similar_destination_model);
@@ -133,7 +138,7 @@ class page_destinationdetail extends Page{
         if(!$this->model['instagram_page_url'])
             $this->template->tryDel('instagram_wrapper');
 
-        // Booking Request form
+        // // Booking Request form
         $enquiry_form = $this->add('View_RequestToBook',null,'enquiryform');
         $js_event = [
                         $this->js()->_selector('#destination_enquiry_modalpopup')->modal('show'),
