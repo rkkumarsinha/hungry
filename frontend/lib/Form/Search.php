@@ -50,9 +50,8 @@ class Form_Search extends Form{
         if($this->isSubmitted()){
             $city_model->load($this['city']);
             if($this->app->city_id != $this['city'])  {
-                $this->app->memorize('city_id',$this['city']);
+                // $this->app->memorize('city_id',$this['city']);
                 $this->app->redirect($this->app->url($this->redirect_page,['city'=>$city_model['name']]));
-                
             }
             
             $restro_id = 0;
