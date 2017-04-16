@@ -54,6 +54,7 @@ class Frontend extends ApiFrontend {
             }
         }
         
+
         //Subscription Form
         $f = $this->layout->add('Form',null,'subscription',['form\stacked'])->addClass('hungry-subscription');
         $f->addField('email')->validateNotNull()->validateField('filter_var($this->get(), FILTER_VALIDATE_EMAIL)');
@@ -70,24 +71,24 @@ class Frontend extends ApiFrontend {
         $this->api->today = date('Y-m-d');
         $this->api->now = date('Y-m-d H:i:s');
 
+        $this->makeSEF();
+
         $this->app->city_name = $this->app->recall('city_id')?:$_GET['city']?:"Udaipur";
-        // throw new \Exception($this->app->city_name);
         
         if($this->app->city_name){
             if(is_numeric($this->app->city_name)){
                 $this->app->city = $city = $this->add('Model_City')->load($this->app->city_name);
                 $this->app->city_id = $city->id;
-                $this->app->city_name = $city['name'];
+                $this->app->city_name = strtolower($city['name']);
             }else{
                 $this->app->city = $city = $this->add('Model_City')->loadBy('name',$this->app->city_name);
                 $this->app->city_id = $city->id;
-                $this->app->city_name = $city['name'];
-                
+                $this->app->city_name =  strtolower($city['name']); 
                 // $area = $this->add('Model_Area')->loadBy('name',$this->app->city_name);
                 // $this->app->area_id = $area->id;
             }
         }
-
+        
         if($this->api->auth->model->id){
             $this->layout->add('View',null,'username')->setElement('strong')->set("Hello ".$this->api->auth->model['name'])->setStyle('color','white');
             $this->layout->template->tryDel('register_wrapper');
@@ -133,20 +134,37 @@ class Frontend extends ApiFrontend {
         $this->app->template->appendHTML('absolute_url','http://test.com/hungry/');
         $this->app->layout->template->trySet('absolute_url','http://test.com/hungry/');
 
-        $this->makeSEF();
     }
 
     function makeSEF(){
-        if(strtolower($this->app->page) ==  strtolower($this->app->city_name)){
+        
+        $citylist = $this->add('Model_City')->addCondition('is_active',true)->getRows();
+        $active_city = [];
+        foreach ($citylist as $key => $city) {
+            if(!$city['is_active']) continue;
+            $active_city[$city['id']] = strtolower($city['name']);
+        }
+        $this->active_city = $active_city;
+
+        if(strtolower($this->app->page) == strtolower(isset($this->app->city_name)?$this->app->city_name:"")){
             $this->app->page = "index";
+        }
+
+        if(in_array(strtolower($this->app->page), $active_city)){
+            $_GET['city'] = $this->app->page;
+            $this->app->page = 'index';
         }
 
         $this->add('Controller_PatternRouter')
             ->link('index', ['city'])
             ->link('restaurantdetail', ['slug'])
+            ->link('event', ['city'])
+            ->link('venue', ['city'])
+            ->link('destination', ['city','venue'])
+            ->link('destinationdetail', ['slug'])
             ->route();
 
-        if($this->app->page == "restaurantdetail"){
+        if(in_array($this->app->page,["restaurantdetail",'destinationdetail'])){
             $this->app->jui->addStaticStyleSheet($this->app->getConfig('absolute_url').'frontend/public/css/lightgallery.css');
             $this->app->jui->addStaticStyleSheet($this->app->getConfig('absolute_url').'frontend/public/css/magnific-popup.css');
 
