@@ -17,7 +17,7 @@ class Frontend extends ApiFrontend {
         // $this->initAddons();
         $this->add('jUI');
         
-        $this->add('performance/Controller_Profiler');
+        // $this->add('performance/Controller_Profiler');
         $this->add('Layout_HungryDunia');
 
         $this->dbConnect();
