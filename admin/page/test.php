@@ -12,8 +12,8 @@ class page_test extends Page {
     function init() {
         parent::init();
 
-        $rest = $this->add("Model_Restaurant")->load(22);
-        $this->add('View_Info')->set($rest['offers']." = ".$rest['name']);
+        // $rest = $this->add("Model_Restaurant")->load(22);
+        // $this->add('View_Info')->set($rest['offers']." = ".$rest['name']);
         // $this->add('View_LocationPicker');
         // $form = $this->add('Form');
         // $form->addField('text');

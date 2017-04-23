@@ -54,9 +54,12 @@ class Frontend extends ApiFrontend {
         $this->api->now = date('Y-m-d H:i:s');
 
         $this->makeSEF();
-
         $this->app->city_name = $this->app->recall('city_id')?:$_GET['city']?:"Udaipur";
-        
+        // appending city name in
+        if(!$_GET['city'] AND $this->app->page == "index"){
+            $this->app->js(true)->_library('history')->pushState(['Title'=>'index','Url'=>$this->app->city_name],'index',$this->app->city_name);
+        }
+
         if($this->app->city_name){
             if(is_numeric($this->app->city_name)){
                 $this->app->city = $city = $this->add('Model_City')->load($this->app->city_name);
