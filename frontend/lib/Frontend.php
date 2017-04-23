@@ -113,8 +113,8 @@ class Frontend extends ApiFrontend {
         }
         $this->api->jui->addStaticInclude('hungry');
 
-        $this->app->template->appendHTML('absolute_url','http://test.com/hungry/');
-        $this->app->layout->template->trySet('absolute_url','http://test.com/hungry/');
+        $this->app->template->appendHTML('absolute_url',$this->app->getConfig('absolute_url'));
+        $this->app->layout->template->trySet('absolute_url',$this->app->getConfig('absolute_url'));
 
     }
 
