@@ -159,7 +159,7 @@ class Frontend extends ApiFrontend {
             $this->app->jui->addStaticInclude($this->app->getConfig('absolute_url').'frontend/public/js/lg-hash.js');
             $this->app->jui->addStaticInclude($this->app->getConfig('absolute_url').'frontend/public/js/lg-pager.js');
         }
-        $this->app->jui->addStaticInclude($this->app->getConfig('absolute_url').'frontend/public/js/jquery.magnific-popup.js');
+        $this->app->jui->addStaticInclude($this->app->getConfig('absolute_url').'frontend/public/js/jquery.magnific-popup.min.js');
         
     }
 
