@@ -10,7 +10,7 @@ class View_Lister_UpcomingEvent extends CompleteLister{
 		parent::formatRow();
 
 		$this->current_row['display_image'] = str_replace("/public", "", $this->model['display_image']);
-		$this->current_row['path'] = $this->api->url('restaurantdetail',['slug'=>$this->model['url_slug']]);
+		$this->current_row['path'] = $this->api->url('restaurant',['slug'=>$this->model['url_slug']]);
 	}
 
 	function defaultTemplate(){

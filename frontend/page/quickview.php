@@ -20,7 +20,7 @@ class page_quickview extends Page{
 		$quickview->setModel($rest);
 
 		$quickview->template->trySet('avg_cost',$rest->avgCost());
-		$quickview->template->trySet('detail_url',$this->api->url('restaurantdetail',['slug'=>$rest['url_slug']])->getURL());
+		$quickview->template->trySet('detail_url',$this->api->url('restaurant',['slug'=>$rest['url_slug']])->getURL());
 		
 		$image_lister = $quickview->add('Lister',null,'gallery_images',['view/quickview','gallery_images']);
 		$image_lister->setSource($rest->getImages());

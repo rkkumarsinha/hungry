@@ -1,6 +1,6 @@
 <?php
 
-class page_restaurantdetail extends Page{
+class page_restaurant extends Page{
 	
     public $gallery_model;
 	public $menu_model;

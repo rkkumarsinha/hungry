@@ -74,7 +74,7 @@ class Form_Search extends Form{
             if($restro_id > 0){
                 $rest_model = $this->add('Model_Restaurant')->tryLoad($restro_id);
                 if($rest_model->loaded()){
-                    $this->app->redirect($this->app->url('restaurantdetail',['slug'=>$rest_model['url_slug']]));
+                    $this->app->redirect($this->app->url('restaurant',['slug'=>$rest_model['url_slug']]));
                 }
             }
 

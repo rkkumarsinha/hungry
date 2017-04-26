@@ -45,7 +45,7 @@ class View_FilterMapSearch extends View{
 					"location" => $rest['address']." ".$rest['area']." ".$rest['city']." ".$rest['state']." ".$rest['country'],
 		            "latitude" => $rest['latitude'],
 		            "longitude" => $rest['longitude'],
-		            "url"=> $this->api->url('restaurantdetail',['slug'=>$rest['url_slug']])->getURL(),
+		            "url"=> $this->api->url('restaurant',['slug'=>$rest['url_slug']])->getURL(),
 		            "type"=> $rest['category'],
 		            "type_icon"=>$rest['category_icon_url'],
 		            "rating"=> $rest['rating'],

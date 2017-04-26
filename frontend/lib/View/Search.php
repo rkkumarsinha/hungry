@@ -13,7 +13,7 @@ class View_Search extends View{
 		$form = $this;
 		switch ($page_name) {
 			case 'index':
-			case 'restaurantdetail':
+			case 'restaurant':
 				$form = $this->add('Form_Search',['redirect_page'=>'index'],'form_search');
 				$this->template->trySet('tab_restaurant','active');
 				break;

@@ -152,7 +152,7 @@ class Frontend extends ApiFrontend {
 
         $this->add('Controller_PatternRouter')
             ->link('index', ['city'])
-            ->link('restaurantdetail', ['slug'])
+            ->link('restaurant', ['slug'])
             ->link('event', ['city'])
             ->link('venue', ['city'])
             ->link('destination', ['city','venue'])
@@ -162,7 +162,7 @@ class Frontend extends ApiFrontend {
             ->link('search', ['city'])
             ->route();
 
-        if(in_array($this->app->page,["restaurantdetail",'destinationdetail','eventdetail'])){
+        if(in_array($this->app->page,["restaurant",'destinationdetail','eventdetail'])){
             $this->app->jui->addStaticStyleSheet($this->app->getConfig('absolute_url').'frontend/public/css/lightgallery.css');
             $this->app->jui->addStaticStyleSheet($this->app->getConfig('absolute_url').'frontend/public/css/magnific-popup.css');
 

@@ -17,7 +17,7 @@ class View_Lister_Restaurant extends CompleteLister{
 
 	function formatRow(){			
 		$this->current_row['display_image'] = str_replace("/public", "", $this->model['display_image'])?:($this->app->getConfig('absolute_url')."assets/img/hungry-not-found.jpg");
-		$this->current_row['path'] = $this->api->url('restaurantdetail',['slug'=>$this->model['url_slug']]);
+		$this->current_row['path'] = $this->api->url('restaurant',['slug'=>$this->model['url_slug']]);
 
 		// $avgcost = $this->model['avg_cost_per_person_veg'];
 		// if()
