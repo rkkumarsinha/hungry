@@ -54,7 +54,17 @@ class Frontend extends ApiFrontend {
         $this->api->now = date('Y-m-d H:i:s');
 
         $this->makeSEF();
-        $this->app->city_name = $this->app->recall('city_id')?:$_GET['city']?:"Udaipur";
+        // $this->app->city_name = $this->app->recall('city_id')?:$_GET['city']?:"Udaipur";
+        if($this->app->recall('city_id') && $_GET['city']){
+            $this->app->city_name = $_GET['city'];
+        }elseif($_GET['city'] && !$this->app->recall('city_id')){
+            $this->app->city_name = $_GET['city'];
+        }elseif(!$_GET['city'] && $this->app->recall('city_id')){
+            $this->app->city_name = $this->app->recall('city_id');
+        }else{
+            $this->app->city_name = "Udaipur";
+        }
+
         // appending city name in
         if(!$_GET['city'] AND $this->app->page == "index"){
             $this->app->js(true)->_library('history')->pushState(['Title'=>'index','Url'=>$this->app->city_name],'index',$this->app->city_name);
@@ -149,6 +159,7 @@ class Frontend extends ApiFrontend {
             ->link('destinationdetail', ['slug'])
             ->link('eventdetail', ['slug'])
             ->link('discount', ['city','discount'])
+            ->link('search', ['city'])
             ->route();
 
         if(in_array($this->app->page,["restaurantdetail",'destinationdetail','eventdetail'])){
