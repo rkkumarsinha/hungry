@@ -90,7 +90,7 @@ class Form_Venue extends Form{
             if(is_numeric($this['keyword'])){
                 $destination_model = $this->add('Model_Destination')->tryLoad($this['keyword']);
                 if($destination_model->loaded())               
-                    $this->app->redirect($this->app->url('destinationdetail',['slug'=>$destination_model['url_slug']]));
+                    $this->app->redirect($this->app->url('venuedetail',['slug'=>$destination_model['url_slug']]));
             }
 
             $venue_data = [

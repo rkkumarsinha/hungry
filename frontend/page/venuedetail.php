@@ -1,6 +1,6 @@
 <?php
 
-class page_destinationdetail extends Page{
+class page_venuedetail extends Page{
     
     public $gallery_model;
     public $destination_model;
