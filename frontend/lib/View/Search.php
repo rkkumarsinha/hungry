@@ -17,9 +17,9 @@ class View_Search extends View{
 				$form = $this->add('Form_Search',['redirect_page'=>'index'],'form_search');
 				$this->template->trySet('tab_restaurant','active');
 				break;
+			case 'eventlist':
 			case 'event':
-			case 'eventdetail':
-				$form = $this->add('Form_Event',['redirect_page'=>'event'],'form_search');
+				$form = $this->add('Form_Event',['redirect_page'=>'eventlist'],'form_search');
 				$this->template->trySet('tab_event','active');
 				break;
 			case 'venue':
@@ -33,8 +33,8 @@ class View_Search extends View{
 				break;
 		}
 
-		$this->template->trySet('restaurat_url',$this->app->getConfig('absolute_url')."index/".$this->app->city_name);
-		$this->template->trySet('event_url',$this->app->getConfig('absolute_url')."event/".$this->app->city_name);
+		$this->template->trySet('restaurat_url',$this->app->getConfig('absolute_url')."".$this->app->city_name);
+		$this->template->trySet('event_url',$this->app->getConfig('absolute_url')."eventlist/".$this->app->city_name);
 		$this->template->trySet('venue_url',$this->app->getConfig('absolute_url')."venue/".$this->app->city_name);
 		// $form->layout->add('View_Location',null,'location');
 	}

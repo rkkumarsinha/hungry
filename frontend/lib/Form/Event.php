@@ -58,7 +58,7 @@ class Form_Event extends Form{
             
             $event_model = $this->add('Model_Event')->tryLoad($this['keyword']);
             if($event_model->loaded()){
-                $this->app->redirect($this->app->url('eventdetail',['slug'=>$event_model['url_slug']]));
+                $this->app->redirect($this->app->url('event',['slug'=>$event_model['url_slug']]));
             }
 
              $search_term = 0;
