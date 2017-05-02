@@ -70,6 +70,23 @@ $.each({
 			},
 			enableAutocomplete: true,
 		});
+	},
+
+	selectCity: function(field_id,city_id,city_list,base_url){
+		if(city_id <= 0){
+			$.univ().errorMessage('please select city');
+			return;
+		}
+
+		var city_name = "";
+		$.each(city_list, function(index, city) {
+			if(city.id == city_id){
+				city_name = city.name;
+				return false;
+			}
+		});
+
+		window.location.href = base_url+city_name;
 	}
 
 },$.univ._import);

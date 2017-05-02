@@ -22,7 +22,7 @@ class page_user extends Page{
 		$user_crud->add('misc/Export');
 		$user_crud->setModel($user_model);
 		$user_crud->grid->addPaginator($ipp=30);
-		$user_crud->grid->addQuickSearch(['name','email']);
+		$user_crud->grid->addQuickSearch(['name','email','mobile']);
 		$user_model->setOrder('created_at','Desc');
 		$user_crud->grid->addHook('formatRow',function($g){
 

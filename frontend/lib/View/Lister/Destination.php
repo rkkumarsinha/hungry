@@ -22,15 +22,16 @@ class View_Lister_Destination extends CompleteLister{
 		$timestamp = strtotime($this->model['starting_date']);
 		$day = date('d', $timestamp);
 		$month = date('M', $timestamp);
-		
+				
 		$this->current_row['display_image'] = str_replace("/public", "", $this->model['display_image'])?:"assets/img/hungry-not-found.jpg";
-		$this->current_row['path'] = $this->api->url('destinationdetail',['slug'=>$this->model['url_slug']]);
+		$this->current_row['path'] = $this->app->getConfig('absolute_url').'venuedetail/'.$this->model['url_slug'];
+		// $this->current_row['path'] = $this->api->url('destinationdetail',['slug'=>$this->model['url_slug']]);
 		$this->current_row['starting_date'] = $day;
 		$this->current_row['starting_month'] = $month;
 
 		$review = $this->add('View_Review',['restaurant_rating'=>$this->model['rating']],'rating_star');
 		$this->current_row_html['rating_star'] = $review->getHtml();
-
+		$this->current_row_html['absolute_url'] = $this->app->getConfig('absolute_url');
 		parent::formatRow();
 	}
 

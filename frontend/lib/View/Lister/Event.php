@@ -24,7 +24,8 @@ class View_Lister_Event extends CompleteLister{
 		$month = date('M', $timestamp);
 		
 		$this->current_row['display_image'] = str_replace("/public", "", $this->model['display_image']);
-		$this->current_row['path'] = $this->api->url('eventdetail',['slug'=>$this->model['url_slug']]);
+		$this->current_row['path'] = $this->app->getConfig('absolute_url').'event/'.$this->model['url_slug'];
+		// $this->current_row['path'] = $this->api->url('eventdetail',['slug'=>$this->model['url_slug']]);
 
 		$this->current_row['starting_date'] = $day;
 		$this->current_row['starting_month'] = $month;
@@ -35,7 +36,7 @@ class View_Lister_Event extends CompleteLister{
 			$this->current_row_html['bookticket_wrapper'] = '<div style="height:48px;"></div>';
 		}
 
-
+		$this->current_row_html['absolute_url'] = $this->app->getConfig('absolute_url');
 		parent::formatRow();
 	}
 

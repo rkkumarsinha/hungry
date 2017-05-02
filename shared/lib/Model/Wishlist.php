@@ -26,7 +26,7 @@
 		$this->addExpression('amount',function($m,$q){
 			return $q->expr('((IFNULL([0],0) * IFNULL([1],0)) - IFNULL([2],0))',[$m->getElement('qty'),$m->getElement('unit_price'),$m->getElement('discount_amount')]);
 		});		
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 	function addToWish($user_id,$event_ticket_id,$qty,$unit_price,$discount_voucher,$discount_amount,$wishlist_id=0,$type="add"){

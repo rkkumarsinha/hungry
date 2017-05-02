@@ -18,6 +18,9 @@ class Model_Destination_Space extends SQL_Model{
 			return $q->expr("replace([0],'/public','')",[$m->getElement('image')]);
 		});
 
+		$this->addExpression('absolute_url')->set(function($m,$q){
+			return $q->expr("'[0]'",[$m->app->getConfig('absolute_url')]);
+		});
 		// $this->add('dynamic_model/Controller_AutoCreator');
 	}	
 }

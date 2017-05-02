@@ -18,6 +18,6 @@ class Model_SeoConfig extends SQL_Model{
 	$this->addField('description')->type('text');
 
 	$this->hasMany('MetaTag','seo_config_id');
-	$this->add('dynamic_model/Controller_AutoCreator');
+	// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 }

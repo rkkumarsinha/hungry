@@ -5,7 +5,6 @@ class page_discount extends Page{
         parent::init();
 
         $this->app->stickyGET('restaurant_id');
-
         if(!$this->app->city_id){
             $this->add('View_Error',null,'restaurant')->set("city not found");
             return;
@@ -50,9 +49,9 @@ class page_discount extends Page{
         // //Jquery For restaurant
         $form->on('change','.discount',function($js,$data){
             if($data['discount'])
-                return $js->univ()->location('?page=discount&discount='.$data['discount']);
-            else            
-                return $js->univ()->location('?page=discount');
+                return $js->univ()->location($this->app->getConfig('absolute_url').'discount/'.$this->app->city_name.'/'.$data['discount']);
+            else
+                return $js->univ()->location($this->app->getConfig('absolute_url').'discount/'.$this->app->city_name);
         });
 
 

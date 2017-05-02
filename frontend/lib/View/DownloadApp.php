@@ -5,7 +5,7 @@ class View_DownloadApp extends \View{
 		parent::init();
 
 		$a_view = $this->add('View')->setElement('a')->setAttr('href','https://play.google.com/store/apps/details?id=com.hungrydunia.app&hl=en')->setAttr('targer','_blank');
-		$img = $a_view->add('View')->setElement('img')->setAttr('src','img/hungrydownloadtheapp.jpg')->setStyle('border-radius','5px')->addClass('social-box-wrapper');
+		$img = $a_view->add('View')->setElement('img')->setAttr('src',$this->app->getConfig('absolute_url').'frontend/public/img/hungrydownloadtheapp.jpg')->setStyle('border-radius','5px')->addClass('social-box-wrapper');
 
 		$form = $this->add('Form',null,null,['form/stacked'])->addClass('atk-box')->setStyle('background-color','transparent');
 		$form->addField('Number','mobile_no')->validateNotNull(true);

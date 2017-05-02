@@ -43,17 +43,18 @@ class Form_Search extends Form{
         // $js_event = [
         //             $search_phrase->js()->reload(null,null,[$this->app->url(null,['cut_object'=>$search_phrase->name]),'form_city_id'=>$city_f->js()->val()])
         //         ];
-
-        $city_f->js('change')->submit();
+        $city_f->js('change')->univ()->selectCity($city_f->name,$city_f->js()->val(),$city_model->getRows(),$this->app->url($this->redirect_page));
 
         $this->js('click')->_selector('.atk-swatch-orange.do-search')->submit();
         if($this->isSubmitted()){
-            
-            if($this->app->city_id != $this['city'])  {
-                $this->app->memorize('city_id',$this['city']);
-                $this->app->redirect($this->app->url($this->redirect_page));
-                
-            }
+            // if(!$this['city']){
+            //     $this->error('city','select your city');
+            // }
+
+            // if($this->app->city_id != $this['city']){
+            //     // $this->app->memorize('city_id',$this['city']);
+            //     $this->app->redirect($this->app->url($this->redirect_page,['city'=>$city_model['name']]));
+            // }
             
             $restro_id = 0;
             $search_term = 0;
@@ -73,7 +74,7 @@ class Form_Search extends Form{
             if($restro_id > 0){
                 $rest_model = $this->add('Model_Restaurant')->tryLoad($restro_id);
                 if($rest_model->loaded()){
-                    $this->app->redirect($this->app->url('restaurantdetail',['slug'=>$rest_model['url_slug']]));
+                    $this->app->redirect($this->app->url('restaurant',['slug'=>$rest_model['url_slug']]));
                 }
             }
 
@@ -84,7 +85,8 @@ class Form_Search extends Form{
             $this->app->memorize('search_data',$search_data);
 
             
-            $this->app->redirect($this->app->url('search'));
+            $city_model->load($this['city']);
+            $this->app->redirect($this->app->url('search',['city'=>$city_model['name']]));
         }
     }
 }

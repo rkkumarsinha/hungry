@@ -11,7 +11,7 @@ class Model_MetaTag extends SQL_Model{
 	$this->addField('meta_property')->hint('FaceBook: og:title, og:site_name, og:url, og:description, og:image, og:type, og:locale . For Twitter twitter:card, twitter:title, twitter:description, twitter:creator, twitter:url, twitter:image, twitter:image:alt .');
 	$this->addField('meta_content')->type('text');
 
-	$this->add('dynamic_model/Controller_AutoCreator');
+	// $this->add('dynamic_model/Controller_AutoCreator');
 	
 	// <!--FACEBOOK-->
 	// <meta property="og:title" content="" >

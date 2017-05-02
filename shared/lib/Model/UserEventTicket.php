@@ -42,7 +42,7 @@ class Model_UserEventTicket extends SQL_Model{
 		$this->addExpression('eventdayid')->set($this->refSQL('event_ticket_id')->fieldQuery('event_day_id'));
 		$this->addExpression('profile_image_url')->set($this->refSQL('user_id')->fieldQuery('profile_image_url'));
 
-		$this->add('dynamic_model/Controller_AutoCreator');
+		// $this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 	//book only the ticket

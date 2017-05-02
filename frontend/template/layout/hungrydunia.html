@@ -6,14 +6,14 @@
     <!-- Navigation-->
     <div id="page-top" class="header">
       <div class="wrapper">
-        <div class="brand"><a href="?page=index"><img src="assets/img/hungrydunia/logo.png" alt="logo"/></a></div>
+        <div class="brand"><a href="{$absolute_url}"><img src="{$absolute_url}frontend/public/assets/img/hungrydunia/logo.png" alt="logo"/></a></div>
         <div class="brand hungry-current-location">{$location}</div>
         <nav class="navigation-items">
           <div class="wrapper">
             <ul class="main-navigation navigation-top-header"></ul>
             <ul class="user-area">{event_cart_wrapper}
               <a href="https://play.google.com/store/apps/details?id=com.hungrydunia.app&hl=en" target="_blank"><i class="glyphicon glyphicon-phone " style="font-size:20px;background-color:white;"> </i>&nbsp;<b style="font-size:14px;color:white;">Download App</b></a>
-              <li style="display:none;" class="hungryeventcart"><a href="?page=cartdetail">Event <span class="badge">{$event_count}</span></a></li>{/}
+              <li style="display:none;" class="hungryeventcart"><a href="{$absolute_url}cartdetail">Event <span class="badge">{$event_count}</span></a></li>{/}
               {login_menu}
               <li>
                 <div role="group" class="btn-group">
@@ -27,8 +27,8 @@
                 </div>
               </li>{/login_menu}
               <li>{signlogout}a(href='?page=sign-in') Sign In{/}</li>{register_wrapper}
-              <li><a href="?page=register"><strong>Register</strong></a></li>{/}
-              <li><a href="?page=addlisting"><i style="color:white;" class="glyphicon glyphicon-plus"></i><strong>&nbsp;Add Your Listing</strong></a></li>
+              <li><a href="{$absolute_url}register"><strong>Register</strong></a></li>{/}
+              <li><a href="{$absolute_url}addlisting"><i style="color:white;" class="glyphicon glyphicon-plus"></i><strong>&nbsp;Add Your Listing</strong></a></li>
             </ul>
         <div class="toggle-navigation" style="display: inline-block;">
           <div class="icon">
@@ -63,15 +63,15 @@
         {/}
 
       <li>
-        <a href="?page=index" data-toggle="collapse" aria-expanded="false" aria-controls="home">Home</a>
+        <a href="{$absolute_url}" data-toggle="collapse" aria-expanded="false" aria-controls="home">Home</a>
       </li>
           <li>{signlogout}a(href='?page=sign-in') Sign In{/}</li>{register_wrapper}
               <li>
-                <a href="?page=register"><strong>Register</strong></a>
+                <a href="{$absolute_url}register"><strong>Register</strong></a>
               </li>
           {/}
           <li>
-            <a href="?page=addlisting">
+            <a href="{$absolute_url}addlisting">
               <i style="color:white;" class="glyphicon glyphicon-plus"></i><strong>&nbsp;Add Your Listing</strong>
             </a>
           </li>
@@ -100,7 +100,7 @@
                     <figure>
                       <div class="info"><i class="fa fa-mobile"></i><span>+91 9521389201</span></div>
                       <div class="info"><i class="fa fa-envelope"></i><span>info@hungrydunia.com</span></div>
-                      <div class="info"><i class="fa fa-globe"></i><a href="www.hungrydunia.com" target="_blank">www.hungrydunia.com</a></div>
+                      <div class="info"><i class="fa fa-globe"></i><a href="http://www.hungrydunia.com" target="_blank">www.hungrydunia.com</a></div>
                     </figure>
                   </address>
                   <div class="social">
@@ -114,7 +114,7 @@
                         <i class="fa fa-instagram"></i>
                       </a>
                   </div>
-                  <a href="?page=contact" class="btn framed icon">Contact Us
+                  <a href="{$absolute_url}contact" class="btn framed icon">Contact Us
                     <i class="fa fa-angle-right">
                       </i></a>
                 </section>
@@ -134,11 +134,11 @@
                 <section>
                   <h2>site links</h2>
                   <div class="info"><a href="http://hungrydunia.com/">&nbsp; Home</a></div>
-                  <div class="info"><a href="?page=aboutus">&nbsp; About Us</a></div>
-                  <div class="info"><a href="?page=contact">&nbsp; Contact</a></div>
-                  <div class="info"><a href="?page=privacypolicy">&nbsp; Privacy Policy</a></div>
-                  <div class="info"><a href="?page=termsandcondition">&nbsp; Terms &amp; Conditions</a></div>
-                  <div style="display:none;" class="info"><a href="?page=selfie">&nbsp; Selfie Contest</a></div>
+                  <div class="info"><a href="{$absolute_url}aboutus">&nbsp; About Us</a></div>
+                  <div class="info"><a href="{$absolute_url}contact">&nbsp; Contact</a></div>
+                  <div class="info"><a href="{$absolute_url}privacypolicy">&nbsp; Privacy Policy</a></div>
+                  <div class="info"><a href="{$absolute_url}termsandcondition">&nbsp; Terms &amp; Conditions</a></div>
+                  <div style="display:none;" class="info"><a href="{$absolute_url}selfie">&nbsp; Selfie Contest</a></div>
                 </section>
               </div>
               <div class="col-md-3 col-sm-3">

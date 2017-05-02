@@ -21,6 +21,10 @@ class page_venue extends Page{
 			return $q->expr("replace([0],'/public','')",[$m->getElement('image')]);
 			// return $m->refSQL('Highlight_id')->fieldQuery('image');
 		});
+
+		$model->addExpression('absolute_url')->set(function($m,$q){
+			return $q->expr("CONCAT('[0]','[1]',[2])",[$m->app->getConfig('absolute_url'),('destination/'.$m->app->city_name."/"),$m->getElement('id')]);
+		});
 		$lister->setModel($model);
 
     }
