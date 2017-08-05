@@ -7,8 +7,10 @@
 
 		$this->setSource('Session');
 		
+		$this->addField('user_id')->set($this->app->auth->model->id);
 		$this->addField('name');
 		$this->addField('event_ticket_id');
+		$this->addField('event_id');
 		$this->addField('qty');
 		$this->addField('event_time_id');
 		$this->addField('event_time');
@@ -39,7 +41,6 @@
 											
 			if(!$voucher_model->loaded())
 				throw new \Exception("discount voucher not found", 1);
-				
 			
 			$result = $voucher_model->applyCoupon($qty,$unit_price);
 			
@@ -64,6 +65,7 @@
 		$this['sequence'] = $this->getNextSequence();
 		$this['discount_voucher'] = $discount_voucher;
 		$this['discount_amount'] = $re_cal_discount_amount;
+		$this['event_id'] = $event_id;
 
 		$this->save();
 	}
@@ -132,17 +134,101 @@
 		$this['disclaimer'] = $disclaimer;
 		$this['discount_voucher'] = $discount_voucher;
 		$this['discount_amount'] = $re_cal_discount_amount;
+		$this['event_id'] = $event_id;
 		$this->save();
 	}
 
 	function getNetAmount(){
-		$cart = $this->add('Model_Cart');
-		$net_amount = 0;
-		foreach ($cart as $model) {
-			$net_amount += round(($model['unit_price'] * $model['qty']) - $model['discount_amount']);
-		}
+		$amounts = $this->add('Model_Cart')->getAmounts();
+		return $amounts['net_amount'];
+		// $net_amount = 0;
+		// foreach ($cart as $model) {
+		// 	$net_amount += round(($model['unit_price'] * $model['qty']) - $model['discount_amount']);
+		// }
 		return $net_amount;
 	}
 
+	function getAmounts(){
+		//
+		$event_array = [];
+		$cart = $this->add('Model_Cart');
+		$amount_array = [
+				'subtotal'=>0,
+				'internet_handling_fees'=>0,
+				'base_amount'=>0,
+				'tax_amount'=>0,
+				'net_amount'=>0,
+				'cgst'=>[],
+				'sgst'=>[],
+				'igst'=>[]
+			];
+		$state_model = $this->add('Model_State')->loadBy('name','Rajasthan');
+
+		foreach ($cart as $key => $ci) {
+			// echo "ci id ".$ci['event_id']."<br/>";
+			// continue;
+			
+			if(!isset($event_array[$ci['event_id']])){
+				$event_array[$ci['event_id']] = $this->add('Model_Event')->load($ci['event_id']);
+			}
+			$event_model = $event_array[$ci['event_id']];
+			$item_amount = ($ci['qty'] * $ci['unit_price']);
+			$item_half_amount = ($item_amount/2);
+
+			$amount_array['subtotal'] += $item_amount;
+
+			$tax_amount = 0;
+			if($event_model['tax_percentage'] > 0 && $event_model['handling_charge'] > 0){
+
+				$base_amount = $event_model['handling_charge'];
+				$amount_array['base_amount'] += $base_amount;
+				// in state
+				$half_percentage = ($event_model['tax_percentage'] /2);
+				$half_tax_amount = round(($base_amount * $half_percentage)/100,2);
+				$half_percentage_str = "".($event_model['tax_percentage'] /2);
+				// $tax_amount = round(($event_model['tax_percentage'] * $item_amount)/100,2);
+
+				if($event_model['state_id'] == $state_model->id){
+					if(!isset($amount_array['sgst'][$half_percentage_str])){
+						$amount_array['sgst'][$half_percentage_str] = ['on_amount'=>0,'tax_amount'=>0];
+					}
+
+					if(!isset($amount_array['cgst'][$half_percentage_str])){
+						$amount_array['cgst'][$half_percentage_str] = ['on_amount'=>0,'tax_amount'=>0];
+					}
+
+					$amount_array['cgst'][$half_percentage_str]['on_amount'] += $base_amount;
+					$amount_array['cgst'][$half_percentage_str]['tax_amount'] += $half_tax_amount;
+					
+					$amount_array['sgst'][$half_percentage_str]['on_amount'] += $base_amount;
+					$amount_array['sgst'][$half_percentage_str]['tax_amount'] += $half_tax_amount;
+
+					$tax_amount = $half_tax_amount * 2;
+				}else{
+
+					$tax_amount = round(($event_model['tax_percentage'] * $base_amount)/100,2);
+
+					if(!isset($amount_array['igst'][$event_model['tax_percentage']])){
+						$amount_array['igst'][$event_model['tax_percentage']] = ['on_amount'=>0,'tax_amount'=>0];
+					}
+
+					$amount_array['igst'][$event_model['tax_percentage']]['on_amount'] += $base_amount;
+					$amount_array['igst'][$event_model['tax_percentage']]['tax_amount'] += $tax_amount;
+				}
+
+
+				$amount_array['tax_amount'] += $tax_amount;
+			}
+
+
+			$amount_array['internet_handling_fees'] = $amount_array['base_amount'] + $amount_array['tax_amount'];
+			$amount_array['net_amount'] = $amount_array['subtotal'] + $amount_array['internet_handling_fees'];
+		}
+
+		// echo "<pre>";
+		// print_r($amount_array);
+		// echo "</pre>";
+		return $amount_array;
+	}
 }
  

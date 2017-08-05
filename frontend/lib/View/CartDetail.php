@@ -26,7 +26,25 @@ class View_CartDetail extends CompleteLister{
 			$this->js(null,$js_event)->execute();
 		}
 
-		$this->template->trySet('net_amount', $this->add('Model_Cart')->getNetAmount());
+		$cart = $this->add('Model_Cart');
+		$amount = $cart->getAmounts();
+
+		$this->template->trySet('sub_total', $amount['subtotal']);
+		$this->template->trySet('internet_handling_fees', $amount['internet_handling_fees']);
+		// $this->template->trySet('gst_charge', $amount['tax_amount']);
+		$this->template->trySet('net_amount', $amount['net_amount']);
+
+		$tdh = '<div class="row text-right" style="border:1px solid #f3f3f3;">';
+		$tdh .= '<div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">Base Amount </div><div class="col-md-6 col-sm-12 col-xs-12 col-lg-6"> '.$amount['base_amount'].'&nbsp;<i class="fa fa-rupee"></i></div>';
+		foreach ($amount as $sub_tax_name => $tax_detail) {
+			if(!is_array($tax_detail) || !count($tax_detail)) continue;
+
+			foreach ($tax_detail as $tax_per => $detail) {
+				$tdh .= '<div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">'.$sub_tax_name." ".$tax_per.'% on '.$detail['on_amount'].'</div><div class="col-md-6 col-sm-12 col-xs-12 col-lg-6"> '.$detail['tax_amount'].'&nbsp;<i class="fa fa-rupee"></i></div>';
+			}
+		}
+		$tdh .= "</div>";
+		$this->template->trySetHtml('tax_detail',$tdh);
 
 	}
 	
@@ -37,7 +55,7 @@ class View_CartDetail extends CompleteLister{
 			$this->template->tryDel('checkout_button');
 
 			$this->add('View_Warning')->set('your cart is empty');
-			$this->add('Button')->set('Continue Ticket Booking')->js('click')->redirect($this->app->url('event'));
+			$this->add('Button')->set('Continue Ticket Booking')->js('click')->redirect($this->app->url('eventlist'));
 
 		}else{
 
@@ -171,6 +189,7 @@ class View_CartDetail extends CompleteLister{
 			$new_cart['sequence'] = $old_cart['sequence'];
 			$new_cart['discount_amount'] = $discount_amount;
 			$new_cart['discount_voucher'] = $discount_voucher;
+			$new_cart['event_id'] = $event_ticket_model['event_id'];
 			$new_cart->save();
 
 			//delete old cart and adding new cart item

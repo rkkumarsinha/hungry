@@ -38,6 +38,12 @@ class Model_Invoice extends SQL_Model{
 
 		$this->addField('transaction_detail')->type('text');
 
+		$this->addField('subtotal');
+		$this->addField('internet_handling_fees');
+		$this->addField('base_amount');
+		$this->addField('tax_amount');
+		$this->addField('amount_json')->type('text');
+
 		$this->hasMany('UserEventTicket','invoice_id');
 		$this->addExpression('net_amount')->set(function($m,$q){
 			return $q->expr('IFNULL([0],0)',[$m->refSQL('UserEventTicket')->sum('net_amount')]);
@@ -45,7 +51,7 @@ class Model_Invoice extends SQL_Model{
 		$this->addHook('beforeSave',$this);
 		$this->addHook('afterSave',$this);
 
-		// $this->add('dynamic_model/Controller_AutoCreator');
+		$this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 	function beforeSave(){

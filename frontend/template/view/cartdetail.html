@@ -19,7 +19,42 @@
   <div style="padding:0px 0px;" class="row">
     <div class="col-md-6"></div>
     <div class="col-md-6">
-      <h3 style="text-align:right;">Total Amount: {net_amount}0{/} &nbsp; <i class="fa fa-rupee"></i></h3><a href="?page=checkout" style="margin-top:20px;" class="btn btn-block btn-success atk-swatch-orange hungrydunia-event-checkout">Checkout</a>
+      <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+          <h3 style="text-align:right;">Subtotal:		</h3>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 text-right">{$sub_total} &nbsp;<i class="fa fa-rupee"></i></div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+          <h3 style="text-align:right;">Internet handling fees:</h3>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 text-right">{$internet_handling_fees} &nbsp;<i class="fa fa-rupee"></i></div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+          <div id="accordion" role="tablist" aria-multiselectable="true" class="panel-group">
+            <div style="background-color:none;" class="panel panel-default">
+              <div id="headingOne" role="tab" class="panel-heading">
+                <p style="text-align:right;" class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Service Tax Breakup</a></p>
+              </div>
+              <div id="collapseOne" role="tabpanel" aria-labelledby="headingOne" class="panel-collapse collapse">
+                <div class="panel-body">
+                  			 
+                  {$tax_detail}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 text-right"></div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+          <h3 style="text-align:right;">Total Amount: </h3>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 text-right">{net_amount}0{/} &nbsp;<i class="fa fa-rupee"></i></div>
+      </div><a href="?page=checkout" style="margin-top:20px;" class="btn btn-block btn-success atk-swatch-orange hungrydunia-event-checkout">Checkout</a>
     </div>
   </div>{/}
 </div>

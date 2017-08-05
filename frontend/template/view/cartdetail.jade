@@ -28,7 +28,35 @@ div(id="{$_name}" class="{$class} container" style="{$style}")
 	.row(style="padding:0px 0px;")
 		.col-md-6
 		.col-md-6
-			h3(style="text-align:right;") Total Amount: {net_amount}0{/} &nbsp; 
-				i.fa.fa-rupee
+			.row
+				.col-lg-8.col-md-8.col-sm-8
+					h3(style="text-align:right;") Subtotal:		
+				.col-lg-4.col-md-4.col-sm-4.text-right
+					{$sub_total} &nbsp;
+					i.fa.fa-rupee
+			.row
+				.col-lg-8.col-md-8.col-sm-8
+					h3(style="text-align:right;") Internet handling fees:
+				.col-lg-4.col-md-4.col-sm-4.text-right
+					{$internet_handling_fees} &nbsp;
+					i.fa.fa-rupee
+			.row
+				.col-lg-8.col-md-8.col-sm-8
+					#accordion.panel-group(role='tablist', aria-multiselectable='true')
+						.panel.panel-default(style="background-color:none;")
+							#headingOne.panel-heading(role='tab')
+								p.panel-title(style="text-align:right;")
+									a(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseOne', aria-expanded='false', aria-controls='collapseOne')
+										| Service Tax Breakup
+							#collapseOne.panel-collapse.collapse(role='tabpanel', aria-labelledby='headingOne')
+								.panel-body			 
+									{$tax_detail}
+				.col-lg-4.col-md-4.col-sm-4.text-right
+			.row
+				.col-lg-8.col-md-8.col-sm-8
+					h3(style="text-align:right;") Total Amount: 
+				.col-lg-4.col-md-4.col-sm-4.text-right
+					{net_amount}0{/} &nbsp;
+					i.fa.fa-rupee
 			a.btn.btn-block.btn-success.atk-swatch-orange.hungrydunia-event-checkout(href="?page=checkout" style="margin-top:20px;") Checkout
 	{/}

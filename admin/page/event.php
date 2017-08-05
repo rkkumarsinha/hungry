@@ -48,7 +48,9 @@ class page_event extends page_adminevent{
                                 'how_to_reach',
                                 'is_active',
                                 'is_verified',
-                                'disclaimer'
+                                'disclaimer',
+                                'tax_percentage',
+                                'handling_charge'
                             ),
                         array
                             (    

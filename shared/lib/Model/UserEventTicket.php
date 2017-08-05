@@ -35,6 +35,17 @@ class Model_UserEventTicket extends SQL_Model{
 		$this->addField('mobile');
 		$this->addField('email');
 
+		$this->addField('base_amount');
+		$this->addField('tax_percentage');
+		$this->addField('tax_amount');
+		$this->addField('cgst_tax_percentage');
+		$this->addField('cgst_tax_amount');
+		$this->addField('sgst_tax_percentage');
+		$this->addField('sgst_tax_amount');
+		$this->addField('igst_tax_percentage');
+		$this->addField('igst_tax_amount');
+		
+		
 		$this->addField('is_verified')->type('boolean')->defaultValue(false);
 
 		$this->addExpression('eventid')->set($this->refSQL('event_ticket_id')->fieldQuery('event_id'));
@@ -42,12 +53,25 @@ class Model_UserEventTicket extends SQL_Model{
 		$this->addExpression('eventdayid')->set($this->refSQL('event_ticket_id')->fieldQuery('event_day_id'));
 		$this->addExpression('profile_image_url')->set($this->refSQL('user_id')->fieldQuery('profile_image_url'));
 
-		// $this->add('dynamic_model/Controller_AutoCreator');
+		$this->add('dynamic_model/Controller_AutoCreator');
 	}
 
 	//book only the ticket
 	function bookTicket($user_id,$event_ticket_id,$booking_name,$secondary_booking_name=null,$qty,$ticket_price,$discount_voucher,$discount_amount,$return_model=false,$invoice_id,$wishlist_id=null){
-		$ticket_model = $this->add('Model_Event_Ticket')->load($event_ticket_id);
+		$ticket_model = $this->add('Model_Event_Ticket');
+		$ticket_model->addExpression('tax_percentage')->set(function($m,$q){
+			return $q->expr('IFNULL([0],0)',[$m->refSQL('event_id')->fieldQuery('tax_percentage')]);
+		});
+		$ticket_model->addExpression('handling_charge')->set(function($m,$q){
+			return $q->expr('IFNULL([0],0)',[$m->refSQL('event_id')->fieldQuery('handling_charge')]);
+		});
+
+		$ticket_model->addExpression('state_id')->set(function($m,$q){
+			return $q->expr('IFNULL([0],0)',[$m->refSQL('event_id')->fieldQuery('state_id')]);
+		});
+
+
+		$ticket_model->load($event_ticket_id);
 		
 		//check qty is remaining or not
 		if($qty > $ticket_model['remaining_ticket'])
@@ -58,9 +82,34 @@ class Model_UserEventTicket extends SQL_Model{
 
 		$total_amount = $ticket_model['price'] * $qty;
 		$offer_amount = 0;
-		$net_amount = $total_amount - $discount_amount;
+		$tax_amount = 0;
+		$base_amount = $ticket_model['handling_charge'];
+		$tax_percentage = $ticket_model['tax_percentage'];
+		
 
 		$user_ticket_model = $this->add('Model_UserEventTicket');
+		$user_ticket_model['base_amount'] = $base_amount;
+		$user_ticket_model['tax_percentage'] = $tax_percentage;
+
+		// tax calculation
+		if($base_amount > 0 && $tax_percentage > 0){
+			$tax_amount = round(($base_amount * $tax_percentage)/100,2);
+			$state_model = $this->add('Model_State')->loadBy('name','Rajasthan');
+
+			$user_ticket_model['tax_amount'] = $tax_amount;
+			if($event_model['state_id'] == $state_model->id){
+				$user_ticket_model['cgst_tax_percentage'] = round(($tax_percentage/2),2);
+				$user_ticket_model['sgst_tax_percentage'] = round(($tax_percentage/2),2);
+				$user_ticket_model['cgst_tax_amount'] = round(($tax_amount/2),2);
+				$user_ticket_model['sgst_tax_amount'] = round(($tax_amount/2),2);
+			}else{
+				$user_ticket_model['igst_tax_percentage'] = $tax_percentage;
+				$user_ticket_model['igst_tax_amount'] = $tax_amount;
+			}
+		}
+
+		$net_amount = $total_amount - $discount_amount + $tax_amount;
+
 		$user_ticket_model['invoice_id'] = $invoice_id;
 		$user_ticket_model['user_id'] = $user_id;
 		$user_ticket_model['event_ticket_id'] = $event_ticket_id;

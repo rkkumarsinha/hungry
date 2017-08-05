@@ -58,6 +58,11 @@ class Model_Event extends SQL_Model{
 		$this->addField('image_title')->type('text')->hint('Ex:Event in Udaipur - Event Name');
 		$this->addField('image_alt_text')->type('text')->hint('Ex:event udaipur');
 
+		// tax field
+		$this->addField('tax_percentage')->type('int');
+		$this->addField('handling_charge')->type('int');
+
+
 		$this->hasMany('Event_Day','event_id');
 		$this->hasMany('Event_Ticket','event_id');
 		$this->hasMany('EventImage','event_id');
@@ -82,7 +87,7 @@ class Model_Event extends SQL_Model{
 
 		$this->addHook('beforeSave',[$this,'beforeSave']);
 		$this->addHook('beforeSave',[$this,'updateSearchString']);
-		// $this->add('dynamic_model/Controller_AutoCreator');
+		$this->add('dynamic_model/Controller_AutoCreator');
 
 	}
 

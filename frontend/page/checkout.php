@@ -133,8 +133,17 @@ class page_checkout extends Page{
             // save sale invoice
             $invoice = $this->add('Model_Invoice');
             $invoice['user_id'] = $this->api->auth->model->id;
+            // save invoice amount detail
+            $amount_array = $cart->getAmounts();
+            $invoice['subtotal'] = $amount_array['subtotal'];
+            $invoice['base_amount'] = $amount_array['base_amount'];
+            $invoice['tax_amount'] = $amount_array['tax_amount'];
+            $invoice['internet_handling_fees'] = $amount_array['internet_handling_fees'];
+            $invoice['amount_json'] =  json_encode($amount_array,true);
+            $invoice['amount'] = $amount_array['net_amount'];
             $invoice->save();
 
+            
             foreach ($cart as $cart_ticket) {
                 $event_ticket_model = $this->add('Model_Event_Ticket')
                     ->addCondition('id',$cart_ticket['event_ticket_id']);
@@ -163,6 +172,7 @@ class page_checkout extends Page{
                 //todo send the sms and email
                 //$booked_ticket_model->send();
             }
+            
             $this->add('Model_Cart')->emptyCart();
             $this->app->memorize('hungryevent-checkout-saleinvoice',$invoice->id);
             // $this->app->memorize('hungryevent-checkout-step',"Address");
