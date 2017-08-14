@@ -43,10 +43,12 @@ class Model_Invoice extends SQL_Model{
 		$this->addField('base_amount');
 		$this->addField('tax_amount');
 		$this->addField('amount_json')->type('text');
+		// $this->addField('net_amount');
 
 		$this->hasMany('UserEventTicket','invoice_id');
+		
 		$this->addExpression('net_amount')->set(function($m,$q){
-			return $q->expr('IFNULL([0],0)',[$m->refSQL('UserEventTicket')->sum('net_amount')]);
+			return $q->expr('IFNULL([0],0)',[$m->getElement('amount')]);
 		});
 		$this->addHook('beforeSave',$this);
 		$this->addHook('afterSave',$this);
@@ -211,6 +213,14 @@ class Model_Invoice extends SQL_Model{
         $this['delivery_country'] = $this['billing_country'] = $data['billing_country'];
         $this['delivery_tel'] = $this['billing_tel']= $data['billing_tel'];
         $this['delivery_email']= $this['billing_email'] = $data['billing_email'];
+		
+		$amounts = $wishlist->getAmounts();
+		$this['subtotal'] = $amounts['subtotal'];
+		$this['internet_handling_fees'] = $amounts['internet_handling_fees'];
+		$this['base_amount'] = $amounts['base_amount'];
+		$this['amount'] = $amounts['net_amount'];
+		$this['tax_amount'] = $amounts['tax_amount'];
+		$this['amount_json'] = json_encode($amounts);
         $this->save();
         
         foreach ($wishlist as $cart_ticket) {
@@ -246,8 +256,9 @@ class Model_Invoice extends SQL_Model{
 	        	exit();
 	        }
 
-	       // $cart_ticket['is_wishcomplete'] = true;
-	       // $cart_ticket->saveAndUnload();
+
+	       $cart_ticket['is_wishcomplete'] = true;
+	       $cart_ticket->saveAndUnload();
 	    }
         return $this;
 	}

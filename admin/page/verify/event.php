@@ -60,7 +60,8 @@ class page_verify_event extends Page {
         $subject = $email_template['subject'];
         $body = $email_template['body'];
 
-        $user_model = $this->add('Model_User')->tryLoad($listing_model['user_id']);
+        $user_model = $this->add('Model_User')->addCondition('id',$listing_model['user_id']);
+
         $body = str_replace("{event_name}", $listing_model['name'], $body);
         $body = str_replace("{address}", $listing_model['address'], $body);
         
@@ -134,7 +135,9 @@ class page_verify_event extends Page {
                                 'latitude',
                                 'guidelines',
                                 'how_to_reach',
-                                'disclaimer'
+                                'disclaimer',
+                                'is_free_ticket',
+                                'registration_url'
                             ]);
 
         $basic_form->addSubmit("Save");

@@ -39,8 +39,7 @@ class endpoint_v1_cart extends HungryREST {
 
         if(!$this->allow_list)throw $this->app->exception('Listing is not allowed');
 
-
-        return $this->outputMany($m);
+        return ['list'=>$this->outputMany($m),'fare_breakdown'=>$m->getAmounts()];
     }
 
     function _model(){

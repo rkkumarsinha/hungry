@@ -49,6 +49,10 @@ class endpoint_v1_post_confirmorder extends HungryREST {
 
         try{
             $order = $this->add('Model_Invoice')->load($data['order_id']);
+            if($order['status'] == "Paid"){
+                return ['status'=>"success",'message'=>'order is already paid'];
+            }
+
             $order->updateInvoiceTransaction($data);
             $order->reload();
             if($order['status'] == "Paid"){

@@ -85,8 +85,12 @@ class Model_Event extends SQL_Model{
 
 		$this->addField('search_string')->type('text')->system(true)->defaultValue(null);
 
+		$this->addField('is_free_ticket')->type('boolean')->defaultValue(false);
+		$this->addField('registration_url')->type('text')->hint('it may be google form url or any other website link for registration');
+
 		$this->addHook('beforeSave',[$this,'beforeSave']);
 		$this->addHook('beforeSave',[$this,'updateSearchString']);
+		
 		$this->add('dynamic_model/Controller_AutoCreator');
 
 	}
@@ -186,6 +190,8 @@ class Model_Event extends SQL_Model{
 		if(!$this->loaded())
 			return array('event model must loaded');
 
+		if($this['is_free_ticket'])
+			return [];
 		$model_day = $this->add('Model_Event_Day')->addCondition('event_id',$this->id)->getRows();
 		$output = [];
 		foreach ($model_day as $day) {
@@ -197,7 +203,6 @@ class Model_Event extends SQL_Model{
 				$ticket_array = [];
 
 				$model_ticket = $this->add('Model_Event_Ticket')
-									->addCondition('event_time_id',$time['id'])
 									->addCondition('event_id',$this->id)
 									->addCondition('remaining_ticket','>',0)
 									->getRows();
@@ -210,7 +215,9 @@ class Model_Event extends SQL_Model{
 										'max_no_to_sale'=>$ticket['max_no_to_sale'],
 										'disclaimer'=>$ticket['disclaimer'],
 										'is_voucher_applicable'=>$ticket['is_voucher_applicable'],
-										'remaining_ticket'=>$ticket['remaining_ticket']
+										'remaining_ticket'=>$ticket['remaining_ticket'],
+										'tax_percentage'=>$this['tax_percentage'],
+										'handling_charge'=>$this['handling_charge']
 									];
 				}
 
@@ -232,6 +239,8 @@ class Model_Event extends SQL_Model{
 	function getVoucher(){
 		if(!$this->loaded())
 			return array('event model must loaded');
+
+		if($this['is_free_ticket']) return [];
 
 		$voucher = $this->add('Model_Voucher');
 		$voucher->addCondition('event_id',$this->id);

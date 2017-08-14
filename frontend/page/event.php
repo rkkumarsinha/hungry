@@ -28,9 +28,13 @@ class page_event extends Page{
     	$this->gallery_model = $this->add('Model_EventImage')->addCondition('event_id',$id);
         $this->setModel($event_model);
 
-        if($event_model['remaining_tickets']){
+        if($event_model['remaining_tickets'] && !$event_model['is_free_ticket']){
             $bookticket_btn  = $this->add('Button','null','bookticket')->set('Book Ticket')->addClass('atk-swatch-orange btn-block')->setStyle('border','0px solid white');
             $bookticket_btn->js('click')->univ()->location($this->api->url('bookticket',['slug'=>$event_model['url_slug']]));
+        }
+        if($event_model['is_free_ticket'] && $event_model['registration_url']){
+            $bookticket_btn  = $this->add('Button','null','bookticket')->set('Get Register')->addClass('atk-swatch-orange btn-block')->setStyle('border','0px solid white');
+            $bookticket_btn->js('click')->univ()->newWindow($event_model['registration_url']);
         }
 
         //Add Route Map

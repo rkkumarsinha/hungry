@@ -48,6 +48,16 @@ class Model_Event_Ticket extends SQL_Model{
 
 		$this->hasMany('UserEventTicket','event_ticket_id');
 
+		$this->addHook('beforeSave',[$this,'beforeSave']);
 		// $this->add('dynamic_model/Controller_AutoCreator');
+	}
+
+	function beforeSave(){
+		if($this['event_id']){
+			$e_model = $this->add('Model_Event')->load($this['event_id']);
+			if($e_model['is_free_ticket']){
+				throw $this->exception('you cannot add ticket, it\'s free event  ', 'ValidityCheck')->setField('name');
+			}
+		}
 	}
 }

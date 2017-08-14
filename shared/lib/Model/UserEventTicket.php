@@ -57,7 +57,7 @@ class Model_UserEventTicket extends SQL_Model{
 	}
 
 	//book only the ticket
-	function bookTicket($user_id,$event_ticket_id,$booking_name,$secondary_booking_name=null,$qty,$ticket_price,$discount_voucher,$discount_amount,$return_model=false,$invoice_id,$wishlist_id=null){
+	function bookTicket($user_id,$event_ticket_id,$booking_name,$secondary_booking_name=null,$qty,$ticket_price,$discount_voucher=null,$discount_amount=0,$return_model=false,$invoice_id,$wishlist_id=null){
 		$ticket_model = $this->add('Model_Event_Ticket');
 		$ticket_model->addExpression('tax_percentage')->set(function($m,$q){
 			return $q->expr('IFNULL([0],0)',[$m->refSQL('event_id')->fieldQuery('tax_percentage')]);
@@ -97,7 +97,7 @@ class Model_UserEventTicket extends SQL_Model{
 			$state_model = $this->add('Model_State')->loadBy('name','Rajasthan');
 
 			$user_ticket_model['tax_amount'] = $tax_amount;
-			if($event_model['state_id'] == $state_model->id){
+			if($ticket_model['state_id'] == $state_model->id){
 				$user_ticket_model['cgst_tax_percentage'] = round(($tax_percentage/2),2);
 				$user_ticket_model['sgst_tax_percentage'] = round(($tax_percentage/2),2);
 				$user_ticket_model['cgst_tax_amount'] = round(($tax_amount/2),2);

@@ -21,6 +21,11 @@ class page_account extends Page{
                 $data = explode("-", $key);
             }
 
+            if(!isset($data)){
+                $this->add('View_Error')->set('no one list is found with your account, contact to hungrydunia');
+                return;
+            }
+
             if(!$this->app->recall('HOSTLISTID')){
                 $this->app->memorize('HOSTLISTID',$data[0]);
                 $this->app->memorize('HOSTLISTTYPE',$data[1]);

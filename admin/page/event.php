@@ -12,7 +12,7 @@ class page_event extends page_adminevent{
         $event_model->addExpression('user_status')->set(function($m,$q){
             return $m->refSQL('user_id')->fieldQuery('is_verified');
         });
-
+        $event_model->setOrder('id','desc');
 		$crud->setModel($event_model,
 						array(
                                 'user_id',
@@ -50,7 +50,9 @@ class page_event extends page_adminevent{
                                 'is_verified',
                                 'disclaimer',
                                 'tax_percentage',
-                                'handling_charge'
+                                'handling_charge',
+                                'is_free_ticket',
+                                'registration_url'
                             ),
                         array
                             (    

@@ -151,7 +151,9 @@
 	function getAmounts(){
 		//
 		$event_array = [];
-		$cart = $this->add('Model_Cart');
+		// $cart = $this->add('Model_Cart');
+		$cart = $this->addCondition('user_id',$this->app->auth->model->id);
+
 		$amount_array = [
 				'subtotal'=>0,
 				'internet_handling_fees'=>0,
