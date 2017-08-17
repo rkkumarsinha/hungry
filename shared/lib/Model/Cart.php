@@ -182,7 +182,7 @@
 			$tax_amount = 0;
 			if($event_model['tax_percentage'] > 0 && $event_model['handling_charge'] > 0){
 
-				$base_amount = $event_model['handling_charge'];
+				$base_amount = $event_model['handling_charge'] * $ci['qty'];
 				$amount_array['base_amount'] += $base_amount;
 				// in state
 				$half_percentage = ($event_model['tax_percentage'] /2);
