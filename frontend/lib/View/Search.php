@@ -14,7 +14,7 @@ class View_Search extends View{
 		switch ($page_name) {
 			case 'index':
 			case 'restaurant':
-				$form = $this->add('Form_Search',['redirect_page'=>'index'],'form_search');
+				$form = $this->add('Form_Search',['redirect_page'=>''],'form_search');
 				$this->template->trySet('tab_restaurant','active');
 				break;
 			case 'eventlist':
