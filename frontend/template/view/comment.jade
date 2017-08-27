@@ -9,7 +9,7 @@ section#reviews.block(style="clear:both;" class="{$class}")
     {rows}{row}
     article.review(style="margin-bottom:20px;")
       figure.author
-        img(alt='{$user_name}', src='{$profile_image}' onerror="this.src='assets/img/default-avatar.png';")
+        img(alt='{$user_name}', src='{$profile_image}')
         .date {$created_at} {$created_time}
       // /.author
       .wrapper(style="min-height:130px;")
