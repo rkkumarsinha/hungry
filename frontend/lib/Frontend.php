@@ -8,8 +8,8 @@ class Frontend extends ApiFrontend {
         
         date_default_timezone_set("Asia/Calcutta");
         
-        $this->api_public_path = dirname(@$_SERVER['SCRIPT_FILENAME']);
-        $this->api_base_path = dirname(dirname(@$_SERVER['SCRIPT_FILENAME']));
+        $this->app->public_path = $this->api_public_path = dirname(@$_SERVER['SCRIPT_FILENAME']);
+        $this->app->base_path = $this->api_base_path = dirname(dirname(@$_SERVER['SCRIPT_FILENAME']));
 
         $this->addLocations();
         // $this->addProjectLocations();
@@ -25,6 +25,7 @@ class Frontend extends ApiFrontend {
         $auth=$this->add('Auth');
         $auth->usePasswordEncryption();
         $auth->setModel('User','email','password');
+        $this->app->stickyGET('city');
         
         if($_GET['hungry_user_id'] AND $this->app->page == "bookticket"){
             try{
@@ -65,10 +66,6 @@ class Frontend extends ApiFrontend {
             $this->app->city_name = "Udaipur";
         }
 
-        // appending city name in
-        if(!$_GET['city'] AND $this->app->page == "index"){
-            $this->app->js(true)->_library('history')->pushState(['Title'=>'index','Url'=>$this->app->city_name],'index',$this->app->city_name);
-        }
 
         if($this->app->city_name){
             if(is_numeric($this->app->city_name)){
@@ -82,6 +79,11 @@ class Frontend extends ApiFrontend {
                 // $area = $this->add('Model_Area')->loadBy('name',$this->app->city_name);
                 // $this->app->area_id = $area->id;
             }
+        }
+        
+        // appending city name in
+        if(!$_GET['city'] AND $this->app->page == "index"){
+            $this->app->js(true)->_library('history')->pushState(['Title'=>'index','Url'=>$this->app->city_name],'index',$this->app->city_name);
         }
         
         if($this->api->auth->model->id){
@@ -152,7 +154,7 @@ class Frontend extends ApiFrontend {
 
         $this->add('Controller_PatternRouter')
             ->link('index', ['city'])
-            ->link('restaurant', ['slug'])
+            ->link('restaurant', ['city','slug'])
             ->link('eventlist', ['city'])
             ->link('venue', ['city'])
             ->link('destination', ['city','venue'])
