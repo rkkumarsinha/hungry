@@ -149,9 +149,15 @@ class Model_Restaurant extends SQL_Model{
 	function afterSave(){
 		//check first if file exist or not
 		$path = $this->api->pathfinder->base_location->base_path;
-		$filename = $path."/json/".strtoupper($this['city'])."/restaurant.json";
+		$path = str_replace("/admin", "", $path);
+
+		$dir_path = $path."/json/".strtoupper($this['city']);
+		if(!is_dir($dir_path))
+			mkdir($dir_path, 0755, true);
+
+		$file_path = $dir_path."/restaurant.json";
 		$rest = $this->add('Model_Restaurant')->addCondition('city_id',$this['city_id']);
-		file_put_contents($filename, json_encode($rest->getRows()));
+		file_put_contents($file_path, json_encode($rest->getRows()));
 		//if exist then empty the file
 		//if exit not then create file 
 		//write all restaurant json data

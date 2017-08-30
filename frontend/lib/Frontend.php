@@ -56,8 +56,10 @@ class Frontend extends ApiFrontend {
 
         $this->makeSEF();
         // $this->app->city_name = $this->app->recall('city_id')?:$_GET['city']?:"Udaipur";
+        
         if($this->app->recall('city_id') && $_GET['city']){
             $this->app->city_name = $_GET['city'];
+            // throw new \Exception($this->app->city_name." inside");
         }elseif($_GET['city'] && !$this->app->recall('city_id')){
             $this->app->city_name = $_GET['city'];
         }elseif(!$_GET['city'] && $this->app->recall('city_id')){
@@ -66,7 +68,8 @@ class Frontend extends ApiFrontend {
             $this->app->city_name = "Udaipur";
         }
 
-
+        // throw new \Exception($this->app->city_name);
+        
         if($this->app->city_name){
             if(is_numeric($this->app->city_name)){
                 $this->app->city = $city = $this->add('Model_City')->load($this->app->city_name);
@@ -184,7 +187,7 @@ class Frontend extends ApiFrontend {
         $this->api->pathfinder->base_location->defineContents(array(
             'docs'=>array('docs','doc'),   // Documentation (external)
             'content'=>'content',          // Content in MD format
-            'addons'=>array('vendor','../addons','../shared','addons'),
+            'addons'=>array('vendor','frontend/addons','../shared'),
             'php'=>array('shared','vender','frontend','shared/lib'),
             'js'=>array('shared','vender','addons','frontend/public/js','frontend/public/assets/js','frontend/public/assets'),
             'css'=>array('shared','vender','addons','frontend/public/css','frontend/public/assets/css','frontend/public/assets'),
