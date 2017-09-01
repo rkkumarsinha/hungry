@@ -187,7 +187,7 @@ class Frontend extends ApiFrontend {
         $this->api->pathfinder->base_location->defineContents(array(
             'docs'=>array('docs','doc'),   // Documentation (external)
             'content'=>'content',          // Content in MD format
-            'addons'=>array('vendor','frontend/addons','../shared'),
+            'addons'=>array('vendor','frontend/addons','addons','../shared'),
             'php'=>array('shared','vender','frontend','shared/lib'),
             'js'=>array('shared','vender','addons','frontend/public/js','frontend/public/assets/js','frontend/public/assets'),
             'css'=>array('shared','vender','addons','frontend/public/css','frontend/public/assets/css','frontend/public/assets'),
