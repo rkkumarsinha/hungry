@@ -177,14 +177,14 @@ class page_restaurant extends page_adminrestaurant {
                 $cuisine_tab = $t->addTab('Cuisine');
                 $cu_crud = $cuisine_tab->add('CRUD');
                 $cu_hl = $this->add('Model_Restaurant_Keyword')->addCondition('restaurant_id',$id);
-                $cu_crud->setModel($cu_hl);
                 $cu_crud->grid->addHook('formatRow',function($g){
                     if($g->model['icon_url'])
                         $g->current_row_html['icon_url'] = "<img src=".$g->model['icon_url'].">";
                     else
                         $g->current_row_html['image'] = "No Icon Found";
                 });
-                $cu_crud->setModel($r_hl);
+                $cu_crud->setModel($cu_hl);
+                // $cu_crud->setModel($cu_hl);
 
                 $offers_tab = $t->addTab('Offers');
                 $offers_crud = $offers_tab->add('CRUD');
