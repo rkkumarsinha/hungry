@@ -8,7 +8,7 @@ class Form_Search extends Form{
     public $redirect_page = 'index';
     function init(){
         parent::init();
-        
+        $this->app->stickyGET('city');
         // $this->js(true)->_load('selectize');
 
         $this->setLayout('form/search');
@@ -24,11 +24,14 @@ class Form_Search extends Form{
                                         ]);
 
         // $search_phrase = $this->addField('SelectizeDropDown','keyword');
+
         $restaurant_model = $this->add('Model_Restaurant');
         $restaurant_model->addCondition('city_id',$this->app->city_id);
-        $search_phrase->setModel($restaurant_model);
+        $restaurant_model->addCondition('status','active');
+        $restaurant_model->addCondition('is_verified',true);
         
-        // if($_GET['form_city_id']){            
+        $search_phrase->setModel($restaurant_model);
+        // if($_GET['form_city_id']){
         //     $this->app->memorize('form_city_id',$_GET['form_city_id']);
         // }
         
@@ -43,7 +46,9 @@ class Form_Search extends Form{
         // $js_event = [
         //             $search_phrase->js()->reload(null,null,[$this->app->url(null,['cut_object'=>$search_phrase->name]),'form_city_id'=>$city_f->js()->val()])
         //         ];
-        $city_f->js('change')->univ()->selectCity($city_f->name,$city_f->js()->val(),$city_model->getRows(),$this->app->url($this->redirect_page));
+        // throw new \Exception(str_replace("/index/", "/",$this->app->url($this->redirect_page,['city'=>''])));
+        
+        $city_f->js('change')->univ()->selectCity($city_f->name,$city_f->js()->val(),$city_model->getRows(),str_replace("/index/", "/",$this->app->url($this->redirect_page,['city'=>''])));
 
         $this->js('click')->_selector('.atk-swatch-orange.do-search')->submit();
         if($this->isSubmitted()){
@@ -71,10 +76,11 @@ class Form_Search extends Form{
                 $this->error('city','must select city');
             
             // keyword actually the restaurant
+            // $this->app->forget('city');
             if($restro_id > 0){
                 $rest_model = $this->add('Model_Restaurant')->tryLoad($restro_id);
                 if($rest_model->loaded()){
-                    $this->app->redirect($this->app->url('restaurant',['slug'=>$rest_model['url_slug']]));
+                    $this->app->redirect($this->app->url('restaurant',['city'=>$rest_model['city'],'slug'=>$rest_model['url_slug']]));
                 }
             }
 

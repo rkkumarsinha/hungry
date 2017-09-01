@@ -240,7 +240,8 @@ class Model_File extends \SQL_Model
         }
 
         $v = $this->ref('filestore_volume_id'); //won't work because of MVCFieldDefinition, line 304, loaded() check
-        $dirname = $v->get('dirname');
+        // $dirname = $v->get('dirname');
+        $dirname = '../upload';
         $seq = $v->getFileNumber();
 
         // Initially we store $min_files_per_node files per node until we reach 256 nodes.
@@ -336,7 +337,8 @@ class Model_File extends \SQL_Model
     function getPath()
     {
         $path =
-            $this->ref("filestore_volume_id")->get("dirname") .
+            "../upload" .
+            // $this->ref("filestore_volume_id")->get("dirname") .
             "/" .
             $this['filename'];
 

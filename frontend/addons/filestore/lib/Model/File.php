@@ -254,6 +254,7 @@ class Model_File extends \SQL_Model
             $node = $seq % 256;
         }
         $d = $dirname . '/' . dechex($node);
+        $d = str_replace("../upload", "upload", $d);
         if (!is_dir($d)) {
             mkdir($d);
             chmod($d, $this->api->getConfig('filestore/chmod', 0770));
@@ -336,7 +337,7 @@ class Model_File extends \SQL_Model
     function getPath()
     {
         $path =
-            $this->ref("filestore_volume_id")->get("dirname") .
+            str_replace("../upload", "upload", $this->ref("filestore_volume_id")->get("dirname")) .
             "/" .
             $this['filename'];
 

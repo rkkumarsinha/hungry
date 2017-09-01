@@ -19,8 +19,8 @@ class Model_Keyword extends SQL_Model{
 
 	function updateKeywordJson(){
 		$keywords = $this->add('Model_Keyword');
-		$dir_path = '../json/keyword.json';
-		if(!file_exists($dir_path))
+		$dir_path = '../json';
+		if(!is_dir($dir_path))
 			mkdir($dir_path, 0755, true);
 
 		// $datas = $keywords->getRows();
@@ -34,8 +34,9 @@ class Model_Keyword extends SQL_Model{
 			$data[] = $temp;
 		}
 
+		$file_path = $dir_path."/keyword.json";
 		// print_r($data);
-		file_put_contents($dir_path, json_encode($data));
+		file_put_contents($file_path, json_encode($data));
 	}
 
 	function getRestaurant($key_word_id){

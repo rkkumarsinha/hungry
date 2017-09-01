@@ -88,7 +88,7 @@ class View_Lister_Comment extends CompleteLister{
 	}
 
 	function formatRow(){
-		$this->current_row['profile_image'] = $this->model['profile_image_url']?:'assets/img/default-avatar.png';
+		$this->current_row['profile_image'] = $this->model['profile_image_url']?:($this->app->getConfig('absolute_url').'/assets/img/default-avatar.png');
 		parent::formatRow();
 	}
 

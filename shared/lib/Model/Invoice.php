@@ -257,8 +257,8 @@ class Model_Invoice extends SQL_Model{
 	        }
 
 
-	       $cart_ticket['is_wishcomplete'] = true;
-	       $cart_ticket->saveAndUnload();
+	       // $cart_ticket['is_wishcomplete'] = true;
+	       // $cart_ticket->saveAndUnload();
 	    }
         return $this;
 	}
@@ -273,7 +273,7 @@ class Model_Invoice extends SQL_Model{
 		$this['card_name'] = $data['card_name'];
 		$this['trans_date'] = $data['trans_date'];
 		$this['transaction_detail'] = $data['transaction_detail'];
-		if($data['order_status'] = "Success")
+		if($data['order_status'] == "Success")
 			$this['status'] = "Paid";
 		
 		$this->save();

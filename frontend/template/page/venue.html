@@ -1,5 +1,9 @@
 
 <div id="page-canvas">
+  <nav class="off-canvas-navigation">
+    <header>Navigation</header>
+    <div class="main-navigation navigation-off-canvas"></div>
+  </nav>
   <div id="page-content">
     <section class="hero-image search-filter-middle height-450">
       <div class="inner">
@@ -20,8 +24,8 @@
       <div class="row">
         {rows}
         {row}
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 hungry-venue"><a href="{$absolute_url}" class="info">
-            <div class="hovereffect"><img src="{$venue_image_url}" onerror="this.src='assets/img/hungry-not-found.png';" class="img-responsive"/>
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 hungry-venue"><a href="?page=destination&amp;venue={$id}" class="info">
+            <div class="hovereffect"><img src="{$venue_image_url}" class="img-responsive"/>
               <div class="overlay">
                 <h2>{$name}</h2>
               </div>

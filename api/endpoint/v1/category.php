@@ -52,10 +52,17 @@ class endpoint_v1_category extends HungryREST {
         $last_id = 0;
         $first_id = 0;
         $count = 1;
+
+        $has_rest = [];
         foreach ($data as $cat_asso) {
             if($count==1)
                 $first_id = $cat_asso['id'];
 
+            if(isset($has_rest[$cat_asso['restaurant_id']]))
+               continue;
+            else
+                $has_rest[$cat_asso['restaurant_id']] =  $cat_asso['restaurant_id'];
+            
             $rest = $this->add('Model_Restaurant')
                     ->addCondition('id',$cat_asso['restaurant_id'])
                     ->tryLoadAny()
@@ -150,6 +157,10 @@ class endpoint_v1_category extends HungryREST {
             return $q->expr('UPPER([0])',[$m->refSQL('restaurant_id')->fieldQuery('city_id')]);
         });
 
+        $model->addExpression('city_name')->set(function($m,$q){
+            return $q->expr('UPPER([0])',[$m->refSQL('restaurant_id')->fieldQuery('city')]);
+        });
+
         $model->addExpression('is_featured')->set(function($m,$q){
             return $q->expr('IFNULL([0],0)',[$m->refSQL('restaurant_id')->fieldQuery('is_featured')]);
         });
@@ -174,7 +185,7 @@ class endpoint_v1_category extends HungryREST {
             return $q->expr('IFNULL([0],0)',[$m->refSQL('restaurant_id')->fieldQuery('status')]);
         });
 
-        $model->addCondition('city',strtoupper($_GET['city']));
+        $model->addCondition([['city',strtoupper($_GET['city'])],['city_name',strtoupper($_GET['city'])]]);
         $model->addCondition('category_id',$_GET['category']);
 
         $model->addCondition('status','active');

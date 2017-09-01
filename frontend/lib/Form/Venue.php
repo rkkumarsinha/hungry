@@ -38,6 +38,10 @@ class Form_Venue extends Form{
         $search_phrase->setModel($destination_model);
 
         $venue_id = $_GET['venue'];
+        if(!is_numeric($venue_id)){
+            $venue_id = $this->add('Model_Venue')->addCondition('name',$venue_id)->tryLoadAny()->id;
+        }
+
         if($this->app->recall('form_venue_id')){
             $venue_id = $this->app->recall('form_venue_id');
             $this->app->memorize('form_venue_id',$venue_id);
@@ -99,14 +103,16 @@ class Form_Venue extends Form{
                             'keyword'=>$this['keyword']
                         ];
             $this->app->memorize('venue_data',$venue_data);
-            
-            $url = $this->app->url($this->redirect_page,['city'=>$this->app->active_city[$this['city']] ,'venue'=>$this['venue']]);
+                                               
             if(!$this['venue']){
                 $this->app->stickyForget('venue');
                 $this->redirect_page = "venue";
                 $url = $this->app->url($this->redirect_page,['city'=>$this->app->active_city[$this['city']]]);
+            }else{
+                $venue_name = $this->add('Model_Venue')->load($this['venue'])['name'];
+                $url = $this->app->url($this->redirect_page,['city'=>$this->app->active_city[$this['city']] ,'venue'=>$venue_name]);
             }
-
+            
             if($this->redirect_page){
                 $this->app->forget('form_venue_id');
                 $this->app->redirect($url);
