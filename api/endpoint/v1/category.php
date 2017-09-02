@@ -82,7 +82,7 @@ class endpoint_v1_category extends HungryREST {
             $rest_data['avg_cost_per_person_thali'] = $rest['avg_cost_per_person_thali'];
             $rest_data['food_type'] = $rest['food_type'];
             $rest_data['offer_count'] = $rest['offers'];
-            $rest_data['discount'] = $rest['discount_percentage'];// - $rest['discount_subtract'])?($rest['discount_percentage'] - $rest['discount_subtract']):0;
+            $rest_data['discount'] = $rest['discount_percentage_to_be_given'];// - $rest['discount_subtract'])?($rest['discount_percentage'] - $rest['discount_subtract']):0;
             //$rest_data['discount'] = ($rest['discount_percentage'] - $rest['discount_subtract'])?($rest['discount_percentage'] - $rest['discount_subtract']):0;
             $rest_data['discount_id'] = $rest['discount_id'];
             $rest_data['rating'] = $rest['rating'];
