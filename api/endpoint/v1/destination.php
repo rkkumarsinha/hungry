@@ -150,7 +150,7 @@ class endpoint_v1_destination extends HungryREST {
         $this->validateParams();
         $model = parent::_model(); 
 
-        $model->addCondition('city_id',strtoupper($_GET['city']));
+        $model->addCondition([['city_id',strtoupper($_GET['city'])],['city',strtoupper($_GET['city'])]]);
         $asso_j = $model->join('destination_venue_association.destination_id','id');
         $asso_j->addField('venue_id');
         $venue_j = $asso_j->join('venue.id','venue_id');
@@ -217,7 +217,7 @@ class endpoint_v1_destination extends HungryREST {
 
     private function validateParams(){
 
-        if(!$_GET['city'] or !is_numeric($_GET['city'])){
+        if(!$_GET['city']){
             throw new \Exception("some thing wrong ...1001"); //must pass city
         }
 

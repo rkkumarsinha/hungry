@@ -17,6 +17,8 @@ class page_restaurant extends Page{
     	//loading required model
         // $slug = trim($_GET['slug']);
         $slug = trim($this->api->stickyGET('slug'));
+        trim($this->api->stickyGET('city'));
+
     	$restaurant_model = $this->add('Model_Restaurant')
                          ->addCondition('url_slug',$slug)
                          ->addCondition('status','active')
