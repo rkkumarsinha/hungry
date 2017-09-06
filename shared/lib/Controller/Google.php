@@ -14,7 +14,9 @@ class Controller_Google extends AbstractController {
     parent::init();
 
     $this->config = $config = $this->app->getConfig('Google');
-    $redirect_url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?page=signin&hfrom=Google';
+    // $redirect_url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?page=signin&hfrom=Google';
+    $redirect_url = 'http://'.$_SERVER['HTTP_HOST'].$this->app->url('signin',['hfrom'=>"Google"]);
+            
     $this->client = new Google_Client();
     $this->client->setApplicationName($config['application_name']);
     $this->client->setClientId($config['client_id']);
