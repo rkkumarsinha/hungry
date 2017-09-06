@@ -52,7 +52,8 @@ class page_event extends page_adminevent{
                                 'tax_percentage',
                                 'handling_charge',
                                 'is_free_ticket',
-                                'registration_url'
+                                'registration_url',
+                                'is_active'
                             ),
                         array
                             (    
