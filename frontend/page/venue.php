@@ -23,7 +23,7 @@ class page_venue extends Page{
 		});
 
 		$model->addExpression('absolute_url')->set(function($m,$q){
-			return $q->expr("CONCAT('[0]','[1]',[2])",[$m->app->getConfig('absolute_url'),('destination/'.$m->app->city_name."/"),$m->getElement('name')]);
+			return $q->expr("CONCAT('[0]','[1]',[2])",[$m->app->getConfig('absolute_url'),('venues/'.$m->app->city_name."/"),$m->getElement('name')]);
 		});
 		$lister->setModel($model);
 

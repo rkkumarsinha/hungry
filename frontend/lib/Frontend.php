@@ -160,7 +160,7 @@ class Frontend extends ApiFrontend {
             ->link('restaurant', ['city','slug'])
             ->link('eventlist', ['city'])
             ->link('venue', ['city'])
-            ->link('destination', ['city','venue'])
+            ->link('venues', ['city','venue'])
             ->link('venuedetail', ['slug'])
             ->link('event', ['slug'])
             ->link('discount', ['city','discount'])
