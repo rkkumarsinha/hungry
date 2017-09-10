@@ -68,7 +68,7 @@ class page_destination extends page_admindestination {
         	);
         
         $c->grid->addHook('formatRow',function($g){
-            $g->current_row_html['name'] = '<a style="width:100px;" target="_blank" href="'.$this->api->url('verify_event',['id'=>$g->model['id'],'type'=>'event']).'">'.$g->model['name'].'</a>';
+            $g->current_row_html['name'] = '<a style="width:100px;" target="_blank" href="'.$this->api->url('verify_destination',['id'=>$g->model['id'],'type'=>'destination']).'">'.$g->model['name'].'</a>';
             // $g->current_row_html['name'] = '<a style="width:100px;" target="_blank" href="'.$this->api->url('restaurantdetail',['rest_id'=>$g->model['id']]).'">'.$g->model['name'].'</a>';
             $g->current_row_html['user_status'] = $g->model['user_status']?'<div class="atk-swatch-green" style="padding:2px;text-align:center;">verified</div>':'<div class="atk-swatch-red" style="padding:2px;text-align:center;">to be verified</div>';
         });
