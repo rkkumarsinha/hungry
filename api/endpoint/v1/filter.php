@@ -93,6 +93,7 @@ class endpoint_v1_filter extends HungryREST {
             $output[] = [   
                             'id'=>$rest['id'],
                             'name'=>$rest['name'],
+                            // 'distance_lat_lng'=>$rest['distance_lat_lng'],
                             'address'=>$rest['address'],
                             'longitude'=>$rest['longitude'],
                             'latitude'=>$rest['latitude'],
@@ -265,8 +266,22 @@ class endpoint_v1_filter extends HungryREST {
         $this->validateParams();
         $model = parent::_model();
         
+        $city = $this->add('Model_City')
+                ->addCondition('name',$_GET['city'])
+                ;
+        $city->tryLoadAny();
+
         $current_lat = $_GET['lat']?:0;
         $current_long = $_GET['lng']?:0;
+
+        if($city->loaded() && !$current_lat){
+            $current_lat = $city['latitude'];
+        }
+
+        if($city->loaded() && !$current_long){
+            $current_long = $city['longitude'];
+        }
+
         $model->addExpression('distance_lat_lng')->set(function($m,$q)use($current_lat,$current_long){
             return $q->expr('ABS(ABS([0] - [1]) + ABS([2] - [3]))',[$m->getElement('latitude'),$current_lat,$m->getElement('longitude'),$current_long]);
         });
