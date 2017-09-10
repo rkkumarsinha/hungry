@@ -122,7 +122,8 @@ class Frontend extends ApiFrontend {
         //     return $js->alert("hello");
         // });
         
-        $this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=false&libraries=places&key='.$this->api->getConfig('Google/MapKey'));
+        $this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=false&libraries=places');
+        // $this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=false&libraries=places&key='.$this->api->getConfig('Google/MapKey'));
         
         if($this->app->auth->model['type'] == "host"){
             $this->api->jui->addStaticInclude('ckeditor/ckeditor');
@@ -164,7 +165,7 @@ class Frontend extends ApiFrontend {
             ->link('venuedetail', ['slug'])
             ->link('event', ['slug'])
             ->link('discount', ['city','discount'])
-            ->link('search', ['city'])
+            // ->link('search', ['city'])
             ->route();
 
         if(in_array($this->app->page,["restaurant",'venuedetail','event'])){
