@@ -67,6 +67,16 @@ class endpoint_v1_post_booktable extends HungryREST {
             $m['no_of_child'] = $data['child'];
             $m['booking_date'] = $data['date'];
             $m['booking_time'] = $data['time'];
+
+            if($data['discount_id']){
+                $rest = $this->add('Model_Restaurant')->tryLoad($data['restaurant_id']);
+                $m['discount_offer_value'] = $rest['discount_percentage_to_be_given'];
+            }
+            if($data['offer_id']){
+                $offer_model = $this->add('Model_RestaurantOffer')->load($data['offer_id']);
+                $m['discount_offer_value'] = $offer_model['name']." ".$offer_model['sub_name']." ".$offer_model['detail'];
+            }
+
             $m->save();
             $m->sendEnquiryEmailToHost();
             $m->sendProcessingSMS();
