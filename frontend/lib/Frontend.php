@@ -122,7 +122,7 @@ class Frontend extends ApiFrontend {
         //     return $js->alert("hello");
         // });
         
-        $this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=false&libraries=places');
+        // $this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=false&libraries=places');
         // $this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=false&libraries=places&key='.$this->api->getConfig('Google/MapKey'));
         
         if($this->app->auth->model['type'] == "host"){
@@ -141,6 +141,7 @@ class Frontend extends ApiFrontend {
         
         $citylist = $this->add('Model_City')->addCondition('is_active',true)->getRows();
         $active_city = [];
+
         foreach ($citylist as $key => $city) {
             if(!$city['is_active']) continue;
             $active_city[$city['id']] = strtolower($city['name']);
