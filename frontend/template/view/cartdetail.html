@@ -1,7 +1,13 @@
 
 <div id="{$_name}" style="{$style}" class="{$class} container">
-  {$empty_cart}
-  {$Content}
+  <div class="row">
+    <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 text-left">{$empty_cart}</div>
+    <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12 text-center">
+      <h2 style="margin-top:10px;">Selected Ticket Details</h2>
+    </div>
+    <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12"></div>
+  </div>
+  <hr/>{$Content}
   <section>{rows}{row}
     <div class="item list admin-view hungry-event-ticket">
       <div style="width:100px;height:auto !important;min-height:auto !important;" class="image"><a href="item-detail.html">

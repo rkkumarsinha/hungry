@@ -21,7 +21,7 @@ class page_bookticket extends Page{
         }
 
         if(!$event_model->loaded()){
-            $this->add('View_Error')->set('no record found');
+            $this->add('View_Error')->set('no one ticket are available');
             return;
         }
 

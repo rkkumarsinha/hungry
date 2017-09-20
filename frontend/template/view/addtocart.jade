@@ -1,4 +1,11 @@
 div(id="{$_name}" class="{$class} text-center" style="{$style} margin-top:25px;")
-	a.fa.fa-shopping-cart.hungrycart.text-center(style="border-radius:5px;color:white;font-size:16px;font-weight:bold;" href="?page=cartdetail") &nbsp;Cart&nbsp;&nbsp;
-		span.badge(style="background-color:white;color:#fa9634;box-shadow:4px 0px 4px #ff6600;font-size:20px;") {event_count}0{/}
+	.row
+		.col-md-4.col-sm-12.col-lg-4.col-xs-4.text-left
+			{$empty_cart}
+		.col-md-4.col-sm-12.col-lg-4.col-xs-4
+			a.fa.fa-shopping-cart.hungrycart.text-center(style="border-radius:5px;color:white;font-size:16px;font-weight:bold;" href="?page=cartdetail") &nbsp;Cart&nbsp;&nbsp;
+				span.badge(style="background-color:white;color:#fa9634;box-shadow:4px 0px 4px #ff6600;font-size:20px;") {event_count}0{/}
+		.col-md-4.col-sm-12.col-lg-4.col-xs-4.text-right
+			a.atk-swatch-orange.atk-button(style="border-radius:5px;color:white;font-size:16px;font-weight:bold;" href="?page=cartdetail") Next&nbsp;
+				i.fa.fa-arrow-right			
 	{$Content}

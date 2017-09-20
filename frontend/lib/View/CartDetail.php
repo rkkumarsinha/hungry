@@ -28,6 +28,10 @@ class View_CartDetail extends CompleteLister{
 
 		$cart = $this->add('Model_Cart');
 		$amount = $cart->getAmounts();
+		// echo "<pre>";
+		// print_r($amount);
+		// echo "</pre>";
+		// die();
 
 		$this->template->trySet('sub_total', $amount['subtotal']);
 		$this->template->trySet('internet_handling_fees', $amount['internet_handling_fees']);
@@ -59,7 +63,8 @@ class View_CartDetail extends CompleteLister{
 
 		}else{
 
-			$btn = $this->add('Button',null,'empty_cart')->set('empty cart');
+			$btn = $this->add('Button',null,'empty_cart')->setIcon('trash')
+					->set('Remove All From Your Cart')->addClass('atk-swatch-red');
 			if($btn->isClicked()){
 				$this->add('Model_Cart')->emptyCart();
 				$this->js(null,$this->js()->univ()->reload())->univ()->successMessage('cart empty successfully')->execute();
