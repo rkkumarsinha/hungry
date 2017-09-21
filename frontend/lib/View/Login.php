@@ -6,7 +6,10 @@ class View_Login extends View{
 	public $reload_page = false;
 	function init(){
 		parent::init();
-	
+		
+		if($this->app->page == "bookticket")
+			$this->app->memorize('event_slug',$_GET['slug']);
+		
 		if($this->api->auth->model->id){
 			$container = $this->add("View")->addClass('container')->setStyle(['width'=>'100%','margin-top'=>'20px']);
             $container->add('View_Info',null)->set('already logged in');
@@ -33,8 +36,8 @@ class View_Login extends View{
 
 	        if($this->api->recall('next_url')){
 	            $redirect_url = array('next_url'=>$this->api->recall('next_url'));
-	        }	        
-
+	        }
+	        
 			$facebook_controller = $this->add('Controller_Facebook',['hfrom'=>$_GET['hfrom'],'isWebsiteCheck'=>true]);
 
 			$fb_btn = $this->add('Button',null,'facebook_btn');
@@ -59,6 +62,10 @@ class View_Login extends View{
 				else{
 					$this->api->auth->loginById($user_model->id);
 					// $this->api->auth->login($user_model);
+					if($slug = $this->app->recall('event_slug')){
+						$this->app->forget('event_slug');
+						$this->app->redirect($this->app->url('bookticket',['slug'=>$slug]));
+					}
           			$this->api->redirect($this->api->url('account'));
 				}
 			}
@@ -83,6 +90,10 @@ class View_Login extends View{
 					$this->app->redirect($this->app->url('validate',['email_not_found'=>$google_controller->user->id."_"]));
 				}else{
 					$this->api->auth->loginById($user_model->id);
+					if($slug = $this->app->recall('event_slug')){
+						$this->app->forget('event_slug');
+						$this->app->redirect($this->app->url('bookticket',['slug'=>$slug]));
+					}
           			$this->api->redirect($this->api->url('account'));
 				}
 				// $this->app->auth->model->load($google_controller->user->id);
