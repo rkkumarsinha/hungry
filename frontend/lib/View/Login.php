@@ -7,8 +7,11 @@ class View_Login extends View{
 	function init(){
 		parent::init();
 		
-		if($this->app->page == "bookticket")
+		if($this->app->page == "bookticket"){
 			$this->app->memorize('event_slug',$_GET['slug']);
+		}
+		
+		// throw new \Exception($this->app->recall('event_slug'));
 		
 		if($this->api->auth->model->id){
 			$container = $this->add("View")->addClass('container')->setStyle(['width'=>'100%','margin-top'=>'20px']);
@@ -30,6 +33,8 @@ class View_Login extends View{
 	        		$info->set('You Account Activated Successfully');
 	        	}elseif($status=="verificationhost"){
 	        		$info->set('you email is verified, you can login once your account is activated by HungryDunia');
+	        	}elseif($status == "newuser"){
+	        		$info->set('verification link send to your registered email');
 	        	}
 	        	$this->api->stickyForget('from');
 	        }

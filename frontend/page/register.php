@@ -4,7 +4,7 @@ class page_register extends Page
     function init()
     {
         parent::init();
-
+        
         $f = $this->add('Form',null,'register',['form/stacked'])->addClass('hungry-registration-form');
         $f->addField('full_name')->validateNotNull(true);
         
@@ -48,7 +48,7 @@ class page_register extends Page
             $user['name'] = $f['full_name']; 
             $user['email'] = $f['email'];
             $user['password'] = $f['password'];
-            $user['is_verified'] = true;
+            $user['is_verified'] = false;
             $user['dob'] = $f['date_of_birth'];
             $user['received_newsletter'] = $f['received_newsletter'];
             $user['is_active'] = true;
@@ -90,7 +90,9 @@ class page_register extends Page
             try{
                 $email_response = $outbox->sendEmail($user['email'],$subject,$body,$user);
                 $outbox->createNew("New User Registered",$user['email'],$subject,$body,"Email","New User Registration",$user->id,$user);
-                $f->js(null,$f->js()->reload())->univ()->successMessage('Registered Successfully')->execute();
+                $this->app->memorize('from','newuser');
+                $this->app->redirect($this->app->url('signin'));
+                // $f->js(null,$f->js()->reload())->univ()->successMessage('Registered Successfully')->execute();
             }catch(Exception $e){
                 // $f->js(null,$f->js()->reload())->univ()->errorMessage('something happen wrong')->execute();
             }
