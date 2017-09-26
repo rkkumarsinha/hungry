@@ -1,0 +1,26 @@
+div(id="{$_name}" class="{$class} hungry-blog-post-list" style="{$style}")
+	header
+		h1.page-title Blog
+	{rows}
+	{row}
+	article.blog-post
+		header
+			a(href="{$detail_url}")
+				h2 {$name}
+		a(href="{$detail_url}")
+			img(src="{$post_image}" alt="{$name}")
+		figure(class="meta")
+			a(href="#" class="link-icon")
+				i(class="fa fa-user")&nbsp;{$author}
+			a(href="#" class="link-icon")
+				i.fa.fa-calendar&nbsp;{$created_at}
+			div.tags
+				a(href="#" class="tag article") Architecture
+				a(href="#" class="tag article") Design
+				a(href="#" class="tag article") Trend
+		p {$detail}
+		a(href="{$detail_url}" class="icon") Read More&nbsp;
+			i.fa.fa-angle-right
+	{/}
+	{/}
+	

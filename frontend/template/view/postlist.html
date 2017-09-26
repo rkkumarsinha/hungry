@@ -1,0 +1,16 @@
+
+<div id="{$_name}" style="{$style}" class="{$class} hungry-blog-post-list">
+  <header>
+    <h1 class="page-title">Blog</h1>
+  </header>{rows}
+  {row}
+  <article class="blog-post">
+    <header><a href="{$detail_url}">
+        <h2>{$name}</h2></a></header><a href="{$detail_url}"><img src="{$post_image}" alt="{$name}"/></a>
+    <figure class="meta"><a href="#" class="link-icon"><i class="fa fa-user">&nbsp;{$author}</i></a><a href="#" class="link-icon"><i class="fa fa-calendar">&nbsp;{$created_at}</i></a>
+      <div class="tags"><a href="#" class="tag article">Architecture</a><a href="#" class="tag article">Design</a><a href="#" class="tag article">Trend</a></div>
+    </figure>
+    <p>{$detail}</p><a href="{$detail_url}" class="icon">Read More&nbsp;<i class="fa fa-angle-right"></i></a>
+  </article>{/}
+  {/}
+</div>
