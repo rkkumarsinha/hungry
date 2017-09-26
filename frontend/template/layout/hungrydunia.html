@@ -1,181 +1,183 @@
-
 <!-- Outer Wrapper-->
 <div id="outer-wrapper">
-  <!-- Inner Wrapper-->
-  <div id="inner-wrapper">
-    <!-- Navigation-->
-    <div id="page-top" class="header">
-      <div class="wrapper">
-        <div class="brand"><a href="{$absolute_url}"><img src="{$absolute_url}frontend/public/assets/img/hungrydunia/logo.png" alt="logo"/></a></div>
-        <div class="brand hungry-current-location">{$location}</div>
-        <nav class="navigation-items">
-          <div class="wrapper">
-            <ul class="main-navigation navigation-top-header"></ul>
-            <ul class="user-area">{event_cart_wrapper}
-              <a href="https://play.google.com/store/apps/details?id=com.hungrydunia.app&hl=en" target="_blank"><i class="glyphicon glyphicon-phone " style="font-size:20px;background-color:white;"> </i>&nbsp;<b style="font-size:14px;color:white;">Download App</b></a>
-              <li style="display:none;" class="hungryeventcart"><a href="{$absolute_url}cartdetail">Event <span class="badge">{$event_count}</span></a></li>{/}
-              {login_menu}
-              <li>
-                <div role="group" class="btn-group">
-                  <div aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button" id="btnGroupVerticalDrop1" class="dropdown-toggle">
-                    {$username}
-                    {host_wrapper}<span style="margin:10px;" class="caret"></span>
-                  </div>
-                  <ul aria-labelledby="btnGroupVerticalDrop1" class="dropdown-menu">{hostdropdown}
-                    <li><a href="#">Dropdown link</a></li>{/}
-                  </ul>{/}
-                </div>
-              </li>{/login_menu}
-              <li>{signlogout}a(href='?page=sign-in') Sign In{/}</li>{register_wrapper}
-              <li><a href="{$absolute_url}register"><strong>Register</strong></a></li>{/}
-              <li><a href="{$absolute_url}addlisting"><i style="color:white;" class="glyphicon glyphicon-plus"></i><strong>&nbsp;Add Your Listing</strong></a></li>
-            </ul>
-        <div class="toggle-navigation" style="display: inline-block;">
-          <div class="icon">
-              <div class="line"></div>
-              <div class="line"></div>
-              <div class="line"></div>
-          </div>
+    <!-- Inner Wrapper-->
+    <div id="inner-wrapper">
+        <!-- Navigation-->
+        <div id="page-top" class="header">
+            <div class="wrapper">
+                <div class="brand"><a href="{$absolute_url}"><img src="{$absolute_url}frontend/public/assets/img/hungrydunia/logo.png" alt="logo"/></a></div>
+                <div class="brand hungry-current-location">{$location}</div>
+                <nav class="navigation-items">
+                    <div class="wrapper">
+                        <ul class="main-navigation navigation-top-header"></ul>
+                        <ul class="user-area">{event_cart_wrapper}
+                            <a href="https://play.google.com/store/apps/details?id=com.hungrydunia.app&hl=en" target="_blank"><i class="glyphicon glyphicon-phone " style="font-size:20px;background-color:white;"> </i>&nbsp;<b style="font-size:14px;color:white;">Download App</b></a>
+                            <li style="display:none;" class="hungryeventcart"><a href="{$absolute_url}cartdetail">Event <span class="badge">{$event_count}</span></a></li>{/} {login_menu}
+                            <li>
+                                <div role="group" class="btn-group">
+                                    <div aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button" id="btnGroupVerticalDrop1" class="dropdown-toggle">
+                                        {$username} {host_wrapper}
+                                        <span style="margin:10px;" class="caret"></span>
+                                    </div>
+                                    <ul aria-labelledby="btnGroupVerticalDrop1" class="dropdown-menu">{hostdropdown}
+                                        <li><a href="#">Dropdown link</a></li>{/}
+                                    </ul>{/}
+                                </div>
+                            </li>{/login_menu}
+                            <li>{signlogout}a(href='?page=sign-in') Sign In{/}</li>{register_wrapper}
+                            <li><a href="{$absolute_url}register"><strong>Register</strong></a></li>{/}
+                            <li><a href="{$absolute_url}addlisting"><i style="color:white;" class="glyphicon glyphicon-plus"></i><strong>&nbsp;Add Your Listing</strong></a></li>
+                        </ul>
+                        <div class="toggle-navigation" style="display: inline-block;">
+                            <div class="icon">
+                                <div class="line"></div>
+                                <div class="line"></div>
+                                <div class="line"></div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
         </div>
-          </div>
-        </nav>
-      </div>
-    </div>
-    <!-- end Navigation-->
-    <!-- Page Canvas-->
-    <div id="page-canvas">
-    <!-- Off Canvas Navigation-->
-    <nav class="off-canvas-navigation">
-      <header>Navigation</header>
-      <div class="main-navigation navigation-off-canvas">
-        <ul>
-        {login_menu}
-        <li>
-        <a href="#home" class="has-child" data-toggle="collapse" aria-expanded="false" aria-controls="home">{$username}</a>
-          <div class="collapse in" id="home" style="height: auto;">
-            <ul>
-              {hostdropdown}
-                <li><a href="index-directory.html">Google Maps</a></li>
-              {/}
-            </ul>
-        </div>
-        </li>
-        {/}
-
-      <li>
-        <a href="{$absolute_url}" data-toggle="collapse" aria-expanded="false" aria-controls="home">Home</a>
-      </li>
-          <li>{signlogout}a(href='?page=sign-in') Sign In{/}</li>{register_wrapper}
-              <li>
-                <a href="{$absolute_url}register"><strong>Register</strong></a>
-              </li>
-          {/}
-          <li>
-            <a href="{$absolute_url}addlisting">
+        <!-- end Navigation-->
+        <!-- Page Canvas-->
+        <div id="page-canvas">
+            <!-- Off Canvas Navigation-->
+            <nav class="off-canvas-navigation">
+                <header>Navigation</header>
+                <div class="main-navigation navigation-off-canvas">
+                    <ul>
+                        {login_menu}
+                        <li>
+                            <a href="#home" class="has-child" data-toggle="collapse" aria-expanded="false" aria-controls="home">{$username}</a>
+                            <div class="collapse in" id="home" style="height: auto;">
+                                <ul>
+                                    {hostdropdown}
+                                    <li><a href="index-directory.html">Google Maps</a></li>
+                                    {/}
+                                </ul>
+                            </div>
+                        </li>
+                        {/}
+                        <li>
+                            <a href="{$absolute_url}" data-toggle="collapse" aria-expanded="false" aria-controls="home">Home</a>
+                        </li>
+                        <li>{signlogout}a(href='?page=sign-in') Sign In{/}</li>{register_wrapper}
+                        <li>
+                            <a href="{$absolute_url}register"><strong>Register</strong></a>
+                        </li>
+                        {/}
+                        <li>
+                            <a href="{$absolute_url}addlisting">
               <i style="color:white;" class="glyphicon glyphicon-plus"></i><strong>&nbsp;Add Your Listing</strong>
             </a>
-          </li>
-          <li>
-            <a href="https://play.google.com/store/apps/details?id=com.hungrydunia.app&hl=en" target="_blank"><i class="glyphicon glyphicon-phone " style="font-size:20px;background-color:white;"> </i>&nbsp;<b style="font-size:14px;color:white;">Download App</b></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    {$Content}
-    </div>
-    <!-- end Page Canvas-->
-    <!-- Page Footer-->
-    <footer id="page-footer">
-      <div class="inner">
-        <div class="footer-top">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-3 col-sm-3">
-                <section>
-                  <h2>About Us</h2>
-                  <address>
-                    <div>hungrydunia.com</div>
-                    <div>19, priyadarshni Nagar,</div>
-                    <div>Bedla Road, Udaipur(Raj.)</div>
-                    <figure>
-                      <div class="info"><i class="fa fa-mobile"></i><span>+91 9521389201</span></div>
-                      <div class="info"><i class="fa fa-envelope"></i><span>info@hungrydunia.com</span></div>
-                      <div class="info"><i class="fa fa-globe"></i><a href="http://www.hungrydunia.com" target="_blank">www.hungrydunia.com</a></div>
-                    </figure>
-                  </address>
-                  <div class="social">
-                      <a href="http://www.twitter.com/HungryDunia" target="_blank" class="social-button">
+                        </li>
+                        <li>
+                            <a href="https://play.google.com/store/apps/details?id=com.hungrydunia.app&hl=en" target="_blank"><i class="glyphicon glyphicon-phone " style="font-size:20px;background-color:white;"> </i>&nbsp;<b style="font-size:14px;color:white;">Download App</b></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            {$Content}
+        </div>
+        <!-- end Page Canvas-->
+        <!-- Page Footer-->
+        <footer id="page-footer">
+            <div class="inner">
+                <div class="footer-top">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3">
+                                <section>
+                                    <h2>About Us</h2>
+                                    <address>
+                                        <div>hungrydunia.com</div>
+                                        <div>19, priyadarshni Nagar,</div>
+                                        <div>Bedla Road, Udaipur(Raj.)</div>
+                                        <figure>
+                                            <div class="info"><i class="fa fa-mobile"></i><span>+91 9521389201</span></div>
+                                            <div class="info"><i class="fa fa-envelope"></i><span>info@hungrydunia.com</span></div>
+                                            <div class="info"><i class="fa fa-globe"></i><a href="http://www.hungrydunia.com" target="_blank">www.hungrydunia.com</a></div>
+                                        </figure>
+                                    </address>
+                                    <div class="social">
+                                        <a href="http://www.twitter.com/HungryDunia" target="_blank" class="social-button">
                         <i class="fa fa-twitter"></i>
                       </a>
-                      <a href="http://www.facebook.com/HungryDunia" target="_blank" class="social-button">
+                                        <a href="http://www.facebook.com/HungryDunia" target="_blank" class="social-button">
                         <i class="fa fa-facebook"></i>
                       </a>
-                      <a href="https://www.instagram.com/hungrydunia/" target="_blank" class="social-button">
+                                        <a href="https://www.instagram.com/hungrydunia/" target="_blank" class="social-button">
                         <i class="fa fa-instagram"></i>
                       </a>
-                  </div>
-                  <a href="{$absolute_url}contact" class="btn framed icon">Contact Us
+                                    </div>
+                                    <a href="{$absolute_url}contact" class="btn framed icon">Contact Us
                     <i class="fa fa-angle-right">
                       </i></a>
-                </section>
-              </div>
-              <!-- /.col-md-4-->
-              <div class="col-md-3 col-sm-3">
-                <!-- New Items-->
-                <section>
-                  <h2>Subscribe</h2>{$subscription}
-                </section>
-                <!-- download the app -->
-                <a href='https://play.google.com/store/apps/details?id=com.hungrydunia.app&hl=en&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
-
-              </div>
-              <div class="col-md-3 col-sm-3">
-                <!-- Recent Reviews-->
-                <section>
-                  <h2>site links</h2>
-                  <div class="info"><a href="http://hungrydunia.com/">&nbsp; Home</a></div>
-                  <div class="info"><a href="{$absolute_url}aboutus">&nbsp; About Us</a></div>
-                  <div class="info"><a href="{$absolute_url}contact">&nbsp; Contact</a></div>
-                  <div class="info"><a href="{$absolute_url}privacypolicy">&nbsp; Privacy Policy</a></div>
-                  <div class="info"><a href="{$absolute_url}termsandconditions">&nbsp; Terms &amp; Conditions</a></div>
-                  <div style="display:none;" class="info"><a href="{$absolute_url}selfie">&nbsp; Selfie Contest</a></div>
-                </section>
-              </div>
-              <div class="col-md-3 col-sm-3">
-                <section>
-                  <h2>Like us on Facebook</h2>
-                  <div data-show-posts="true" data-show-facepile="true" data-hide-cover="false" data-adapt-container-width="true" data-small-header="false" data-height="350px" data-href="https://www.facebook.com/profile.php?id=1626740274230341&amp;fref=ts" fb-xfbml-state="rendered" fb-iframe-plugin-query="adapt_container_width=true&amp;app_id=684843678310300&amp;container_width=263&amp;height=350&amp;hide_cover=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D1626740274230341%26fref%3Dts&amp;locale=en_US&amp;sdk=joey&amp;show_facepile=true&amp;show_posts=true&amp;small_header=false" class="fb-page fb_iframe_widget"><span style="vertical-align: bottom; width: 263px; height: 350px;">
-                      <iframe width="1000px" height="350px" frameborder="0" name="fe37da973d8f5" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:page Facebook Social Plugin" style="border: medium none; visibility: visible; width: 263px; height: 350px;" src="http://www.facebook.com/v2.3/plugins/page.php?adapt_container_width=true&amp;app_id=684843678310300&amp;channel=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D42%23cb%3Df372b813986e826%26domain%3Dhungrydunia.com%26origin%3Dhttp%253A%252F%252Fhungrydunia.com%252Ff3b606491fa0f58%26relation%3Dparent.parent&amp;container_width=263&amp;height=350&amp;hide_cover=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D1626740274230341%26fref%3Dts&amp;locale=en_US&amp;sdk=joey&amp;show_facepile=true&amp;show_posts=true&amp;small_header=false"></iframe></span></div>
-                  <!-- /.review-->
-                </section>
-                <!-- end Recent Reviews-->
-              </div>
+                                </section>
+                            </div>
+                            <!-- /.col-md-4-->
+                            <div class="col-md-3 col-sm-3">
+                                <!-- New Items-->
+                                <section>
+                                    <h2>Subscribe</h2>{$subscription}
+                                </section>
+                                <!-- download the app -->
+                                <a href='https://play.google.com/store/apps/details?id=com.hungrydunia.app&hl=en&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <!-- Recent Reviews-->
+                                <section>
+                                    <h2>site links</h2>
+                                    <div class="info"><a href="http://hungrydunia.com/">&nbsp; Home</a></div>
+                                    <div class="info"><a href="{$absolute_url}aboutus">&nbsp; About Us</a></div>
+                                    <div class="info"><a href="{$absolute_url}contact">&nbsp; Contact</a></div>
+                                    <div class="info"><a href="{$absolute_url}privacypolicy">&nbsp; Privacy Policy</a></div>
+                                    <div class="info"><a href="{$absolute_url}termsandconditions">&nbsp; Terms &amp; Conditions</a></div>
+                                    <div style="display:none;" class="info"><a href="{$absolute_url}selfie">&nbsp; Selfie Contest</a></div>
+                                </section>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <section>
+                                    <h2>Like us on Facebook</h2>
+                                    <div data-show-posts="true" data-show-facepile="true" data-hide-cover="false" data-adapt-container-width="true" data-small-header="false" data-height="350px" data-href="https://www.facebook.com/profile.php?id=1626740274230341&amp;fref=ts" fb-xfbml-state="rendered" fb-iframe-plugin-query="adapt_container_width=true&amp;app_id=684843678310300&amp;container_width=263&amp;height=350&amp;hide_cover=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D1626740274230341%26fref%3Dts&amp;locale=en_US&amp;sdk=joey&amp;show_facepile=true&amp;show_posts=true&amp;small_header=false" class="fb-page fb_iframe_widget">
+                                        <span class="hungry-fb-activity" style="vertical-align: bottom; width: 263px; height: 350px;">
+                                          
+                                        </span>
+                                    </div>
+                                    <!-- /.review-->
+                                </section>
+                                <!-- end Recent Reviews-->
+                            </div>
+                        </div>
+                        <!-- /.row-->
+                    </div>
+                    <!-- /.container-->
+                </div>
+                <!-- /.footer-top-->
+                <div class="footer-bottom">
+                    <div class="container"><span class="left">Copyright 2015 hungrydunia.com, All rights reserved</span><span class="right"><a href="#page-top" class="to-top roll"><i class="fa fa-angle-up"></i></a></span></div>
+                </div>
+                <!-- /.footer-bottom-->
             </div>
-            <!-- /.row-->
-          </div>
-          <!-- /.container-->
-        </div>
-        <!-- /.footer-top-->
-        <div class="footer-bottom">
-          <div class="container"><span class="left">Copyright 2015 hungrydunia.com, All rights reserved</span><span class="right"><a href="#page-top" class="to-top roll"><i class="fa fa-angle-up"></i></a></span></div>
-        </div>
-        <!-- /.footer-bottom-->
-      </div>
-    </footer>
-    <!-- end Page Footer-->
-  </div>
-  <!-- end Inner Wrapper-->
-  <script type="text/javascript">
-    if( $('body').hasClass('navigation-off-canvas') ){
-      $('.header .toggle-navigation').click(function() {
-          $('#outer-wrapper').toggleClass('show-nav');  
-      }); 
-      $('#page-content').click(function() {
-        $('#outer-wrapper').removeClass('show-nav');  
+        </footer>
+        <!-- end Page Footer-->
+    </div>
+    <!-- end Inner Wrapper-->
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('.hungry-fb-activity').html('<iframe width="1000px" height="350px" frameborder="0" name="fe37da973d8f5" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:page Facebook Social Plugin" style="border: medium none; visibility: visible; width: 263px; height: 350px;" src="http://www.facebook.com/v2.3/plugins/page.php?adapt_container_width=true&amp;app_id=684843678310300&amp;channel=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D42%23cb%3Df372b813986e826%26domain%3Dhungrydunia.com%26origin%3Dhttp%253A%252F%252Fhungrydunia.com%252Ff3b606491fa0f58%26relation%3Dparent.parent&amp;container_width=263&amp;height=350&amp;hide_cover=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D1626740274230341%26fref%3Dts&amp;locale=en_US&amp;sdk=joey&amp;show_facepile=true&amp;show_posts=true&amp;small_header=false"></iframe>');
       });
-    }
-  </script>
 
+    if ($('body').hasClass('navigation-off-canvas')) {
+        $('.header .toggle-navigation').click(function() {
+            $('#outer-wrapper').toggleClass('show-nav');
+        });
+        $('#page-content').click(function() {
+            $('#outer-wrapper').removeClass('show-nav');
+        });
+    }
+    </script>
 </div>
 <!-- end Outer Wrapper-->
 <!--script(type='text/javascript', src='assets/js/jquery-2.1.0.min.js')-->
