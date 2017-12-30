@@ -59,11 +59,13 @@ class View_AddToCartButton extends View{
 				$amount_field->set($m['price'] * $_GET['hungry_event_qty']);
 			}
 			
-			$qty_field->js('change',$amount_field->js()->reload(null,null,[$this->app->url(null,['cut_object'=>$amount_field->name]),'hungry_event_qty'=>$qty_field->js()->val()]));
-
+			$qty_field->on('change',function($js,$data)use($form){
+				$this->app->memorize('call_from','change');
+				return $form->js()->submit();
+			});
+			// $qty_field->js('change',$amount_field->js()->reload(null,null,[$this->app->url(null,['cut_object'=>$amount_field->name]),'hungry_event_qty'=>$qty_field->js()->val(),'hungry_voucher'=>$voucher_field->js()->val()]));
 
 			if($form->isSubmitted()){
-
 				if($this->app->recall('call_from') == "change"){
 					$is_change = $this->app->recall('call_from');
 					$this->app->forget('call_from');
