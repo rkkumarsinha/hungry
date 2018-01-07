@@ -30,7 +30,7 @@
 		if(!is_numeric($qty)) $qty=1;
 
 		if(!is_numeric($event_ticket_id)) return;
-
+			
 		$re_cal_discount_amount = 0;
 		if($discount_voucher){
 			$voucher_model = $this->add('Model_Voucher')
@@ -52,8 +52,10 @@
 		if($re_cal_discount_amount != $discount_amount)
 			throw new \Exception("some thing happen wrong", 1);
 			
+		// throw new \Exception($this->app->auth->model->id);
 		
 		$this['event_ticket_id'] = $event_ticket_id;
+		$this['user_id'] = $this->app->auth->model->id;
 		$this['name'] = $event_ticket;
 		$this['qty'] = $qty;
 		$this['event_time_id'] = $event_time_id;
@@ -149,8 +151,10 @@
 	}
 
 	function getAmounts(){
+		
 		//
 		$event_array = [];
+		$this->reload();
 		// $cart = $this->add('Model_Cart');
 		$cart = $this->addCondition('user_id',$this->app->auth->model->id);
 

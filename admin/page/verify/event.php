@@ -131,13 +131,24 @@ class page_verify_event extends Page {
                                 'starting_time',
                                 'closing_date',
                                 'closing_time',
-                                'longitude',
-                                'latitude',
                                 'guidelines',
                                 'how_to_reach',
                                 'disclaimer',
                                 'is_free_ticket',
-                                'registration_url'
+                                'registration_url',
+                                'longitude',
+                                'latitude'
+                            ]);
+        $latitude_field_name = $basic_form->getElement('latitude');
+        $longitude_field_name = $basic_form->getElement('longitude');
+
+    
+        $basic_form->add('View_LocationPicker',
+                            [
+                                'latitude_field'=>$latitude_field_name,
+                                'longitude_field'=>$longitude_field_name,
+                                'lat_value'=>$event_model['latitude'],
+                                'lng_value'=>$event_model['longitude']
                             ]);
 
         $basic_form->addSubmit("Save");

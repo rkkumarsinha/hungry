@@ -8,6 +8,16 @@ class View_EventTicket extends View{
 		$cart = $this->add('Model_Cart');
 		$count = $cart->getEventCount();
 		$cart_view = $this->add('View',null,null,['view/addtocart']);
+
+		if($count){
+			$btn = $cart_view->add('Button',null,'empty_cart')->setIcon('trash')
+						->set('Remove All From Your Cart')->addClass('atk-swatch-red');
+			if($btn->isClicked()){
+				$this->add('Model_Cart')->emptyCart();
+				$this->js(null,$cart_view->js()->univ()->reload())->univ()->successMessage('cart empty successfully')->execute();
+			}			
+		}
+
 		$cart_view->js('reload')->reload();
 		$cart_view->template->set('event_count',$count);
 

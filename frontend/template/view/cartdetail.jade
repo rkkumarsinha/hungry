@@ -1,5 +1,11 @@
 div(id="{$_name}" class="{$class} container" style="{$style}")
-	{$empty_cart}
+	.row
+		.col-md-4.col-lg-4.col-sm-12.col-xs-12.text-left
+			{$empty_cart}
+		.col-md-4.col-lg-4.col-sm-12.col-xs-12.text-center
+			h2(style="margin-top:10px;") Selected Ticket Details
+		.col-md-4.col-lg-4.col-sm-12.col-xs-12
+	hr
 	{$Content}
 	section
 		{rows}{row}

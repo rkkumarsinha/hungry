@@ -26,7 +26,7 @@ class View_Search extends View{
 				$form = $this->add('Form_Venue',['redirect_page'=>'destination'],'form_search');
 				$this->template->trySet('tab_venue','active');
 				break;
-			case 'destination':
+			case 'venues':
 			case 'venuedetail':
 				$form = $this->add('Form_Venue',['redirect_page'=>'destination'],'form_search');
 				$this->template->trySet('tab_venue','active');

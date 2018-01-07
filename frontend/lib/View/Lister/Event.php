@@ -31,7 +31,7 @@ class View_Lister_Event extends CompleteLister{
 		$this->current_row['starting_month'] = $month;
 
 		if($this->model['remaining_tickets'] && !$this->model['is_free_ticket'])
-			$this->current_row_html['bookticket_wrapper'] = '<a href="?page=bookticket&slug='.$this->model['url_slug'].'" data-restaurantid="'.$this->model->id.'" style="width:60%;margin-top:10px;border-radius:10px;" class="btn-block atk-swatch-orange btn hungry-getdiscount container">Book Ticket</a>';
+			$this->current_row_html['bookticket_wrapper'] = '<a href="'.$this->app->url('bookticket',['slug'=>$this->model['url_slug']]).'" data-restaurantid="'.$this->model->id.'" style="width:60%;margin-top:10px;border-radius:10px;" class="btn-block atk-swatch-orange btn hungry-getdiscount container">Book Ticket</a>';
 		elseif($this->model['is_free_ticket'] && $this->model['registration_url']){
 			$this->current_row_html['bookticket_wrapper'] = '<a target="_blank" href="'.$this->model['registration_url'].'" style="width:60%;margin-top:10px;border-radius:10px;" class="btn-block atk-swatch-orange btn container">Get Register</a>';
 		}else{

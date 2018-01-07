@@ -145,8 +145,6 @@ class page_verify_rest extends Page {
                                 'credit_card_accepted',
                                 'reservation_needed',
                                 'type',
-                                'longitude',
-                                'latitude',
                                 'monday',
                                 'tuesday',
                                 'wednesday',
@@ -154,7 +152,19 @@ class page_verify_rest extends Page {
                                 'friday',
                                 'saturday',
                                 'sunday',
-                                'food_type'
+                                'food_type',
+                                'longitude',
+                                'latitude'
+                            ]);
+
+        $latitude_field_name = $basic_form->getElement('latitude');
+        $longitude_field_name = $basic_form->getElement('longitude');
+        $basic_form->add('View_LocationPicker',
+                            [
+                                'latitude_field'=>$latitude_field_name,
+                                'longitude_field'=>$longitude_field_name,
+                                'lat_value'=>$host_restaurant['latitude'],
+                                'lng_value'=>$host_restaurant['longitude']
                             ]);
 
         $basic_form->addSubmit("Update");

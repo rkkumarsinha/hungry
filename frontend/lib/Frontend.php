@@ -122,7 +122,8 @@ class Frontend extends ApiFrontend {
         //     return $js->alert("hello");
         // });
         
-        $this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=false&libraries=places&key='.$this->api->getConfig('Google/MapKey'));
+        // $this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=false&libraries=places');
+        // $this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=false&libraries=places&key='.$this->api->getConfig('Google/MapKey'));
         
         if($this->app->auth->model['type'] == "host"){
             $this->api->jui->addStaticInclude('ckeditor/ckeditor');
@@ -140,6 +141,7 @@ class Frontend extends ApiFrontend {
         
         $citylist = $this->add('Model_City')->addCondition('is_active',true)->getRows();
         $active_city = [];
+
         foreach ($citylist as $key => $city) {
             if(!$city['is_active']) continue;
             $active_city[$city['id']] = strtolower($city['name']);
@@ -160,11 +162,11 @@ class Frontend extends ApiFrontend {
             ->link('restaurant', ['city','slug'])
             ->link('eventlist', ['city'])
             ->link('venue', ['city'])
-            ->link('destination', ['city','venue'])
+            ->link('venues', ['city','venue'])
             ->link('venuedetail', ['slug'])
             ->link('event', ['slug'])
             ->link('discount', ['city','discount'])
-            ->link('search', ['city'])
+            // ->link('search', ['city'])
             ->route();
 
         if(in_array($this->app->page,["restaurant",'venuedetail','event'])){

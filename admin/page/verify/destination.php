@@ -131,8 +131,6 @@ class page_verify_destination extends Page {
                                 'avg_cost',
                                 'credit_card_accepted',
                                 'reservation_needed',
-                                'longitude',
-                                'latitude',
                                 'monday',
                                 'tuesday',
                                 'wednesday',
@@ -144,7 +142,20 @@ class page_verify_destination extends Page {
                                 'booking_policy',
                                 'cancellation_policy',
                                 'guidelines',
-                                'how_to_reach'
+                                'how_to_reach',
+                                'longitude',
+                                'latitude'
+                            ]);
+        $latitude_field_name = $basic_form->getElement('latitude');
+        $longitude_field_name = $basic_form->getElement('longitude');
+
+    
+        $basic_form->add('View_LocationPicker',
+                            [
+                                'latitude_field'=>$latitude_field_name,
+                                'longitude_field'=>$longitude_field_name,
+                                'lat_value'=>$host_destination['latitude'],
+                                'lng_value'=>$host_destination['longitude']
                             ]);
 
         $basic_form->addSubmit("Update");

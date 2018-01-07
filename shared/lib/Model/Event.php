@@ -197,12 +197,16 @@ class Model_Event extends SQL_Model{
 		foreach ($model_day as $day) {
 
 			$time_array = [];
-			$model_time = $this->add('Model_Event_Time')->addCondition('event_day_id',$day['id'])->addCondition('event_id',$this->id)->getRows();
+			$model_time = $this->add('Model_Event_Time')
+						->addCondition('event_day_id',$day['id'])
+						->addCondition('event_id',$this->id)
+						->getRows();
 
 			foreach ($model_time as $time) {
 				$ticket_array = [];
 
 				$model_ticket = $this->add('Model_Event_Ticket')
+									->addCondition('event_time_id',$time['id'])
 									->addCondition('event_id',$this->id)
 									->addCondition('remaining_ticket','>',0)
 									->getRows();

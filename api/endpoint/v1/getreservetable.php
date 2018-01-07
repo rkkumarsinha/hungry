@@ -54,7 +54,7 @@ class endpoint_v1_getreservetable extends HungryREST {
                                 'restaurant_id'=>$model['restaurant_id'],
                                 'restaurant'=>$model['restaurant'],
                                 'discount_id'=>$model['discount_id'],
-                                'discount'=>$model['discount'],
+                                'discount'=>$model['discount_offer_value'],
                                 'offer_id'=>$model['offer_id'],
                                 'offer'=>$model['offer'],
                                 'booking_id'=>$model['booking_id'],

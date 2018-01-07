@@ -157,8 +157,8 @@ class endpoint_v1_keyword extends HungryREST {
         // });
 
         $model->addCondition('city',strtoupper($_GET['city']));
-        $model->addCondition('keyword_id',$_GET['keyword']);
-
+        $model->addCondition([['keyword_id',$_GET['keyword']],['keyword',$_GET['keyword']]]);
+        
         // if($_GET['type'] === "next"){
         //     $model->addCondition('id','>',$_GET['offset']);
 
@@ -206,7 +206,7 @@ class endpoint_v1_keyword extends HungryREST {
         if(!$_GET['city'] or is_numeric($_GET['city']))
             throw new \Exception("some thing wrong ...1001"); //must pass city
 
-        if(!$_GET['keyword'] or !is_numeric($_GET['keyword']))
+        if(!$_GET['keyword'])
             throw new \Exception("some thing wrong ...1002"); //must pass category
 
         if(!is_numeric($_GET['limit']))

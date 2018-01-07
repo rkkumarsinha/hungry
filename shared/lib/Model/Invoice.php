@@ -45,6 +45,8 @@ class Model_Invoice extends SQL_Model{
 		$this->addField('amount_json')->type('text');
 		// $this->addField('net_amount');
 
+		$this->addField('created_at')->type('datetime')->defaultValue(date('Y-m-d H:i:s'));
+
 		$this->hasMany('UserEventTicket','invoice_id');
 		
 		$this->addExpression('net_amount')->set(function($m,$q){

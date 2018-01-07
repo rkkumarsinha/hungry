@@ -33,6 +33,7 @@ class Admin extends App_Admin {
         }
 
         $this->api->today = date('Y-m-d');
+        $this->api->now = date('Y-m-d H:i:s');
 
 
         // $this->js(true)->_load("selectize");
@@ -53,6 +54,7 @@ class Admin extends App_Admin {
         $top_menu->addItem(['User','icon'=>'users'],'/user');
         $top_menu->addItem(['Enquiry','icon'=>'users'],'/enquiry');
         $top_menu->addItem(['Report','icon'=>'ajust'],'/report');
+        $top_menu->addItem(['Blog','icon'=>'ajust'],'/blog');
             
     }
 }

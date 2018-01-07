@@ -9,6 +9,8 @@ class page_verification extends Page
         $this->api->stickyGET('business_type');
         $verification_code = $this->api->stickyGET('verification_code');
 
+        $event_slug = $this->app->recall('event_slug',false);
+
         $user = $this->add('Model_User')
         		->addCondition('email',$_GET['email'])
         		;
@@ -56,7 +58,14 @@ class page_verification extends Page
 
             $this->app->stickyForget('business_type');
             $this->app->stickyForget('business');
-            $form->js()->univ()->redirect($this->api->url('signin'))->execute();
+
+            if($event_slug){
+              $this->api->auth->loginById($user->id);
+              $this->app->redirect($this->app->url('bookticket',['slug'=>$event_slug]));
+            }else{
+              $form->js()->univ()->redirect($this->api->url('signin'))->execute();
+            }
+
           }catch(Exception $e){
       		  $form->js()->univ()->redirect($this->api->url('signin'))->execute();
           }

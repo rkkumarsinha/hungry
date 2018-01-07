@@ -92,7 +92,7 @@ class Form_Search extends Form{
 
             
             $city_model->load($this['city']);
-            $this->app->redirect($this->app->url('search',['city'=>$city_model['name']]));
+            $this->app->redirect($this->app->url('?page=search',['city'=>$city_model['name']]));
         }
     }
 }

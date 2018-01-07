@@ -4,7 +4,7 @@ class page_search extends Page{
 	function init(){
 		parent::init();	
 
-        $this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=true&language=en&key='.$this->api->getConfig('Google/MapKey'));
+        $this->app->jui->addStaticInclude('http://maps.google.com/maps/api/js?sensor=true&language=en');
         $map = $this->add('View_FilterMapSearch');
 
         // $form = $map->add('Form',null,'filter');

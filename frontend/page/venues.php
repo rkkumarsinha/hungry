@@ -1,6 +1,6 @@
 <?php
 
-class page_destination extends Page{
+class page_venues extends Page{
 
     function init(){
         parent::init();
