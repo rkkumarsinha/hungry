@@ -35,15 +35,15 @@ class View_LocationPicker extends \View{
 		if(!$this->lng_value) $this->lng_value = 73.71247900000003;
 		if(!$this->lat_value) $this->lat_value = 24.585445;
 
-		$this->js(true)->univ()->hungryLocationPicker(
-									$this->map_view->name,
-									$this->lat_value,
-									$this->lng_value,
-									$this->latitude_field->name,
-									$this->longitude_field->name,
-									$this->location_field->name,
-									$this->radius_field->name
-								);
+		// $this->js(true)->univ()->hungryLocationPicker(
+		// 							$this->map_view->name,
+		// 							$this->lat_value,
+		// 							$this->lng_value,
+		// 							$this->latitude_field->name,
+		// 							$this->longitude_field->name,
+		// 							$this->location_field->name,
+		// 							$this->radius_field->name
+		// 						);
 
 		parent::render();
 	}
