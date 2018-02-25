@@ -1580,3 +1580,15 @@ body.modal-open .modal-backdrop.fade.in{
 		height: 400px;
 	}
 }
+
+
+div#hungry_preloader {
+	position: fixed; 
+	left: 0; 
+	top: 0; 
+	z-index: 999; 
+	width: 100%; 
+	height: 100%; 
+	overflow: visible; 
+	background: #333 url('http://hungry.com/hungry/assets/img/loading.gif') no-repeat center center; 
+}

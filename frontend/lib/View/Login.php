@@ -9,6 +9,21 @@ class View_Login extends View{
 		
 		if($this->app->page == "bookticket"){
 			$this->app->memorize('event_slug',$_GET['slug']);
+
+			$this->add('View',null,'guest_login')->set('skip')->addClass('text-center');
+			$btn = $this->add('Button',null,'guest_login')
+				->set('Guest Login')
+				->addClass('atk-swatch-green btn-block');
+			if($btn->isClicked()){
+				$guest_user_model = $this->add('Model_User');
+				$guest_user_model->addCondition('name','Guest');
+				$guest_user_model->tryLoadAny();
+				if(!$guest_user_model->loaded())
+					$guest_user_model->save();
+
+				$this->app->auth->loginById($guest_user_model->id);
+				$this->owner->js()->reload()->execute();
+			}
 		}
 		
 		// throw new \Exception($this->app->recall('event_slug'));

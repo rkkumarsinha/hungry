@@ -175,6 +175,13 @@ class page_checkout extends Page{
             
             $this->add('Model_Cart')->emptyCart();
             $this->app->memorize('hungryevent-checkout-saleinvoice',$invoice->id);
+            $temp = [
+                    'mobile'=>$form['mobile'],
+                    'email'=>$form['email'],
+                    'primary_booking_name'=>$form['primary_booking_name']
+                ];
+
+            $this->app->memorize('checkout_data',$temp);
             // $this->app->memorize('hungryevent-checkout-step',"Address");
             $form->js(true,$this->js()->reload(['step'=>"Address"]))->execute();
         }
@@ -202,125 +209,123 @@ class page_checkout extends Page{
 
         $address_form = $this->add('Form',null,null,['form/stacked']);
         $col = $address_form->add('Columns');
-        $col1 = $col->addColumn(4);
-        $col2 = $col->addColumn(8);
+        $col1 = $col->addColumn(8);
+        $col2 = $col->addColumn(4);
 
-        $col1->addField('billing_name')->validateNotNull(true);
-        $col2->addField('billing_address')->validateNotNull(true);
+        // $col1->addField('billing_name')->validateNotNull(true)->set($this->app->auth->model['name']);
+        $col1->addField('line','billing_address','Address')->validateNotNull(true);
+        $col2->addField('line','billing_city','City')->validateNotNull(true);
 
         $col_2 = $address_form->add('Columns');
         $col2_1 = $col_2->addColumn(4);
         $col2_2 = $col_2->addColumn(4);
         $col2_3 = $col_2->addColumn(4);
 
-        $col2_1->addField('billing_city')->validateNotNull(true);
-        $col2_2->addField('billing_state')->validateNotNull(true);
-        $col2_3->addField('billing_country')->validateNotNull(true);
+        $col2_1->addField('line','billing_state','State')->validateNotNull(true);
+        $col2_2->addField('line','billing_country','Country')->validateNotNull(true)->set('India');
+        $col2_3->addField('line','billing_zip','zip')->validateNotNull(true);
 
-        $col_3 = $address_form->add('Columns');
-        $col3_1 = $col_3->addColumn(4);
-        $col3_2 = $col_3->addColumn(4);
-        $col3_3 = $col_3->addColumn(4);
+        // $col3_2->addField('billing_tel');
+        // $col3_3->addField('billing_email')
+        //         ->validateNotNull(true)
+        //         ->set($this->app->auth->model['email'])
+        //         ->validateField('filter_var($this->get(), FILTER_VALIDATE_EMAIL)');
 
-        $col3_1->addField('billing_zip')->validateNotNull(true);
-        $col3_2->addField('billing_tel')->validateNotNull(true);
-        $col3_3->addField('billing_email')
-                ->validateNotNull(true)
-                ->set($this->app->auth->model['email'])
-                ->validateField('filter_var($this->get(), FILTER_VALIDATE_EMAIL)');
+        // // $checkbox_field = $address_form->addField('checkbox','shipping_address_same_as_billing_address')->set(true);
 
-        $checkbox_field = $address_form->addField('checkbox','shipping_address_same_as_billing_address')->set(true);
+        // $s_col = $address_form->add('Columns');
+        // $s_col1 = $s_col->addColumn(4);
+        // $s_col2 = $s_col->addColumn(8);
 
-        $s_col = $address_form->add('Columns');
-        $s_col1 = $s_col->addColumn(4);
-        $s_col2 = $s_col->addColumn(8);
+        // $s_col1->addField('delivery_name');
+        // $s_col2->addField('delivery_address');
 
-        $s_col1->addField('delivery_name');
-        $s_col2->addField('delivery_address');
+        // $s_col_2 = $address_form->add('Columns');
+        // $s_col2_1 = $s_col_2->addColumn(4);
+        // $s_col2_2 = $s_col_2->addColumn(4);
+        // $s_col2_3 = $s_col_2->addColumn(4);
 
-        $s_col_2 = $address_form->add('Columns');
-        $s_col2_1 = $s_col_2->addColumn(4);
-        $s_col2_2 = $s_col_2->addColumn(4);
-        $s_col2_3 = $s_col_2->addColumn(4);
+        // $s_col2_1->addField('delivery_city');
+        // $s_col2_2->addField('delivery_state');
+        // $s_col2_3->addField('delivery_country');
 
-        $s_col2_1->addField('delivery_city');
-        $s_col2_2->addField('delivery_state');
-        $s_col2_3->addField('delivery_country');
+        // $s_col_3 = $address_form->add('Columns');
+        // $s_col3_1 = $s_col_3->addColumn(4);
+        // $s_col3_2 = $s_col_3->addColumn(4);
+        // $s_col3_3 = $s_col_3->addColumn(4);
 
-        $s_col_3 = $address_form->add('Columns');
-        $s_col3_1 = $s_col_3->addColumn(4);
-        $s_col3_2 = $s_col_3->addColumn(4);
-        $s_col3_3 = $s_col_3->addColumn(4);
-
-        $s_col3_1->addField('delivery_zip');
-        $s_col3_2->addField('delivery_tel');
-        $s_col3_3->addField('delivery_email');
+        // $s_col3_1->addField('delivery_zip');
+        // $s_col3_2->addField('delivery_tel');
+        // $s_col3_3->addField('delivery_email');
         
-        $checkbox_field->js(true)->univ()->bindConditionalShow([
-                ''=>['delivery_name','delivery_address','delivery_city','delivery_state','delivery_country','delivery_zip','delivery_tel','delivery_email'],
-                '*'=>['']
-            ],'div.atk-form-row');
+        // $checkbox_field->js(true)->univ()->bindConditionalShow([
+        //         ''=>['delivery_name','delivery_address','delivery_city','delivery_state','delivery_country','delivery_zip','delivery_tel','delivery_email'],
+        //         '*'=>['']
+        //     ],'div.atk-form-row');
 
 
         $address_form->addSubmit('Next');
         if($address_form->isSubmitted()){
             
-            $this->invoice['billing_name'] = $address_form['billing_name'];
-            $this->invoice['billing_address'] = $address_form['billing_address'];
-            $this->invoice['billing_city'] = $address_form['billing_city'];
-            $this->invoice['billing_state'] = $address_form['billing_state'];
-            $this->invoice['billing_country'] = $address_form['billing_country'];
-            $this->invoice['billing_zip'] = $address_form['billing_zip'];
-            $this->invoice['billing_tel'] = $address_form['billing_tel'];
-            $this->invoice['billing_email'] = $address_form['billing_email'];
+            $checkout_data = $this->app->recall('checkout_data');
+            
 
-            if(!$address_form['shipping_address_same_as_billing_address']){
-                if(!$address_form['delivery_name'])
-                    $address_form->error('delivery_name','Delivery Name is a mandatory field');
+            $this->invoice['delivery_name'] = $this->invoice['billing_name'] = $checkout_data['primary_booking_name'];
+            $this->invoice['delivery_address'] = $this->invoice['billing_address'] = $address_form['billing_address'];
+            $this->invoice['billing_city'] = $this->invoice['billing_city'] = $address_form['billing_city'];
+            $this->invoice['billing_state'] = $this->invoice['billing_state'] = $address_form['billing_state'];
+            $this->invoice['billing_country'] = $this->invoice['billing_country'] = $address_form['billing_country'];
+            $this->invoice['billing_zip'] = $this->invoice['billing_zip'] = $address_form['billing_zip'];
+            $this->invoice['billing_tel'] = $this->invoice['billing_tel'] = $checkout_data['mobile'];
+            $this->invoice['billing_email'] = $this->invoice['billing_email'] = $checkout_data['email'];
 
-                if(!$address_form['delivery_address'])
-                    $address_form->error('delivery_address','Delivery Address is a mandatory field');
+            // if(!$address_form['shipping_address_same_as_billing_address']){
+            //     if(!$address_form['delivery_name'])
+            //         $address_form->error('delivery_name','Delivery Name is a mandatory field');
 
-                if(!$address_form['delivery_city'])
-                    $address_form->error('delivery_city','Delivery City is a mandatory field');
+            //     if(!$address_form['delivery_address'])
+            //         $address_form->error('delivery_address','Delivery Address is a mandatory field');
+
+            //     if(!$address_form['delivery_city'])
+            //         $address_form->error('delivery_city','Delivery City is a mandatory field');
                 
-                if(!$address_form['delivery_state'])
-                    $address_form->error('delivery_state','Delivery State is a mandatory field');
+            //     if(!$address_form['delivery_state'])
+            //         $address_form->error('delivery_state','Delivery State is a mandatory field');
                 
-                if(!$address_form['delivery_country'])
-                    $address_form->error('delivery_country','Delivery Country is a mandatory field');
+            //     if(!$address_form['delivery_country'])
+            //         $address_form->error('delivery_country','Delivery Country is a mandatory field');
 
-                if(!$address_form['delivery_zip'])
-                    $address_form->error('delivery_zip','Delivery zip is a mandatory field');
+            //     if(!$address_form['delivery_zip'])
+            //         $address_form->error('delivery_zip','Delivery zip is a mandatory field');
 
-                if(!$address_form['delivery_tel'])
-                    $address_form->error('delivery_tel','Delivery Tel is a mandatory field');
+            //     if(!$address_form['delivery_tel'])
+            //         $address_form->error('delivery_tel','Delivery Tel is a mandatory field');
 
-                if(!$address_form['delivery_email'])
-                    $address_form->error('delivery_email','Delivery Email is a mandatory field');
+            //     if(!$address_form['delivery_email'])
+            //         $address_form->error('delivery_email','Delivery Email is a mandatory field');
                 
-                if(!filter_var($address_form['delivery_email'], FILTER_VALIDATE_EMAIL))
-                    $address_form->error('delivery_email','Error in Delivery email');
+            //     if(!filter_var($address_form['delivery_email'], FILTER_VALIDATE_EMAIL))
+            //         $address_form->error('delivery_email','Error in Delivery email');
 
-                $this->invoice['delivery_name'] = $address_form['delivery_name'];
-                $this->invoice['delivery_address'] = $address_form['delivery_address'];
-                $this->invoice['delivery_city'] = $address_form['delivery_city'];
-                $this->invoice['delivery_state'] = $address_form['delivery_state'];
-                $this->invoice['delivery_country'] = $address_form['delivery_country'];
-                $this->invoice['delivery_zip'] = $address_form['delivery_zip'];
-                $this->invoice['delivery_tel'] = $address_form['delivery_tel'];
-                $this->invoice['delivery_email'] = $address_form['delivery_email'];
+            //     $this->invoice['delivery_name'] = $address_form['delivery_name'];
+            //     $this->invoice['delivery_address'] = $address_form['delivery_address'];
+            //     $this->invoice['delivery_city'] = $address_form['delivery_city'];
+            //     $this->invoice['delivery_state'] = $address_form['delivery_state'];
+            //     $this->invoice['delivery_country'] = $address_form['delivery_country'];
+            //     $this->invoice['delivery_zip'] = $address_form['delivery_zip'];
+            //     $this->invoice['delivery_tel'] = $address_form['delivery_tel'];
+            //     $this->invoice['delivery_email'] = $address_form['delivery_email'];
 
-            }else{
-                $this->invoice['delivery_name'] = $address_form['billing_name'];
-                $this->invoice['delivery_address'] = $address_form['billing_address'];
-                $this->invoice['delivery_city'] = $address_form['billing_city'];
-                $this->invoice['delivery_state'] = $address_form['billing_state'];
-                $this->invoice['delivery_country'] = $address_form['billing_country'];
-                $this->invoice['delivery_zip'] = $address_form['billing_zip'];
-                $this->invoice['delivery_tel'] = $address_form['billing_tel'];
-                $this->invoice['delivery_email'] = $address_form['billing_email'];
-            }
+            // }else{
+                // $this->invoice['delivery_name'] = $address_form['billing_name'];
+                // $this->invoice['delivery_address'] = $address_form['billing_address'];
+                // $this->invoice['delivery_city'] = $address_form['billing_city'];
+                // $this->invoice['delivery_state'] = $address_form['billing_state'];
+                // $this->invoice['delivery_country'] = $address_form['billing_country'];
+                // $this->invoice['delivery_zip'] = $address_form['billing_zip'];
+                // $this->invoice['delivery_tel'] = $address_form['billing_tel'];
+                // $this->invoice['delivery_email'] = $address_form['billing_email'];
+            // }
 
             $this->invoice['status'] = "Due";
             $this->invoice = $this->invoice->save();
